@@ -7829,13 +7829,9 @@ static u16 GetLengthWithExpandedPlayerName(const u8 *str)
     return length;
 }
 
-static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreBPress, u8 cursorPos)
+static void DrawMultichoiceMenuCustom(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos, const struct MenuAction *actions, int count)
 {
-    int i;
-    u8 windowId;
-    u8 count = sMultichoiceLists[multichoiceId].count;
-    const struct MenuAction *actions = sMultichoiceLists[multichoiceId].list;
-    int width = 0;
+    int i, windowId, width = 0;
     u8 newWidth;
 
     for (i = 0; i < count; i++)
@@ -7852,7 +7848,40 @@ static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, bool8 ignoreB
     ScheduleBgCopyTilemapToVram(0);
     InitMultichoiceCheckWrap(ignoreBPress, count, windowId, multichoiceId);
 }
-# 126 "src/script_menu.c"
+
+static void DrawMultichoiceMenu(u8 left, u8 top, u8 multichoiceId, u8 ignoreBPress, u8 cursorPos)
+{
+    DrawMultichoiceMenuCustom(left, top, multichoiceId, ignoreBPress, cursorPos, sMultichoiceLists[multichoiceId].list, sMultichoiceLists[multichoiceId].count);
+}
+
+void TryDrawRepelMenu(void)
+{
+    static const u16 repelItems[] = {90, 91, 92};
+    struct MenuAction menuItems[4] = {((void *)0)};
+    int i, count = 0;
+
+    for (i = 0; i < (size_t)(sizeof(repelItems) / sizeof((repelItems)[0])); i++)
+    {
+        if (CheckBagHasItem(repelItems[i], 1))
+        {
+            VarSet(0x8004 + count, repelItems[i]);
+            menuItems[count].text = ItemId_GetName(repelItems[i]);
+            count++;
+        }
+    }
+
+    if (count > 1)
+        DrawMultichoiceMenuCustom(0, 0, 0, 0, 0, menuItems, count);
+
+    gSpecialVar_Result = (count > 1);
+}
+
+void HandleRepelMenuChoice(void)
+{
+    gSpecialVar_0x8004 = VarGet(0x8004 + gSpecialVar_Result);
+    VarSet(0x4021, ItemId_GetHoldEffectParam(gSpecialVar_0x8004));
+}
+# 155 "src/script_menu.c"
 static void InitMultichoiceCheckWrap(bool8 ignoreBPress, u8 count, u8 windowId, u8 multichoiceId)
 {
     u8 i;
@@ -8275,7 +8304,7 @@ void GetLilycoveSSTidalSelection(void)
         gSpecialVar_Result = sLilycoveSSTidalSelections[gSpecialVar_Result];
     }
 }
-# 556 "src/script_menu.c"
+# 585 "src/script_menu.c"
 static void Task_PokemonPicWindow(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -8340,7 +8369,7 @@ static bool8 IsPicboxClosed(void)
     else
         return 0;
 }
-# 628 "src/script_menu.c"
+# 657 "src/script_menu.c"
 u8 CreateWindowFromRect(u8 x, u8 y, u8 width, u8 height)
 {
     struct WindowTemplate template = CreateWindowTemplate(0, x + 1, y + 1, width, height, 15, 100);
@@ -8429,7 +8458,7 @@ static void InitMultichoiceNoWrap(bool8 ignoreBPress, u8 unusedCount, u8 windowI
     gTasks[taskId].data[6] = windowId;
     gTasks[taskId].data[7] = multichoiceId;
 }
-# 726 "src/script_menu.c"
+# 755 "src/script_menu.c"
 static int DisplayTextAndGetWidthInternal(const u8 *str)
 {
     u8 temp[64];
