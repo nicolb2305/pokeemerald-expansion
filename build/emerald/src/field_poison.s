@@ -129,26 +129,21 @@ FaintFromFieldPoison:
 .LM19:
 
 	add	r0, r4, #0
-	mov	r1, #0x7
-	bl	AdjustFriendship
-.LM20:
-
-	add	r0, r4, #0
 	mov	r1, #0x37
 	mov	r2, sp
 	bl	SetMonData
-.LM21:
+.LM20:
 
 	ldr	r5, .L19+0x4
 	add	r0, r4, #0
 	mov	r1, #0x2
 	add	r2, r5, #0
 	bl	GetMonData
-.LM22:
+.LM21:
 
 	add	r0, r5, #0
 	bl	StringGetEnd10
-.LM23:
+.LM22:
 
 .LBE4:
 	add	sp, sp, #0x4
@@ -168,19 +163,19 @@ FaintFromFieldPoison:
 	.thumb_func
 MonFaintedFromPoison:
 .LFB4:
-.LM24:
+.LM23:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM25:
+.LM24:
 
 .LBB5:
 	mov	r1, #0x64
 	mul	r1, r1, r0
 	ldr	r0, .L24
 	add	r4, r1, r0
-.LM26:
+.LM25:
 
 	add	r0, r4, #0
 	bl	IsMonValidSpecies
@@ -189,7 +184,7 @@ MonFaintedFromPoison:
 	add	r0, r4, #0
 	mov	r1, #0x39
 	bl	GetMonData
-	cmp	r0, #0
+	cmp	r0, #0x1
 	bne	.L22	@cond_branch
 	add	r0, r4, #0
 	mov	r1, #0x37
@@ -199,7 +194,7 @@ MonFaintedFromPoison:
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
 	bne	.L22	@cond_branch
-.LM27:
+.LM26:
 
 	mov	r0, #0x1
 	b	.L23
@@ -208,11 +203,11 @@ MonFaintedFromPoison:
 .L24:
 	.word	gPlayerParty
 .L22:
-.LM28:
+.LM27:
 
 	mov	r0, #0x0
 .L23:
-.LM29:
+.LM28:
 
 .LBE5:
 	pop	{r4}
@@ -226,12 +221,12 @@ MonFaintedFromPoison:
 	.thumb_func
 Task_TryFieldPoisonWhiteOut:
 .LFB5:
-.LM30:
+.LM29:
 
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM31:
+.LM30:
 
 .LBB6:
 	lsl	r0, r6, #0x2
@@ -239,7 +234,7 @@ Task_TryFieldPoisonWhiteOut:
 	lsl	r0, r0, #0x3
 	ldr	r1, .L47
 	add	r4, r0, r1
-.LM32:
+.LM31:
 
 	mov	r0, #0x0
 	ldrsh	r5, [r4, r0]
@@ -259,7 +254,7 @@ Task_TryFieldPoisonWhiteOut:
 	beq	.L37	@cond_branch
 	b	.L26
 .L28:
-.LM33:
+.LM32:
 
 	ldrh	r1, [r4, #0x2]
 	mov	r2, #0x2
@@ -267,14 +262,14 @@ Task_TryFieldPoisonWhiteOut:
 	cmp	r0, #0x5
 	bgt	.L30	@cond_branch
 .L32:
-.LM34:
+.LM33:
 
 	lsl	r0, r1, #0x18
 	lsr	r0, r0, #0x18
 	bl	MonFaintedFromPoison
 	cmp	r0, #0
 	bne	.L46	@cond_branch
-.LM35:
+.LM34:
 
 	ldrh	r0, [r4, #0x2]
 	add	r0, r0, #0x1
@@ -285,36 +280,36 @@ Task_TryFieldPoisonWhiteOut:
 	cmp	r0, #0x5
 	ble	.L32	@cond_branch
 .L30:
-.LM36:
+.LM35:
 
 	mov	r0, #0x2
 	strh	r0, [r4]
-.LM37:
+.LM36:
 
 	b	.L26
 .L35:
-.LM38:
+.LM37:
 
 	bl	IsFieldMessageBoxHidden
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
 	beq	.L26	@cond_branch
-.LM39:
+.LM38:
 
 	ldrh	r0, [r4]
 	sub	r0, r0, #0x1
 	strh	r0, [r4]
-.LM40:
+.LM39:
 
 	b	.L26
 .L37:
-.LM41:
+.LM40:
 
 	bl	AllMonsFainted
 	add	r1, r0, #0
 	cmp	r1, #0
 	beq	.L38	@cond_branch
-.LM42:
+.LM41:
 
 	bl	InBattlePyramid
 	add	r4, r0, #0
@@ -328,11 +323,11 @@ Task_TryFieldPoisonWhiteOut:
 	cmp	r0, #0
 	beq	.L39	@cond_branch
 .L40:
-.LM43:
+.LM42:
 
 	ldr	r0, .L49
 	strh	r5, [r0]
-.LM44:
+.LM43:
 
 	b	.L42
 .L50:
@@ -340,12 +335,12 @@ Task_TryFieldPoisonWhiteOut:
 .L49:
 	.word	gSpecialVar_Result
 .L39:
-.LM45:
+.LM44:
 
 	ldr	r1, .L51
 	mov	r0, #0x1
 	strh	r0, [r1]
-.LM46:
+.LM45:
 
 	b	.L42
 .L52:
@@ -353,20 +348,20 @@ Task_TryFieldPoisonWhiteOut:
 .L51:
 	.word	gSpecialVar_Result
 .L46:
-.LM47:
+.LM46:
 
 	ldrb	r0, [r4, #0x2]
 	bl	FaintFromFieldPoison
-.LM48:
+.LM47:
 
 	ldr	r0, .L53
 	bl	ShowFieldMessage
-.LM49:
+.LM48:
 
 	ldrh	r0, [r4]
 	add	r0, r0, #0x1
 	strh	r0, [r4]
-.LM50:
+.LM49:
 
 	b	.L26
 .L54:
@@ -374,19 +369,19 @@ Task_TryFieldPoisonWhiteOut:
 .L53:
 	.word	gText_PkmnFainted3
 .L38:
-.LM51:
+.LM50:
 
 	ldr	r0, .L55
 	strh	r1, [r0]
 .L42:
-.LM52:
+.LM51:
 
 	bl	EnableBothScriptContexts
-.LM53:
+.LM52:
 
 	add	r0, r6, #0
 	bl	DestroyTask
-.LM54:
+.LM53:
 
 .LBE6:
 .L26:
@@ -406,18 +401,18 @@ Task_TryFieldPoisonWhiteOut:
 	.thumb_func
 TryFieldPoisonWhiteOut:
 .LFB6:
-.LM55:
+.LM54:
 
 	push	{lr}
-.LM56:
+.LM55:
 
 	ldr	r0, .L58
 	mov	r1, #0x50
 	bl	CreateTask
-.LM57:
+.LM56:
 
 	bl	ScriptContext1_Stop
-.LM58:
+.LM57:
 
 	pop	{r0}
 	bx	r0
@@ -434,27 +429,27 @@ TryFieldPoisonWhiteOut:
 	.thumb_func
 DoPoisonFieldEffect:
 .LFB7:
-.LM59:
+.LM58:
 
 	push	{r4, r5, r6, r7, lr}
 	add	sp, sp, #-0x4
-.LM60:
+.LM59:
 
 .LBB7:
-.LM61:
+.LM60:
 
 	ldr	r4, .L74
-.LM62:
+.LM61:
 
 	mov	r7, #0x0
-.LM63:
+.LM62:
 
 	mov	r6, #0x0
-.LM64:
+.LM63:
 
 	mov	r5, #0x5
 .L64:
-.LM65:
+.LM64:
 
 	add	r0, r4, #0
 	mov	r1, #0x5
@@ -469,59 +464,59 @@ DoPoisonFieldEffect:
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
 	bne	.L65	@cond_branch
-.LM66:
+.LM65:
 
 	add	r0, r4, #0
 	mov	r1, #0x39
 	bl	GetMonData
 	str	r0, [sp]
-.LM67:
+.LM66:
 
-	cmp	r0, #0
+	cmp	r0, #0x1
 	beq	.L67	@cond_branch
 	sub	r0, r0, #0x1
 	str	r0, [sp]
-	cmp	r0, #0
+	cmp	r0, #0x1
 	bne	.L66	@cond_branch
 .L67:
-.LM68:
+.LM67:
 
 	add	r6, r6, #0x1
 .L66:
-.LM69:
+.LM68:
 
 	add	r0, r4, #0
 	mov	r1, #0x39
 	mov	r2, sp
 	bl	SetMonData
-.LM70:
+.LM69:
 
 	add	r7, r7, #0x1
 .L65:
-.LM71:
+.LM70:
 
 	add	r4, r4, #0x64
-.LM72:
+.LM71:
 
 	sub	r5, r5, #0x1
 	cmp	r5, #0
 	bge	.L64	@cond_branch
-.LM73:
+.LM72:
 
 	cmp	r6, #0
 	bne	.L70	@cond_branch
 	cmp	r7, #0
 	beq	.L69	@cond_branch
 .L70:
-.LM74:
+.LM73:
 
 	bl	FldEffPoison_Start
 .L69:
-.LM75:
+.LM74:
 
 	cmp	r6, #0
 	beq	.L71	@cond_branch
-.LM76:
+.LM75:
 
 	mov	r0, #0x2
 	b	.L73
@@ -530,20 +525,20 @@ DoPoisonFieldEffect:
 .L74:
 	.word	gPlayerParty
 .L71:
-.LM77:
+.LM76:
 
 	cmp	r7, #0
 	bne	.L72	@cond_branch
-.LM78:
+.LM77:
 
 	mov	r0, #0x0
 	b	.L73
 .L72:
-.LM79:
+.LM78:
 
 	mov	r0, #0x1
 .L73:
-.LM80:
+.LM79:
 
 .LBE7:
 	add	sp, sp, #0x4
@@ -558,7 +553,7 @@ DoPoisonFieldEffect:
 .Letext0:
 
 	.section	.debug_line
-	.4byte	0x590
+	.4byte	0x588
 	.2byte	0x2
 	.4byte	0x2f5
 	.byte	0x4
@@ -845,12 +840,12 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM23
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM24
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -860,7 +855,7 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM26
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -870,17 +865,17 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM28
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM29
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM30
+	.4byte	.LM29
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM30
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -890,32 +885,32 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM32
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM33
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM34
+	.4byte	.LM33
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM35
+	.4byte	.LM34
 	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM36
+	.4byte	.LM35
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM37
+	.4byte	.LM36
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM37
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -945,29 +940,29 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM43
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM44
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM45
+	.4byte	.LM44
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM46
+	.4byte	.LM45
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM47
+	.4byte	.LM46
 	.byte	0x3
 	.byte	0x67
 	.byte	0x1
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM47
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -982,22 +977,22 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM50
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM51
 	.byte	0x2d
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM52
+	.4byte	.LM51
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM53
+	.4byte	.LM52
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM53
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1007,7 +1002,7 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM55
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1022,22 +1017,22 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM58
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM59
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM60
+	.4byte	.LM59
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM61
+	.4byte	.LM60
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM61
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1052,7 +1047,7 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM64
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1062,12 +1057,12 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM66
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM67
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1077,29 +1072,29 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM69
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM70
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM71
+	.4byte	.LM70
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM72
+	.4byte	.LM71
 	.byte	0x3
 	.byte	0x74
 	.byte	0x1
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM73
+	.4byte	.LM72
 	.byte	0x22
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM73
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -1119,21 +1114,16 @@ DoPoisonFieldEffect:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM77
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM78
 	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM79
+	.4byte	.LM78
 	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM80
+	.4byte	.LM79
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
@@ -2843,7 +2833,7 @@ DoPoisonFieldEffect:
 	.ascii	"MonFaintedFromPoison\000"
 
 	.byte	0x1
-	.byte	0x39
+	.byte	0x38
 	.byte	0x1
 	.4byte	0xba
 	.4byte	.LFB4
@@ -2854,13 +2844,13 @@ DoPoisonFieldEffect:
 	.ascii	"partyIdx\000"
 
 	.byte	0x1
-	.byte	0x38
+	.byte	0x37
 	.4byte	0x2ac
 	.byte	0xf
 	.ascii	"pokemon\000"
 
 	.byte	0x1
-	.byte	0x3a
+	.byte	0x39
 	.4byte	0x18a
 	.byte	0x1
 	.byte	0x54
@@ -2870,7 +2860,7 @@ DoPoisonFieldEffect:
 	.ascii	"Task_TryFieldPoisonWhiteOut\000"
 
 	.byte	0x1
-	.byte	0x43
+	.byte	0x42
 	.byte	0x1
 	.4byte	.LFB5
 	.4byte	.LFE5
@@ -2880,7 +2870,7 @@ DoPoisonFieldEffect:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.byte	0x42
+	.byte	0x41
 	.4byte	0x2ac
 	.byte	0x1
 	.byte	0x56
@@ -2888,7 +2878,7 @@ DoPoisonFieldEffect:
 	.ascii	"data\000"
 
 	.byte	0x1
-	.byte	0x44
+	.byte	0x43
 	.4byte	0x9d6
 	.byte	0x1
 	.byte	0x54
@@ -2906,7 +2896,7 @@ DoPoisonFieldEffect:
 	.ascii	"TryFieldPoisonWhiteOut\000"
 
 	.byte	0x1
-	.byte	0x71
+	.byte	0x70
 	.byte	0x1
 	.4byte	.LFB6
 	.4byte	.LFE6
@@ -2918,7 +2908,7 @@ DoPoisonFieldEffect:
 	.ascii	"DoPoisonFieldEffect\000"
 
 	.byte	0x1
-	.byte	0x77
+	.byte	0x76
 	.byte	0x1
 	.4byte	0xa87
 	.4byte	.LFB7
@@ -2929,7 +2919,7 @@ DoPoisonFieldEffect:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.byte	0x78
+	.byte	0x77
 	.4byte	0x8db
 	.byte	0x1
 	.byte	0x55
@@ -2937,7 +2927,7 @@ DoPoisonFieldEffect:
 	.ascii	"hp\000"
 
 	.byte	0x1
-	.byte	0x79
+	.byte	0x78
 	.4byte	0x2a5
 	.byte	0x2
 	.byte	0x91
@@ -2946,7 +2936,7 @@ DoPoisonFieldEffect:
 	.ascii	"pokemon\000"
 
 	.byte	0x1
-	.byte	0x7a
+	.byte	0x79
 	.4byte	0x18a
 	.byte	0x1
 	.byte	0x54
@@ -2954,7 +2944,7 @@ DoPoisonFieldEffect:
 	.ascii	"numPoisoned\000"
 
 	.byte	0x1
-	.byte	0x7b
+	.byte	0x7a
 	.4byte	0x2a5
 	.byte	0x1
 	.byte	0x57
@@ -2962,7 +2952,7 @@ DoPoisonFieldEffect:
 	.ascii	"numFainted\000"
 
 	.byte	0x1
-	.byte	0x7c
+	.byte	0x7b
 	.4byte	0x2a5
 	.byte	0x1
 	.byte	0x56

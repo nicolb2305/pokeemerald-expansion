@@ -23,3 +23,5 @@ Modification:
 ** TMs are reusable and cannot be held
 * [**repel**](https://github.com/DizzyEggg/pokeemerald/tree/repel)
 ** Brings up prompt for whether to use another repel when one wears out
+* [**ow_1hp_psn_survival**](https://github.com/LOuroboros/pokeemerald/tree/ow_1hp_psn_survival)
+** Makes pokemon survive at 1 hp from poison outside of battle instead of fainting

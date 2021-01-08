@@ -8276,7 +8276,6 @@ static void FaintFromFieldPoison(u8 partyIdx)
     struct Pokemon *pokemon = gPlayerParty + partyIdx;
     u32 status = 0;
 
-    AdjustFriendship(pokemon, 7);
     SetMonData(pokemon, 55, &status);
     GetMonData(pokemon, 2, gStringVar1);
     StringGetEnd10(gStringVar1);
@@ -8285,7 +8284,7 @@ static void FaintFromFieldPoison(u8 partyIdx)
 static bool32 MonFaintedFromPoison(u8 partyIdx)
 {
     struct Pokemon *pokemon = gPlayerParty + partyIdx;
-    if (IsMonValidSpecies(pokemon) && GetMonData(pokemon, 57) == 0 && GetAilmentFromStatus(GetMonData(pokemon, 55)) == 1)
+    if (IsMonValidSpecies(pokemon) && GetMonData(pokemon, 57) == 1 && GetAilmentFromStatus(GetMonData(pokemon, 55)) == 1)
     {
         return 1;
     }
@@ -8356,7 +8355,7 @@ s32 DoPoisonFieldEffect(void)
         if (GetMonData(pokemon, 5) && GetAilmentFromStatus(GetMonData(pokemon, 55)) == 1)
         {
             hp = GetMonData(pokemon, 57);
-            if (hp == 0 || --hp == 0)
+            if (hp == 1 || --hp == 1)
             {
                 numFainted++;
             }
