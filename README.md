@@ -25,3 +25,5 @@ Modification:
 ** Brings up prompt for whether to use another repel when one wears out
 * [**ow_1hp_psn_survival**](https://github.com/LOuroboros/pokeemerald/tree/ow_1hp_psn_survival)
 ** Makes pokemon survive at 1 hp from poison outside of battle instead of fainting
+* [**Faster berry interactions**](https://www.pokecommunity.com/showpost.php?p=10164065&postcount=82)
+** Speeds up picking, planting and watering berries by removing unnessecary dialogue
