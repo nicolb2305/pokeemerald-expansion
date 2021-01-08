@@ -19922,6 +19922,7 @@ static void SpriteCb_MoveSelector(struct Sprite *sprite);
 static void DestroyMoveSelectorSprites(u8 firstArrayId);
 static void SetMainMoveSelectorColor(u8 whichColor);
 static void KeepMoveSelectorVisible(u8 firstSpriteId);
+static void BufferIvOrEvStats(u8 mode);
 
 
 # 1 "src/data/text/move_descriptions.h" 1
@@ -23632,7 +23633,7 @@ const u8 *const gMoveDescriptionPointers[755 - 1] =
     [753 - 1] = sASTRAL_BARRAGEDescription,
     [754 - 1] = sEERIE_SPELLDescription,
 };
-# 305 "src/pokemon_summary_screen.c" 2
+# 306 "src/pokemon_summary_screen.c" 2
 # 1 "src/data/text/nature_names.h" 1
 static const u8 sHardyNatureName[] = _("HARDY");
 static const u8 sLonelyNatureName[] = _("LONELY");
@@ -23688,7 +23689,7 @@ const u8 *const gNatureNamePointers[25] =
     [23] = sCarefulNatureName,
     [24] = sQuirkyNatureName,
 };
-# 306 "src/pokemon_summary_screen.c" 2
+# 307 "src/pokemon_summary_screen.c" 2
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -24098,6 +24099,7 @@ static void (*const sTextPrinterTasks[])(u8 taskId) =
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
 static const u8 sMemoMiscTextColor[] = _("{COLOR WHITE}{SHADOW DARK_GREY}");
 static const u8 sStatsLeftColumnLayout[] = _("{DYNAMIC 0}/{DYNAMIC 1}\n{DYNAMIC 2}\n{DYNAMIC 3}");
+static const u8 sStatsLeftColumnLayoutIVEV[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sStatsRightColumnLayout[] = _("{DYNAMIC 0}\n{DYNAMIC 1}\n{DYNAMIC 2}");
 static const u8 sMovesPPLayout[] = _("{PP}{DYNAMIC 0}/{DYNAMIC 1}");
 
@@ -25009,6 +25011,28 @@ static void Task_HandleInput(u8 taskId)
             StopPokemonAnimations();
             PlaySE(5);
             BeginCloseSummaryScreen(taskId);
+        }
+
+        else if (gMain.newKeys & 0x0100)
+        {
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+            {
+                BufferIvOrEvStats(0);
+            }
+        }
+        else if (gMain.newKeys & 0x0200)
+        {
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+            {
+                BufferIvOrEvStats(1);
+            }
+        }
+        else if (gMain.newKeys & 0x0008)
+        {
+            if (sMonSummaryScreen->currPageIndex == PSS_PAGE_SKILLS)
+            {
+                BufferIvOrEvStats(2);
+            }
         }
     }
 }
@@ -26827,6 +26851,84 @@ static void BufferStat(u8 *dst, s8 natureMod, u32 stat, u32 strId, u32 n)
 
     ConvertIntToDecimalStringN(txtPtr, stat, STR_CONV_MODE_RIGHT_ALIGN, n);
     DynamicPlaceholderTextUtil_SetPlaceholderPtr(strId, dst);
+}
+
+static void BufferIvOrEvStats(u8 mode)
+{
+    u16 hp, hp2, atk, def, spA, spD, spe;
+    u8 *currHPString = Alloc(20);
+    const s8 *natureMod = gNatureStatTable[sMonSummaryScreen->summary.nature];
+
+    switch (mode)
+    {
+    case 0:
+        hp = GetMonData(&sMonSummaryScreen->currentMon, 39);
+        atk = GetMonData(&sMonSummaryScreen->currentMon, 40);
+        def = GetMonData(&sMonSummaryScreen->currentMon, 41);
+
+        spA = GetMonData(&sMonSummaryScreen->currentMon, 43);
+        spD = GetMonData(&sMonSummaryScreen->currentMon, 44);
+        spe = GetMonData(&sMonSummaryScreen->currentMon, 42);
+        break;
+    case 1:
+        hp = GetMonData(&sMonSummaryScreen->currentMon, 26);
+        atk = GetMonData(&sMonSummaryScreen->currentMon, 27);
+        def = GetMonData(&sMonSummaryScreen->currentMon, 28);
+
+        spA = GetMonData(&sMonSummaryScreen->currentMon, 30);
+        spD = GetMonData(&sMonSummaryScreen->currentMon, 31);
+        spe = GetMonData(&sMonSummaryScreen->currentMon, 29);
+        break;
+    case 2:
+    default:
+        hp = sMonSummaryScreen->summary.currentHP;
+        hp2 = sMonSummaryScreen->summary.maxHP;
+        atk = sMonSummaryScreen->summary.atk;
+        def = sMonSummaryScreen->summary.def;
+
+        spA = sMonSummaryScreen->summary.spatk;
+        spD = sMonSummaryScreen->summary.spdef;
+        spe = sMonSummaryScreen->summary.speed;
+        break;
+    }
+
+    FillWindowPixelBuffer(sMonSummaryScreen->windowIds[2], 0);
+    FillWindowPixelBuffer(sMonSummaryScreen->windowIds[3], 0);
+
+    switch (mode)
+    {
+    case 0:
+    case 1:
+        BufferStat(gStringVar1, 0, hp, 0, 7);
+        BufferStat(gStringVar2, 0, atk, 1, 7);
+        BufferStat(gStringVar3, 0, def, 2, 7);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayoutIVEV);
+        PrintLeftColumnStats();
+
+        BufferStat(gStringVar1, 0, spA, 0, 3);
+        BufferStat(gStringVar2, 0, spD, 1, 3);
+        BufferStat(gStringVar3, 0, spe, 2, 3);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
+        PrintRightColumnStats();
+        break;
+    case 2:
+    default:
+        BufferStat(currHPString, 0, hp, 0, 3);
+        BufferStat(gStringVar1, 0, hp2, 1, 3);
+        BufferStat(gStringVar2, natureMod[1 - 1], atk, 2, 7);
+        BufferStat(gStringVar3, natureMod[2 - 1], def, 3, 7);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsLeftColumnLayout);
+        PrintLeftColumnStats();
+
+        BufferStat(gStringVar1, natureMod[4 - 1], spA, 0, 3);
+        BufferStat(gStringVar2, natureMod[5 - 1], spD, 1, 3);
+        BufferStat(gStringVar3, natureMod[3 - 1], spe, 2, 3);
+        DynamicPlaceholderTextUtil_ExpandPlaceholders(gStringVar4, sStatsRightColumnLayout);
+        PrintRightColumnStats();
+        break;
+    }
+
+    Free(currHPString);
 }
 
 static void BufferLeftColumnStats(void)
