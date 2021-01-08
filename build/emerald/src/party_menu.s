@@ -24702,101 +24702,81 @@ Task_LearnedMove:
 .LFB245:
 .LM2652:
 
-	push	{r4, r5, r6, r7, lr}
+	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
-	lsr	r7, r0, #0x18
+	lsr	r6, r0, #0x18
 .LM2653:
 
 .LBB104:
-	ldr	r2, .L2159
+	ldr	r5, .L2158
 	mov	r1, #0x9
-	ldrsb	r1, [r2, r1]
+	ldrsb	r1, [r5, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2159+0x4
-	add	r5, r1, r0
+	ldr	r0, .L2158+0x4
+	add	r4, r1, r0
 .LM2654:
 
-	add	r6, r2, #0
-	add	r6, r6, #0xe
-.LM2655:
-
-	ldr	r0, .L2159+0x8
-	ldrh	r4, [r0]
-.LM2656:
-
-	mov	r1, #0x2
-	ldrsh	r0, [r6, r1]
+	mov	r1, #0x10
+	ldrsh	r0, [r5, r1]
 	cmp	r0, #0
 	bne	.L2157	@cond_branch
-.LM2657:
+.LM2655:
 
-	add	r0, r5, #0
+	add	r0, r4, #0
 	mov	r1, #0x4
 	bl	AdjustFriendship
+.L2157:
+.LM2656:
+
+	ldr	r1, .L2158+0x8
+	add	r0, r4, #0
+	bl	GetMonNickname
+.LM2657:
+
+	ldr	r0, .L2158+0xc
+	mov	r1, #0xe
+	ldrsh	r2, [r5, r1]
+	mov	r1, #0xd
+	mul	r1, r1, r2
+	ldr	r2, .L2158+0x10
+	add	r1, r1, r2
+	bl	StringCopy
 .LM2658:
 
-	ldr	r0, .L2159+0xc
-	cmp	r4, r0
-	bhi	.L2157	@cond_branch
+	ldr	r4, .L2158+0x14
+	ldr	r1, .L2158+0x18
+	add	r0, r4, #0
+	bl	StringExpandPlaceholders
 .LM2659:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
-	bl	RemoveBagItem
-.L2157:
-.LM2660:
-
-	ldr	r1, .L2159+0x10
-	add	r0, r5, #0
-	bl	GetMonNickname
-.LM2661:
-
-	ldr	r0, .L2159+0x14
-	mov	r1, #0x0
-	ldrsh	r2, [r6, r1]
-	mov	r1, #0xd
-	mul	r1, r1, r2
-	ldr	r2, .L2159+0x18
-	add	r1, r1, r2
-	bl	StringCopy
-.LM2662:
-
-	ldr	r4, .L2159+0x1c
-	ldr	r1, .L2159+0x20
-	add	r0, r4, #0
-	bl	StringExpandPlaceholders
-.LM2663:
-
-	add	r0, r4, #0
-	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2664:
+.LM2660:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2665:
+.LM2661:
 
-	ldr	r1, .L2159+0x24
-	lsl	r0, r7, #0x2
-	add	r0, r0, r7
+	ldr	r1, .L2158+0x1c
+	lsl	r0, r6, #0x2
+	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2159+0x28
+	ldr	r1, .L2158+0x20
 	str	r1, [r0]
-.LM2666:
+.LM2662:
 
 .LBE104:
-	pop	{r4, r5, r6, r7}
+	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2160:
-	.align	2, 0
 .L2159:
+	.align	2, 0
+.L2158:
 	.word	gPartyMenu
 	.word	gPlayerParty
-	.word	gSpecialVar_ItemId
-	.word	0x213
 	.word	gStringVar1
 	.word	gStringVar2
 	.word	gMoveNames
@@ -24812,40 +24792,40 @@ Task_LearnedMove:
 	.thumb_func
 Task_DoLearnedMoveFanfareAfterText:
 .LFB246:
-.LM2667:
+.LM2663:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2668:
+.LM2664:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2162	@cond_branch
-.LM2669:
+	beq	.L2161	@cond_branch
+.LM2665:
 
-	ldr	r0, .L2163
+	ldr	r0, .L2162
 	bl	PlayFanfare
-.LM2670:
+.LM2666:
 
-	ldr	r1, .L2163+0x4
+	ldr	r1, .L2162+0x4
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2163+0x8
+	ldr	r1, .L2162+0x8
 	str	r1, [r0]
-.L2162:
-.LM2671:
+.L2161:
+.LM2667:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2164:
-	.align	2, 0
 .L2163:
+	.align	2, 0
+.L2162:
 	.word	0x16f
 	.word	gTasks
 	.word	Task_LearnNextMoveOrClosePartyMenu
@@ -24857,76 +24837,76 @@ Task_DoLearnedMoveFanfareAfterText:
 	.thumb_func
 Task_LearnNextMoveOrClosePartyMenu:
 .LFB247:
-.LM2672:
+.LM2668:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	add	r5, r4, #0
-.LM2673:
+.LM2669:
 
 .LBB105:
 	bl	IsFanfareTaskInactive
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2166	@cond_branch
+	beq	.L2165	@cond_branch
 .LBB106:
-	ldr	r0, .L2171
+	ldr	r0, .L2170
 	ldrh	r1, [r0, #0x2e]
 	mov	r2, #0x1
 	add	r0, r2, #0
 	and	r0, r0, r1
 .LBE106:
 	cmp	r0, #0
-	bne	.L2167	@cond_branch
+	bne	.L2166	@cond_branch
 .LBB107:
 	mov	r0, #0x2
 	and	r0, r0, r1
 .LBE107:
 	cmp	r0, #0
-	beq	.L2166	@cond_branch
-.L2167:
-.LM2674:
+	beq	.L2165	@cond_branch
+.L2166:
+.LM2670:
 
-	ldr	r0, .L2171+0x4
+	ldr	r0, .L2170+0x4
 	mov	r1, #0x10
 	ldrsh	r0, [r0, r1]
 	cmp	r0, #0x1
-	bne	.L2168	@cond_branch
-.LM2675:
+	bne	.L2167	@cond_branch
+.LM2671:
 
 	add	r0, r4, #0
 	bl	Task_TryLearningNextMove
-	b	.L2166
-.L2172:
-	.align	2, 0
+	b	.L2165
 .L2171:
+	.align	2, 0
+.L2170:
 	.word	gMain
 	.word	gPartyMenu
-.L2168:
-.LM2676:
+.L2167:
+.LM2672:
 
 	cmp	r0, #0x2
-	bne	.L2170	@cond_branch
-.LM2677:
+	bne	.L2169	@cond_branch
+.LM2673:
 
-	ldr	r0, .L2173
+	ldr	r0, .L2172
 	strh	r2, [r0]
-.L2170:
-.LM2678:
+.L2169:
+.LM2674:
 
 	add	r0, r5, #0
 	bl	Task_ClosePartyMenu
-.L2166:
-.LM2679:
+.L2165:
+.LM2675:
 
 .LBE105:
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2174:
-	.align	2, 0
 .L2173:
+	.align	2, 0
+.L2172:
 	.word	gSpecialVar_Result
 .LFE247:
 .Lfe247:
@@ -24936,39 +24916,39 @@ Task_LearnNextMoveOrClosePartyMenu:
 	.thumb_func
 Task_ReplaceMoveYesNo:
 .LFB248:
-.LM2680:
+.LM2676:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2681:
+.LM2677:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2176	@cond_branch
-.LM2682:
+	beq	.L2175	@cond_branch
+.LM2678:
 
 	bl	PartyMenuDisplayYesNoMenu
-.LM2683:
+.LM2679:
 
-	ldr	r0, .L2177
+	ldr	r0, .L2176
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2177+0x4
+	ldr	r0, .L2176+0x4
 	str	r0, [r1]
-.L2176:
-.LM2684:
+.L2175:
+.LM2680:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2178:
-	.align	2, 0
 .L2177:
+	.align	2, 0
+.L2176:
 	.word	gTasks
 	.word	Task_HandleReplaceMoveYesNoInput
 .LFE248:
@@ -24979,65 +24959,65 @@ Task_ReplaceMoveYesNo:
 	.thumb_func
 Task_HandleReplaceMoveYesNoInput:
 .LFB249:
-.LM2685:
+.LM2681:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2686:
+.LM2682:
 
 	bl	Menu_ProcessInputNoWrapClearOnChoose
 	lsl	r0, r0, #0x18
 	asr	r1, r0, #0x18
 	cmp	r1, #0
-	beq	.L2181	@cond_branch
+	beq	.L2180	@cond_branch
 	cmp	r1, #0
-	bgt	.L2186	@cond_branch
+	bgt	.L2185	@cond_branch
 	mov	r0, #0x1
 	neg	r0, r0
 	cmp	r1, r0
-	beq	.L2182	@cond_branch
-	b	.L2180
-.L2186:
+	beq	.L2181	@cond_branch
+	b	.L2179
+.L2185:
 	cmp	r1, #0x1
-	beq	.L2183	@cond_branch
-	b	.L2180
-.L2181:
-.LM2687:
+	beq	.L2182	@cond_branch
+	b	.L2179
+.L2180:
+.LM2683:
 
-	ldr	r0, .L2187
+	ldr	r0, .L2186
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2688:
+.LM2684:
 
-	ldr	r1, .L2187+0x4
+	ldr	r1, .L2186+0x4
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2187+0x8
+	ldr	r1, .L2186+0x8
 	str	r1, [r0]
-.LM2689:
+.LM2685:
 
-	b	.L2180
-.L2188:
-	.align	2, 0
+	b	.L2179
 .L2187:
+	.align	2, 0
+.L2186:
 	.word	gText_WhichMoveToForget
 	.word	gTasks
 	.word	Task_ShowSummaryScreenToForgetMove
-.L2182:
-.LM2690:
+.L2181:
+.LM2686:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.L2183:
-.LM2691:
+.L2182:
+.LM2687:
 
 	add	r0, r4, #0
 	bl	StopLearningMovePrompt
-.L2180:
-.LM2692:
+.L2179:
+.LM2688:
 
 	pop	{r4}
 	pop	{r0}
@@ -25050,37 +25030,37 @@ Task_HandleReplaceMoveYesNoInput:
 	.thumb_func
 Task_ShowSummaryScreenToForgetMove:
 .LFB250:
-.LM2693:
+.LM2689:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2694:
+.LM2690:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2190	@cond_branch
-.LM2695:
+	beq	.L2189	@cond_branch
+.LM2691:
 
-	ldr	r0, .L2191
+	ldr	r0, .L2190
 	ldr	r1, [r0]
-	ldr	r0, .L2191+0x4
+	ldr	r0, .L2190+0x4
 	str	r0, [r1, #0x4]
-.LM2696:
+.LM2692:
 
 	add	r0, r4, #0
 	bl	Task_ClosePartyMenu
-.L2190:
-.LM2697:
+.L2189:
+.LM2693:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2192:
-	.align	2, 0
 .L2191:
+	.align	2, 0
+.L2190:
 	.word	sPartyMenuInternal
 	.word	CB2_ShowSummaryScreenToForgetMove
 .LFE250:
@@ -25091,33 +25071,33 @@ Task_ShowSummaryScreenToForgetMove:
 	.thumb_func
 CB2_ShowSummaryScreenToForgetMove:
 .LFB251:
-.LM2698:
+.LM2694:
 
 	push	{r4, lr}
 	add	sp, sp, #-0x4
-.LM2699:
+.LM2695:
 
-	ldr	r0, .L2194
-	ldr	r4, .L2194+0x4
+	ldr	r0, .L2193
+	ldr	r4, .L2193+0x4
 	ldrb	r1, [r4, #0x9]
-	ldr	r2, .L2194+0x8
+	ldr	r2, .L2193+0x8
 	ldrb	r2, [r2]
 	sub	r2, r2, #0x1
 	lsl	r2, r2, #0x18
 	lsr	r2, r2, #0x18
-	ldr	r3, .L2194+0xc
+	ldr	r3, .L2193+0xc
 	ldrh	r4, [r4, #0xe]
 	str	r4, [sp]
 	bl	ShowSelectMovePokemonSummaryScreen
-.LM2700:
+.LM2696:
 
 	add	sp, sp, #0x4
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2195:
-	.align	2, 0
 .L2194:
+	.align	2, 0
+.L2193:
 	.word	gPlayerParty
 	.word	gPartyMenu
 	.word	gPlayerPartyCount
@@ -25130,17 +25110,17 @@ CB2_ShowSummaryScreenToForgetMove:
 	.thumb_func
 CB2_ReturnToPartyMenuWhileLearningMove:
 .LFB252:
-.LM2701:
+.LM2697:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM2702:
+.LM2698:
 
 	mov	r0, #0x7f
 	str	r0, [sp]
-	ldr	r0, .L2197
+	ldr	r0, .L2196
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2197+0x4
+	ldr	r0, .L2196+0x4
 	ldr	r0, [r0]
 	str	r0, [sp, #0x8]
 	mov	r0, #0x0
@@ -25148,14 +25128,14 @@ CB2_ReturnToPartyMenuWhileLearningMove:
 	mov	r2, #0x0
 	mov	r3, #0x1
 	bl	InitPartyMenu
-.LM2703:
+.LM2699:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2198:
-	.align	2, 0
 .L2197:
+	.align	2, 0
+.L2196:
 	.word	Task_ReturnToPartyMenuWhileLearningMove
 	.word	gPartyMenu
 .LFE252:
@@ -25166,43 +25146,43 @@ CB2_ReturnToPartyMenuWhileLearningMove:
 	.thumb_func
 Task_ReturnToPartyMenuWhileLearningMove:
 .LFB253:
-.LM2704:
+.LM2700:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	add	r5, r4, #0
-.LM2705:
+.LM2701:
 
-	ldr	r0, .L2203
+	ldr	r0, .L2202
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2200	@cond_branch
-.LM2706:
+	bne	.L2199	@cond_branch
+.LM2702:
 
 	bl	GetMoveSlotToReplace
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x4
-	beq	.L2201	@cond_branch
-.LM2707:
+	beq	.L2200	@cond_branch
+.LM2703:
 
 	add	r0, r4, #0
 	bl	DisplayPartyMenuForgotMoveMessage
-	b	.L2200
-.L2204:
-	.align	2, 0
+	b	.L2199
 .L2203:
+	.align	2, 0
+.L2202:
 	.word	gPaletteFade
-.L2201:
-.LM2708:
+.L2200:
+.LM2704:
 
 	add	r0, r5, #0
 	bl	StopLearningMovePrompt
-.L2200:
-.LM2709:
+.L2199:
+.LM2705:
 
 	pop	{r4, r5}
 	pop	{r0}
@@ -25215,24 +25195,24 @@ Task_ReturnToPartyMenuWhileLearningMove:
 	.thumb_func
 DisplayPartyMenuForgotMoveMessage:
 .LFB254:
-.LM2710:
+.LM2706:
 
 	push	{r4, r5, r6, lr}
 	add	r6, r0, #0
 	lsl	r6, r6, #0x18
 	lsr	r6, r6, #0x18
-.LM2711:
+.LM2707:
 
 .LBB108:
-	ldr	r0, .L2206
+	ldr	r0, .L2205
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mov	r5, r1
 	mul	r5, r5, r0
-	ldr	r0, .L2206+0x4
+	ldr	r0, .L2205+0x4
 	add	r5, r5, r0
-.LM2712:
+.LM2708:
 
 	bl	GetMoveSlotToReplace
 	add	r1, r0, #0
@@ -25244,41 +25224,41 @@ DisplayPartyMenuForgotMoveMessage:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x10
 	lsr	r4, r4, #0x10
-.LM2713:
+.LM2709:
 
-	ldr	r1, .L2206+0x8
+	ldr	r1, .L2205+0x8
 	add	r0, r5, #0
 	bl	GetMonNickname
-.LM2714:
+.LM2710:
 
-	ldr	r0, .L2206+0xc
+	ldr	r0, .L2205+0xc
 	mov	r1, #0xd
 	mul	r1, r1, r4
-	ldr	r2, .L2206+0x10
+	ldr	r2, .L2205+0x10
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2715:
+.LM2711:
 
-	ldr	r0, .L2206+0x14
+	ldr	r0, .L2205+0x14
 	bl	DisplayLearnMoveMessage
-.LM2716:
+.LM2712:
 
-	ldr	r1, .L2206+0x18
+	ldr	r1, .L2205+0x18
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2206+0x1c
+	ldr	r1, .L2205+0x1c
 	str	r1, [r0]
-.LM2717:
+.LM2713:
 
 .LBE108:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2207:
-	.align	2, 0
 .L2206:
+	.align	2, 0
+.L2205:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gStringVar1
@@ -25295,32 +25275,32 @@ DisplayPartyMenuForgotMoveMessage:
 	.thumb_func
 Task_PartyMenuReplaceMove:
 .LFB255:
-.LM2718:
+.LM2714:
 
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM2719:
+.LM2715:
 
 .LBB109:
-.LM2720:
+.LM2716:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2209	@cond_branch
-.LM2721:
+	beq	.L2208	@cond_branch
+.LM2717:
 
-	ldr	r5, .L2210
+	ldr	r5, .L2209
 	mov	r1, #0x9
 	ldrsb	r1, [r5, r1]
 	mov	r0, #0x64
 	mov	r4, r1
 	mul	r4, r4, r0
-	ldr	r0, .L2210+0x4
+	ldr	r0, .L2209+0x4
 	add	r4, r4, r0
-.LM2722:
+.LM2718:
 
 	bl	GetMoveSlotToReplace
 	add	r1, r0, #0
@@ -25328,10 +25308,10 @@ Task_PartyMenuReplaceMove:
 	lsr	r1, r1, #0x18
 	add	r0, r4, #0
 	bl	RemoveMonPPBonus
-.LM2723:
+.LM2719:
 
 	ldrh	r5, [r5, #0xe]
-.LM2724:
+.LM2720:
 
 	bl	GetMoveSlotToReplace
 	add	r2, r0, #0
@@ -25340,20 +25320,20 @@ Task_PartyMenuReplaceMove:
 	add	r0, r4, #0
 	add	r1, r5, #0
 	bl	SetMonMoveSlot
-.LM2725:
+.LM2721:
 
 	add	r0, r6, #0
 	bl	Task_LearnedMove
-.L2209:
-.LM2726:
+.L2208:
+.LM2722:
 
 .LBE109:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2211:
-	.align	2, 0
 .L2210:
+	.align	2, 0
+.L2209:
 	.word	gPartyMenu
 	.word	gPlayerParty
 .LFE255:
@@ -25364,55 +25344,55 @@ Task_PartyMenuReplaceMove:
 	.thumb_func
 StopLearningMovePrompt:
 .LFB256:
-.LM2727:
+.LM2723:
 
 	push	{r4, r5, lr}
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-.LM2728:
+.LM2724:
 
-	ldr	r0, .L2213
-	ldr	r1, .L2213+0x4
+	ldr	r0, .L2212
+	ldr	r1, .L2212+0x4
 	mov	r3, #0xe
 	ldrsh	r2, [r1, r3]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, .L2213+0x8
+	ldr	r2, .L2212+0x8
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2729:
+.LM2725:
 
-	ldr	r4, .L2213+0xc
-	ldr	r1, .L2213+0x10
+	ldr	r4, .L2212+0xc
+	ldr	r1, .L2212+0x10
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2730:
+.LM2726:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2731:
+.LM2727:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2732:
+.LM2728:
 
-	ldr	r1, .L2213+0x14
+	ldr	r1, .L2212+0x14
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2213+0x18
+	ldr	r1, .L2212+0x18
 	str	r1, [r0]
-.LM2733:
+.LM2729:
 
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2214:
-	.align	2, 0
 .L2213:
+	.align	2, 0
+.L2212:
 	.word	gStringVar2
 	.word	gPartyMenu
 	.word	gMoveNames
@@ -25428,39 +25408,39 @@ StopLearningMovePrompt:
 	.thumb_func
 Task_StopLearningMoveYesNo:
 .LFB257:
-.LM2734:
+.LM2730:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2735:
+.LM2731:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2216	@cond_branch
-.LM2736:
+	beq	.L2215	@cond_branch
+.LM2732:
 
 	bl	PartyMenuDisplayYesNoMenu
-.LM2737:
+.LM2733:
 
-	ldr	r0, .L2217
+	ldr	r0, .L2216
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2217+0x4
+	ldr	r0, .L2216+0x4
 	str	r0, [r1]
-.L2216:
-.LM2738:
+.L2215:
+.LM2734:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2218:
-	.align	2, 0
 .L2217:
+	.align	2, 0
+.L2216:
 	.word	gTasks
 	.word	Task_HandleStopLearningMoveYesNoInput
 .LFE257:
@@ -25471,92 +25451,92 @@ Task_StopLearningMoveYesNo:
 	.thumb_func
 Task_HandleStopLearningMoveYesNoInput:
 .LFB258:
-.LM2739:
+.LM2735:
 
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM2740:
+.LM2736:
 
 .LBB110:
-	ldr	r7, .L2230
+	ldr	r7, .L2229
 	mov	r1, #0x9
 	ldrsb	r1, [r7, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2230+0x4
+	ldr	r0, .L2229+0x4
 	add	r4, r1, r0
-.LM2741:
+.LM2737:
 
 	bl	Menu_ProcessInputNoWrapClearOnChoose
 	lsl	r0, r0, #0x18
 	asr	r5, r0, #0x18
 	cmp	r5, #0
-	beq	.L2221	@cond_branch
+	beq	.L2220	@cond_branch
 	cmp	r5, #0
-	bgt	.L2229	@cond_branch
+	bgt	.L2228	@cond_branch
 	mov	r0, #0x1
 	neg	r0, r0
 	cmp	r5, r0
-	beq	.L2225	@cond_branch
-	b	.L2220
-.L2231:
-	.align	2, 0
+	beq	.L2224	@cond_branch
+	b	.L2219
 .L2230:
+	.align	2, 0
+.L2229:
 	.word	gPartyMenu
 	.word	gPlayerParty
-.L2229:
+.L2228:
 	cmp	r5, #0x1
-	beq	.L2226	@cond_branch
-	b	.L2220
-.L2221:
-.LM2742:
+	beq	.L2225	@cond_branch
+	b	.L2219
+.L2220:
+.LM2738:
 
-	ldr	r1, .L2232
+	ldr	r1, .L2231
 	add	r0, r4, #0
 	bl	GetMonNickname
-.LM2743:
+.LM2739:
 
-	ldr	r0, .L2232+0x4
+	ldr	r0, .L2231+0x4
 	mov	r1, #0xe
 	ldrsh	r2, [r7, r1]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, .L2232+0x8
+	ldr	r2, .L2231+0x8
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2744:
+.LM2740:
 
-	ldr	r4, .L2232+0xc
-	ldr	r1, .L2232+0x10
+	ldr	r4, .L2231+0xc
+	ldr	r1, .L2231+0x10
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2745:
+.LM2741:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2746:
+.LM2742:
 
 	mov	r3, #0x10
 	ldrsh	r0, [r7, r3]
 	cmp	r0, #0x1
-	bne	.L2222	@cond_branch
-.LM2747:
+	bne	.L2221	@cond_branch
+.LM2743:
 
-	ldr	r0, .L2232+0x14
+	ldr	r0, .L2231+0x14
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2232+0x18
+	ldr	r0, .L2231+0x18
 	str	r0, [r1]
-.LM2748:
+.LM2744:
 
-	b	.L2220
-.L2233:
-	.align	2, 0
+	b	.L2219
 .L2232:
+	.align	2, 0
+.L2231:
 	.word	gStringVar1
 	.word	gStringVar2
 	.word	gMoveNames
@@ -25564,79 +25544,79 @@ Task_HandleStopLearningMoveYesNoInput:
 	.word	gText_MoveNotLearned
 	.word	gTasks
 	.word	Task_TryLearningNextMoveAfterText
-.L2222:
-.LM2749:
+.L2221:
+.LM2745:
 
 	cmp	r0, #0x2
-	bne	.L2224	@cond_branch
-.LM2750:
+	bne	.L2223	@cond_branch
+.LM2746:
 
-	ldr	r0, .L2234
+	ldr	r0, .L2233
 	strh	r5, [r0]
-.L2224:
-.LM2751:
+.L2223:
+.LM2747:
 
-	ldr	r0, .L2234+0x4
+	ldr	r0, .L2233+0x4
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2234+0x8
+	ldr	r0, .L2233+0x8
 	str	r0, [r1]
-.LM2752:
+.LM2748:
 
-	b	.L2220
-.L2235:
-	.align	2, 0
+	b	.L2219
 .L2234:
+	.align	2, 0
+.L2233:
 	.word	gSpecialVar_Result
 	.word	gTasks
 	.word	Task_ClosePartyMenuAfterText
-.L2225:
-.LM2753:
+.L2224:
+.LM2749:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.L2226:
-.LM2754:
+.L2225:
+.LM2750:
 
-	ldr	r1, .L2236
+	ldr	r1, .L2235
 	add	r0, r4, #0
 	bl	GetMonNickname
-.LM2755:
+.LM2751:
 
-	ldr	r0, .L2236+0x4
-	ldr	r1, .L2236+0x8
+	ldr	r0, .L2235+0x4
+	ldr	r1, .L2235+0x8
 	mov	r3, #0xe
 	ldrsh	r2, [r1, r3]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, .L2236+0xc
+	ldr	r2, .L2235+0xc
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2756:
+.LM2752:
 
-	ldr	r0, .L2236+0x10
+	ldr	r0, .L2235+0x10
 	bl	DisplayLearnMoveMessage
-.LM2757:
+.LM2753:
 
-	ldr	r1, .L2236+0x14
+	ldr	r1, .L2235+0x14
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2236+0x18
+	ldr	r1, .L2235+0x18
 	str	r1, [r0]
-.L2220:
-.LM2758:
+.L2219:
+.LM2754:
 
 .LBE110:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2237:
-	.align	2, 0
 .L2236:
+	.align	2, 0
+.L2235:
 	.word	gStringVar1
 	.word	gStringVar2
 	.word	gPartyMenu
@@ -25652,24 +25632,24 @@ Task_HandleStopLearningMoveYesNoInput:
 	.thumb_func
 Task_TryLearningNextMoveAfterText:
 .LFB259:
-.LM2759:
+.LM2755:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2760:
+.LM2756:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2239	@cond_branch
-.LM2761:
+	beq	.L2238	@cond_branch
+.LM2757:
 
 	add	r0, r4, #0
 	bl	Task_TryLearningNextMove
-.L2239:
-.LM2762:
+.L2238:
+.LM2758:
 
 	pop	{r4}
 	pop	{r0}
@@ -25683,7 +25663,7 @@ Task_TryLearningNextMoveAfterText:
 	.thumb_func
 ItemUseCB_RareCandy:
 .LFB260:
-.LM2763:
+.LM2759:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, sl
@@ -25693,43 +25673,43 @@ ItemUseCB_RareCandy:
 	mov	sl, r1
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-.LM2764:
+.LM2760:
 
 .LBB111:
-	ldr	r0, .L2246
+	ldr	r0, .L2245
 	mov	r9, r0
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2246+0x4
+	ldr	r0, .L2245+0x4
 	add	r5, r1, r0
-.LM2765:
+.LM2761:
 
-	ldr	r0, .L2246+0x8
+	ldr	r0, .L2245+0x8
 	ldr	r6, [r0]
-.LM2766:
+.LM2762:
 
 	mov	r1, #0x86
 	lsl	r1, r1, #0x2
 	add	r4, r6, r1
-.LM2767:
+.LM2763:
 
-	ldr	r2, .L2246+0xc
+	ldr	r2, .L2245+0xc
 	mov	r8, r2
-.LM2768:
+.LM2764:
 
 	add	r0, r5, #0
 	mov	r1, #0x38
 	bl	GetMonData
 	cmp	r0, #0x64
-	beq	.L2241	@cond_branch
-.LM2769:
+	beq	.L2240	@cond_branch
+.LM2765:
 
 	add	r0, r5, #0
 	add	r1, r4, #0
 	bl	BufferMonStatsToTaskData
-.LM2770:
+.LM2766:
 
 	mov	r1, r9
 	ldrb	r0, [r1, #0x9]
@@ -25739,97 +25719,97 @@ ItemUseCB_RareCandy:
 	bl	ExecuteTableBasedItemEffect_
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2771:
+.LM2767:
 
 	mov	r0, #0x89
 	lsl	r0, r0, #0x2
 	add	r1, r6, r0
 	add	r0, r5, #0
 	bl	BufferMonStatsToTaskData
-.LM2772:
+.LM2768:
 
-	b	.L2242
-.L2247:
-	.align	2, 0
+	b	.L2241
 .L2246:
+	.align	2, 0
+.L2245:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	sPartyMenuInternal
 	.word	gSpecialVar_ItemId
-.L2241:
-.LM2773:
+.L2240:
+.LM2769:
 
 	mov	r4, #0x1
-.L2242:
-.LM2774:
+.L2241:
+.LM2770:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM2775:
+.LM2771:
 
 	cmp	r4, #0
-	beq	.L2243	@cond_branch
-.LM2776:
+	beq	.L2242	@cond_branch
+.LM2772:
 
-	ldr	r1, .L2248
+	ldr	r1, .L2247
 	mov	r0, #0x0
 	strb	r0, [r1]
-.LM2777:
+.LM2773:
 
-	ldr	r0, .L2248+0x4
+	ldr	r0, .L2247+0x4
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2778:
+.LM2774:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2779:
+.LM2775:
 
-	ldr	r1, .L2248+0x8
+	ldr	r1, .L2247+0x8
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
 	mov	r1, sl
-.LM2780:
+.LM2776:
 
-	b	.L2245
-.L2249:
-	.align	2, 0
+	b	.L2244
 .L2248:
+	.align	2, 0
+.L2247:
 	.word	gPartyMenuUseExitCallback
 	.word	gText_WontHaveEffect
 	.word	gTasks
-.L2243:
-.LM2781:
+.L2242:
+.LM2777:
 
-	ldr	r1, .L2250
+	ldr	r1, .L2249
 	mov	r0, #0x1
 	strb	r0, [r1]
-.LM2782:
+.LM2778:
 
 	mov	r0, #0x0
 	bl	PlayFanfareByFanfareNum
-.LM2783:
+.LM2779:
 
-	ldr	r0, .L2250+0x4
+	ldr	r0, .L2249+0x4
 	ldrb	r0, [r0, #0x9]
 	add	r1, r5, #0
 	bl	UpdateMonDisplayInfoAfterRareCandy
-.LM2784:
+.LM2780:
 
-	ldr	r0, .L2250+0x8
+	ldr	r0, .L2249+0x8
 	ldrh	r0, [r0]
 	mov	r1, #0x1
 	bl	RemoveBagItem
-.LM2785:
+.LM2781:
 
-	ldr	r1, .L2250+0xc
+	ldr	r1, .L2249+0xc
 	add	r0, r5, #0
 	bl	GetMonNickname
-.LM2786:
+.LM2782:
 
-	ldr	r4, .L2250+0x10
+	ldr	r4, .L2249+0x10
 	add	r0, r5, #0
 	mov	r1, #0x38
 	bl	GetMonData
@@ -25838,32 +25818,32 @@ ItemUseCB_RareCandy:
 	mov	r2, #0x0
 	mov	r3, #0x3
 	bl	ConvertIntToDecimalStringN
-.LM2787:
+.LM2783:
 
-	ldr	r4, .L2250+0x14
-	ldr	r1, .L2250+0x18
+	ldr	r4, .L2249+0x14
+	ldr	r1, .L2249+0x18
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2788:
+.LM2784:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2789:
+.LM2785:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2790:
+.LM2786:
 
-	ldr	r1, .L2250+0x1c
+	ldr	r1, .L2249+0x1c
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2250+0x20
-.L2245:
+	ldr	r1, .L2249+0x20
+.L2244:
 	str	r1, [r0]
-.LM2791:
+.LM2787:
 
 .LBE111:
 	pop	{r3, r4, r5}
@@ -25873,9 +25853,9 @@ ItemUseCB_RareCandy:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2251:
-	.align	2, 0
 .L2250:
+	.align	2, 0
+.L2249:
 	.word	gPartyMenuUseExitCallback
 	.word	gPartyMenu
 	.word	gSpecialVar_ItemId
@@ -25893,24 +25873,24 @@ ItemUseCB_RareCandy:
 	.thumb_func
 UpdateMonDisplayInfoAfterRareCandy:
 .LFB261:
-.LM2792:
+.LM2788:
 
 	push	{r4, r5, r6, r7, lr}
 	add	r5, r1, #0
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	add	r7, r0, #0
-.LM2793:
+.LM2789:
 
-	ldr	r6, .L2254
+	ldr	r6, .L2253
 	lsl	r4, r7, #0x4
 	ldr	r1, [r6]
 	add	r1, r1, r4
 	add	r0, r5, #0
 	bl	SetPartyMonAilmentGfx
-.LM2794:
+.LM2790:
 
-	ldr	r2, .L2254+0x4
+	ldr	r2, .L2253+0x4
 	ldr	r0, [r6]
 	add	r3, r4, r0
 	ldrb	r1, [r3, #0xc]
@@ -25922,58 +25902,58 @@ UpdateMonDisplayInfoAfterRareCandy:
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x1d
 	cmp	r0, #0
-	bge	.L2253	@cond_branch
-.LM2795:
+	bge	.L2252	@cond_branch
+.LM2791:
 
 	add	r0, r5, #0
 	add	r1, r3, #0
 	mov	r2, #0x1
 	bl	DisplayPartyPokemonLevelCheck
-.L2253:
-.LM2796:
+.L2252:
+.LM2792:
 
 	ldr	r1, [r6]
 	add	r1, r1, r4
 	add	r0, r5, #0
 	mov	r2, #0x1
 	bl	DisplayPartyPokemonHPCheck
-.LM2797:
+.LM2793:
 
 	ldr	r1, [r6]
 	add	r1, r1, r4
 	add	r0, r5, #0
 	mov	r2, #0x1
 	bl	DisplayPartyPokemonMaxHPCheck
-.LM2798:
+.LM2794:
 
 	ldr	r1, [r6]
 	add	r1, r1, r4
 	add	r0, r5, #0
 	bl	DisplayPartyPokemonHPBarCheck
-.LM2799:
+.LM2795:
 
 	ldr	r0, [r6]
 	add	r0, r4, r0
 	ldrb	r0, [r0, #0x9]
 	add	r1, r5, #0
 	bl	UpdatePartyMonHPBar
-.LM2800:
+.LM2796:
 
 	add	r0, r7, #0
 	mov	r1, #0x1
 	bl	AnimatePartySlot
-.LM2801:
+.LM2797:
 
 	mov	r0, #0x0
 	bl	ScheduleBgCopyTilemapToVram
-.LM2802:
+.LM2798:
 
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2255:
-	.align	2, 0
 .L2254:
+	.align	2, 0
+.L2253:
 	.word	sPartyMenuBoxes
 	.word	gSprites
 .LFE261:
@@ -25984,66 +25964,66 @@ UpdateMonDisplayInfoAfterRareCandy:
 	.thumb_func
 Task_DisplayLevelUpStatsPg1:
 .LFB262:
-.LM2803:
+.LM2799:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2804:
+.LM2800:
 
 .LBB112:
 	mov	r0, #0x0
 	bl	WaitFanfare
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2257	@cond_branch
+	beq	.L2256	@cond_branch
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2257	@cond_branch
+	beq	.L2256	@cond_branch
 .LBB113:
-	ldr	r0, .L2259
+	ldr	r0, .L2258
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
 .LBE113:
 	cmp	r0, #0
-	bne	.L2258	@cond_branch
+	bne	.L2257	@cond_branch
 .LBB114:
 	mov	r0, #0x2
 	and	r0, r0, r1
 .LBE114:
 	cmp	r0, #0
-	beq	.L2257	@cond_branch
-.L2258:
-.LM2805:
+	beq	.L2256	@cond_branch
+.L2257:
+.LM2801:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM2806:
+.LM2802:
 
 	add	r0, r4, #0
 	bl	DisplayLevelUpStatsPg1
-.LM2807:
+.LM2803:
 
-	ldr	r0, .L2259+0x4
+	ldr	r0, .L2258+0x4
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2259+0x8
+	ldr	r0, .L2258+0x8
 	str	r0, [r1]
-.L2257:
-.LM2808:
+.L2256:
+.LM2804:
 
 .LBE112:
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2260:
-	.align	2, 0
 .L2259:
+	.align	2, 0
+.L2258:
 	.word	gMain
 	.word	gTasks
 	.word	Task_DisplayLevelUpStatsPg2
@@ -26055,56 +26035,56 @@ Task_DisplayLevelUpStatsPg1:
 	.thumb_func
 Task_DisplayLevelUpStatsPg2:
 .LFB263:
-.LM2809:
+.LM2805:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2810:
+.LM2806:
 
 .LBB115:
 .LBB116:
-	ldr	r0, .L2264
+	ldr	r0, .L2263
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
 .LBE116:
 	cmp	r0, #0
-	bne	.L2263	@cond_branch
+	bne	.L2262	@cond_branch
 .LBB117:
 	mov	r0, #0x2
 	and	r0, r0, r1
 .LBE117:
 	cmp	r0, #0
-	beq	.L2262	@cond_branch
-.L2263:
-.LM2811:
+	beq	.L2261	@cond_branch
+.L2262:
+.LM2807:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM2812:
+.LM2808:
 
 	add	r0, r4, #0
 	bl	DisplayLevelUpStatsPg2
-.LM2813:
+.LM2809:
 
-	ldr	r0, .L2264+0x4
+	ldr	r0, .L2263+0x4
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2264+0x8
+	ldr	r0, .L2263+0x8
 	str	r0, [r1]
-.L2262:
-.LM2814:
+.L2261:
+.LM2810:
 
 .LBE115:
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2265:
-	.align	2, 0
 .L2264:
+	.align	2, 0
+.L2263:
 	.word	gMain
 	.word	gTasks
 	.word	Task_TryLearnNewMoves
@@ -26116,25 +26096,25 @@ Task_DisplayLevelUpStatsPg2:
 	.thumb_func
 DisplayLevelUpStatsPg1:
 .LFB264:
-.LM2815:
+.LM2811:
 
 	push	{r4, r5, lr}
 	add	sp, sp, #-0x8
-.LM2816:
+.LM2812:
 
 .LBB118:
-	ldr	r0, .L2267
+	ldr	r0, .L2266
 	ldr	r5, [r0]
 	mov	r0, #0x86
 	lsl	r0, r0, #0x2
 	add	r4, r5, r0
-.LM2817:
+.LM2813:
 
 	bl	CreateLevelUpStatsWindow
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	strh	r0, [r4, #0x18]
-.LM2818:
+.LM2814:
 
 	ldrh	r0, [r4, #0x18]
 	mov	r1, #0x89
@@ -26147,25 +26127,25 @@ DisplayLevelUpStatsPg1:
 	add	r1, r4, #0
 	mov	r3, #0x1
 	bl	DrawLevelUpWindowPg1
-.LM2819:
+.LM2815:
 
 	ldrb	r0, [r4, #0x18]
 	mov	r1, #0x2
 	bl	CopyWindowToVram
-.LM2820:
+.LM2816:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2821:
+.LM2817:
 
 .LBE118:
 	add	sp, sp, #0x8
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2268:
-	.align	2, 0
 .L2267:
+	.align	2, 0
+.L2266:
 	.word	sPartyMenuInternal
 .LFE264:
 .Lfe264:
@@ -26175,19 +26155,19 @@ DisplayLevelUpStatsPg1:
 	.thumb_func
 DisplayLevelUpStatsPg2:
 .LFB265:
-.LM2822:
+.LM2818:
 
 	push	{r4, lr}
 	add	sp, sp, #-0x4
-.LM2823:
+.LM2819:
 
 .LBB119:
-	ldr	r0, .L2270
+	ldr	r0, .L2269
 	ldr	r1, [r0]
 	mov	r0, #0x86
 	lsl	r0, r0, #0x2
 	add	r4, r1, r0
-.LM2824:
+.LM2820:
 
 	ldrh	r0, [r4, #0x18]
 	mov	r2, #0x89
@@ -26198,25 +26178,25 @@ DisplayLevelUpStatsPg2:
 	mov	r2, #0x1
 	mov	r3, #0x2
 	bl	DrawLevelUpWindowPg2
-.LM2825:
+.LM2821:
 
 	ldrb	r0, [r4, #0x18]
 	mov	r1, #0x2
 	bl	CopyWindowToVram
-.LM2826:
+.LM2822:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2827:
+.LM2823:
 
 .LBE119:
 	add	sp, sp, #0x4
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2271:
-	.align	2, 0
 .L2270:
+	.align	2, 0
+.L2269:
 	.word	sPartyMenuInternal
 .LFE265:
 .Lfe265:
@@ -26226,123 +26206,123 @@ DisplayLevelUpStatsPg2:
 	.thumb_func
 Task_TryLearnNewMoves:
 .LFB266:
-.LM2828:
+.LM2824:
 
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM2829:
+.LM2825:
 
 .LBB120:
 	mov	r0, #0x0
 	bl	WaitFanfare
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2273	@cond_branch
-.LM2830:
+	beq	.L2272	@cond_branch
+.LM2826:
 
 .LBB121:
-	ldr	r0, .L2282
+	ldr	r0, .L2281
 	ldrh	r1, [r0, #0x2e]
 	mov	r6, #0x1
 	add	r0, r6, #0
 	and	r0, r0, r1
 .LBE121:
 	cmp	r0, #0
-	bne	.L2274	@cond_branch
+	bne	.L2273	@cond_branch
 .LBB122:
 	mov	r0, #0x2
 	and	r0, r0, r1
 .LBE122:
 	cmp	r0, #0
-	beq	.L2273	@cond_branch
-.L2274:
-.LM2831:
+	beq	.L2272	@cond_branch
+.L2273:
+.LM2827:
 
 	bl	RemoveLevelUpStatsWindow
-.LM2832:
+.LM2828:
 
-	ldr	r4, .L2282+0x4
+	ldr	r4, .L2281+0x4
 	mov	r1, #0x9
 	ldrsb	r1, [r4, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2282+0x8
+	ldr	r1, .L2281+0x8
 	add	r0, r0, r1
 	mov	r1, #0x1
 	bl	MonTryLearningNewMove
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-.LM2833:
+.LM2829:
 
 	strh	r6, [r4, #0x10]
-.LM2834:
+.LM2830:
 
-	ldr	r0, .L2282+0xc
+	ldr	r0, .L2281+0xc
 	cmp	r1, r0
-	beq	.L2278	@cond_branch
+	beq	.L2277	@cond_branch
 	cmp	r1, r0
-	bgt	.L2281	@cond_branch
+	bgt	.L2280	@cond_branch
 	cmp	r1, #0
-	beq	.L2276	@cond_branch
-	b	.L2279
-.L2283:
-	.align	2, 0
+	beq	.L2275	@cond_branch
+	b	.L2278
 .L2282:
+	.align	2, 0
+.L2281:
 	.word	gMain
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	0xfffe
-.L2281:
-	ldr	r0, .L2284
+.L2280:
+	ldr	r0, .L2283
 	cmp	r1, r0
-	beq	.L2277	@cond_branch
-	b	.L2279
-.L2285:
-	.align	2, 0
+	beq	.L2276	@cond_branch
+	b	.L2278
 .L2284:
+	.align	2, 0
+.L2283:
 	.word	0xffff
-.L2276:
-.LM2835:
+.L2275:
+.LM2831:
 
 	add	r0, r5, #0
 	bl	PartyMenuTryEvolution
-.LM2836:
+.LM2832:
 
-	b	.L2273
-.L2277:
-.LM2837:
+	b	.L2272
+.L2276:
+.LM2833:
 
 	add	r0, r5, #0
 	bl	DisplayMonNeedsToReplaceMove
-.LM2838:
+.LM2834:
 
-	b	.L2273
-.L2278:
-.LM2839:
+	b	.L2272
+.L2277:
+.LM2835:
 
-	ldr	r0, .L2286
+	ldr	r0, .L2285
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2286+0x4
+	ldr	r0, .L2285+0x4
 	str	r0, [r1]
-.LM2840:
+.LM2836:
 
-	b	.L2273
-.L2287:
-	.align	2, 0
+	b	.L2272
 .L2286:
+	.align	2, 0
+.L2285:
 	.word	gTasks
 	.word	Task_TryLearningNextMove
-.L2279:
-.LM2841:
+.L2278:
+.LM2837:
 
 	add	r0, r5, #0
 	bl	DisplayMonLearnedMove
-.L2273:
-.LM2842:
+.L2272:
+.LM2838:
 
 .LBE120:
 	pop	{r4, r5, r6}
@@ -26356,75 +26336,75 @@ Task_TryLearnNewMoves:
 	.thumb_func
 Task_TryLearningNextMove:
 .LFB267:
-.LM2843:
+.LM2839:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2844:
+.LM2840:
 
 .LBB123:
-	ldr	r0, .L2296
+	ldr	r0, .L2295
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2296+0x4
+	ldr	r1, .L2295+0x4
 	add	r0, r0, r1
 	mov	r1, #0x0
 	bl	MonTryLearningNewMove
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-.LM2845:
+.LM2841:
 
-	ldr	r0, .L2296+0x8
+	ldr	r0, .L2295+0x8
 	cmp	r1, r0
-	beq	.L2288	@cond_branch
+	beq	.L2287	@cond_branch
 	cmp	r1, r0
-	bgt	.L2295	@cond_branch
+	bgt	.L2294	@cond_branch
 	cmp	r1, #0
-	beq	.L2290	@cond_branch
-	b	.L2293
-.L2297:
-	.align	2, 0
+	beq	.L2289	@cond_branch
+	b	.L2292
 .L2296:
+	.align	2, 0
+.L2295:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	0xfffe
-.L2295:
-	ldr	r0, .L2298
+.L2294:
+	ldr	r0, .L2297
 	cmp	r1, r0
-	beq	.L2291	@cond_branch
-	b	.L2293
-.L2299:
-	.align	2, 0
+	beq	.L2290	@cond_branch
+	b	.L2292
 .L2298:
+	.align	2, 0
+.L2297:
 	.word	0xffff
-.L2290:
-.LM2846:
+.L2289:
+.LM2842:
 
 	add	r0, r4, #0
 	bl	PartyMenuTryEvolution
-.LM2847:
+.LM2843:
 
-	b	.L2288
-.L2291:
-.LM2848:
+	b	.L2287
+.L2290:
+.LM2844:
 
 	add	r0, r4, #0
 	bl	DisplayMonNeedsToReplaceMove
-.LM2849:
+.LM2845:
 
-	b	.L2288
-.L2293:
-.LM2850:
+	b	.L2287
+.L2292:
+.LM2846:
 
 	add	r0, r4, #0
 	bl	DisplayMonLearnedMove
-.LM2851:
+.LM2847:
 
 .LBE123:
-.L2288:
+.L2287:
 	pop	{r4}
 	pop	{r0}
 	bx	r0
@@ -26436,22 +26416,22 @@ Task_TryLearningNextMove:
 	.thumb_func
 PartyMenuTryEvolution:
 .LFB268:
-.LM2852:
+.LM2848:
 
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM2853:
+.LM2849:
 
 .LBB124:
-	ldr	r6, .L2303
+	ldr	r6, .L2302
 	mov	r1, #0x9
 	ldrsb	r1, [r6, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2303+0x4
+	ldr	r0, .L2302+0x4
 	add	r7, r1, r0
-.LM2854:
+.LM2850:
 
 	add	r0, r7, #0
 	mov	r1, #0x0
@@ -26460,58 +26440,58 @@ PartyMenuTryEvolution:
 	bl	GetEvolutionTargetSpecies
 	lsl	r0, r0, #0x10
 	lsr	r4, r0, #0x10
-.LM2855:
+.LM2851:
 
 	cmp	r4, #0
-	beq	.L2301	@cond_branch
-.LM2856:
+	beq	.L2300	@cond_branch
+.LM2852:
 
 	bl	FreePartyPointers
-.LM2857:
+.LM2853:
 
-	ldr	r0, .L2303+0x8
+	ldr	r0, .L2302+0x8
 	ldr	r1, [r6]
 	str	r1, [r0]
-.LM2858:
+.LM2854:
 
 	ldrb	r3, [r6, #0x9]
 	add	r0, r7, #0
 	add	r1, r4, #0
 	mov	r2, #0x1
 	bl	BeginEvolutionScene
-.LM2859:
+.LM2855:
 
 	add	r0, r5, #0
 	bl	DestroyTask
-.LM2860:
+.LM2856:
 
-	b	.L2302
-.L2304:
-	.align	2, 0
+	b	.L2301
 .L2303:
+	.align	2, 0
+.L2302:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gCB2_AfterEvolution
-.L2301:
-.LM2861:
+.L2300:
+.LM2857:
 
-	ldr	r0, .L2305
+	ldr	r0, .L2304
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2305+0x4
+	ldr	r0, .L2304+0x4
 	str	r0, [r1]
-.L2302:
-.LM2862:
+.L2301:
+.LM2858:
 
 .LBE124:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2306:
-	.align	2, 0
 .L2305:
+	.align	2, 0
+.L2304:
 	.word	gTasks
 	.word	Task_ClosePartyMenuAfterText
 .LFE268:
@@ -26522,7 +26502,7 @@ PartyMenuTryEvolution:
 	.thumb_func
 DisplayMonNeedsToReplaceMove:
 .LFB269:
-.LM2863:
+.LM2859:
 
 	push	{r4, r5, r6, lr}
 	mov	r6, r8
@@ -26530,67 +26510,67 @@ DisplayMonNeedsToReplaceMove:
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-.LM2864:
+.LM2860:
 
-	ldr	r0, .L2308
+	ldr	r0, .L2307
 	mov	r8, r0
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2308+0x4
+	ldr	r1, .L2307+0x4
 	add	r0, r0, r1
-	ldr	r1, .L2308+0x8
+	ldr	r1, .L2307+0x8
 	bl	GetMonNickname
-.LM2865:
+.LM2861:
 
-	ldr	r0, .L2308+0xc
-	ldr	r6, .L2308+0x10
+	ldr	r0, .L2307+0xc
+	ldr	r6, .L2307+0x10
 	ldrh	r2, [r6]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, .L2308+0x14
+	ldr	r2, .L2307+0x14
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2866:
+.LM2862:
 
-	ldr	r4, .L2308+0x18
-	ldr	r1, .L2308+0x1c
+	ldr	r4, .L2307+0x18
+	ldr	r1, .L2307+0x1c
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2867:
+.LM2863:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2868:
+.LM2864:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2869:
+.LM2865:
 
 	ldrh	r0, [r6]
 	mov	r1, r8
 	strh	r0, [r1, #0xe]
-.LM2870:
+.LM2866:
 
-	ldr	r1, .L2308+0x20
+	ldr	r1, .L2307+0x20
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2308+0x24
+	ldr	r1, .L2307+0x24
 	str	r1, [r0]
-.LM2871:
+.LM2867:
 
 	pop	{r3}
 	mov	r8, r3
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2309:
-	.align	2, 0
 .L2308:
+	.align	2, 0
+.L2307:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gStringVar1
@@ -26609,7 +26589,7 @@ DisplayMonNeedsToReplaceMove:
 	.thumb_func
 DisplayMonLearnedMove:
 .LFB270:
-.LM2872:
+.LM2868:
 
 	push	{r4, r5, r6, lr}
 	mov	r6, r8
@@ -26620,64 +26600,64 @@ DisplayMonLearnedMove:
 	lsr	r6, r6, #0x18
 	lsl	r5, r5, #0x10
 	lsr	r5, r5, #0x10
-.LM2873:
+.LM2869:
 
-	ldr	r0, .L2311
+	ldr	r0, .L2310
 	mov	r8, r0
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2311+0x4
+	ldr	r1, .L2310+0x4
 	add	r0, r0, r1
-	ldr	r1, .L2311+0x8
+	ldr	r1, .L2310+0x8
 	bl	GetMonNickname
-.LM2874:
+.LM2870:
 
-	ldr	r0, .L2311+0xc
+	ldr	r0, .L2310+0xc
 	mov	r1, #0xd
 	mul	r1, r1, r5
-	ldr	r2, .L2311+0x10
+	ldr	r2, .L2310+0x10
 	add	r1, r1, r2
 	bl	StringCopy
-.LM2875:
+.LM2871:
 
-	ldr	r4, .L2311+0x14
-	ldr	r1, .L2311+0x18
+	ldr	r4, .L2310+0x14
+	ldr	r1, .L2310+0x18
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2876:
+.LM2872:
 
 	add	r0, r4, #0
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2877:
+.LM2873:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2878:
+.LM2874:
 
 	mov	r0, r8
 	strh	r5, [r0, #0xe]
-.LM2879:
+.LM2875:
 
-	ldr	r1, .L2311+0x1c
+	ldr	r1, .L2310+0x1c
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2311+0x20
+	ldr	r1, .L2310+0x20
 	str	r1, [r0]
-.LM2880:
+.LM2876:
 
 	pop	{r3}
 	mov	r8, r3
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2312:
-	.align	2, 0
 .L2311:
+	.align	2, 0
+.L2310:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gStringVar1
@@ -26695,47 +26675,47 @@ DisplayMonLearnedMove:
 	.thumb_func
 BufferMonStatsToTaskData:
 .LFB271:
-.LM2881:
+.LM2877:
 
 	push	{r4, r5, lr}
 	add	r4, r0, #0
 	add	r5, r1, #0
-.LM2882:
+.LM2878:
 
 	mov	r1, #0x3a
 	bl	GetMonData
 	strh	r0, [r5]
-.LM2883:
+.LM2879:
 
 	add	r0, r4, #0
 	mov	r1, #0x3b
 	bl	GetMonData
 	strh	r0, [r5, #0x2]
-.LM2884:
+.LM2880:
 
 	add	r0, r4, #0
 	mov	r1, #0x3c
 	bl	GetMonData
 	strh	r0, [r5, #0x4]
-.LM2885:
+.LM2881:
 
 	add	r0, r4, #0
 	mov	r1, #0x3e
 	bl	GetMonData
 	strh	r0, [r5, #0x8]
-.LM2886:
+.LM2882:
 
 	add	r0, r4, #0
 	mov	r1, #0x3f
 	bl	GetMonData
 	strh	r0, [r5, #0xa]
-.LM2887:
+.LM2883:
 
 	add	r0, r4, #0
 	mov	r1, #0x3d
 	bl	GetMonData
 	strh	r0, [r5, #0x6]
-.LM2888:
+.LM2884:
 
 	pop	{r4, r5}
 	pop	{r0}
@@ -26749,28 +26729,28 @@ BufferMonStatsToTaskData:
 	.thumb_func
 ItemUseCB_SacredAsh:
 .LFB272:
-.LM2889:
+.LM2885:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM2890:
+.LM2886:
 
-	ldr	r1, .L2315
+	ldr	r1, .L2314
 	ldr	r2, [r1]
 	mov	r3, #0x86
 	lsl	r3, r3, #0x2
 	add	r1, r2, r3
 	mov	r3, #0x0
 	strh	r3, [r1]
-.LM2891:
+.LM2887:
 
-	ldr	r4, .L2315+0x4
+	ldr	r4, .L2314+0x4
 	add	r1, r2, r4
 	strh	r3, [r1]
-.LM2892:
+.LM2888:
 
-	ldr	r1, .L2315+0x8
+	ldr	r1, .L2314+0x8
 	ldrb	r1, [r1, #0x9]
 	lsl	r1, r1, #24
 	asr	r1, r1, #24
@@ -26778,17 +26758,17 @@ ItemUseCB_SacredAsh:
 	lsl	r3, r3, #0x2
 	add	r2, r2, r3
 	strh	r1, [r2]
-.LM2893:
+.LM2889:
 
 	bl	UseSacredAsh
-.LM2894:
+.LM2890:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2316:
-	.align	2, 0
 .L2315:
+	.align	2, 0
+.L2314:
 	.word	sPartyMenuInternal
 	.word	0x21a
 	.word	gPartyMenu
@@ -26800,7 +26780,7 @@ ItemUseCB_SacredAsh:
 	.thumb_func
 UseSacredAsh:
 .LFB273:
-.LM2895:
+.LM2891:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
@@ -26809,69 +26789,69 @@ UseSacredAsh:
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	mov	r8, r4
-.LM2896:
+.LM2892:
 
 .LBB125:
-	ldr	r6, .L2322
+	ldr	r6, .L2321
 	mov	r1, #0x9
 	ldrsb	r1, [r6, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2322+0x4
+	ldr	r0, .L2321+0x4
 	add	r5, r1, r0
-.LM2897:
+.LM2893:
 
 	add	r0, r5, #0
 	mov	r1, #0xb
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2321	@cond_branch
-.LM2898:
+	beq	.L2320	@cond_branch
+.LM2894:
 
 	add	r0, r5, #0
 	mov	r1, #0x39
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r7, r0, #0x10
-.LM2899:
+.LM2895:
 
 	ldrb	r0, [r6, #0x9]
-	ldr	r1, .L2322+0x8
+	ldr	r1, .L2321+0x8
 	ldrh	r1, [r1]
 	mov	r2, #0x0
 	bl	ExecuteTableBasedItemEffect_
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2319	@cond_branch
-.LM2900:
+	beq	.L2318	@cond_branch
+.LM2896:
 
-.L2321:
-	ldr	r0, .L2322+0xc
+.L2320:
+	ldr	r0, .L2321+0xc
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2322+0x10
+	ldr	r0, .L2321+0x10
 	str	r0, [r1]
-.LM2901:
+.LM2897:
 
-	b	.L2317
-.L2323:
-	.align	2, 0
+	b	.L2316
 .L2322:
+	.align	2, 0
+.L2321:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gSpecialVar_ItemId
 	.word	gTasks
 	.word	Task_SacredAshLoop
-.L2319:
-.LM2902:
+.L2318:
+.LM2898:
 
 	mov	r0, #0x1
 	bl	PlaySE
-.LM2903:
+.LM2899:
 
-	ldr	r4, .L2324
+	ldr	r4, .L2323
 	mov	r0, #0x9
 	ldrsb	r0, [r6, r0]
 	lsl	r0, r0, #0x4
@@ -26879,9 +26859,9 @@ UseSacredAsh:
 	add	r1, r1, r0
 	add	r0, r5, #0
 	bl	SetPartyMonAilmentGfx
-.LM2904:
+.LM2900:
 
-	ldr	r2, .L2324+0x4
+	ldr	r2, .L2323+0x4
 	mov	r0, #0x9
 	ldrsb	r0, [r6, r0]
 	ldr	r1, [r4]
@@ -26896,17 +26876,17 @@ UseSacredAsh:
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x1d
 	cmp	r0, #0
-	bge	.L2320	@cond_branch
-.LM2905:
+	bge	.L2319	@cond_branch
+.LM2901:
 
 	add	r0, r5, #0
 	add	r1, r3, #0
 	mov	r2, #0x1
 	bl	DisplayPartyPokemonLevelCheck
-.L2320:
-.LM2906:
+.L2319:
+.LM2902:
 
-	ldr	r4, .L2324+0x8
+	ldr	r4, .L2323+0x8
 	ldr	r0, [r4]
 	mov	r1, #0x87
 	lsl	r1, r1, #0x2
@@ -26914,12 +26894,12 @@ UseSacredAsh:
 	ldrb	r0, [r0]
 	mov	r1, #0x0
 	bl	AnimatePartySlot
-.LM2907:
+.LM2903:
 
 	ldrb	r0, [r6, #0x9]
 	mov	r1, #0x1
 	bl	AnimatePartySlot
-.LM2908:
+.LM2904:
 
 	add	r0, r5, #0
 	mov	r1, #0x39
@@ -26929,18 +26909,18 @@ UseSacredAsh:
 	lsl	r3, r3, #0x10
 	asr	r3, r3, #0x10
 	ldrb	r1, [r6, #0x9]
-	ldr	r0, .L2324+0xc
+	ldr	r0, .L2323+0xc
 	str	r0, [sp]
 	mov	r0, r8
 	mov	r2, #0x1
 	bl	PartyMenuModifyHP
-.LM2909:
+.LM2905:
 
 	mov	r0, r8
 	mov	r1, #0x0
 	add	r2, r7, #0
 	bl	ResetHPTaskData
-.LM2910:
+.LM2906:
 
 	ldr	r0, [r4]
 	mov	r2, #0x86
@@ -26948,24 +26928,24 @@ UseSacredAsh:
 	add	r1, r0, r2
 	mov	r2, #0x1
 	strh	r2, [r1]
-.LM2911:
+.LM2907:
 
-	ldr	r1, .L2324+0x10
+	ldr	r1, .L2323+0x10
 	add	r0, r0, r1
 	strh	r2, [r0]
-.LM2912:
+.LM2908:
 
 .LBE125:
-.L2317:
+.L2316:
 	add	sp, sp, #0x4
 	pop	{r3}
 	mov	r8, r3
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2325:
-	.align	2, 0
 .L2324:
+	.align	2, 0
+.L2323:
 	.word	sPartyMenuBoxes
 	.word	gSprites
 	.word	sPartyMenuInternal
@@ -26979,35 +26959,35 @@ UseSacredAsh:
 	.thumb_func
 Task_SacredAshLoop:
 .LFB274:
-.LM2913:
+.LM2909:
 
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM2914:
+.LM2910:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2327	@cond_branch
-.LM2915:
+	beq	.L2326	@cond_branch
+.LM2911:
 
-	ldr	r5, .L2333
+	ldr	r5, .L2332
 	ldr	r2, [r5]
 	mov	r0, #0x86
 	lsl	r0, r0, #0x2
 	add	r1, r2, r0
 	mov	r3, #0x0
 	ldrsh	r0, [r1, r3]
-	ldr	r3, .L2333+0x4
+	ldr	r3, .L2332+0x4
 	cmp	r0, #0x1
-	bne	.L2328	@cond_branch
-.LM2916:
+	bne	.L2327	@cond_branch
+.LM2912:
 
 	mov	r0, #0x0
 	strh	r0, [r1]
-.LM2917:
+.LM2913:
 
 	mov	r1, #0x9
 	ldrsb	r1, [r3, r1]
@@ -27015,8 +26995,8 @@ Task_SacredAshLoop:
 	lsl	r6, r6, #0x2
 	add	r0, r2, r6
 	strh	r1, [r0]
-.L2328:
-.LM2918:
+.L2327:
+.LM2914:
 
 	ldrb	r0, [r3, #0x9]
 	add	r0, r0, #0x1
@@ -27024,85 +27004,85 @@ Task_SacredAshLoop:
 	lsl	r0, r0, #0x18
 	asr	r0, r0, #0x18
 	cmp	r0, #0x6
-	bne	.L2329	@cond_branch
-.LM2919:
+	bne	.L2328	@cond_branch
+.LM2915:
 
 	ldr	r0, [r5]
-	ldr	r1, .L2333+0x8
+	ldr	r1, .L2332+0x8
 	add	r0, r0, r1
 	mov	r2, #0x0
 	ldrsh	r1, [r0, r2]
 	cmp	r1, #0
-	bne	.L2330	@cond_branch
-.LM2920:
+	bne	.L2329	@cond_branch
+.LM2916:
 
-	ldr	r0, .L2333+0xc
+	ldr	r0, .L2332+0xc
 	strb	r1, [r0]
-.LM2921:
+.LM2917:
 
-	ldr	r0, .L2333+0x10
+	ldr	r0, .L2332+0x10
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2922:
+.LM2918:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2923:
+.LM2919:
 
-	b	.L2331
-.L2334:
-	.align	2, 0
+	b	.L2330
 .L2333:
+	.align	2, 0
+.L2332:
 	.word	sPartyMenuInternal
 	.word	gPartyMenu
 	.word	0x21a
 	.word	gPartyMenuUseExitCallback
 	.word	gText_WontHaveEffect
-.L2330:
-.LM2924:
+.L2329:
+.LM2920:
 
-	ldr	r1, .L2335
+	ldr	r1, .L2334
 	mov	r0, #0x1
 	strb	r0, [r1]
-.LM2925:
+.LM2921:
 
-	ldr	r0, .L2335+0x4
+	ldr	r0, .L2334+0x4
 	ldrh	r0, [r0]
 	mov	r1, #0x1
 	bl	RemoveBagItem
-.L2331:
-.LM2926:
+.L2330:
+.LM2922:
 
-	ldr	r1, .L2335+0x8
+	ldr	r1, .L2334+0x8
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2335+0xc
+	ldr	r1, .L2334+0xc
 	str	r1, [r0]
-.LM2927:
+.LM2923:
 
-	ldr	r1, .L2335+0x10
+	ldr	r1, .L2334+0x10
 	mov	r0, #0x0
 	strb	r0, [r1, #0x9]
-.LM2928:
+.LM2924:
 
-	b	.L2327
-.L2336:
-	.align	2, 0
+	b	.L2326
 .L2335:
+	.align	2, 0
+.L2334:
 	.word	gPartyMenuUseExitCallback
 	.word	gSpecialVar_ItemId
 	.word	gTasks
 	.word	Task_ClosePartyMenuAfterText
 	.word	gPartyMenu
-.L2329:
-.LM2929:
+.L2328:
+.LM2925:
 
 	add	r0, r4, #0
 	bl	UseSacredAsh
-.L2327:
-.LM2930:
+.L2326:
+.LM2926:
 
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -27115,55 +27095,55 @@ Task_SacredAshLoop:
 	.thumb_func
 Task_SacredAshDisplayHPRestored:
 .LFB275:
-.LM2931:
+.LM2927:
 
 	push	{r4, r5, lr}
 	add	r5, r0, #0
 	lsl	r5, r5, #0x18
 	lsr	r5, r5, #0x18
-.LM2932:
+.LM2928:
 
-	ldr	r0, .L2338
+	ldr	r0, .L2337
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2338+0x4
+	ldr	r1, .L2337+0x4
 	add	r0, r0, r1
-	ldr	r1, .L2338+0x8
+	ldr	r1, .L2337+0x8
 	bl	GetMonNickname
-.LM2933:
+.LM2929:
 
-	ldr	r4, .L2338+0xc
-	ldr	r1, .L2338+0x10
+	ldr	r4, .L2337+0xc
+	ldr	r1, .L2337+0x10
 	add	r0, r4, #0
 	bl	StringExpandPlaceholders
-.LM2934:
+.LM2930:
 
 	add	r0, r4, #0
 	mov	r1, #0x0
 	bl	DisplayPartyMenuMessage
-.LM2935:
+.LM2931:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2936:
+.LM2932:
 
-	ldr	r1, .L2338+0x14
+	ldr	r1, .L2337+0x14
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2338+0x18
+	ldr	r1, .L2337+0x18
 	str	r1, [r0]
-.LM2937:
+.LM2933:
 
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2339:
-	.align	2, 0
 .L2338:
+	.align	2, 0
+.L2337:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gStringVar1
@@ -27180,77 +27160,77 @@ Task_SacredAshDisplayHPRestored:
 	.thumb_func
 ItemUseCB_EvolutionStone:
 .LFB276:
-.LM2938:
+.LM2934:
 
 	push	{r4, r5, r6, lr}
 	add	r6, r1, #0
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM2939:
+.LM2935:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM2940:
+.LM2936:
 
-	ldr	r2, .L2343
-	ldr	r1, .L2343+0x4
+	ldr	r2, .L2342
+	ldr	r1, .L2342+0x4
 	ldr	r0, [r1]
 	str	r0, [r2]
-.LM2941:
+.LM2937:
 
 	ldrb	r0, [r1, #0x9]
-	ldr	r4, .L2343+0x8
+	ldr	r4, .L2342+0x8
 	ldrh	r1, [r4]
 	mov	r2, #0x0
 	bl	ExecuteTableBasedItemEffect_
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2341	@cond_branch
-.LM2942:
+	beq	.L2340	@cond_branch
+.LM2938:
 
-	ldr	r1, .L2343+0xc
+	ldr	r1, .L2342+0xc
 	mov	r0, #0x0
 	strb	r0, [r1]
-.LM2943:
+.LM2939:
 
-	ldr	r0, .L2343+0x10
+	ldr	r0, .L2342+0x10
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM2944:
+.LM2940:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM2945:
+.LM2941:
 
-	ldr	r1, .L2343+0x14
+	ldr	r1, .L2342+0x14
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
 	str	r6, [r0]
-.LM2946:
+.LM2942:
 
-	b	.L2342
-.L2344:
-	.align	2, 0
+	b	.L2341
 .L2343:
+	.align	2, 0
+.L2342:
 	.word	gCB2_AfterEvolution
 	.word	gPartyMenu
 	.word	gSpecialVar_ItemId
 	.word	gPartyMenuUseExitCallback
 	.word	gText_WontHaveEffect
 	.word	gTasks
-.L2341:
-.LM2947:
+.L2340:
+.LM2943:
 
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	bl	RemoveBagItem
-.LM2948:
+.LM2944:
 
 	bl	FreePartyPointers
-.L2342:
-.LM2949:
+.L2341:
+.LM2945:
 
 	pop	{r4, r5, r6}
 	pop	{r0}
@@ -27264,315 +27244,315 @@ ItemUseCB_EvolutionStone:
 	.thumb_func
 GetItemEffectType:
 .LFB277:
-.LM2950:
+.LM2946:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-.LM2951:
+.LM2947:
 
 .LBB126:
-.LM2952:
+.LM2948:
 
 	add	r2, r1, #0
 	sub	r2, r2, #0x1c
 	lsl	r0, r2, #0x10
 	lsr	r0, r0, #0x10
 	cmp	r0, #0xb6
-	bls	.LCB24886
-	b	.L2394	@long jump
-.LCB24886:
-.LM2953:
+	bls	.LCB24872
+	b	.L2393	@long jump
+.LCB24872:
+.LM2949:
 
 	cmp	r1, #0xcd
-	bne	.L2347	@cond_branch
-.LM2954:
+	bne	.L2346	@cond_branch
+.LM2950:
 
-	ldr	r0, .L2395
+	ldr	r0, .L2394
 	ldr	r0, [r0]
-	ldr	r1, .L2395+0x4
+	ldr	r1, .L2394+0x4
 	add	r4, r0, r1
-	b	.L2348
-.L2396:
-	.align	2, 0
+	b	.L2347
 .L2395:
+	.align	2, 0
+.L2394:
 	.word	gSaveBlock1Ptr
 	.word	0x3214
-.L2347:
-.LM2955:
+.L2346:
+.LM2951:
 
-	ldr	r1, .L2397
+	ldr	r1, .L2396
 	lsl	r0, r2, #0x2
 	add	r0, r0, r1
 	ldr	r4, [r0]
-.L2348:
-.LM2956:
+.L2347:
+.LM2952:
 
 	ldrb	r1, [r4]
 	mov	r5, #0x3f
 	add	r0, r5, #0
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2350	@cond_branch
+	bne	.L2349	@cond_branch
 	ldrb	r0, [r4, #0x1]
 	cmp	r0, #0
-	bne	.L2350	@cond_branch
+	bne	.L2349	@cond_branch
 	ldrb	r0, [r4, #0x2]
 	cmp	r0, #0
-	bne	.L2350	@cond_branch
+	bne	.L2349	@cond_branch
 	ldrb	r3, [r4, #0x3]
 	mov	r0, #0x80
 	and	r0, r0, r3
 	cmp	r0, #0
-	beq	.L2349	@cond_branch
-.L2350:
-.LM2957:
+	beq	.L2348	@cond_branch
+.L2349:
+.LM2953:
 
 	mov	r0, #0x0
-	b	.L2393
-.L2398:
-	.align	2, 0
+	b	.L2392
 .L2397:
+	.align	2, 0
+.L2396:
 	.word	gItemEffectTable
-.L2349:
-.LM2958:
+.L2348:
+.LM2954:
 
 	mov	r2, #0x40
 	add	r0, r2, #0
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2352	@cond_branch
-.LM2959:
+	beq	.L2351	@cond_branch
+.LM2955:
 
 	mov	r0, #0xa
-	b	.L2393
-.L2352:
-.LM2960:
+	b	.L2392
+.L2351:
+.LM2956:
 
 	add	r0, r2, #0
 	and	r0, r0, r3
 	cmp	r0, #0
-	beq	.L2351	@cond_branch
-.LM2961:
+	beq	.L2350	@cond_branch
+.LM2957:
 
 	mov	r0, #0x1
-	b	.L2393
-.L2351:
-.LM2962:
+	b	.L2392
+.L2350:
+.LM2958:
 
 	add	r2, r5, #0
 	and	r2, r2, r3
-.LM2963:
+.LM2959:
 
 	cmp	r2, #0
-	bne	.L2356	@cond_branch
+	bne	.L2355	@cond_branch
 	lsr	r0, r1, #0x7
 	cmp	r0, #0
-	beq	.L2355	@cond_branch
-.L2356:
-.LM2964:
+	beq	.L2354	@cond_branch
+.L2355:
+.LM2960:
 
 	cmp	r2, #0x20
-	bne	.L2357	@cond_branch
-.LM2965:
+	bne	.L2356	@cond_branch
+.LM2961:
 
 	mov	r0, #0x4
-	b	.L2393
-.L2357:
-.LM2966:
+	b	.L2392
+.L2356:
+.LM2962:
 
 	cmp	r2, #0x10
-	bne	.L2359	@cond_branch
-.LM2967:
+	bne	.L2358	@cond_branch
+.LM2963:
 
 	mov	r0, #0x3
-	b	.L2393
-.L2359:
-.LM2968:
+	b	.L2392
+.L2358:
+.LM2964:
 
 	cmp	r2, #0x8
-	bne	.L2361	@cond_branch
-.LM2969:
+	bne	.L2360	@cond_branch
+.LM2965:
 
 	mov	r0, #0x5
-	b	.L2393
-.L2361:
-.LM2970:
+	b	.L2392
+.L2360:
+.LM2966:
 
 	cmp	r2, #0x4
-	bne	.L2363	@cond_branch
-.LM2971:
+	bne	.L2362	@cond_branch
+.LM2967:
 
 	mov	r0, #0x6
-	b	.L2393
-.L2363:
-.LM2972:
+	b	.L2392
+.L2362:
+.LM2968:
 
 	cmp	r2, #0x2
-	bne	.L2365	@cond_branch
-.LM2973:
+	bne	.L2364	@cond_branch
+.LM2969:
 
 	mov	r0, #0x7
-	b	.L2393
-.L2365:
-.LM2974:
+	b	.L2392
+.L2364:
+.LM2970:
 
 	cmp	r2, #0x1
-	bne	.L2367	@cond_branch
-.LM2975:
+	bne	.L2366	@cond_branch
+.LM2971:
 
 	mov	r0, #0x8
-	b	.L2393
-.L2367:
-.LM2976:
+	b	.L2392
+.L2366:
+.LM2972:
 
 	lsr	r0, r1, #0x7
 	cmp	r0, #0
-	beq	.L2369	@cond_branch
+	beq	.L2368	@cond_branch
 	cmp	r2, #0
-	bne	.L2369	@cond_branch
-.LM2977:
+	bne	.L2368	@cond_branch
+.LM2973:
 
 	mov	r0, #0x9
-	b	.L2393
-.L2369:
-.LM2978:
+	b	.L2392
+.L2368:
+.LM2974:
 
 	mov	r0, #0xb
-	b	.L2393
-.L2355:
-.LM2979:
+	b	.L2392
+.L2354:
+.LM2975:
 
 	ldrb	r1, [r4, #0x4]
 	mov	r0, #0x44
 	and	r0, r0, r1
 	add	r2, r1, #0
 	cmp	r0, #0
-	beq	.L2371	@cond_branch
-.LM2980:
+	beq	.L2370	@cond_branch
+.LM2976:
 
 	mov	r0, #0x2
-	b	.L2393
-.L2371:
-.LM2981:
+	b	.L2392
+.L2370:
+.LM2977:
 
 	mov	r5, #0x2
 	add	r0, r5, #0
 	and	r0, r0, r2
 	cmp	r0, #0
-	beq	.L2373	@cond_branch
-.LM2982:
+	beq	.L2372	@cond_branch
+.LM2978:
 
 	mov	r0, #0xc
-	b	.L2393
-.L2373:
-.LM2983:
+	b	.L2392
+.L2372:
+.LM2979:
 
 	mov	r3, #0x1
 	add	r0, r3, #0
 	and	r0, r0, r2
 	cmp	r0, #0
-	beq	.L2375	@cond_branch
-.LM2984:
+	beq	.L2374	@cond_branch
+.LM2980:
 
 	mov	r0, #0xd
-	b	.L2393
-.L2375:
-.LM2985:
+	b	.L2392
+.L2374:
+.LM2981:
 
 	ldrb	r1, [r4, #0x5]
 	mov	r0, #0x8
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2377	@cond_branch
-.LM2986:
+	beq	.L2376	@cond_branch
+.LM2982:
 
 	mov	r0, #0xe
-	b	.L2393
-.L2377:
-.LM2987:
+	b	.L2392
+.L2376:
+.LM2983:
 
 	mov	r0, #0x4
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2379	@cond_branch
-.LM2988:
+	beq	.L2378	@cond_branch
+.LM2984:
 
 	mov	r0, #0xf
-	b	.L2393
-.L2379:
-.LM2989:
+	b	.L2392
+.L2378:
+.LM2985:
 
 	add	r0, r5, #0
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2381	@cond_branch
-.LM2990:
+	beq	.L2380	@cond_branch
+.LM2986:
 
 	mov	r0, #0x10
-	b	.L2393
-.L2381:
-.LM2991:
+	b	.L2392
+.L2380:
+.LM2987:
 
 	add	r0, r3, #0
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2383	@cond_branch
-.LM2992:
+	beq	.L2382	@cond_branch
+.LM2988:
 
 	mov	r0, #0x11
-	b	.L2393
-.L2383:
-.LM2993:
+	b	.L2392
+.L2382:
+.LM2989:
 
 	mov	r0, #0x80
 	and	r0, r0, r2
 	cmp	r0, #0
-	beq	.L2385	@cond_branch
-.LM2994:
+	beq	.L2384	@cond_branch
+.LM2990:
 
 	mov	r0, #0x12
-	b	.L2393
-.L2385:
-.LM2995:
+	b	.L2392
+.L2384:
+.LM2991:
 
 	mov	r0, #0x20
 	and	r0, r0, r2
 	cmp	r0, #0
-	beq	.L2387	@cond_branch
-.LM2996:
+	beq	.L2386	@cond_branch
+.LM2992:
 
 	mov	r0, #0x13
-	b	.L2393
-.L2387:
-.LM2997:
+	b	.L2392
+.L2386:
+.LM2993:
 
 	mov	r0, #0x10
 	and	r0, r0, r1
 	cmp	r0, #0
-	beq	.L2389	@cond_branch
-.LM2998:
+	beq	.L2388	@cond_branch
+.LM2994:
 
 	mov	r0, #0x14
-	b	.L2393
-.L2389:
-.LM2999:
+	b	.L2392
+.L2388:
+.LM2995:
 
 	mov	r0, #0x18
 	and	r0, r0, r2
 	cmp	r0, #0
-	bne	.L2391	@cond_branch
-.LM3000:
+	bne	.L2390	@cond_branch
+.LM2996:
 
-.L2394:
+.L2393:
 	mov	r0, #0x16
-	b	.L2393
-.L2391:
-.LM3001:
+	b	.L2392
+.L2390:
+.LM2997:
 
 	mov	r0, #0x15
-.L2393:
-.LM3002:
+.L2392:
+.LM2998:
 
 .LBE126:
 	pop	{r4, r5}
@@ -27586,65 +27566,65 @@ GetItemEffectType:
 	.thumb_func
 TryTutorSelectedMon:
 .LFB278:
-.LM3003:
+.LM2999:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM3004:
+.LM3000:
 
 .LBB127:
-.LM3005:
+.LM3001:
 
-	ldr	r0, .L2409
+	ldr	r0, .L2408
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2399	@cond_branch
-.LM3006:
+	bne	.L2398	@cond_branch
+.LM3002:
 
-	ldr	r7, .L2409+0x4
+	ldr	r7, .L2408+0x4
 	mov	r1, #0x9
 	ldrsb	r1, [r7, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2409+0x8
+	ldr	r0, .L2408+0x8
 	add	r5, r1, r0
-.LM3007:
+.LM3003:
 
 	mov	r0, #0xe
 	add	r0, r0, r7
 	mov	r8, r0
-.LM3008:
+.LM3004:
 
-	ldr	r1, .L2409+0xc
+	ldr	r1, .L2408+0xc
 	add	r0, r5, #0
 	bl	GetMonNickname
-.LM3009:
+.LM3005:
 
-	ldr	r4, .L2409+0x10
+	ldr	r4, .L2408+0x10
 	ldrb	r0, [r4]
 	bl	GetTutorMove
 	strh	r0, [r7, #0xe]
-.LM3010:
+.LM3006:
 
-	ldr	r0, .L2409+0x14
+	ldr	r0, .L2408+0x14
 	mov	r1, #0xe
 	ldrsh	r2, [r7, r1]
 	mov	r1, #0xd
 	mul	r1, r1, r2
-	ldr	r2, .L2409+0x18
+	ldr	r2, .L2408+0x18
 	add	r1, r1, r2
 	bl	StringCopy
-.LM3011:
+.LM3007:
 
 	mov	r0, #0x2
 	mov	r1, r8
 	strh	r0, [r1, #0x2]
-.LM3012:
+.LM3008:
 
 	ldrb	r2, [r4]
 	add	r0, r5, #0
@@ -27653,26 +27633,26 @@ TryTutorSelectedMon:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2402	@cond_branch
+	beq	.L2401	@cond_branch
 	cmp	r0, #0x2
-	beq	.L2403	@cond_branch
-.LM3013:
+	beq	.L2402	@cond_branch
+.LM3009:
 
 	ldrh	r1, [r7, #0xe]
 	add	r0, r5, #0
 	bl	GiveMoveToMon
 	lsl	r0, r0, #0x10
-	ldr	r1, .L2409+0x1c
+	ldr	r1, .L2408+0x1c
 	cmp	r0, r1
-	beq	.L2401	@cond_branch
+	beq	.L2400	@cond_branch
 	add	r0, r6, #0
 	bl	Task_LearnedMove
-.LM3014:
+.LM3010:
 
-	b	.L2399
-.L2410:
-	.align	2, 0
+	b	.L2398
 .L2409:
+	.align	2, 0
+.L2408:
 	.word	gPaletteFade
 	.word	gPartyMenu
 	.word	gPlayerParty
@@ -27681,59 +27661,59 @@ TryTutorSelectedMon:
 	.word	gStringVar2
 	.word	gMoveNames
 	.word	-0x10000
-.L2402:
-.LM3015:
+.L2401:
+.LM3011:
 
-	ldr	r1, .L2411
-.LM3016:
+	ldr	r1, .L2410
+.LM3012:
 
-	b	.L2408
-.L2412:
-	.align	2, 0
+	b	.L2407
 .L2411:
+	.align	2, 0
+.L2410:
 	.word	gText_PkmnCantLearnMove
-.L2403:
-.LM3017:
+.L2402:
+.LM3013:
 
-	ldr	r1, .L2413
-.L2408:
+	ldr	r1, .L2412
+.L2407:
 	add	r0, r6, #0
 	bl	DisplayLearnMoveMessageAndClose
-.LM3018:
+.LM3014:
 
-	b	.L2399
-.L2414:
-	.align	2, 0
+	b	.L2398
 .L2413:
+	.align	2, 0
+.L2412:
 	.word	gText_PkmnAlreadyKnows
-.LM3019:
+.LM3015:
 
-.L2401:
-.LM3020:
+.L2400:
+.LM3016:
 
-	ldr	r0, .L2415
+	ldr	r0, .L2414
 	bl	DisplayLearnMoveMessage
-.LM3021:
+.LM3017:
 
-	ldr	r1, .L2415+0x4
+	ldr	r1, .L2414+0x4
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2415+0x8
+	ldr	r1, .L2414+0x8
 	str	r1, [r0]
-.LM3022:
+.LM3018:
 
 .LBE127:
-.L2399:
+.L2398:
 	pop	{r3}
 	mov	r8, r3
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2416:
-	.align	2, 0
 .L2415:
+	.align	2, 0
+.L2414:
 	.word	gText_PkmnNeedsToReplaceMove
 	.word	gTasks
 	.word	Task_ReplaceMoveYesNo
@@ -27746,31 +27726,31 @@ TryTutorSelectedMon:
 	.thumb_func
 CB2_PartyMenuFromStartMenu:
 .LFB279:
-.LM3023:
+.LM3019:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3024:
+.LM3020:
 
 	mov	r0, #0x0
 	str	r0, [sp]
-	ldr	r0, .L2418
+	ldr	r0, .L2417
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2418+0x4
+	ldr	r0, .L2417+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x0
 	mov	r1, #0x0
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3025:
+.LM3021:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2419:
-	.align	2, 0
 .L2418:
+	.align	2, 0
+.L2417:
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ReturnToFieldWithOpenMenu
 .LFE279:
@@ -27782,25 +27762,25 @@ CB2_PartyMenuFromStartMenu:
 	.thumb_func
 CB2_ChooseMonToGiveItem:
 .LFB280:
-.LM3026:
+.LM3022:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3027:
+.LM3023:
 
 .LBB128:
 	bl	InBattlePyramid
 	lsl	r0, r0, #0x18
-	ldr	r1, .L2423
+	ldr	r1, .L2422
 	cmp	r0, #0
-	bne	.L2421	@cond_branch
-	ldr	r1, .L2423+0x4
-.L2421:
-.LM3028:
+	bne	.L2420	@cond_branch
+	ldr	r1, .L2422+0x4
+.L2420:
+.LM3024:
 
 	mov	r0, #0x6
 	str	r0, [sp]
-	ldr	r0, .L2423+0x8
+	ldr	r0, .L2422+0x8
 	str	r0, [sp, #0x4]
 	str	r1, [sp, #0x8]
 	mov	r0, #0x0
@@ -27808,21 +27788,21 @@ CB2_ChooseMonToGiveItem:
 	mov	r2, #0x5
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3029:
+.LM3025:
 
-	ldr	r1, .L2423+0xc
-	ldr	r0, .L2423+0x10
+	ldr	r1, .L2422+0xc
+	ldr	r0, .L2422+0x10
 	ldrh	r0, [r0]
 	strh	r0, [r1, #0xc]
-.LM3030:
+.LM3026:
 
 .LBE128:
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2424:
-	.align	2, 0
 .L2423:
+	.align	2, 0
+.L2422:
 	.word	CB2_ReturnToPyramidBagMenu
 	.word	CB2_ReturnToBagMenu
 	.word	Task_HandleChooseMonInput
@@ -27836,7 +27816,7 @@ CB2_ChooseMonToGiveItem:
 	.thumb_func
 TryGiveItemOrMailToSelectedMon:
 .LFB281:
-.LM3031:
+.LM3027:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r9
@@ -27845,10 +27825,10 @@ TryGiveItemOrMailToSelectedMon:
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	add	r6, r4, #0
-.LM3032:
+.LM3028:
 
-	ldr	r5, .L2430
-	ldr	r0, .L2430+0x4
+	ldr	r5, .L2429
+	ldr	r0, .L2429+0x4
 	mov	r9, r0
 	ldrb	r0, [r0, #0x9]
 	lsl	r0, r0, #24
@@ -27858,46 +27838,46 @@ TryGiveItemOrMailToSelectedMon:
 	mov	r1, r8
 	mul	r1, r1, r0
 	add	r0, r1, #0
-	ldr	r7, .L2430+0x8
+	ldr	r7, .L2429+0x8
 	add	r0, r0, r7
 	mov	r1, #0xc
 	bl	GetMonData
 	strh	r0, [r5]
-.LM3033:
+.LM3029:
 
 	lsl	r0, r0, #0x10
 	cmp	r0, #0
-	bne	.L2426	@cond_branch
-.LM3034:
+	bne	.L2425	@cond_branch
+.LM3030:
 
 	add	r0, r4, #0
 	bl	GiveItemOrMailToSelectedMon
-.LM3035:
+.LM3031:
 
-	b	.L2427
-.L2431:
-	.align	2, 0
+	b	.L2426
 .L2430:
+	.align	2, 0
+.L2429:
 	.word	sPartyMenuItemId
 	.word	gPartyMenu
 	.word	gPlayerParty
-.L2426:
-.LM3036:
+.L2425:
+.LM3032:
 
 	ldrh	r0, [r5]
 	bl	ItemIsMail
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2428	@cond_branch
-.LM3037:
+	beq	.L2427	@cond_branch
+.LM3033:
 
 	add	r0, r4, #0
 	bl	DisplayItemMustBeRemovedFirstMessage
-.LM3038:
+.LM3034:
 
-	b	.L2427
-.L2428:
-.LM3039:
+	b	.L2426
+.L2427:
+.LM3035:
 
 	mov	r1, r9
 	mov	r0, #0x9
@@ -27909,17 +27889,17 @@ TryGiveItemOrMailToSelectedMon:
 	ldrh	r1, [r5]
 	mov	r2, #0x1
 	bl	DisplayAlreadyHoldingItemSwitchMessage
-.LM3040:
+.LM3036:
 
-	ldr	r1, .L2432
+	ldr	r1, .L2431
 	lsl	r0, r6, #0x2
 	add	r0, r0, r6
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2432+0x4
+	ldr	r1, .L2431+0x4
 	str	r1, [r0]
-.L2427:
-.LM3041:
+.L2426:
+.LM3037:
 
 	pop	{r3, r4}
 	mov	r8, r3
@@ -27927,9 +27907,9 @@ TryGiveItemOrMailToSelectedMon:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2433:
-	.align	2, 0
 .L2432:
+	.align	2, 0
+.L2431:
 	.word	gTasks
 	.word	Task_SwitchItemsFromBagYesNo
 .LFE281:
@@ -27940,49 +27920,49 @@ TryGiveItemOrMailToSelectedMon:
 	.thumb_func
 GiveItemOrMailToSelectedMon:
 .LFB282:
-.LM3042:
+.LM3038:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3043:
+.LM3039:
 
-	ldr	r5, .L2437
+	ldr	r5, .L2436
 	ldrh	r0, [r5, #0xc]
 	bl	ItemIsMail
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2435	@cond_branch
-.LM3044:
+	beq	.L2434	@cond_branch
+.LM3040:
 
 	ldrh	r0, [r5, #0xc]
 	bl	RemoveItemToGiveFromBag
-.LM3045:
+.LM3041:
 
-	ldr	r0, .L2437+0x4
+	ldr	r0, .L2436+0x4
 	ldr	r1, [r0]
-	ldr	r0, .L2437+0x8
+	ldr	r0, .L2436+0x8
 	str	r0, [r1, #0x4]
-.LM3046:
+.LM3042:
 
 	add	r0, r4, #0
 	bl	Task_ClosePartyMenu
-.LM3047:
+.LM3043:
 
-	b	.L2436
-.L2438:
-	.align	2, 0
+	b	.L2435
 .L2437:
+	.align	2, 0
+.L2436:
 	.word	gPartyMenu
 	.word	sPartyMenuInternal
 	.word	CB2_WriteMailToGiveMonFromBag
-.L2435:
-.LM3048:
+.L2434:
+.LM3044:
 
 	add	r0, r4, #0
 	bl	GiveItemToSelectedMon
-.L2436:
-.LM3049:
+.L2435:
+.LM3045:
 
 	pop	{r4, r5}
 	pop	{r0}
@@ -27995,29 +27975,29 @@ GiveItemOrMailToSelectedMon:
 	.thumb_func
 GiveItemToSelectedMon:
 .LFB283:
-.LM3050:
+.LM3046:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
 	lsl	r0, r0, #0x18
 	lsr	r7, r0, #0x18
-.LM3051:
+.LM3047:
 
 .LBB129:
-.LM3052:
+.LM3048:
 
-	ldr	r0, .L2441
+	ldr	r0, .L2440
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2440	@cond_branch
-.LM3053:
+	bne	.L2439	@cond_branch
+.LM3049:
 
-	ldr	r4, .L2441+0x4
+	ldr	r4, .L2440+0x4
 	ldrh	r5, [r4, #0xc]
-.LM3054:
+.LM3050:
 
 	mov	r0, #0x9
 	ldrsb	r0, [r4, r0]
@@ -28026,13 +28006,13 @@ GiveItemToSelectedMon:
 	mov	r1, r8
 	mul	r1, r1, r0
 	add	r0, r1, #0
-	ldr	r6, .L2441+0x8
+	ldr	r6, .L2440+0x8
 	add	r0, r0, r6
 	add	r1, r5, #0
 	mov	r2, #0x0
 	mov	r3, #0x1
 	bl	DisplayGaveHeldItemMessage
-.LM3055:
+.LM3051:
 
 	mov	r0, #0x9
 	ldrsb	r0, [r4, r0]
@@ -28042,21 +28022,21 @@ GiveItemToSelectedMon:
 	add	r0, r0, r6
 	add	r1, r5, #0
 	bl	GiveItemToMon
-.LM3056:
+.LM3052:
 
 	add	r0, r5, #0
 	bl	RemoveItemToGiveFromBag
-.LM3057:
+.LM3053:
 
-	ldr	r1, .L2441+0xc
+	ldr	r1, .L2440+0xc
 	lsl	r0, r7, #0x2
 	add	r0, r0, r7
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2441+0x10
+	ldr	r1, .L2440+0x10
 	str	r1, [r0]
-.L2440:
-.LM3058:
+.L2439:
+.LM3054:
 
 .LBE129:
 	pop	{r3}
@@ -28064,9 +28044,9 @@ GiveItemToSelectedMon:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2442:
-	.align	2, 0
 .L2441:
+	.align	2, 0
+.L2440:
 	.word	gPaletteFade
 	.word	gPartyMenu
 	.word	gPlayerParty
@@ -28080,50 +28060,50 @@ GiveItemToSelectedMon:
 	.thumb_func
 Task_UpdateHeldItemSpriteAndClosePartyMenu:
 .LFB284:
-.LM3059:
+.LM3055:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3060:
+.LM3056:
 
 .LBB130:
-	ldr	r0, .L2445
+	ldr	r0, .L2444
 	ldrb	r4, [r0, #0x9]
-.LM3061:
+.LM3057:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2444	@cond_branch
-.LM3062:
+	beq	.L2443	@cond_branch
+.LM3058:
 
 	lsl	r2, r4, #0x18
 	asr	r2, r2, #0x18
 	mov	r0, #0x64
 	mul	r0, r0, r2
-	ldr	r1, .L2445+0x4
+	ldr	r1, .L2444+0x4
 	add	r0, r0, r1
-	ldr	r1, .L2445+0x8
+	ldr	r1, .L2444+0x8
 	lsl	r2, r2, #0x4
 	ldr	r1, [r1]
 	add	r1, r1, r2
 	bl	UpdatePartyMonHeldItemSprite
-.LM3063:
+.LM3059:
 
 	add	r0, r5, #0
 	bl	Task_ClosePartyMenu
-.L2444:
-.LM3064:
+.L2443:
+.LM3060:
 
 .LBE130:
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2446:
-	.align	2, 0
 .L2445:
+	.align	2, 0
+.L2444:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	sPartyMenuBoxes
@@ -28135,24 +28115,24 @@ Task_UpdateHeldItemSpriteAndClosePartyMenu:
 	.thumb_func
 CB2_WriteMailToGiveMonFromBag:
 .LFB285:
-.LM3065:
+.LM3061:
 
 	push	{r4, r5, r6, lr}
-.LM3066:
+.LM3062:
 
 .LBB131:
-.LM3067:
+.LM3063:
 
-	ldr	r4, .L2448
+	ldr	r4, .L2447
 	mov	r0, #0x9
 	ldrsb	r0, [r4, r0]
 	mov	r6, #0x64
 	mul	r0, r0, r6
-	ldr	r5, .L2448+0x4
+	ldr	r5, .L2447+0x4
 	add	r0, r0, r5
 	ldrh	r1, [r4, #0xc]
 	bl	GiveItemToMon
-.LM3068:
+.LM3064:
 
 	mov	r0, #0x9
 	ldrsb	r0, [r4, r0]
@@ -28162,29 +28142,29 @@ CB2_WriteMailToGiveMonFromBag:
 	bl	GetMonData
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3069:
+.LM3065:
 
-	ldr	r1, .L2448+0x8
+	ldr	r1, .L2447+0x8
 	lsl	r2, r0, #0x3
 	add	r2, r2, r0
 	lsl	r2, r2, #0x2
-	ldr	r0, .L2448+0xc
+	ldr	r0, .L2447+0xc
 	add	r2, r2, r0
 	ldr	r1, [r1]
 	add	r1, r1, r2
-	ldr	r2, .L2448+0x10
+	ldr	r2, .L2447+0x10
 	mov	r0, #0x4
 	mov	r3, #0x3
 	bl	DoEasyChatScreen
-.LM3070:
+.LM3066:
 
 .LBE131:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2449:
-	.align	2, 0
 .L2448:
+	.align	2, 0
+.L2447:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gSaveBlock1Ptr
@@ -28198,69 +28178,69 @@ CB2_WriteMailToGiveMonFromBag:
 	.thumb_func
 CB2_ReturnToPartyOrBagMenuFromWritingMail:
 .LFB286:
-.LM3071:
+.LM3067:
 
 	push	{r4, r5, r6, r7, lr}
 	add	sp, sp, #-0xc
-.LM3072:
+.LM3068:
 
 .LBB132:
-	ldr	r6, .L2453
+	ldr	r6, .L2452
 	mov	r1, #0x9
 	ldrsb	r1, [r6, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2453+0x4
+	ldr	r0, .L2452+0x4
 	add	r5, r1, r0
-.LM3073:
+.LM3069:
 
 	add	r0, r5, #0
 	mov	r1, #0xc
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r7, r0, #0x10
-.LM3074:
+.LM3070:
 
-	ldr	r0, .L2453+0x8
+	ldr	r0, .L2452+0x8
 	ldrh	r0, [r0]
 	cmp	r0, #0
-	bne	.L2451	@cond_branch
-.LM3075:
+	bne	.L2450	@cond_branch
+.LM3071:
 
 	add	r0, r5, #0
 	bl	TakeMailFromMon
-.LM3076:
+.LM3072:
 
-	ldr	r4, .L2453+0xc
+	ldr	r4, .L2452+0xc
 	add	r0, r5, #0
 	mov	r1, #0xc
 	add	r2, r4, #0
 	bl	SetMonData
-.LM3077:
+.LM3073:
 
 	ldrh	r0, [r4]
 	mov	r1, #0x1
 	bl	RemoveBagItem
-.LM3078:
+.LM3074:
 
 	add	r0, r7, #0
 	bl	ReturnGiveItemToBagOrPC
-.LM3079:
+.LM3075:
 
 	ldr	r0, [r6]
 	bl	SetMainCallback2
-.LM3080:
+.LM3076:
 
-	b	.L2452
-.L2454:
-	.align	2, 0
+	b	.L2451
 .L2453:
+	.align	2, 0
+.L2452:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gSpecialVar_Result
 	.word	sPartyMenuItemId
-.L2451:
-.LM3081:
+.L2450:
+.LM3077:
 
 	ldrb	r0, [r6, #0x8]
 	lsl	r0, r0, #0x1c
@@ -28268,24 +28248,24 @@ CB2_ReturnToPartyOrBagMenuFromWritingMail:
 	ldrb	r2, [r6, #0xb]
 	mov	r1, #0x7f
 	str	r1, [sp]
-	ldr	r1, .L2455
+	ldr	r1, .L2454
 	str	r1, [sp, #0x4]
 	ldr	r1, [r6]
 	str	r1, [sp, #0x8]
 	mov	r1, #0xff
 	mov	r3, #0x1
 	bl	InitPartyMenu
-.L2452:
-.LM3082:
+.L2451:
+.LM3078:
 
 .LBE132:
 	add	sp, sp, #0xc
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2456:
-	.align	2, 0
 .L2455:
+	.align	2, 0
+.L2454:
 	.word	Task_DisplayGaveMailFromBagMessage
 .LFE286:
 .Lfe286:
@@ -28295,72 +28275,72 @@ CB2_ReturnToPartyOrBagMenuFromWritingMail:
 	.thumb_func
 Task_DisplayGaveMailFromBagMessage:
 .LFB287:
-.LM3083:
+.LM3079:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3084:
+.LM3080:
 
-	ldr	r0, .L2461
+	ldr	r0, .L2460
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2458	@cond_branch
-.LM3085:
+	bne	.L2457	@cond_branch
+.LM3081:
 
-	ldr	r1, .L2461+0x4
+	ldr	r1, .L2460+0x4
 	ldrh	r0, [r1]
 	cmp	r0, #0
-	beq	.L2459	@cond_branch
-.LM3086:
+	beq	.L2458	@cond_branch
+.LM3082:
 
-	ldr	r0, .L2461+0x8
+	ldr	r0, .L2460+0x8
 	ldrh	r0, [r0, #0xc]
 	ldrh	r1, [r1]
 	mov	r2, #0x0
 	bl	DisplaySwitchedHeldItemMessage
-	b	.L2460
-.L2462:
-	.align	2, 0
+	b	.L2459
 .L2461:
+	.align	2, 0
+.L2460:
 	.word	gPaletteFade
 	.word	sPartyMenuItemId
 	.word	gPartyMenu
-.L2459:
-.LM3087:
+.L2458:
+.LM3083:
 
-	ldr	r2, .L2463
+	ldr	r2, .L2462
 	mov	r1, #0x9
 	ldrsb	r1, [r2, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2463+0x4
+	ldr	r1, .L2462+0x4
 	add	r0, r0, r1
 	ldrh	r1, [r2, #0xc]
 	mov	r2, #0x0
 	mov	r3, #0x1
 	bl	DisplayGaveHeldItemMessage
-.L2460:
-.LM3088:
+.L2459:
+.LM3084:
 
-	ldr	r0, .L2463+0x8
+	ldr	r0, .L2462+0x8
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2463+0xc
+	ldr	r0, .L2462+0xc
 	str	r0, [r1]
-.L2458:
-.LM3089:
+.L2457:
+.LM3085:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2464:
-	.align	2, 0
 .L2463:
+	.align	2, 0
+.L2462:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gTasks
@@ -28373,39 +28353,39 @@ Task_DisplayGaveMailFromBagMessage:
 	.thumb_func
 Task_SwitchItemsFromBagYesNo:
 .LFB288:
-.LM3090:
+.LM3086:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3091:
+.LM3087:
 
 	bl	IsPartyMenuTextPrinterActive
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2466	@cond_branch
-.LM3092:
+	beq	.L2465	@cond_branch
+.LM3088:
 
 	bl	PartyMenuDisplayYesNoMenu
-.LM3093:
+.LM3089:
 
-	ldr	r0, .L2467
+	ldr	r0, .L2466
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2467+0x4
+	ldr	r0, .L2466+0x4
 	str	r0, [r1]
-.L2466:
-.LM3094:
+.L2465:
+.LM3090:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2468:
-	.align	2, 0
 .L2467:
+	.align	2, 0
+.L2466:
 	.word	gTasks
 	.word	Task_HandleSwitchItemsFromBagYesNoInput
 .LFE288:
@@ -28416,159 +28396,159 @@ Task_SwitchItemsFromBagYesNo:
 	.thumb_func
 Task_HandleSwitchItemsFromBagYesNoInput:
 .LFB289:
-.LM3095:
+.LM3091:
 
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3096:
+.LM3092:
 
 .LBB133:
-.LM3097:
+.LM3093:
 
 	bl	Menu_ProcessInputNoWrapClearOnChoose
 	lsl	r0, r0, #0x18
 	asr	r1, r0, #0x18
 	cmp	r1, #0
-	beq	.L2471	@cond_branch
+	beq	.L2470	@cond_branch
 	cmp	r1, #0
-	bgt	.L2480	@cond_branch
+	bgt	.L2479	@cond_branch
 	mov	r0, #0x1
 	neg	r0, r0
 	cmp	r1, r0
-	beq	.L2476	@cond_branch
-	b	.L2470
-.L2480:
+	beq	.L2475	@cond_branch
+	b	.L2469
+.L2479:
 	cmp	r1, #0x1
-	beq	.L2477	@cond_branch
-	b	.L2470
-.L2471:
-.LM3098:
+	beq	.L2476	@cond_branch
+	b	.L2469
+.L2470:
+.LM3094:
 
-	ldr	r7, .L2482
+	ldr	r7, .L2481
 	ldrh	r4, [r7, #0xc]
-.LM3099:
+.LM3095:
 
 	add	r0, r4, #0
 	bl	RemoveItemToGiveFromBag
-.LM3100:
+.LM3096:
 
-	ldr	r6, .L2482+0x4
+	ldr	r6, .L2481+0x4
 	ldrh	r0, [r6]
 	mov	r1, #0x1
 	bl	AddBagItem
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2472	@cond_branch
-.LM3101:
+	bne	.L2471	@cond_branch
+.LM3097:
 
 	add	r0, r4, #0
 	bl	ReturnGiveItemToBagOrPC
-.LM3102:
+.LM3098:
 
 	ldrh	r0, [r6]
 	bl	BufferBagFullCantTakeItemMessage
-.LM3103:
+.LM3099:
 
-	ldr	r0, .L2482+0x8
+	ldr	r0, .L2481+0x8
 	mov	r1, #0x0
 	bl	DisplayPartyMenuMessage
-.LM3104:
+.LM3100:
 
-	b	.L2481
-.L2483:
-	.align	2, 0
+	b	.L2480
 .L2482:
+	.align	2, 0
+.L2481:
 	.word	gPartyMenu
 	.word	sPartyMenuItemId
 	.word	gStringVar4
-.L2472:
-.LM3105:
+.L2471:
+.LM3101:
 
 	add	r0, r4, #0
 	bl	ItemIsMail
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2474	@cond_branch
-.LM3106:
+	beq	.L2473	@cond_branch
+.LM3102:
 
-	ldr	r0, .L2484
+	ldr	r0, .L2483
 	ldr	r1, [r0]
-	ldr	r0, .L2484+0x4
+	ldr	r0, .L2483+0x4
 	str	r0, [r1, #0x4]
-.LM3107:
+.LM3103:
 
 	add	r0, r5, #0
 	bl	Task_ClosePartyMenu
-.LM3108:
+.LM3104:
 
-	b	.L2470
-.L2485:
-	.align	2, 0
+	b	.L2469
 .L2484:
+	.align	2, 0
+.L2483:
 	.word	sPartyMenuInternal
 	.word	CB2_WriteMailToGiveMonFromBag
-.L2474:
-.LM3109:
+.L2473:
+.LM3105:
 
 	mov	r1, #0x9
 	ldrsb	r1, [r7, r1]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2486
+	ldr	r1, .L2485
 	add	r0, r0, r1
 	add	r1, r4, #0
 	bl	GiveItemToMon
-.LM3110:
+.LM3106:
 
 	ldrh	r1, [r6]
 	add	r0, r4, #0
 	mov	r2, #0x1
 	bl	DisplaySwitchedHeldItemMessage
-.LM3111:
+.LM3107:
 
-.L2481:
-	ldr	r1, .L2486+0x4
+.L2480:
+	ldr	r1, .L2485+0x4
 	lsl	r0, r5, #0x2
 	add	r0, r0, r5
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2486+0x8
+	ldr	r1, .L2485+0x8
 	str	r1, [r0]
-.LM3112:
+.LM3108:
 
-	b	.L2470
-.L2487:
-	.align	2, 0
+	b	.L2469
 .L2486:
+	.align	2, 0
+.L2485:
 	.word	gPlayerParty
 	.word	gTasks
 	.word	Task_UpdateHeldItemSpriteAndClosePartyMenu
-.L2476:
-.LM3113:
+.L2475:
+.LM3109:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.L2477:
-.LM3114:
+.L2476:
+.LM3110:
 
-	ldr	r0, .L2488
+	ldr	r0, .L2487
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2488+0x4
+	ldr	r0, .L2487+0x4
 	str	r0, [r1]
-.L2470:
-.LM3115:
+.L2469:
+.LM3111:
 
 .LBE133:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2489:
-	.align	2, 0
 .L2488:
+	.align	2, 0
+.L2487:
 	.word	gTasks
 	.word	Task_UpdateHeldItemSpriteAndClosePartyMenu
 .LFE289:
@@ -28579,38 +28559,38 @@ Task_HandleSwitchItemsFromBagYesNoInput:
 	.thumb_func
 DisplayItemMustBeRemovedFirstMessage:
 .LFB290:
-.LM3116:
+.LM3112:
 
 	push	{r4, lr}
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3117:
+.LM3113:
 
-	ldr	r0, .L2491
+	ldr	r0, .L2490
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM3118:
+.LM3114:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM3119:
+.LM3115:
 
-	ldr	r1, .L2491+0x4
+	ldr	r1, .L2490+0x4
 	lsl	r0, r4, #0x2
 	add	r0, r0, r4
 	lsl	r0, r0, #0x3
 	add	r0, r0, r1
-	ldr	r1, .L2491+0x8
+	ldr	r1, .L2490+0x8
 	str	r1, [r0]
-.LM3120:
+.LM3116:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2492:
-	.align	2, 0
 .L2491:
+	.align	2, 0
+.L2490:
 	.word	gText_RemoveMailBeforeItem
 	.word	gTasks
 	.word	Task_UpdateHeldItemSpriteAndClosePartyMenu
@@ -28622,36 +28602,36 @@ DisplayItemMustBeRemovedFirstMessage:
 	.thumb_func
 RemoveItemToGiveFromBag:
 .LFB291:
-.LM3121:
+.LM3117:
 
 	push	{lr}
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-.LM3122:
+.LM3118:
 
-	ldr	r0, .L2496
+	ldr	r0, .L2495
 	ldrb	r0, [r0, #0xb]
 	cmp	r0, #0x6
-	bne	.L2494	@cond_branch
-.LM3123:
+	bne	.L2493	@cond_branch
+.LM3119:
 
 	lsl	r0, r1, #0x18
 	lsr	r0, r0, #0x18
 	mov	r1, #0x1
 	bl	RemovePCItem
-	b	.L2495
-.L2497:
-	.align	2, 0
+	b	.L2494
 .L2496:
+	.align	2, 0
+.L2495:
 	.word	gPartyMenu
-.L2494:
-.LM3124:
+.L2493:
+.LM3120:
 
 	add	r0, r1, #0
 	mov	r1, #0x1
 	bl	RemoveBagItem
-.L2495:
-.LM3125:
+.L2494:
+.LM3121:
 
 	pop	{r0}
 	bx	r0
@@ -28663,37 +28643,37 @@ RemoveItemToGiveFromBag:
 	.thumb_func
 ReturnGiveItemToBagOrPC:
 .LFB292:
-.LM3126:
+.LM3122:
 
 	push	{lr}
 	lsl	r0, r0, #0x10
 	lsr	r1, r0, #0x10
-.LM3127:
+.LM3123:
 
-	ldr	r0, .L2504
+	ldr	r0, .L2503
 	ldrb	r0, [r0, #0xb]
 	cmp	r0, #0x5
-	beq	.L2499	@cond_branch
-.LM3128:
+	beq	.L2498	@cond_branch
+.LM3124:
 
 	add	r0, r1, #0
 	mov	r1, #0x1
 	bl	AddPCItem
-	b	.L2503
-.L2505:
-	.align	2, 0
+	b	.L2502
 .L2504:
+	.align	2, 0
+.L2503:
 	.word	gPartyMenu
-.L2499:
-.LM3129:
+.L2498:
+.LM3125:
 
 	add	r0, r1, #0
 	mov	r1, #0x1
 	bl	AddBagItem
-.L2503:
+.L2502:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3130:
+.LM3126:
 
 	pop	{r1}
 	bx	r1
@@ -28706,31 +28686,31 @@ ReturnGiveItemToBagOrPC:
 	.thumb_func
 ChooseMonToGiveMailFromMailbox:
 .LFB293:
-.LM3131:
+.LM3127:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3132:
+.LM3128:
 
 	mov	r0, #0x6
 	str	r0, [sp]
-	ldr	r0, .L2507
+	ldr	r0, .L2506
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2507+0x4
+	ldr	r0, .L2506+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x0
 	mov	r1, #0x0
 	mov	r2, #0x7
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3133:
+.LM3129:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2508:
-	.align	2, 0
 .L2507:
+	.align	2, 0
+.L2506:
 	.word	Task_HandleChooseMonInput
 	.word	Mailbox_ReturnToMailListAfterDeposit
 .LFE293:
@@ -28741,30 +28721,30 @@ ChooseMonToGiveMailFromMailbox:
 	.thumb_func
 TryGiveMailToSelectedMon:
 .LFB294:
-.LM3134:
+.LM3130:
 
 	push	{r4, r5, r6, lr}
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM3135:
+.LM3131:
 
 .LBB134:
-	ldr	r0, .L2512
+	ldr	r0, .L2511
 	mov	r1, #0x9
 	ldrsb	r1, [r0, r1]
 	mov	r0, #0x64
 	mul	r1, r1, r0
-	ldr	r0, .L2512+0x4
+	ldr	r0, .L2511+0x4
 	add	r5, r1, r0
-.LM3136:
+.LM3132:
 
-	ldr	r1, .L2512+0x8
+	ldr	r1, .L2511+0x8
 	mov	r0, #0x0
 	strb	r0, [r1]
-.LM3137:
+.LM3133:
 
-	ldr	r2, .L2512+0xc
-	ldr	r0, .L2512+0x10
+	ldr	r2, .L2511+0xc
+	ldr	r0, .L2511+0x10
 	ldrh	r1, [r0]
 	add	r1, r1, #0x6
 	ldrh	r0, [r0, #0x2]
@@ -28772,28 +28752,28 @@ TryGiveMailToSelectedMon:
 	lsl	r0, r1, #0x3
 	add	r0, r0, r1
 	lsl	r0, r0, #0x2
-	ldr	r1, .L2512+0x14
+	ldr	r1, .L2511+0x14
 	add	r0, r0, r1
 	ldr	r1, [r2]
 	add	r4, r1, r0
-.LM3138:
+.LM3134:
 
 	add	r0, r5, #0
 	mov	r1, #0xc
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2510	@cond_branch
-.LM3139:
+	beq	.L2509	@cond_branch
+.LM3135:
 
-	ldr	r0, .L2512+0x18
+	ldr	r0, .L2511+0x18
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.LM3140:
+.LM3136:
 
-	b	.L2511
-.L2513:
-	.align	2, 0
+	b	.L2510
 .L2512:
+	.align	2, 0
+.L2511:
 	.word	gPartyMenu
 	.word	gPlayerParty
 	.word	gPartyMenuUseExitCallback
@@ -28801,44 +28781,44 @@ TryGiveMailToSelectedMon:
 	.word	playerPCItemPageInfo
 	.word	0x2be0
 	.word	gText_PkmnHoldingItemCantHoldMail
-.L2510:
-.LM3141:
+.L2509:
+.LM3137:
 
 	add	r0, r5, #0
 	add	r1, r4, #0
 	bl	GiveMailToMon2
-.LM3142:
+.LM3138:
 
 	add	r0, r4, #0
 	bl	ClearMailStruct
-.LM3143:
+.LM3139:
 
-	ldr	r0, .L2514
+	ldr	r0, .L2513
 	mov	r1, #0x1
 	bl	DisplayPartyMenuMessage
-.L2511:
-.LM3144:
+.L2510:
+.LM3140:
 
 	mov	r0, #0x2
 	bl	ScheduleBgCopyTilemapToVram
-.LM3145:
+.LM3141:
 
-	ldr	r0, .L2514+0x4
+	ldr	r0, .L2513+0x4
 	lsl	r1, r6, #0x2
 	add	r1, r1, r6
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2514+0x8
+	ldr	r0, .L2513+0x8
 	str	r0, [r1]
-.LM3146:
+.LM3142:
 
 .LBE134:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2515:
-	.align	2, 0
 .L2514:
+	.align	2, 0
+.L2513:
 	.word	gText_MailTransferredFromMailbox
 	.word	gTasks
 	.word	Task_UpdateHeldItemSpriteAndClosePartyMenu
@@ -28851,20 +28831,20 @@ TryGiveMailToSelectedMon:
 	.thumb_func
 InitChooseHalfPartyForBattle:
 .LFB295:
-.LM3147:
+.LM3143:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3148:
+.LM3144:
 
 	bl	ClearSelectedPartyOrder
-.LM3149:
+.LM3145:
 
 	mov	r0, #0x0
 	str	r0, [sp]
-	ldr	r0, .L2517
+	ldr	r0, .L2516
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2517+0x4
+	ldr	r0, .L2516+0x4
 	ldr	r0, [r0, #0x8]
 	str	r0, [sp, #0x8]
 	mov	r0, #0x4
@@ -28872,19 +28852,19 @@ InitChooseHalfPartyForBattle:
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3150:
+.LM3146:
 
-	ldr	r1, .L2517+0x8
-	ldr	r0, .L2517+0xc
+	ldr	r1, .L2516+0x8
+	ldr	r0, .L2516+0xc
 	str	r0, [r1, #0x4]
-.LM3151:
+.LM3147:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2518:
-	.align	2, 0
 .L2517:
+	.align	2, 0
+.L2516:
 	.word	Task_HandleChooseMonInput
 	.word	gMain
 	.word	gPartyMenu
@@ -28898,22 +28878,22 @@ InitChooseHalfPartyForBattle:
 	.thumb_func
 ClearSelectedPartyOrder:
 .LFB296:
-.LM3152:
+.LM3148:
 
 	push	{lr}
-.LM3153:
+.LM3149:
 
-	ldr	r0, .L2520
+	ldr	r0, .L2519
 	mov	r1, #0x0
 	mov	r2, #0x4
 	bl	memset
-.LM3154:
+.LM3150:
 
 	pop	{r0}
 	bx	r0
-.L2521:
-	.align	2, 0
 .L2520:
+	.align	2, 0
+.L2519:
 	.word	gSelectedOrderFromParty
 .LFE296:
 .Lfe296:
@@ -28923,31 +28903,31 @@ ClearSelectedPartyOrder:
 	.thumb_func
 GetPartySlotEntryStatus:
 .LFB297:
-.LM3155:
+.LM3151:
 
 	push	{r4, lr}
-.LM3156:
+.LM3152:
 
 	lsl	r0, r0, #0x18
 	asr	r4, r0, #0x18
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, .L2526
+	ldr	r1, .L2525
 	add	r0, r0, r1
 	bl	GetBattleEntryEligibility
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2523	@cond_branch
-.LM3157:
+	bne	.L2522	@cond_branch
+.LM3153:
 
 	mov	r0, #0x2
-	b	.L2525
-.L2527:
-	.align	2, 0
+	b	.L2524
 .L2526:
+	.align	2, 0
+.L2525:
 	.word	gPlayerParty
-.L2523:
-.LM3158:
+.L2522:
+.LM3154:
 
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
@@ -28956,17 +28936,17 @@ GetPartySlotEntryStatus:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2524	@cond_branch
-.LM3159:
+	beq	.L2523	@cond_branch
+.LM3155:
 
 	mov	r0, #0x0
-	b	.L2525
-.L2524:
-.LM3160:
+	b	.L2524
+.L2523:
+.LM3156:
 
 	mov	r0, #0x1
-.L2525:
-.LM3161:
+.L2524:
+.LM3157:
 
 	pop	{r4}
 	pop	{r1}
@@ -28979,20 +28959,20 @@ GetPartySlotEntryStatus:
 	.thumb_func
 GetBattleEntryEligibility:
 .LFB298:
-.LM3162:
+.LM3158:
 
 	push	{r4, r5, r6, lr}
 	add	r5, r0, #0
-.LM3163:
+.LM3159:
 
 .LBB135:
 	mov	r6, #0x0
-.LM3164:
+.LM3160:
 
 	mov	r1, #0x2d
 	bl	GetMonData
 	cmp	r0, #0
-	bne	.L2544	@cond_branch
+	bne	.L2543	@cond_branch
 	add	r0, r5, #0
 	mov	r1, #0x38
 	bl	GetMonData
@@ -29001,74 +28981,74 @@ GetBattleEntryEligibility:
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r4, r0
-	bhi	.L2544	@cond_branch
-	ldr	r0, .L2545
+	bhi	.L2543	@cond_branch
+	ldr	r0, .L2544
 	ldr	r0, [r0]
 	ldrh	r1, [r0, #0x4]
-	ldr	r0, .L2545+0x4
+	ldr	r0, .L2544+0x4
 	cmp	r1, r0
-	bne	.L2529	@cond_branch
+	bne	.L2528	@cond_branch
 	add	r0, r5, #0
 	mov	r1, #0xc
 	bl	GetMonData
 	cmp	r0, #0
-	bne	.L2544	@cond_branch
-.L2529:
-.LM3165:
+	bne	.L2543	@cond_branch
+.L2528:
+.LM3161:
 
-	ldr	r0, .L2545+0x8
+	ldr	r0, .L2544+0x8
 	bl	VarGet
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	cmp	r0, #0x8
-	beq	.L2537	@cond_branch
+	beq	.L2536	@cond_branch
 	cmp	r0, #0x9
-	bne	.L2535	@cond_branch
-.LM3166:
+	bne	.L2534	@cond_branch
+.LM3162:
 
 	add	r0, r5, #0
 	mov	r1, #0x39
 	bl	GetMonData
 	cmp	r0, #0
-	bne	.L2537	@cond_branch
-.LM3167:
+	bne	.L2536	@cond_branch
+.LM3163:
 
-.L2544:
-.LM3168:
+.L2543:
+.LM3164:
 
 	mov	r0, #0x0
-	b	.L2543
-.L2546:
-	.align	2, 0
+	b	.L2542
 .L2545:
+	.align	2, 0
+.L2544:
 	.word	gSaveBlock1Ptr
 	.word	0x191a
 	.word	0x40cf
-.L2535:
-.LM3169:
+.L2534:
+.LM3165:
 
 	add	r0, r5, #0
 	mov	r1, #0xb
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r4, r0, #0x10
-.LM3170:
+.LM3166:
 
-	ldr	r3, .L2547
+	ldr	r3, .L2546
 	lsl	r1, r6, #0x1
 	add	r0, r1, r3
 	ldrh	r0, [r0]
-	ldr	r2, .L2547+0x4
+	ldr	r2, .L2546+0x4
 	cmp	r0, r2
-	beq	.L2537	@cond_branch
-.L2539:
-.LM3171:
+	beq	.L2536	@cond_branch
+.L2538:
+.LM3167:
 
 	add	r0, r1, r3
 	ldrh	r0, [r0]
 	cmp	r0, r4
-	beq	.L2544	@cond_branch
-.LM3172:
+	beq	.L2543	@cond_branch
+.LM3168:
 
 	add	r0, r6, #0x1
 	lsl	r0, r0, #0x10
@@ -29077,21 +29057,21 @@ GetBattleEntryEligibility:
 	add	r0, r1, r3
 	ldrh	r0, [r0]
 	cmp	r0, r2
-	bne	.L2539	@cond_branch
-.L2537:
-.LM3173:
+	bne	.L2538	@cond_branch
+.L2536:
+.LM3169:
 
 	mov	r0, #0x1
-.L2543:
-.LM3174:
+.L2542:
+.LM3170:
 
 .LBE135:
 	pop	{r4, r5, r6}
 	pop	{r1}
 	bx	r1
-.L2548:
-	.align	2, 0
 .L2547:
+	.align	2, 0
+.L2546:
 	.word	gFrontierBannedSpecies
 	.word	0xffff
 .LFE298:
@@ -29102,192 +29082,192 @@ GetBattleEntryEligibility:
 	.thumb_func
 CheckBattleEntriesAndGetMessage:
 .LFB299:
-.LM3175:
+.LM3171:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, sl
 	mov	r6, r9
 	mov	r5, r8
 	push	{r5, r6, r7}
-.LM3176:
+.LM3172:
 
 .LBB136:
-.LM3177:
+.LM3173:
 
 	bl	GetMinBattleEntries
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
 	add	r1, r2, #0
-.LM3178:
+.LM3174:
 
-	ldr	r3, .L2569
+	ldr	r3, .L2568
 	add	r0, r2, r3
 	sub	r0, r0, #0x1
 	ldrb	r0, [r0]
 	cmp	r0, #0
-	bne	.L2550	@cond_branch
-.LM3179:
+	bne	.L2549	@cond_branch
+.LM3175:
 
 	cmp	r2, #0x1
-	bne	.L2551	@cond_branch
-.LM3180:
+	bne	.L2550	@cond_branch
+.LM3176:
 
 	mov	r0, #0xe
-	b	.L2565
-.L2570:
-	.align	2, 0
+	b	.L2564
 .L2569:
+	.align	2, 0
+.L2568:
 	.word	gSelectedOrderFromParty
-.L2551:
-.LM3181:
+.L2550:
+.LM3177:
 
-	ldr	r0, .L2571
+	ldr	r0, .L2570
 	mov	r2, #0x0
 	mov	r3, #0x1
 	bl	ConvertIntToDecimalStringN
-.LM3182:
+.LM3178:
 
 	mov	r0, #0x11
-	b	.L2565
-.L2572:
-	.align	2, 0
+	b	.L2564
 .L2571:
+	.align	2, 0
+.L2570:
 	.word	gStringVar1
-.L2550:
-.LM3183:
+.L2549:
+.LM3179:
 
-	ldr	r0, .L2573
+	ldr	r0, .L2572
 	bl	VarGet
 	lsl	r0, r0, #0x18
-.LM3184:
+.LM3180:
 
 	mov	r1, #0xf8
 	lsl	r1, r1, #0x18
 	add	r0, r0, r1
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	bhi	.L2552	@cond_branch
-.LM3185:
+	bhi	.L2551	@cond_branch
+.LM3181:
 
-	b	.L2554
-.L2574:
-	.align	2, 0
+	b	.L2553
 .L2573:
+	.align	2, 0
+.L2572:
 	.word	0x40cf
-.L2566:
-.LM3186:
+.L2565:
+.LM3182:
 
 	mov	r0, #0x12
-	b	.L2565
-.L2567:
-.LM3187:
+	b	.L2564
+.L2566:
+.LM3183:
 
 	mov	r0, #0x13
-	b	.L2565
-.L2552:
-.LM3188:
+	b	.L2564
+.L2551:
+.LM3184:
 
 	bl	GetMaxBattleEntries
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mov	r8, r0
-.LM3189:
+.LM3185:
 
 	mov	r5, #0x0
-	b	.L2568
-.L2556:
-.LM3190:
+	b	.L2567
+.L2555:
+.LM3186:
 
 .LBB137:
-	ldr	r3, .L2575
+	ldr	r3, .L2574
 	add	r4, r3, r5
 	ldrb	r0, [r4]
 	mov	r1, #0x64
 	mul	r0, r0, r1
 	sub	r0, r0, #0x64
-	ldr	r3, .L2575+0x4
+	ldr	r3, .L2574+0x4
 	add	r0, r3, r0
 	mov	r1, #0xb
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	mov	sl, r0
-.LM3191:
+.LM3187:
 
 	ldrb	r0, [r4]
 	mov	r1, #0x64
 	mul	r0, r0, r1
 	sub	r0, r0, #0x64
-	ldr	r3, .L2575+0x4
+	ldr	r3, .L2574+0x4
 	add	r0, r3, r0
 	mov	r1, #0xc
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r6, r0, #0x10
-.LM3192:
+.LM3188:
 
 	add	r1, r5, #0x1
 	lsl	r0, r1, #0x18
 	lsr	r4, r0, #0x18
 	mov	r9, r1
 	cmp	r4, r8
-	bcs	.L2555	@cond_branch
+	bcs	.L2554	@cond_branch
 	mov	r7, #0x64
-.L2560:
-.LM3193:
+.L2559:
+.LM3189:
 
-	ldr	r0, .L2575
+	ldr	r0, .L2574
 	add	r5, r0, r4
 	ldrb	r0, [r5]
 	mul	r0, r0, r7
 	sub	r0, r0, #0x64
-	ldr	r1, .L2575+0x4
+	ldr	r1, .L2574+0x4
 	add	r0, r1, r0
 	mov	r1, #0xb
 	bl	GetMonData
 	cmp	sl, r0
-	beq	.L2566	@cond_branch
-.LM3194:
+	beq	.L2565	@cond_branch
+.LM3190:
 
 	cmp	r6, #0
-	beq	.L2559	@cond_branch
+	beq	.L2558	@cond_branch
 	ldrb	r0, [r5]
 	mul	r0, r0, r7
 	sub	r0, r0, #0x64
-	ldr	r3, .L2575+0x4
+	ldr	r3, .L2574+0x4
 	add	r0, r3, r0
 	mov	r1, #0xc
 	bl	GetMonData
 	cmp	r6, r0
-	beq	.L2567	@cond_branch
-.LM3195:
+	beq	.L2566	@cond_branch
+.LM3191:
 
-.L2559:
+.L2558:
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, r8
-	bcc	.L2560	@cond_branch
-.LM3196:
+	bcc	.L2559	@cond_branch
+.LM3192:
 
 .LBE137:
-.LM3197:
+.LM3193:
 
-.L2555:
+.L2554:
 	mov	r1, r9
 	lsl	r0, r1, #0x18
 	lsr	r5, r0, #0x18
 	mov	r0, r8
-.L2568:
+.L2567:
 	sub	r0, r0, #0x1
 	cmp	r5, r0
-	blt	.L2556	@cond_branch
-.L2554:
-.LM3198:
+	blt	.L2555	@cond_branch
+.L2553:
+.LM3194:
 
 	mov	r0, #0xff
-.L2565:
-.LM3199:
+.L2564:
+.LM3195:
 
 .LBE136:
 	pop	{r3, r4, r5}
@@ -29297,9 +29277,9 @@ CheckBattleEntriesAndGetMessage:
 	pop	{r4, r5, r6, r7}
 	pop	{r1}
 	bx	r1
-.L2576:
-	.align	2, 0
 .L2575:
+	.align	2, 0
+.L2574:
 	.word	gSelectedOrderFromParty
 	.word	gPlayerParty
 .LFE299:
@@ -29310,46 +29290,46 @@ CheckBattleEntriesAndGetMessage:
 	.thumb_func
 HasPartySlotAlreadyBeenSelected:
 .LFB300:
-.LM3200:
+.LM3196:
 
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-.LM3201:
+.LM3197:
 
 .LBB138:
-.LM3202:
+.LM3198:
 
 	mov	r1, #0x0
-	ldr	r3, .L2585
-.L2581:
-.LM3203:
+	ldr	r3, .L2584
+.L2580:
+.LM3199:
 
 	add	r0, r1, r3
 	ldrb	r0, [r0]
 	cmp	r0, r2
-	bne	.L2580	@cond_branch
-.LM3204:
+	bne	.L2579	@cond_branch
+.LM3200:
 
 	mov	r0, #0x1
-	b	.L2584
-.L2586:
-	.align	2, 0
+	b	.L2583
 .L2585:
+	.align	2, 0
+.L2584:
 	.word	gSelectedOrderFromParty
-.LM3205:
+.LM3201:
 
-.L2580:
+.L2579:
 	add	r0, r1, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r1, r0, #0x18
 	cmp	r1, #0x3
-	bls	.L2581	@cond_branch
-.LM3206:
+	bls	.L2580	@cond_branch
+.LM3202:
 
 	mov	r0, #0x0
-.L2584:
-.LM3207:
+.L2583:
+.LM3203:
 
 .LBE138:
 	pop	{r1}
@@ -29362,57 +29342,57 @@ HasPartySlotAlreadyBeenSelected:
 	.thumb_func
 Task_ValidateChosenHalfParty:
 .LFB301:
-.LM3208:
+.LM3204:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3209:
+.LM3205:
 
 .LBB139:
 	bl	CheckBattleEntriesAndGetMessage
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3210:
+.LM3206:
 
 	cmp	r4, #0xff
-	beq	.L2588	@cond_branch
-.LM3211:
+	beq	.L2587	@cond_branch
+.LM3207:
 
 	mov	r0, #0x20
 	bl	PlaySE
-.LM3212:
+.LM3208:
 
 	add	r0, r4, #0
 	bl	DisplayPartyMenuStdMessage
-.LM3213:
+.LM3209:
 
-	ldr	r0, .L2590
+	ldr	r0, .L2589
 	lsl	r1, r5, #0x2
 	add	r1, r1, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2590+0x4
+	ldr	r0, .L2589+0x4
 	str	r0, [r1]
-.LM3214:
+.LM3210:
 
-	b	.L2589
-.L2591:
-	.align	2, 0
+	b	.L2588
 .L2590:
+	.align	2, 0
+.L2589:
 	.word	gTasks
 	.word	Task_ContinueChoosingHalfParty
-.L2588:
-.LM3215:
+.L2587:
+.LM3211:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM3216:
+.LM3212:
 
 	add	r0, r5, #0
 	bl	Task_ClosePartyMenu
-.L2589:
-.LM3217:
+.L2588:
+.LM3213:
 
 .LBE139:
 	pop	{r4, r5}
@@ -29426,56 +29406,56 @@ Task_ValidateChosenHalfParty:
 	.thumb_func
 Task_ContinueChoosingHalfParty:
 .LFB302:
-.LM3218:
+.LM3214:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3219:
+.LM3215:
 
 .LBB140:
 .LBB141:
-	ldr	r0, .L2595
+	ldr	r0, .L2594
 	ldrh	r1, [r0, #0x2e]
 	mov	r0, #0x1
 	and	r0, r0, r1
 .LBE141:
 	cmp	r0, #0
-	bne	.L2594	@cond_branch
+	bne	.L2593	@cond_branch
 .LBB142:
 	mov	r0, #0x2
 	and	r0, r0, r1
 .LBE142:
 	cmp	r0, #0
-	beq	.L2593	@cond_branch
-.L2594:
-.LM3220:
+	beq	.L2592	@cond_branch
+.L2593:
+.LM3216:
 
 	mov	r0, #0x5
 	bl	PlaySE
-.LM3221:
+.LM3217:
 
 	mov	r0, #0x0
 	bl	DisplayPartyMenuStdMessage
-.LM3222:
+.LM3218:
 
-	ldr	r0, .L2595+0x4
+	ldr	r0, .L2594+0x4
 	lsl	r1, r4, #0x2
 	add	r1, r1, r4
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2595+0x8
+	ldr	r0, .L2594+0x8
 	str	r0, [r1]
-.L2593:
-.LM3223:
+.L2592:
+.LM3219:
 
 .LBE140:
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2596:
-	.align	2, 0
 .L2595:
+	.align	2, 0
+.L2594:
 	.word	gMain
 	.word	gTasks
 	.word	Task_HandleChooseMonInput
@@ -29487,45 +29467,45 @@ Task_ContinueChoosingHalfParty:
 	.thumb_func
 GetMaxBattleEntries:
 .LFB303:
-.LM3224:
+.LM3220:
 
 	push	{lr}
-.LM3225:
+.LM3221:
 
-	ldr	r0, .L2604
+	ldr	r0, .L2603
 	bl	VarGet
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	cmp	r0, #0x8
-	beq	.L2600	@cond_branch
+	beq	.L2599	@cond_branch
 	cmp	r0, #0x9
-	bne	.L2601	@cond_branch
-.LM3226:
+	bne	.L2600	@cond_branch
+.LM3222:
 
 	mov	r0, #0x3
-	b	.L2603
-.L2605:
-	.align	2, 0
+	b	.L2602
 .L2604:
+	.align	2, 0
+.L2603:
 	.word	0x40cf
-.L2600:
-.LM3227:
+.L2599:
+.LM3223:
 
 	mov	r0, #0x2
-	b	.L2603
-.L2601:
-.LM3228:
+	b	.L2602
+.L2600:
+.LM3224:
 
-	ldr	r0, .L2606
+	ldr	r0, .L2605
 	ldrb	r0, [r0]
-.L2603:
-.LM3229:
+.L2602:
+.LM3225:
 
 	pop	{r1}
 	bx	r1
-.L2607:
-	.align	2, 0
 .L2606:
+	.align	2, 0
+.L2605:
 	.word	gSpecialVar_0x8005
 .LFE303:
 .Lfe303:
@@ -29535,45 +29515,45 @@ GetMaxBattleEntries:
 	.thumb_func
 GetMinBattleEntries:
 .LFB304:
-.LM3230:
+.LM3226:
 
 	push	{lr}
-.LM3231:
+.LM3227:
 
-	ldr	r0, .L2615
+	ldr	r0, .L2614
 	bl	VarGet
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	cmp	r0, #0x8
-	beq	.L2611	@cond_branch
+	beq	.L2610	@cond_branch
 	cmp	r0, #0x9
-	bne	.L2612	@cond_branch
-.LM3232:
+	bne	.L2611	@cond_branch
+.LM3228:
 
 	mov	r0, #0x1
-	b	.L2614
-.L2616:
-	.align	2, 0
+	b	.L2613
 .L2615:
+	.align	2, 0
+.L2614:
 	.word	0x40cf
-.L2611:
-.LM3233:
+.L2610:
+.LM3229:
 
 	mov	r0, #0x2
-	b	.L2614
-.L2612:
-.LM3234:
+	b	.L2613
+.L2611:
+.LM3230:
 
-	ldr	r0, .L2617
+	ldr	r0, .L2616
 	ldrb	r0, [r0]
-.L2614:
-.LM3235:
+.L2613:
+.LM3231:
 
 	pop	{r1}
 	bx	r1
-.L2618:
-	.align	2, 0
 .L2617:
+	.align	2, 0
+.L2616:
 	.word	gSpecialVar_0x8005
 .LFE304:
 .Lfe304:
@@ -29583,51 +29563,51 @@ GetMinBattleEntries:
 	.thumb_func
 GetBattleEntryLevelCap:
 .LFB305:
-.LM3236:
+.LM3232:
 
 	push	{lr}
-.LM3237:
+.LM3233:
 
-	ldr	r0, .L2628
+	ldr	r0, .L2627
 	bl	VarGet
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	cmp	r0, #0x8
-	beq	.L2622	@cond_branch
+	beq	.L2621	@cond_branch
 	cmp	r0, #0x9
-	bne	.L2623	@cond_branch
-.LM3238:
+	bne	.L2622	@cond_branch
+.LM3234:
 
-.L2627:
+.L2626:
 	mov	r0, #0x64
-	b	.L2626
-.L2629:
-	.align	2, 0
+	b	.L2625
 .L2628:
+	.align	2, 0
+.L2627:
 	.word	0x40cf
-.L2622:
-.LM3239:
+.L2621:
+.LM3235:
 
 	mov	r0, #0x1e
-	b	.L2626
-.L2623:
-.LM3240:
+	b	.L2625
+.L2622:
+.LM3236:
 
-	ldr	r0, .L2630
+	ldr	r0, .L2629
 	ldrh	r0, [r0]
 	cmp	r0, #0
-	bne	.L2627	@cond_branch
-.LM3241:
+	bne	.L2626	@cond_branch
+.LM3237:
 
 	mov	r0, #0x32
-.L2626:
-.LM3242:
+.L2625:
+.LM3238:
 
 	pop	{r1}
 	bx	r1
-.L2631:
-	.align	2, 0
 .L2630:
+	.align	2, 0
+.L2629:
 	.word	gSpecialVar_0x8004
 .LFE305:
 .Lfe305:
@@ -29637,16 +29617,16 @@ GetBattleEntryLevelCap:
 	.thumb_func
 GetFacilityCancelString:
 .LFB306:
-.LM3243:
+.LM3239:
 
 	push	{lr}
-.LM3244:
+.LM3240:
 
 .LBB143:
-	ldr	r0, .L2638
+	ldr	r0, .L2637
 	bl	VarGet
 	lsl	r0, r0, #0x18
-.LM3245:
+.LM3241:
 
 	lsr	r1, r0, #0x18
 	mov	r2, #0xf8
@@ -29654,47 +29634,47 @@ GetFacilityCancelString:
 	add	r0, r0, r2
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	bhi	.L2633	@cond_branch
-.LM3246:
+	bhi	.L2632	@cond_branch
+.LM3242:
 
-	ldr	r0, .L2638+0x4
-	b	.L2637
-.L2639:
-	.align	2, 0
+	ldr	r0, .L2637+0x4
+	b	.L2636
 .L2638:
+	.align	2, 0
+.L2637:
 	.word	0x40cf
 	.word	gText_CancelBattle
-.L2633:
-.LM3247:
+.L2632:
+.LM3243:
 
 	cmp	r1, #0x1
-	bne	.L2635	@cond_branch
-	ldr	r0, .L2640
+	bne	.L2634	@cond_branch
+	ldr	r0, .L2639
 	ldrh	r0, [r0]
 	cmp	r0, #0x2
-	bne	.L2635	@cond_branch
-.LM3248:
+	bne	.L2634	@cond_branch
+.LM3244:
 
-	ldr	r0, .L2640+0x4
-	b	.L2637
-.L2641:
-	.align	2, 0
+	ldr	r0, .L2639+0x4
+	b	.L2636
 .L2640:
+	.align	2, 0
+.L2639:
 	.word	gSpecialVar_0x8005
 	.word	gText_ReturnToWaitingRoom
-.L2635:
-.LM3249:
+.L2634:
+.LM3245:
 
-	ldr	r0, .L2642
-.L2637:
-.LM3250:
+	ldr	r0, .L2641
+.L2636:
+.LM3246:
 
 .LBE143:
 	pop	{r1}
 	bx	r1
-.L2643:
-	.align	2, 0
 .L2642:
+	.align	2, 0
+.L2641:
 	.word	gText_CancelChallenge
 .LFE306:
 .Lfe306:
@@ -29705,31 +29685,31 @@ GetFacilityCancelString:
 	.thumb_func
 ChooseMonForTradingBoard:
 .LFB307:
-.LM3251:
+.LM3247:
 
 	push	{lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3252:
+.LM3248:
 
 	mov	r2, #0x0
 	str	r2, [sp]
-	ldr	r2, .L2645
+	ldr	r2, .L2644
 	str	r2, [sp, #0x4]
 	str	r1, [sp, #0x8]
 	mov	r1, #0x0
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3253:
+.LM3249:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2646:
-	.align	2, 0
 .L2645:
+	.align	2, 0
+.L2644:
 	.word	Task_HandleChooseMonInput
 .LFE307:
 .Lfe307:
@@ -29740,31 +29720,31 @@ ChooseMonForTradingBoard:
 	.thumb_func
 ChooseMonForMoveTutor:
 .LFB308:
-.LM3254:
+.LM3250:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3255:
+.LM3251:
 
 	mov	r0, #0x4
 	str	r0, [sp]
-	ldr	r0, .L2648
+	ldr	r0, .L2647
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2648+0x4
+	ldr	r0, .L2647+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x0
 	mov	r1, #0x0
 	mov	r2, #0xc
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3256:
+.LM3252:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2649:
-	.align	2, 0
 .L2648:
+	.align	2, 0
+.L2647:
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ReturnToFieldContinueScriptPlayMapMusic
 .LFE308:
@@ -29776,31 +29756,31 @@ ChooseMonForMoveTutor:
 	.thumb_func
 ChooseMonForWirelessMinigame:
 .LFB309:
-.LM3257:
+.LM3253:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3258:
+.LM3254:
 
 	mov	r0, #0x1
 	str	r0, [sp]
-	ldr	r0, .L2651
+	ldr	r0, .L2650
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2651+0x4
+	ldr	r0, .L2650+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0xb
 	mov	r1, #0x0
 	mov	r2, #0xd
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3259:
+.LM3255:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2652:
-	.align	2, 0
 .L2651:
+	.align	2, 0
+.L2650:
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ReturnToFieldContinueScriptPlayMapMusic
 .LFE309:
@@ -29811,37 +29791,37 @@ ChooseMonForWirelessMinigame:
 	.thumb_func
 GetPartyLayoutFromBattleType:
 .LFB310:
-.LM3260:
+.LM3256:
 
 	push	{lr}
-.LM3261:
+.LM3257:
 
 	bl	IsDoubleBattle
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2654	@cond_branch
-.LM3262:
+	bne	.L2653	@cond_branch
+.LM3258:
 
 	mov	r0, #0x0
-	b	.L2656
-.L2654:
-.LM3263:
+	b	.L2655
+.L2653:
+.LM3259:
 
 	bl	IsMultiBattle
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	beq	.L2655	@cond_branch
-.LM3264:
+	beq	.L2654	@cond_branch
+.LM3260:
 
 	mov	r0, #0x1
-	b	.L2656
-.L2655:
-.LM3265:
+	b	.L2655
+.L2654:
+.LM3261:
 
 	mov	r0, #0x2
-.L2656:
-.LM3266:
+.L2655:
+.LM3262:
 
 	pop	{r1}
 	bx	r1
@@ -29854,14 +29834,14 @@ GetPartyLayoutFromBattleType:
 	.thumb_func
 OpenPartyMenuInBattle:
 .LFB311:
-.LM3267:
+.LM3263:
 
 	push	{r4, lr}
 	add	sp, sp, #-0xc
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3268:
+.LM3264:
 
 	bl	GetPartyLayoutFromBattleType
 	add	r1, r0, #0
@@ -29869,29 +29849,29 @@ OpenPartyMenuInBattle:
 	lsr	r1, r1, #0x18
 	mov	r0, #0x0
 	str	r0, [sp]
-	ldr	r0, .L2658
+	ldr	r0, .L2657
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2658+0x4
+	ldr	r0, .L2657+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x1
 	add	r2, r4, #0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3269:
+.LM3265:
 
 	bl	nullsub_35
-.LM3270:
+.LM3266:
 
 	bl	UpdatePartyToBattleOrder
-.LM3271:
+.LM3267:
 
 	add	sp, sp, #0xc
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2659:
-	.align	2, 0
 .L2658:
+	.align	2, 0
+.L2657:
 	.word	Task_HandleChooseMonInput
 	.word	CB2_SetUpReshowBattleScreenAfterMenu
 .LFE311:
@@ -29903,11 +29883,11 @@ OpenPartyMenuInBattle:
 	.thumb_func
 ChooseMonForInBattleItem:
 .LFB312:
-.LM3272:
+.LM3268:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3273:
+.LM3269:
 
 	bl	GetPartyLayoutFromBattleType
 	add	r1, r0, #0
@@ -29915,28 +29895,28 @@ ChooseMonForInBattleItem:
 	lsr	r1, r1, #0x18
 	mov	r0, #0x5
 	str	r0, [sp]
-	ldr	r0, .L2661
+	ldr	r0, .L2660
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2661+0x4
+	ldr	r0, .L2660+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x1
 	mov	r2, #0x3
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3274:
+.LM3270:
 
 	bl	nullsub_35
-.LM3275:
+.LM3271:
 
 	bl	UpdatePartyToBattleOrder
-.LM3276:
+.LM3272:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2662:
-	.align	2, 0
 .L2661:
+	.align	2, 0
+.L2660:
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ReturnToBagMenu
 .LFE312:
@@ -29947,61 +29927,61 @@ ChooseMonForInBattleItem:
 	.thumb_func
 GetPartyMenuActionsTypeInBattle:
 .LFB313:
-.LM3277:
+.LM3273:
 
 	push	{r4, lr}
 	add	r4, r0, #0
-.LM3278:
+.LM3274:
 
-	ldr	r0, .L2668
+	ldr	r0, .L2667
 	mov	r1, #0xb
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2664	@cond_branch
+	beq	.L2663	@cond_branch
 	add	r0, r4, #0
 	mov	r1, #0x2d
 	bl	GetMonData
 	cmp	r0, #0
-	bne	.L2664	@cond_branch
-.LM3279:
+	bne	.L2663	@cond_branch
+.LM3275:
 
-	ldr	r0, .L2668+0x4
+	ldr	r0, .L2667+0x4
 	ldrb	r0, [r0, #0xb]
 	cmp	r0, #0x1
-	bne	.L2665	@cond_branch
-.LM3280:
+	bne	.L2664	@cond_branch
+.LM3276:
 
 	mov	r0, #0x3
-	b	.L2667
-.L2669:
-	.align	2, 0
+	b	.L2666
 .L2668:
+	.align	2, 0
+.L2667:
 	.word	gPlayerParty+0x64
 	.word	gPartyMenu
-.L2665:
-.LM3281:
+.L2664:
+.LM3277:
 
-	ldr	r0, .L2670
+	ldr	r0, .L2669
 	ldr	r0, [r0]
 	mov	r1, #0x80
 	lsl	r1, r1, #0xb
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2664	@cond_branch
-.LM3282:
+	bne	.L2663	@cond_branch
+.LM3278:
 
 	mov	r0, #0x2
-	b	.L2667
-.L2671:
-	.align	2, 0
+	b	.L2666
 .L2670:
+	.align	2, 0
+.L2669:
 	.word	gBattleTypeFlags
-.L2664:
-.LM3283:
+.L2663:
+.LM3279:
 
 	mov	r0, #0x7
-.L2667:
-.LM3284:
+.L2666:
+.LM3280:
 
 	pop	{r4}
 	pop	{r1}
@@ -30014,215 +29994,215 @@ GetPartyMenuActionsTypeInBattle:
 	.thumb_func
 TrySwitchInPokemon:
 .LFB314:
-.LM3285:
+.LM3281:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
-.LM3286:
+.LM3282:
 
 .LBB144:
 	bl	GetCursorSelectionMonId
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3287:
+.LM3283:
 
 	bl	IsMultiBattle
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	bne	.L2673	@cond_branch
+	bne	.L2672	@cond_branch
 	cmp	r5, #0x1
-	beq	.L2674	@cond_branch
+	beq	.L2673	@cond_branch
 	cmp	r5, #0x4
-	beq	.L2674	@cond_branch
+	beq	.L2673	@cond_branch
 	cmp	r5, #0x5
-	bne	.L2673	@cond_branch
-.L2674:
-.LM3288:
+	bne	.L2672	@cond_branch
+.L2673:
+.LM3284:
 
-	ldr	r4, .L2691
+	ldr	r4, .L2690
 	bl	GetTrainerPartnerName
 	add	r1, r0, #0
 	add	r0, r4, #0
 	bl	StringCopy
-.LM3289:
+.LM3285:
 
-	ldr	r0, .L2691+0x4
-	ldr	r1, .L2691+0x8
-.LM3290:
+	ldr	r0, .L2690+0x4
+	ldr	r1, .L2690+0x8
+.LM3286:
 
-	b	.L2688
-.L2692:
-	.align	2, 0
+	b	.L2687
 .L2691:
+	.align	2, 0
+.L2690:
 	.word	gStringVar1
 	.word	gStringVar4
 	.word	gText_CantSwitchWithAlly
-.L2673:
-.LM3291:
+.L2672:
+.LM3287:
 
 	mov	r0, #0x64
 	mov	r1, r5
 	mul	r1, r1, r0
-	ldr	r0, .L2693
+	ldr	r0, .L2692
 	add	r4, r1, r0
 	add	r0, r4, #0
 	mov	r1, #0x39
 	bl	GetMonData
 	cmp	r0, #0
-	bne	.L2675	@cond_branch
-.LM3292:
+	bne	.L2674	@cond_branch
+.LM3288:
 
-	ldr	r1, .L2693+0x4
+	ldr	r1, .L2692+0x4
 	add	r0, r4, #0
 	bl	GetMonNickname
-.LM3293:
+.LM3289:
 
-	ldr	r0, .L2693+0x8
-	ldr	r1, .L2693+0xc
-.LM3294:
+	ldr	r0, .L2692+0x8
+	ldr	r1, .L2692+0xc
+.LM3290:
 
-	b	.L2688
-.L2694:
-	.align	2, 0
+	b	.L2687
 .L2693:
+	.align	2, 0
+.L2692:
 	.word	gPlayerParty
 	.word	gStringVar1
 	.word	gStringVar4
 	.word	gText_PkmnHasNoEnergy
-.L2675:
-.LM3295:
+.L2674:
+.LM3291:
 
 	mov	r4, #0x0
-	b	.L2689
-.L2679:
-.LM3296:
+	b	.L2688
+.L2678:
+.LM3292:
 
 	add	r0, r4, #0
 	bl	GetBattlerSide
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2678	@cond_branch
+	bne	.L2677	@cond_branch
 	add	r0, r5, #0
 	bl	GetPartyIdFromBattleSlot
 	lsl	r0, r0, #0x18
-	ldr	r2, .L2695
+	ldr	r2, .L2694
 	lsl	r1, r4, #0x1
 	add	r1, r1, r2
 	lsr	r0, r0, #0x18
 	ldrh	r1, [r1]
 	cmp	r0, r1
-	beq	.L2687	@cond_branch
-.LM3297:
+	beq	.L2686	@cond_branch
+.LM3293:
 
-.L2678:
+.L2677:
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.L2689:
-	ldr	r0, .L2695+0x4
+.L2688:
+	ldr	r0, .L2694+0x4
 	ldrb	r0, [r0]
 	cmp	r4, r0
-	bcc	.L2679	@cond_branch
-.LM3298:
+	bcc	.L2678	@cond_branch
+.LM3294:
 
 	mov	r7, #0x64
 	mov	r0, r5
 	mul	r0, r0, r7
-	ldr	r1, .L2695+0x8
+	ldr	r1, .L2694+0x8
 	mov	r8, r1
 	add	r6, r0, r1
 	add	r0, r6, #0
 	mov	r1, #0x2d
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2682	@cond_branch
-.LM3299:
+	beq	.L2681	@cond_branch
+.LM3295:
 
-	ldr	r0, .L2695+0xc
-	ldr	r1, .L2695+0x10
-.LM3300:
+	ldr	r0, .L2694+0xc
+	ldr	r1, .L2694+0x10
+.LM3296:
 
-	b	.L2688
-.L2696:
-	.align	2, 0
+	b	.L2687
 .L2695:
+	.align	2, 0
+.L2694:
 	.word	gBattlerPartyIndexes
 	.word	gBattlersCount
 	.word	gPlayerParty
 	.word	gStringVar4
 	.word	gText_EggCantBattle
-.L2682:
-.LM3301:
+.L2681:
+.LM3297:
 
 	add	r0, r5, #0
 	bl	GetPartyIdFromBattleSlot
-	ldr	r1, .L2697
+	ldr	r1, .L2696
 	ldr	r1, [r1]
 	add	r1, r1, #0x87
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	ldrb	r1, [r1]
 	cmp	r0, r1
-	bne	.L2683	@cond_branch
-.LM3302:
+	bne	.L2682	@cond_branch
+.LM3298:
 
-	ldr	r1, .L2697+0x4
+	ldr	r1, .L2696+0x4
 	add	r0, r6, #0
 	bl	GetMonNickname
-.LM3303:
+.LM3299:
 
-	ldr	r0, .L2697+0x8
-	ldr	r1, .L2697+0xc
-.LM3304:
+	ldr	r0, .L2696+0x8
+	ldr	r1, .L2696+0xc
+.LM3300:
 
-	b	.L2688
-.L2698:
-	.align	2, 0
+	b	.L2687
 .L2697:
+	.align	2, 0
+.L2696:
 	.word	gBattleStruct
 	.word	gStringVar1
 	.word	gStringVar4
 	.word	gText_PkmnAlreadySelected
-.L2683:
-.LM3305:
+.L2682:
+.LM3301:
 
-	ldr	r0, .L2699
+	ldr	r0, .L2698
 	ldrb	r0, [r0, #0xb]
 	cmp	r0, #0x4
-	bne	.L2684	@cond_branch
-.LM3306:
+	bne	.L2683	@cond_branch
+.LM3302:
 
 	bl	SetMonPreventsSwitchingString
-.LM3307:
+.LM3303:
 
-	b	.L2690
-.L2700:
-	.align	2, 0
+	b	.L2689
 .L2699:
+	.align	2, 0
+.L2698:
 	.word	gPartyMenu
-.L2684:
-.LM3308:
+.L2683:
+.LM3304:
 
 	cmp	r0, #0x2
-	beq	.L2685	@cond_branch
+	beq	.L2684	@cond_branch
 .LBB145:
-.LM3309:
+.LM3305:
 
 	add	r0, r5, #0
 	bl	GetPartyIdFromBattleSlot
-	ldr	r1, .L2701
+	ldr	r1, .L2700
 	strb	r0, [r1]
-.LM3310:
+.LM3306:
 
-	ldr	r1, .L2701+0x4
+	ldr	r1, .L2700+0x4
 	mov	r0, #0x1
 	strb	r0, [r1]
-.LM3311:
+.LM3307:
 
-	ldr	r1, .L2701+0x8
-	ldr	r0, .L2701+0xc
+	ldr	r1, .L2700+0x8
+	ldr	r0, .L2700+0xc
 	ldrb	r0, [r0]
 	lsl	r0, r0, #0x1
 	add	r0, r0, r1
@@ -30231,63 +30211,63 @@ TrySwitchInPokemon:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3312:
+.LM3308:
 
 	add	r0, r4, #0
 	add	r1, r5, #0
 	bl	SwitchPartyMonSlots
-.LM3313:
+.LM3309:
 
 	mov	r0, r4
 	mul	r0, r0, r7
 	add	r0, r0, r8
 	add	r1, r6, #0
 	bl	SwapPartyPokemon
-.LM3314:
+.LM3310:
 
 	mov	r0, #0x1
-	b	.L2686
-.L2702:
-	.align	2, 0
+	b	.L2685
 .L2701:
+	.align	2, 0
+.L2700:
 	.word	gSelectedMonPartyId
 	.word	gPartyMenuUseExitCallback
 	.word	gBattlerPartyIndexes
 	.word	gBattlerInMenuId
-.L2687:
-.LM3315:
+.L2686:
+.LM3311:
 
 	mov	r0, #0x64
 	mul	r0, r0, r5
-	ldr	r1, .L2703
+	ldr	r1, .L2702
 	add	r0, r0, r1
-	ldr	r1, .L2703+0x4
+	ldr	r1, .L2702+0x4
 	bl	GetMonNickname
-.LM3316:
+.LM3312:
 
-	ldr	r0, .L2703+0x8
-	ldr	r1, .L2703+0xc
-.LM3317:
+	ldr	r0, .L2702+0x8
+	ldr	r1, .L2702+0xc
+.LM3313:
 
-	b	.L2688
-.L2704:
-	.align	2, 0
+	b	.L2687
 .L2703:
+	.align	2, 0
+.L2702:
 	.word	gPlayerParty
 	.word	gStringVar1
 	.word	gStringVar4
 	.word	gText_PkmnAlreadyInBattle
-.LM3318:
+.LM3314:
 
 .LBE145:
-.L2685:
-.LM3319:
+.L2684:
+.LM3315:
 
-	ldr	r0, .L2705
+	ldr	r0, .L2704
 	ldrb	r0, [r0]
-.LM3320:
+.LM3316:
 
-	ldr	r1, .L2705+0x4
+	ldr	r1, .L2704+0x4
 	lsl	r0, r0, #0x1
 	add	r0, r0, r1
 	ldrb	r0, [r0]
@@ -30296,20 +30276,20 @@ TrySwitchInPokemon:
 	lsr	r0, r0, #0x18
 	mul	r0, r0, r7
 	add	r0, r0, r8
-	ldr	r1, .L2705+0x8
+	ldr	r1, .L2704+0x8
 	bl	GetMonNickname
-.LM3321:
+.LM3317:
 
-	ldr	r0, .L2705+0xc
-	ldr	r1, .L2705+0x10
-.L2688:
+	ldr	r0, .L2704+0xc
+	ldr	r1, .L2704+0x10
+.L2687:
 	bl	StringExpandPlaceholders
-.LM3322:
+.LM3318:
 
-.L2690:
+.L2689:
 	mov	r0, #0x0
-.L2686:
-.LM3323:
+.L2685:
+.LM3319:
 
 .LBE144:
 	pop	{r3}
@@ -30317,9 +30297,9 @@ TrySwitchInPokemon:
 	pop	{r4, r5, r6, r7}
 	pop	{r1}
 	bx	r1
-.L2706:
-	.align	2, 0
 .L2705:
+	.align	2, 0
+.L2704:
 	.word	gBattlerInMenuId
 	.word	gBattlerPartyIndexes
 	.word	gStringVar1
@@ -30334,26 +30314,26 @@ TrySwitchInPokemon:
 	.thumb_func
 BufferBattlePartyCurrentOrder:
 .LFB315:
-.LM3324:
+.LM3320:
 
 	push	{r4, lr}
-.LM3325:
+.LM3321:
 
-	ldr	r4, .L2708
+	ldr	r4, .L2707
 	bl	GetPlayerFlankId
 	add	r1, r0, #0
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
 	add	r0, r4, #0
 	bl	BufferBattlePartyOrder
-.LM3326:
+.LM3322:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2709:
-	.align	2, 0
 .L2708:
+	.align	2, 0
+.L2707:
 	.word	gBattlePartyCurrentOrder
 .LFE315:
 .Lfe315:
@@ -30363,126 +30343,126 @@ BufferBattlePartyCurrentOrder:
 	.thumb_func
 BufferBattlePartyOrder:
 .LFB316:
-.LM3327:
+.LM3323:
 
 	push	{r4, r5, r6, lr}
 	add	sp, sp, #-0x8
 	add	r6, r0, #0
 	lsl	r1, r1, #0x18
 	lsr	r4, r1, #0x18
-.LM3328:
+.LM3324:
 
 .LBB146:
-.LM3329:
+.LM3325:
 
 	bl	IsMultiBattle
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	bne	.L2711	@cond_branch
-.LM3330:
+	bne	.L2710	@cond_branch
+.LM3326:
 
 	cmp	r4, #0
-	beq	.L2712	@cond_branch
-.LM3331:
+	beq	.L2711	@cond_branch
+.LM3327:
 
 	mov	r0, #0x30
 	strb	r0, [r6]
-.LM3332:
+.LM3328:
 
 	mov	r0, #0x45
 	strb	r0, [r6, #0x1]
-.LM3333:
+.LM3329:
 
 	mov	r0, #0x12
 	strb	r0, [r6, #0x2]
-.LM3334:
+.LM3330:
 
-	b	.L2710
-.L2712:
-.LM3335:
+	b	.L2709
+.L2711:
+.LM3331:
 
 	mov	r0, #0x3
 	strb	r0, [r6]
-.LM3336:
+.LM3332:
 
 	mov	r0, #0x12
 	strb	r0, [r6, #0x1]
-.LM3337:
+.LM3333:
 
 	mov	r0, #0x45
 	strb	r0, [r6, #0x2]
-.LM3338:
+.LM3334:
 
-	b	.L2710
-.L2711:
-.LM3339:
+	b	.L2709
+.L2710:
+.LM3335:
 
 	bl	IsDoubleBattle
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2715	@cond_branch
-.LM3340:
+	bne	.L2714	@cond_branch
+.LM3336:
 
 	mov	r5, #0x1
-.LM3341:
+.LM3337:
 
 	mov	r0, #0x0
 	bl	GetBattlerAtPosition
 	mov	r2, sp
-	ldr	r1, .L2734
+	ldr	r1, .L2733
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x17
 	add	r0, r0, r1
 	ldrh	r0, [r0]
 	strb	r0, [r2]
-.LM3342:
+.LM3338:
 
 	mov	r4, #0x0
 	mov	r1, sp
-.L2719:
-.LM3343:
+.L2718:
+.LM3339:
 
 	ldrb	r0, [r1]
 	cmp	r4, r0
-	beq	.L2718	@cond_branch
-.LM3344:
+	beq	.L2717	@cond_branch
+.LM3340:
 
 	mov	r2, sp
 	add	r0, r2, r5
 	strb	r4, [r0]
-.LM3345:
+.LM3341:
 
 	add	r5, r5, #0x1
-.LM3346:
+.LM3342:
 
-.L2718:
+.L2717:
 	add	r4, r4, #0x1
 	cmp	r4, #0x5
-	ble	.L2719	@cond_branch
-.LM3347:
+	ble	.L2718	@cond_branch
+.LM3343:
 
-	b	.L2714
-.L2735:
-	.align	2, 0
+	b	.L2713
 .L2734:
+	.align	2, 0
+.L2733:
 	.word	gBattlerPartyIndexes
-.L2715:
-.LM3348:
+.L2714:
+.LM3344:
 
 	mov	r5, #0x2
-.LM3349:
+.LM3345:
 
 	mov	r0, #0x0
 	bl	GetBattlerAtPosition
 	mov	r1, sp
-	ldr	r4, .L2736
+	ldr	r4, .L2735
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x17
 	add	r0, r0, r4
 	ldrh	r0, [r0]
 	strb	r0, [r1]
-.LM3350:
+.LM3346:
 
 	mov	r0, #0x2
 	bl	GetBattlerAtPosition
@@ -30492,39 +30472,39 @@ BufferBattlePartyOrder:
 	add	r0, r0, r4
 	ldrh	r0, [r0]
 	strb	r0, [r1, #0x1]
-.LM3351:
+.LM3347:
 
 	mov	r4, #0x0
-.L2726:
-.LM3352:
+.L2725:
+.LM3348:
 
 	ldrb	r0, [r1]
 	cmp	r4, r0
-	beq	.L2725	@cond_branch
+	beq	.L2724	@cond_branch
 	ldrb	r0, [r1, #0x1]
 	cmp	r4, r0
-	beq	.L2725	@cond_branch
-.LM3353:
+	beq	.L2724	@cond_branch
+.LM3349:
 
 	mov	r2, sp
 	add	r0, r2, r5
 	strb	r4, [r0]
-.LM3354:
+.LM3350:
 
 	add	r5, r5, #0x1
-.LM3355:
+.LM3351:
 
-.L2725:
+.L2724:
 	add	r4, r4, #0x1
 	cmp	r4, #0x5
-	ble	.L2726	@cond_branch
-.L2714:
-.LM3356:
+	ble	.L2725	@cond_branch
+.L2713:
+.LM3352:
 
 	mov	r4, #0x0
 	mov	r3, sp
-.L2732:
-.LM3357:
+.L2731:
+.LM3353:
 
 	add	r0, r6, r4
 	ldrb	r1, [r3]
@@ -30532,23 +30512,23 @@ BufferBattlePartyOrder:
 	ldrb	r2, [r3, #0x1]
 	orr	r1, r1, r2
 	strb	r1, [r0]
-.LM3358:
+.LM3354:
 
 	add	r3, r3, #0x2
 	add	r4, r4, #0x1
 	cmp	r4, #0x2
-	ble	.L2732	@cond_branch
-.LM3359:
+	ble	.L2731	@cond_branch
+.LM3355:
 
 .LBE146:
-.L2710:
+.L2709:
 	add	sp, sp, #0x8
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2737:
-	.align	2, 0
 .L2736:
+	.align	2, 0
+.L2735:
 	.word	gBattlerPartyIndexes
 .LFE316:
 .Lfe316:
@@ -30559,7 +30539,7 @@ BufferBattlePartyOrder:
 	.thumb_func
 BufferBattlePartyCurrentOrderBySide:
 .LFB317:
-.LM3360:
+.LM3356:
 
 	push	{lr}
 	add	r2, r0, #0
@@ -30567,22 +30547,22 @@ BufferBattlePartyCurrentOrderBySide:
 	lsr	r2, r2, #0x18
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
-.LM3361:
+.LM3357:
 
-	ldr	r0, .L2739
+	ldr	r0, .L2738
 	lsl	r3, r2, #0x1
 	add	r3, r3, r2
 	add	r3, r3, #0x60
 	ldr	r0, [r0]
 	add	r0, r0, r3
 	bl	BufferBattlePartyOrderBySide
-.LM3362:
+.LM3358:
 
 	pop	{r0}
 	bx	r0
-.L2740:
-	.align	2, 0
 .L2739:
+	.align	2, 0
+.L2738:
 	.word	gBattleStruct
 .LFE317:
 .Lfe317:
@@ -30592,7 +30572,7 @@ BufferBattlePartyCurrentOrderBySide:
 	.thumb_func
 BufferBattlePartyOrderBySide:
 .LFB318:
-.LM3363:
+.LM3359:
 
 	push	{r4, r5, r6, r7, lr}
 	add	sp, sp, #-0x8
@@ -30602,183 +30582,183 @@ BufferBattlePartyOrderBySide:
 	lsr	r7, r1, #0x18
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3364:
+.LM3360:
 
 .LBB147:
-.LM3365:
+.LM3361:
 
 	bl	GetBattlerSide
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2742	@cond_branch
-.LM3366:
+	bne	.L2741	@cond_branch
+.LM3362:
 
 	mov	r0, #0x0
 	bl	GetBattlerAtPosition
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3367:
+.LM3363:
 
 	mov	r0, #0x2
-.LM3368:
+.LM3364:
 
-	b	.L2767
-.L2742:
-.LM3369:
+	b	.L2766
+.L2741:
+.LM3365:
 
 	mov	r0, #0x1
 	bl	GetBattlerAtPosition
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3370:
+.LM3366:
 
 	mov	r0, #0x3
-.L2767:
+.L2766:
 	bl	GetBattlerAtPosition
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
-.LM3371:
+.LM3367:
 
 	bl	IsMultiBattle
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x1
-	bne	.L2744	@cond_branch
-.LM3372:
+	bne	.L2743	@cond_branch
+.LM3368:
 
 	cmp	r7, #0
-	beq	.L2745	@cond_branch
-.LM3373:
+	beq	.L2744	@cond_branch
+.LM3369:
 
 	mov	r0, #0x30
 	strb	r0, [r5]
-.LM3374:
+.LM3370:
 
 	mov	r0, #0x45
 	strb	r0, [r5, #0x1]
-.LM3375:
+.LM3371:
 
 	mov	r0, #0x12
 	strb	r0, [r5, #0x2]
-.LM3376:
+.LM3372:
 
-	b	.L2741
-.L2745:
-.LM3377:
+	b	.L2740
+.L2744:
+.LM3373:
 
 	mov	r0, #0x3
 	strb	r0, [r5]
-.LM3378:
+.LM3374:
 
 	mov	r0, #0x12
 	strb	r0, [r5, #0x1]
-.LM3379:
+.LM3375:
 
 	mov	r0, #0x45
 	strb	r0, [r5, #0x2]
-.LM3380:
+.LM3376:
 
-	b	.L2741
-.L2744:
-.LM3381:
+	b	.L2740
+.L2743:
+.LM3377:
 
 	bl	IsDoubleBattle
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	bne	.L2748	@cond_branch
-.LM3382:
+	bne	.L2747	@cond_branch
+.LM3378:
 
 	mov	r3, #0x1
-.LM3383:
+.LM3379:
 
 	mov	r2, sp
-	ldr	r1, .L2768
+	ldr	r1, .L2767
 	lsl	r0, r4, #0x1
 	add	r0, r0, r1
 	ldrh	r0, [r0]
 	strb	r0, [r2]
-.LM3384:
+.LM3380:
 
 	mov	r4, #0x0
 	mov	r1, sp
-.L2752:
-.LM3385:
+.L2751:
+.LM3381:
 
 	ldrb	r0, [r1]
 	cmp	r4, r0
-	beq	.L2751	@cond_branch
-.LM3386:
+	beq	.L2750	@cond_branch
+.LM3382:
 
 	mov	r2, sp
 	add	r0, r2, r3
 	strb	r4, [r0]
-.LM3387:
+.LM3383:
 
 	add	r3, r3, #0x1
-.LM3388:
+.LM3384:
 
-.L2751:
+.L2750:
 	add	r4, r4, #0x1
 	cmp	r4, #0x5
-	ble	.L2752	@cond_branch
-.LM3389:
+	ble	.L2751	@cond_branch
+.LM3385:
 
-	b	.L2747
-.L2769:
-	.align	2, 0
+	b	.L2746
 .L2768:
+	.align	2, 0
+.L2767:
 	.word	gBattlerPartyIndexes
-.L2748:
-.LM3390:
+.L2747:
+.LM3386:
 
 	mov	r3, #0x2
-.LM3391:
+.LM3387:
 
 	mov	r1, sp
-	ldr	r2, .L2770
+	ldr	r2, .L2769
 	lsl	r0, r4, #0x1
 	add	r0, r0, r2
 	ldrh	r0, [r0]
 	strb	r0, [r1]
-.LM3392:
+.LM3388:
 
 	lsl	r0, r6, #0x1
 	add	r0, r0, r2
 	ldrh	r0, [r0]
 	strb	r0, [r1, #0x1]
-.LM3393:
+.LM3389:
 
 	mov	r4, #0x0
-.L2759:
-.LM3394:
+.L2758:
+.LM3390:
 
 	ldrb	r0, [r1]
 	cmp	r4, r0
-	beq	.L2758	@cond_branch
+	beq	.L2757	@cond_branch
 	ldrb	r0, [r1, #0x1]
 	cmp	r4, r0
-	beq	.L2758	@cond_branch
-.LM3395:
+	beq	.L2757	@cond_branch
+.LM3391:
 
 	mov	r2, sp
 	add	r0, r2, r3
 	strb	r4, [r0]
-.LM3396:
+.LM3392:
 
 	add	r3, r3, #0x1
-.LM3397:
+.LM3393:
 
-.L2758:
+.L2757:
 	add	r4, r4, #0x1
 	cmp	r4, #0x5
-	ble	.L2759	@cond_branch
-.L2747:
-.LM3398:
+	ble	.L2758	@cond_branch
+.L2746:
+.LM3394:
 
 	mov	r4, #0x0
 	mov	r3, sp
-.L2765:
-.LM3399:
+.L2764:
+.LM3395:
 
 	add	r0, r5, r4
 	ldrb	r1, [r3]
@@ -30786,23 +30766,23 @@ BufferBattlePartyOrderBySide:
 	ldrb	r2, [r3, #0x1]
 	orr	r1, r1, r2
 	strb	r1, [r0]
-.LM3400:
+.LM3396:
 
 	add	r3, r3, #0x2
 	add	r4, r4, #0x1
 	cmp	r4, #0x2
-	ble	.L2765	@cond_branch
-.LM3401:
+	ble	.L2764	@cond_branch
+.LM3397:
 
 .LBE147:
-.L2741:
+.L2740:
 	add	sp, sp, #0x8
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2771:
-	.align	2, 0
 .L2770:
+	.align	2, 0
+.L2769:
 	.word	gBattlerPartyIndexes
 .LFE318:
 .Lfe318:
@@ -30813,7 +30793,7 @@ BufferBattlePartyOrderBySide:
 	.thumb_func
 SwitchPartyOrderLinkMulti:
 .LFB319:
-.LM3402:
+.LM3398:
 
 	push	{r4, r5, r6, r7, lr}
 	add	sp, sp, #-0x8
@@ -30823,113 +30803,113 @@ SwitchPartyOrderLinkMulti:
 	lsr	r5, r1, #0x18
 	lsl	r2, r2, #0x18
 	lsr	r6, r2, #0x18
-.LM3403:
+.LM3399:
 
 .LBB148:
-.LM3404:
+.LM3400:
 
 	mov	r7, #0x0
-.LM3405:
+.LM3401:
 
 	bl	IsMultiBattle
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2773	@cond_branch
-.LM3406:
+	beq	.L2772	@cond_branch
+.LM3402:
 
-	ldr	r0, .L2786
+	ldr	r0, .L2785
 	lsl	r1, r4, #0x1
 	add	r1, r1, r4
 	add	r1, r1, #0x60
 	ldr	r0, [r0]
 	add	r4, r0, r1
-.LM3407:
+.LM3403:
 
 	mov	r2, #0x0
 	add	r6, r6, sp
 	mov	ip, r6
 	mov	r6, #0xf
 	mov	r3, sp
-.L2777:
-.LM3408:
+.L2776:
+.LM3404:
 
 	add	r1, r4, r2
 	ldrb	r0, [r1]
 	lsr	r0, r0, #0x4
 	strb	r0, [r3]
-.LM3409:
+.LM3405:
 
 	add	r3, r3, #0x1
-.LM3410:
+.LM3406:
 
 	ldrb	r1, [r1]
 	add	r0, r6, #0
 	and	r0, r0, r1
 	strb	r0, [r3]
-.LM3411:
+.LM3407:
 
 	add	r3, r3, #0x1
 	add	r2, r2, #0x1
 	cmp	r2, #0x2
-	ble	.L2777	@cond_branch
-.LM3412:
+	ble	.L2776	@cond_branch
+.LM3408:
 
 	mov	r0, ip
 	ldrb	r3, [r0]
-.LM3413:
+.LM3409:
 
 	mov	r2, #0x0
-.LM3414:
+.LM3410:
 
 	mov	r0, sp
 	ldrb	r0, [r0]
 	cmp	r0, r5
-	bne	.L2781	@cond_branch
-.LM3415:
+	bne	.L2780	@cond_branch
+.LM3411:
 
 	mov	r0, sp
 	ldrb	r7, [r0]
-.LM3416:
+.LM3412:
 
 	strb	r3, [r0]
-.LM3417:
+.LM3413:
 
-	b	.L2780
-.L2787:
-	.align	2, 0
+	b	.L2779
 .L2786:
+	.align	2, 0
+.L2785:
 	.word	gBattleStruct
-.LM3418:
+.LM3414:
 
-.L2781:
+.L2780:
 	add	r2, r2, #0x1
 	cmp	r2, #0x5
-	bgt	.L2780	@cond_branch
-.LM3419:
+	bgt	.L2779	@cond_branch
+.LM3415:
 
 	mov	r0, sp
 	add	r1, r0, r2
 	ldrb	r0, [r1]
 	cmp	r0, r5
-	bne	.L2781	@cond_branch
-.LM3420:
+	bne	.L2780	@cond_branch
+.LM3416:
 
 	add	r7, r0, #0
-.LM3421:
+.LM3417:
 
 	strb	r3, [r1]
-.LM3422:
+.LM3418:
 
-.L2780:
-.LM3423:
+.L2779:
+.LM3419:
 
 	cmp	r2, #0x6
-	beq	.L2773	@cond_branch
-.LM3424:
+	beq	.L2772	@cond_branch
+.LM3420:
 
 	mov	r0, ip
 	strb	r7, [r0]
-.LM3425:
+.LM3421:
 
 	mov	r0, sp
 	ldrb	r0, [r0]
@@ -30938,7 +30918,7 @@ SwitchPartyOrderLinkMulti:
 	ldrb	r1, [r1, #0x1]
 	orr	r0, r0, r1
 	strb	r0, [r4]
-.LM3426:
+.LM3422:
 
 	mov	r0, sp
 	ldrb	r0, [r0, #0x2]
@@ -30947,7 +30927,7 @@ SwitchPartyOrderLinkMulti:
 	ldrb	r1, [r1, #0x3]
 	orr	r0, r0, r1
 	strb	r0, [r4, #0x1]
-.LM3427:
+.LM3423:
 
 	mov	r0, sp
 	ldrb	r0, [r0, #0x4]
@@ -30956,8 +30936,8 @@ SwitchPartyOrderLinkMulti:
 	ldrb	r1, [r1, #0x5]
 	orr	r0, r0, r1
 	strb	r0, [r4, #0x2]
-.L2773:
-.LM3428:
+.L2772:
+.LM3424:
 
 .LBE148:
 	add	sp, sp, #0x8
@@ -30972,54 +30952,54 @@ SwitchPartyOrderLinkMulti:
 	.thumb_func
 GetPartyIdFromBattleSlot:
 .LFB320:
-.LM3429:
+.LM3425:
 
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-.LM3430:
+.LM3426:
 
 .LBB149:
 	mov	r1, #0x1
 	and	r1, r1, r2
-.LM3431:
+.LM3427:
 
 	lsr	r2, r0, #0x19
-.LM3432:
+.LM3428:
 
 	cmp	r1, #0
-	beq	.L2789	@cond_branch
-.LM3433:
+	beq	.L2788	@cond_branch
+.LM3429:
 
-	ldr	r0, .L2791
+	ldr	r0, .L2790
 	add	r0, r2, r0
 	ldrb	r0, [r0]
 	mov	r1, #0xf
 	and	r1, r1, r0
-	b	.L2790
-.L2792:
-	.align	2, 0
+	b	.L2789
 .L2791:
+	.align	2, 0
+.L2790:
 	.word	gBattlePartyCurrentOrder
-.L2789:
-.LM3434:
+.L2788:
+.LM3430:
 
-	ldr	r0, .L2793
+	ldr	r0, .L2792
 	add	r0, r2, r0
 	ldrb	r0, [r0]
 	lsr	r1, r0, #0x4
-.L2790:
-.LM3435:
+.L2789:
+.LM3431:
 
 	add	r0, r1, #0
-.LM3436:
+.LM3432:
 
 .LBE149:
 	pop	{r1}
 	bx	r1
-.L2794:
-	.align	2, 0
 .L2793:
+	.align	2, 0
+.L2792:
 	.word	gBattlePartyCurrentOrder
 .LFE320:
 .Lfe320:
@@ -31029,43 +31009,43 @@ GetPartyIdFromBattleSlot:
 	.thumb_func
 SetPartyIdAtBattleSlot:
 .LFB321:
-.LM3437:
+.LM3433:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r3, r0, #0x18
 	lsl	r1, r1, #0x18
 	lsr	r4, r1, #0x18
-.LM3438:
+.LM3434:
 
 .LBB150:
 	mov	r1, #0x1
 	and	r1, r1, r3
-.LM3439:
+.LM3435:
 
 	lsr	r3, r0, #0x19
-.LM3440:
+.LM3436:
 
 	cmp	r1, #0
-	beq	.L2796	@cond_branch
-.LM3441:
+	beq	.L2795	@cond_branch
+.LM3437:
 
-	ldr	r0, .L2798
+	ldr	r0, .L2797
 	add	r0, r3, r0
 	ldrb	r2, [r0]
 	mov	r1, #0xf0
 	and	r1, r1, r2
 	orr	r1, r1, r4
 	strb	r1, [r0]
-	b	.L2797
-.L2799:
-	.align	2, 0
+	b	.L2796
 .L2798:
+	.align	2, 0
+.L2797:
 	.word	gBattlePartyCurrentOrder
-.L2796:
-.LM3442:
+.L2795:
+.LM3438:
 
-	ldr	r2, .L2800
+	ldr	r2, .L2799
 	add	r2, r3, r2
 	ldrb	r1, [r2]
 	mov	r0, #0xf
@@ -31073,16 +31053,16 @@ SetPartyIdAtBattleSlot:
 	lsl	r1, r4, #0x4
 	orr	r0, r0, r1
 	strb	r0, [r2]
-.L2797:
-.LM3443:
+.L2796:
+.LM3439:
 
 .LBE150:
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2801:
-	.align	2, 0
 .L2800:
+	.align	2, 0
+.L2799:
 	.word	gBattlePartyCurrentOrder
 .LFE321:
 .Lfe321:
@@ -31093,7 +31073,7 @@ SetPartyIdAtBattleSlot:
 	.thumb_func
 SwitchPartyMonSlots:
 .LFB322:
-.LM3444:
+.LM3440:
 
 	push	{r4, r5, r6, lr}
 	add	r5, r0, #0
@@ -31102,7 +31082,7 @@ SwitchPartyMonSlots:
 	lsr	r5, r5, #0x18
 	lsl	r6, r6, #0x18
 	lsr	r6, r6, #0x18
-.LM3445:
+.LM3441:
 
 .LBB151:
 	add	r0, r5, #0
@@ -31110,7 +31090,7 @@ SwitchPartyMonSlots:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3446:
+.LM3442:
 
 	add	r0, r6, #0
 	bl	GetPartyIdFromBattleSlot
@@ -31119,12 +31099,12 @@ SwitchPartyMonSlots:
 	lsr	r1, r1, #0x18
 	add	r0, r5, #0
 	bl	SetPartyIdAtBattleSlot
-.LM3447:
+.LM3443:
 
 	add	r0, r6, #0
 	add	r1, r4, #0
 	bl	SetPartyIdAtBattleSlot
-.LM3448:
+.LM3444:
 
 .LBE151:
 	pop	{r4, r5, r6}
@@ -31139,50 +31119,50 @@ SwitchPartyMonSlots:
 	.thumb_func
 GetPartyIdFromBattlePartyId:
 .LFB323:
-.LM3449:
+.LM3445:
 
 	push	{r4, r5, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3450:
+.LM3446:
 
 .LBB152:
-.LM3451:
+.LM3447:
 
 	mov	r3, #0x0
 	mov	r2, #0x0
-	ldr	r5, .L2814
-.L2807:
-.LM3452:
+	ldr	r5, .L2813
+.L2806:
+.LM3448:
 
 	add	r0, r3, r5
 	ldrb	r1, [r0]
 	lsr	r0, r1, #0x4
 	cmp	r0, r4
-	beq	.L2813	@cond_branch
-.LM3453:
+	beq	.L2812	@cond_branch
+.LM3449:
 
 	add	r0, r2, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-.LM3454:
+.LM3450:
 
 	mov	r0, #0xf
 	and	r0, r0, r1
 	cmp	r0, r4
-	bne	.L2806	@cond_branch
-.LM3455:
+	bne	.L2805	@cond_branch
+.LM3451:
 
-.L2813:
+.L2812:
 	add	r0, r2, #0
-	b	.L2812
-.L2815:
-	.align	2, 0
+	b	.L2811
 .L2814:
+	.align	2, 0
+.L2813:
 	.word	gBattlePartyCurrentOrder
-.LM3456:
+.LM3452:
 
-.L2806:
+.L2805:
 	add	r0, r2, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
@@ -31190,12 +31170,12 @@ GetPartyIdFromBattlePartyId:
 	lsl	r0, r0, #0x18
 	lsr	r3, r0, #0x18
 	cmp	r3, #0x2
-	bls	.L2807	@cond_branch
-.LM3457:
+	bls	.L2806	@cond_branch
+.LM3453:
 
 	mov	r0, #0x0
-.L2812:
-.LM3458:
+.L2811:
+.LM3454:
 
 .LBE152:
 	pop	{r4, r5}
@@ -31209,10 +31189,10 @@ GetPartyIdFromBattlePartyId:
 	.thumb_func
 UpdatePartyToBattleOrder:
 .LFB324:
-.LM3459:
+.LM3455:
 
 	push	{r4, r5, r6, lr}
-.LM3460:
+.LM3456:
 
 .LBB153:
 	mov	r4, #0x96
@@ -31220,50 +31200,50 @@ UpdatePartyToBattleOrder:
 	add	r0, r4, #0
 	bl	Alloc
 	add	r5, r0, #0
-.LM3461:
+.LM3457:
 
-	ldr	r1, .L2822
+	ldr	r1, .L2821
 	add	r2, r4, #0
 	bl	memcpy
-.LM3462:
+.LM3458:
 
 	mov	r4, #0x0
 	mov	r6, #0x64
-.L2820:
-.LM3463:
+.L2819:
+.LM3459:
 
 	add	r0, r4, #0
 	bl	GetPartyIdFromBattlePartyId
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mul	r0, r0, r6
-	ldr	r1, .L2822
+	ldr	r1, .L2821
 	add	r0, r0, r1
 	mov	r1, r4
 	mul	r1, r1, r6
 	add	r1, r1, r5
 	mov	r2, #0x64
 	bl	memcpy
-.LM3464:
+.LM3460:
 
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0x5
-	bls	.L2820	@cond_branch
-.LM3465:
+	bls	.L2819	@cond_branch
+.LM3461:
 
 	add	r0, r5, #0
 	bl	Free
-.LM3466:
+.LM3462:
 
 .LBE153:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2823:
-	.align	2, 0
 .L2822:
+	.align	2, 0
+.L2821:
 	.word	gPlayerParty
 .LFE324:
 .Lfe324:
@@ -31273,10 +31253,10 @@ UpdatePartyToBattleOrder:
 	.thumb_func
 UpdatePartyToFieldOrder:
 .LFB325:
-.LM3467:
+.LM3463:
 
 	push	{r4, r5, r6, lr}
-.LM3468:
+.LM3464:
 
 .LBB154:
 	mov	r4, #0x96
@@ -31284,50 +31264,50 @@ UpdatePartyToFieldOrder:
 	add	r0, r4, #0
 	bl	Alloc
 	add	r5, r0, #0
-.LM3469:
+.LM3465:
 
-	ldr	r1, .L2830
+	ldr	r1, .L2829
 	add	r2, r4, #0
 	bl	memcpy
-.LM3470:
+.LM3466:
 
 	mov	r4, #0x0
 	mov	r6, #0x64
-.L2828:
-.LM3471:
+.L2827:
+.LM3467:
 
 	add	r0, r4, #0
 	bl	GetPartyIdFromBattleSlot
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	mul	r0, r0, r6
-	ldr	r1, .L2830
+	ldr	r1, .L2829
 	add	r0, r0, r1
 	mov	r1, r4
 	mul	r1, r1, r6
 	add	r1, r1, r5
 	mov	r2, #0x64
 	bl	memcpy
-.LM3472:
+.LM3468:
 
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0x5
-	bls	.L2828	@cond_branch
-.LM3473:
+	bls	.L2827	@cond_branch
+.LM3469:
 
 	add	r0, r5, #0
 	bl	Free
-.LM3474:
+.LM3470:
 
 .LBE154:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2831:
-	.align	2, 0
 .L2830:
+	.align	2, 0
+.L2829:
 	.word	gPlayerParty
 .LFE325:
 .Lfe325:
@@ -31337,22 +31317,22 @@ UpdatePartyToFieldOrder:
 	.thumb_func
 SwitchAliveMonIntoLeadSlot:
 .LFB326:
-.LM3475:
+.LM3471:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
-.LM3476:
+.LM3472:
 
 .LBB155:
-.LM3477:
+.LM3473:
 
 	mov	r6, #0x1
 	mov	r7, #0x64
-	ldr	r0, .L2839
+	ldr	r0, .L2838
 	mov	r8, r0
-.L2836:
-.LM3478:
+.L2835:
+.LM3474:
 
 	add	r0, r6, #0
 	bl	GetPartyIdFromBattleSlot
@@ -31361,54 +31341,54 @@ SwitchAliveMonIntoLeadSlot:
 	mul	r0, r0, r7
 	mov	r1, r8
 	add	r5, r0, r1
-.LM3479:
+.LM3475:
 
 	add	r0, r5, #0
 	mov	r1, #0xb
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2835	@cond_branch
+	beq	.L2834	@cond_branch
 	add	r0, r5, #0
 	mov	r1, #0x39
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2835	@cond_branch
-.LM3480:
+	beq	.L2834	@cond_branch
+.LM3476:
 
 	mov	r0, #0x0
 	bl	GetPartyIdFromBattleSlot
 	add	r4, r0, #0
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3481:
+.LM3477:
 
 	mov	r0, #0x0
 	add	r1, r6, #0
 	bl	SwitchPartyMonSlots
-.LM3482:
+.LM3478:
 
 	mov	r0, r4
 	mul	r0, r0, r7
 	add	r0, r0, r8
 	add	r1, r5, #0
 	bl	SwapPartyPokemon
-.LM3483:
+.LM3479:
 
-	b	.L2834
-.L2840:
-	.align	2, 0
+	b	.L2833
 .L2839:
+	.align	2, 0
+.L2838:
 	.word	gPlayerParty
-.LM3484:
+.LM3480:
 
-.L2835:
+.L2834:
 	add	r0, r6, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
 	cmp	r6, #0x5
-	bls	.L2836	@cond_branch
-.L2834:
-.LM3485:
+	bls	.L2835	@cond_branch
+.L2833:
+.LM3481:
 
 .LBE155:
 	pop	{r3}
@@ -31424,20 +31404,20 @@ SwitchAliveMonIntoLeadSlot:
 	.thumb_func
 CB2_SetUpExitToBattleScreen:
 .LFB327:
-.LM3486:
+.LM3482:
 
 	push	{lr}
-.LM3487:
+.LM3483:
 
-	ldr	r0, .L2842
+	ldr	r0, .L2841
 	bl	SetMainCallback2
-.LM3488:
+.LM3484:
 
 	pop	{r0}
 	bx	r0
-.L2843:
-	.align	2, 0
 .L2842:
+	.align	2, 0
+.L2841:
 	.word	CB2_SetUpReshowBattleScreenAfterMenu
 .LFE327:
 .Lfe327:
@@ -31448,17 +31428,17 @@ CB2_SetUpExitToBattleScreen:
 	.thumb_func
 ShowPartyMenuToShowcaseMultiBattleParty:
 .LFB328:
-.LM3489:
+.LM3485:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3490:
+.LM3486:
 
 	mov	r0, #0x7f
 	str	r0, [sp]
-	ldr	r0, .L2845
+	ldr	r0, .L2844
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2845+0x4
+	ldr	r0, .L2844+0x4
 	ldr	r0, [r0, #0x8]
 	str	r0, [sp, #0x8]
 	mov	r0, #0x5
@@ -31466,14 +31446,14 @@ ShowPartyMenuToShowcaseMultiBattleParty:
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3491:
+.LM3487:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2846:
-	.align	2, 0
 .L2845:
+	.align	2, 0
+.L2844:
 	.word	Task_InitMultiPartnerPartySlideIn
 	.word	gMain
 .LFE328:
@@ -31484,14 +31464,14 @@ ShowPartyMenuToShowcaseMultiBattleParty:
 	.thumb_func
 Task_InitMultiPartnerPartySlideIn:
 .LFB329:
-.LM3492:
+.LM3488:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3493:
+.LM3489:
 
-	ldr	r1, .L2848
+	ldr	r1, .L2847
 	lsl	r4, r0, #0x2
 	add	r4, r4, r0
 	lsl	r4, r4, #0x3
@@ -31499,28 +31479,28 @@ Task_InitMultiPartnerPartySlideIn:
 	mov	r1, #0x80
 	lsl	r1, r1, #0x1
 	strh	r1, [r4, #0x8]
-.LM3494:
+.LM3490:
 
 	bl	SlideMultiPartyMenuBoxSpritesOneStep
-.LM3495:
+.LM3491:
 
 	mov	r1, #0x80
 	lsl	r1, r1, #0x9
 	mov	r0, #0x2
 	mov	r2, #0x0
 	bl	ChangeBgX
-.LM3496:
+.LM3492:
 
-	ldr	r0, .L2848+0x4
+	ldr	r0, .L2847+0x4
 	str	r0, [r4]
-.LM3497:
+.LM3493:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2849:
-	.align	2, 0
 .L2848:
+	.align	2, 0
+.L2847:
 	.word	gTasks
 	.word	Task_MultiPartnerPartySlideIn
 .LFE329:
@@ -31531,94 +31511,94 @@ Task_InitMultiPartnerPartySlideIn:
 	.thumb_func
 Task_MultiPartnerPartySlideIn:
 .LFB330:
-.LM3498:
+.LM3494:
 
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3499:
+.LM3495:
 
 .LBB156:
 	lsl	r6, r5, #0x2
 	add	r0, r6, r5
 	lsl	r0, r0, #0x3
-	ldr	r1, .L2859
+	ldr	r1, .L2858
 	add	r4, r0, r1
-.LM3500:
+.LM3496:
 
-	ldr	r0, .L2859+0x4
+	ldr	r0, .L2858+0x4
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	cmp	r0, #0
-	bne	.L2851	@cond_branch
-.LM3501:
+	bne	.L2850	@cond_branch
+.LM3497:
 
 	ldrh	r0, [r4]
 	sub	r0, r0, #0x8
 	strh	r0, [r4]
-.LM3502:
+.LM3498:
 
 	add	r0, r5, #0
 	bl	SlideMultiPartyMenuBoxSpritesOneStep
-.LM3503:
+.LM3499:
 
 	mov	r1, #0x0
 	ldrsh	r0, [r4, r1]
 	cmp	r0, #0
-	bne	.L2851	@cond_branch
-.LM3504:
+	bne	.L2850	@cond_branch
+.LM3500:
 
 	mov	r4, #0x3
-	ldr	r7, .L2859+0x8
-.L2856:
-.LM3505:
+	ldr	r7, .L2858+0x8
+.L2855:
+.LM3501:
 
 	sub	r0, r4, #0x3
 	lsl	r0, r0, #0x5
 	add	r0, r0, r7
 	ldrh	r0, [r0]
 	cmp	r0, #0
-	beq	.L2855	@cond_branch
-.LM3506:
+	beq	.L2854	@cond_branch
+.LM3502:
 
-	ldr	r0, .L2859+0xc
+	ldr	r0, .L2858+0xc
 	ldr	r1, [r0]
 	lsl	r0, r4, #0x4
 	add	r0, r0, r1
 	ldrb	r0, [r0, #0x9]
 	mov	r1, #0x0
 	bl	AnimateSelectedPartyIcon
-.LM3507:
+.LM3503:
 
-.L2855:
+.L2854:
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0x5
-	bls	.L2856	@cond_branch
-.LM3508:
+	bls	.L2855	@cond_branch
+.LM3504:
 
 	mov	r0, #0x78
 	bl	PlaySE
-.LM3509:
+.LM3505:
 
-	ldr	r0, .L2859+0x10
+	ldr	r0, .L2858+0x10
 	add	r1, r6, r5
 	lsl	r1, r1, #0x3
 	add	r1, r1, r0
-	ldr	r0, .L2859+0x14
+	ldr	r0, .L2858+0x14
 	str	r0, [r1]
-.L2851:
-.LM3510:
+.L2850:
+.LM3506:
 
 .LBE156:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2860:
-	.align	2, 0
 .L2859:
+	.align	2, 0
+.L2858:
 	.word	gTasks+0x8
 	.word	gPaletteFade
 	.word	gMultiPartnerParty
@@ -31633,20 +31613,20 @@ Task_MultiPartnerPartySlideIn:
 	.thumb_func
 Task_WaitAfterMultiPartnerPartySlideIn:
 .LFB331:
-.LM3511:
+.LM3507:
 
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
-.LM3512:
+.LM3508:
 
 .LBB157:
 	lsl	r0, r2, #0x2
 	add	r0, r0, r2
 	lsl	r0, r0, #0x3
-	ldr	r1, .L2863
+	ldr	r1, .L2862
 	add	r0, r0, r1
-.LM3513:
+.LM3509:
 
 	ldrh	r1, [r0]
 	add	r1, r1, #0x1
@@ -31655,20 +31635,20 @@ Task_WaitAfterMultiPartnerPartySlideIn:
 	mov	r0, #0x80
 	lsl	r0, r0, #0x11
 	cmp	r1, r0
-	bne	.L2862	@cond_branch
-.LM3514:
+	bne	.L2861	@cond_branch
+.LM3510:
 
 	add	r0, r2, #0
 	bl	Task_ClosePartyMenu
-.L2862:
-.LM3515:
+.L2861:
+.LM3511:
 
 .LBE157:
 	pop	{r0}
 	bx	r0
-.L2864:
-	.align	2, 0
 .L2863:
+	.align	2, 0
+.L2862:
 	.word	gTasks+0x8
 .LFE331:
 .Lfe331:
@@ -31678,33 +31658,33 @@ Task_WaitAfterMultiPartnerPartySlideIn:
 	.thumb_func
 MoveMultiPartyMenuBoxSprite:
 .LFB332:
-.LM3516:
+.LM3512:
 
 	push	{lr}
 	lsl	r0, r0, #0x18
 	lsr	r2, r0, #0x18
 	lsl	r1, r1, #0x10
-.LM3517:
+.LM3513:
 
 	lsr	r3, r1, #0x10
 	cmp	r1, #0
-	blt	.L2866	@cond_branch
-.LM3518:
+	blt	.L2865	@cond_branch
+.LM3514:
 
-	ldr	r1, .L2867
+	ldr	r1, .L2866
 	lsl	r0, r2, #0x4
 	add	r0, r0, r2
 	lsl	r0, r0, #0x2
 	add	r0, r0, r1
 	strh	r3, [r0, #0x24]
-.L2866:
-.LM3519:
+.L2865:
+.LM3515:
 
 	pop	{r0}
 	bx	r0
-.L2868:
-	.align	2, 0
 .L2867:
+	.align	2, 0
+.L2866:
 	.word	gSprites
 .LFE332:
 .Lfe332:
@@ -31714,34 +31694,34 @@ MoveMultiPartyMenuBoxSprite:
 	.thumb_func
 SlideMultiPartyMenuBoxSpritesOneStep:
 .LFB333:
-.LM3520:
+.LM3516:
 
 	push	{r4, r5, r6, r7, lr}
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3521:
+.LM3517:
 
 .LBB158:
 	lsl	r1, r0, #0x2
 	add	r1, r1, r0
 	lsl	r1, r1, #0x3
-	ldr	r0, .L2876
+	ldr	r0, .L2875
 	add	r5, r1, r0
-.LM3522:
+.LM3518:
 
 	mov	r6, #0x3
-	ldr	r7, .L2876+0x4
-.L2873:
-.LM3523:
+	ldr	r7, .L2875+0x4
+.L2872:
+.LM3519:
 
-	ldr	r0, .L2876+0x8
+	ldr	r0, .L2875+0x8
 	sub	r1, r6, #0x3
 	lsl	r1, r1, #0x5
 	add	r1, r1, r0
 	ldrh	r0, [r1]
 	cmp	r0, #0
-	beq	.L2872	@cond_branch
-.LM3524:
+	beq	.L2871	@cond_branch
+.LM3520:
 
 	ldr	r0, [r7]
 	lsl	r4, r6, #0x4
@@ -31752,7 +31732,7 @@ SlideMultiPartyMenuBoxSpritesOneStep:
 	lsl	r1, r1, #0x10
 	asr	r1, r1, #0x10
 	bl	MoveMultiPartyMenuBoxSprite
-.LM3525:
+.LM3521:
 
 	ldr	r0, [r7]
 	add	r0, r4, r0
@@ -31762,7 +31742,7 @@ SlideMultiPartyMenuBoxSpritesOneStep:
 	lsl	r1, r1, #0x10
 	asr	r1, r1, #0x10
 	bl	MoveMultiPartyMenuBoxSprite
-.LM3526:
+.LM3522:
 
 	ldr	r0, [r7]
 	add	r0, r4, r0
@@ -31772,7 +31752,7 @@ SlideMultiPartyMenuBoxSpritesOneStep:
 	lsl	r1, r1, #0x10
 	asr	r1, r1, #0x10
 	bl	MoveMultiPartyMenuBoxSprite
-.LM3527:
+.LM3523:
 
 	ldr	r0, [r7]
 	add	r4, r4, r0
@@ -31782,30 +31762,30 @@ SlideMultiPartyMenuBoxSpritesOneStep:
 	lsl	r1, r1, #0x10
 	asr	r1, r1, #0x10
 	bl	MoveMultiPartyMenuBoxSprite
-.LM3528:
+.LM3524:
 
-.L2872:
+.L2871:
 	add	r0, r6, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r6, r0, #0x18
 	cmp	r6, #0x5
-	bls	.L2873	@cond_branch
-.LM3529:
+	bls	.L2872	@cond_branch
+.LM3525:
 
 	mov	r1, #0x80
 	lsl	r1, r1, #0x4
 	mov	r0, #0x2
 	mov	r2, #0x1
 	bl	ChangeBgX
-.LM3530:
+.LM3526:
 
 .LBE158:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2877:
-	.align	2, 0
 .L2876:
+	.align	2, 0
+.L2875:
 	.word	gTasks+0x8
 	.word	sPartyMenuBoxes
 	.word	gMultiPartnerParty
@@ -31818,31 +31798,31 @@ SlideMultiPartyMenuBoxSpritesOneStep:
 	.thumb_func
 ChooseMonForDaycare:
 .LFB334:
-.LM3531:
+.LM3527:
 
 	push	{lr}
 	add	sp, sp, #-0xc
-.LM3532:
+.LM3528:
 
 	mov	r0, #0xf
 	str	r0, [sp]
-	ldr	r0, .L2879
+	ldr	r0, .L2878
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2879+0x4
+	ldr	r0, .L2878+0x4
 	str	r0, [sp, #0x8]
 	mov	r0, #0x6
 	mov	r1, #0x0
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3533:
+.LM3529:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2880:
-	.align	2, 0
 .L2879:
+	.align	2, 0
+.L2878:
 	.word	Task_HandleChooseMonInput
 	.word	BufferMonSelection
 .LFE334:
@@ -31853,37 +31833,37 @@ ChooseMonForDaycare:
 	.thumb_func
 ChoosePartyMonByMenuType:
 .LFB335:
-.LM3534:
+.LM3530:
 
 	push	{lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
-.LM3535:
+.LM3531:
 
-	ldr	r2, .L2882
-	ldr	r1, .L2882+0x4
+	ldr	r2, .L2881
+	ldr	r1, .L2881+0x4
 	str	r1, [r2]
-.LM3536:
+.LM3532:
 
 	mov	r1, #0x0
 	str	r1, [sp]
-	ldr	r1, .L2882+0x8
+	ldr	r1, .L2881+0x8
 	str	r1, [sp, #0x4]
-	ldr	r1, .L2882+0xc
+	ldr	r1, .L2881+0xc
 	str	r1, [sp, #0x8]
 	mov	r1, #0x0
 	mov	r2, #0xb
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3537:
+.LM3533:
 
 	add	sp, sp, #0xc
 	pop	{r0}
 	bx	r0
-.L2883:
-	.align	2, 0
 .L2882:
+	.align	2, 0
+.L2881:
 	.word	gFieldCallback2
 	.word	CB2_FadeFromPartyMenu
 	.word	Task_HandleChooseMonInput
@@ -31896,42 +31876,42 @@ ChoosePartyMonByMenuType:
 	.thumb_func
 BufferMonSelection:
 .LFB336:
-.LM3538:
+.LM3534:
 
 	push	{r4, lr}
-.LM3539:
+.LM3535:
 
-	ldr	r4, .L2886
+	ldr	r4, .L2885
 	bl	GetCursorSelectionMonId
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	strh	r0, [r4]
-.LM3540:
+.LM3536:
 
 	cmp	r0, #0x5
-	bls	.L2885	@cond_branch
-.LM3541:
+	bls	.L2884	@cond_branch
+.LM3537:
 
 	mov	r0, #0xff
 	strh	r0, [r4]
-.L2885:
-.LM3542:
+.L2884:
+.LM3538:
 
-	ldr	r0, .L2886+0x4
-	ldr	r1, .L2886+0x8
+	ldr	r0, .L2885+0x4
+	ldr	r1, .L2885+0x8
 	str	r1, [r0]
-.LM3543:
+.LM3539:
 
-	ldr	r0, .L2886+0xc
+	ldr	r0, .L2885+0xc
 	bl	SetMainCallback2
-.LM3544:
+.LM3540:
 
 	pop	{r4}
 	pop	{r0}
 	bx	r0
-.L2887:
-	.align	2, 0
 .L2886:
+	.align	2, 0
+.L2885:
 	.word	gSpecialVar_0x8004
 	.word	gFieldCallback2
 	.word	CB2_FadeFromPartyMenu
@@ -31945,27 +31925,27 @@ BufferMonSelection:
 	.thumb_func
 CB2_FadeFromPartyMenu:
 .LFB337:
-.LM3545:
+.LM3541:
 
 	push	{lr}
-.LM3546:
+.LM3542:
 
 	bl	FadeInFromBlack
-.LM3547:
+.LM3543:
 
-	ldr	r0, .L2889
+	ldr	r0, .L2888
 	mov	r1, #0xa
 	bl	CreateTask
-.LM3548:
+.LM3544:
 
 	mov	r0, #0x1
-.LM3549:
+.LM3545:
 
 	pop	{r1}
 	bx	r1
-.L2890:
-	.align	2, 0
 .L2889:
+	.align	2, 0
+.L2888:
 	.word	Task_PartyMenuWaitForFade
 .LFE337:
 .Lfe337:
@@ -31975,29 +31955,29 @@ CB2_FadeFromPartyMenu:
 	.thumb_func
 Task_PartyMenuWaitForFade:
 .LFB338:
-.LM3550:
+.LM3546:
 
 	push	{r4, lr}
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.LM3551:
+.LM3547:
 
 	bl	IsWeatherNotFadingIn
 	lsl	r0, r0, #0x18
 	cmp	r0, #0
-	beq	.L2892	@cond_branch
-.LM3552:
+	beq	.L2891	@cond_branch
+.LM3548:
 
 	add	r0, r4, #0
 	bl	DestroyTask
-.LM3553:
+.LM3549:
 
 	bl	ScriptContext2_Disable
-.LM3554:
+.LM3550:
 
 	bl	EnableBothScriptContexts
-.L2892:
-.LM3555:
+.L2891:
+.LM3551:
 
 	pop	{r4}
 	pop	{r0}
@@ -32011,29 +31991,29 @@ Task_PartyMenuWaitForFade:
 	.thumb_func
 ChooseContestMon:
 .LFB339:
-.LM3556:
+.LM3552:
 
 	push	{lr}
-.LM3557:
+.LM3553:
 
 	bl	ScriptContext2_Enable
-.LM3558:
+.LM3554:
 
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-.LM3559:
+.LM3555:
 
-	ldr	r0, .L2894
+	ldr	r0, .L2893
 	mov	r1, #0xa
 	bl	CreateTask
-.LM3560:
+.LM3556:
 
 	pop	{r0}
 	bx	r0
-.L2895:
-	.align	2, 0
 .L2894:
+	.align	2, 0
+.L2893:
 	.word	Task_ChooseContestMon
 .LFE339:
 .Lfe339:
@@ -32043,51 +32023,51 @@ ChooseContestMon:
 	.thumb_func
 Task_ChooseContestMon:
 .LFB340:
-.LM3561:
+.LM3557:
 
 	push	{r4, r5, lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3562:
+.LM3558:
 
-	ldr	r0, .L2898
+	ldr	r0, .L2897
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0
-	bne	.L2897	@cond_branch
-.LM3563:
+	bne	.L2896	@cond_branch
+.LM3559:
 
 	bl	CleanupOverworldWindowsAndTilemaps
-.LM3564:
+.LM3560:
 
 	str	r4, [sp]
-	ldr	r0, .L2898+0x4
+	ldr	r0, .L2897+0x4
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2898+0x8
+	ldr	r0, .L2897+0x8
 	str	r0, [sp, #0x8]
 	mov	r0, #0x2
 	mov	r1, #0x0
 	mov	r2, #0xb
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3565:
+.LM3561:
 
 	add	r0, r5, #0
 	bl	DestroyTask
-.L2897:
-.LM3566:
+.L2896:
+.LM3562:
 
 	add	sp, sp, #0xc
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2899:
-	.align	2, 0
 .L2898:
+	.align	2, 0
+.L2897:
 	.word	gPaletteFade
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ChooseContestMon
@@ -32099,46 +32079,46 @@ Task_ChooseContestMon:
 	.thumb_func
 CB2_ChooseContestMon:
 .LFB341:
-.LM3567:
+.LM3563:
 
 	push	{lr}
-.LM3568:
+.LM3564:
 
 	bl	GetCursorSelectionMonId
-	ldr	r2, .L2902
+	ldr	r2, .L2901
 	strb	r0, [r2]
-.LM3569:
+.LM3565:
 
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r0, #0x5
-	bls	.L2901	@cond_branch
-.LM3570:
+	bls	.L2900	@cond_branch
+.LM3566:
 
 	mov	r0, #0xff
 	strb	r0, [r2]
-.L2901:
-.LM3571:
+.L2900:
+.LM3567:
 
-	ldr	r1, .L2902+0x4
+	ldr	r1, .L2901+0x4
 	ldrb	r0, [r2]
 	strh	r0, [r1]
-.LM3572:
+.LM3568:
 
-	ldr	r1, .L2902+0x8
-	ldr	r0, .L2902+0xc
+	ldr	r1, .L2901+0x8
+	ldr	r0, .L2901+0xc
 	str	r0, [r1]
-.LM3573:
+.LM3569:
 
-	ldr	r0, .L2902+0x10
+	ldr	r0, .L2901+0x10
 	bl	SetMainCallback2
-.LM3574:
+.LM3570:
 
 	pop	{r0}
 	bx	r0
-.L2903:
-	.align	2, 0
 .L2902:
+	.align	2, 0
+.L2901:
 	.word	gContestMonPartyIndex
 	.word	gSpecialVar_0x8004
 	.word	gFieldCallback2
@@ -32153,29 +32133,29 @@ CB2_ChooseContestMon:
 	.thumb_func
 ChoosePartyMon:
 .LFB342:
-.LM3575:
+.LM3571:
 
 	push	{lr}
-.LM3576:
+.LM3572:
 
 	bl	ScriptContext2_Enable
-.LM3577:
+.LM3573:
 
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-.LM3578:
+.LM3574:
 
-	ldr	r0, .L2905
+	ldr	r0, .L2904
 	mov	r1, #0xa
 	bl	CreateTask
-.LM3579:
+.LM3575:
 
 	pop	{r0}
 	bx	r0
-.L2906:
-	.align	2, 0
 .L2905:
+	.align	2, 0
+.L2904:
 	.word	Task_ChoosePartyMon
 .LFE342:
 .Lfe342:
@@ -32185,51 +32165,51 @@ ChoosePartyMon:
 	.thumb_func
 Task_ChoosePartyMon:
 .LFB343:
-.LM3580:
+.LM3576:
 
 	push	{r4, r5, lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3581:
+.LM3577:
 
-	ldr	r0, .L2909
+	ldr	r0, .L2908
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0
-	bne	.L2908	@cond_branch
-.LM3582:
+	bne	.L2907	@cond_branch
+.LM3578:
 
 	bl	CleanupOverworldWindowsAndTilemaps
-.LM3583:
+.LM3579:
 
 	str	r4, [sp]
-	ldr	r0, .L2909+0x4
+	ldr	r0, .L2908+0x4
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2909+0x8
+	ldr	r0, .L2908+0x8
 	str	r0, [sp, #0x8]
 	mov	r0, #0x3
 	mov	r1, #0x0
 	mov	r2, #0xb
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3584:
+.LM3580:
 
 	add	r0, r5, #0
 	bl	DestroyTask
-.L2908:
-.LM3585:
+.L2907:
+.LM3581:
 
 	add	sp, sp, #0xc
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2910:
-	.align	2, 0
 .L2909:
+	.align	2, 0
+.L2908:
 	.word	gPaletteFade
 	.word	Task_HandleChooseMonInput
 	.word	BufferMonSelection
@@ -32242,29 +32222,29 @@ Task_ChoosePartyMon:
 	.thumb_func
 ChooseMonForMoveRelearner:
 .LFB344:
-.LM3586:
+.LM3582:
 
 	push	{lr}
-.LM3587:
+.LM3583:
 
 	bl	ScriptContext2_Enable
-.LM3588:
+.LM3584:
 
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-.LM3589:
+.LM3585:
 
-	ldr	r0, .L2912
+	ldr	r0, .L2911
 	mov	r1, #0xa
 	bl	CreateTask
-.LM3590:
+.LM3586:
 
 	pop	{r0}
 	bx	r0
-.L2913:
-	.align	2, 0
 .L2912:
+	.align	2, 0
+.L2911:
 	.word	Task_ChooseMonForMoveRelearner
 .LFE344:
 .Lfe344:
@@ -32274,51 +32254,51 @@ ChooseMonForMoveRelearner:
 	.thumb_func
 Task_ChooseMonForMoveRelearner:
 .LFB345:
-.LM3591:
+.LM3587:
 
 	push	{r4, r5, lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3592:
+.LM3588:
 
-	ldr	r0, .L2916
+	ldr	r0, .L2915
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0
-	bne	.L2915	@cond_branch
-.LM3593:
+	bne	.L2914	@cond_branch
+.LM3589:
 
 	bl	CleanupOverworldWindowsAndTilemaps
-.LM3594:
+.LM3590:
 
 	str	r4, [sp]
-	ldr	r0, .L2916+0x4
+	ldr	r0, .L2915+0x4
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2916+0x8
+	ldr	r0, .L2915+0x8
 	str	r0, [sp, #0x8]
 	mov	r0, #0x7
 	mov	r1, #0x0
 	mov	r2, #0xb
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3595:
+.LM3591:
 
 	add	r0, r5, #0
 	bl	DestroyTask
-.L2915:
-.LM3596:
+.L2914:
+.LM3592:
 
 	add	sp, sp, #0xc
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2917:
-	.align	2, 0
 .L2916:
+	.align	2, 0
+.L2915:
 	.word	gPaletteFade
 	.word	Task_HandleChooseMonInput
 	.word	CB2_ChooseMonForMoveRelearner
@@ -32330,60 +32310,60 @@ Task_ChooseMonForMoveRelearner:
 	.thumb_func
 CB2_ChooseMonForMoveRelearner:
 .LFB346:
-.LM3597:
+.LM3593:
 
 	push	{r4, r5, lr}
-.LM3598:
+.LM3594:
 
-	ldr	r5, .L2921
+	ldr	r5, .L2920
 	bl	GetCursorSelectionMonId
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	strh	r0, [r5]
-.LM3599:
+.LM3595:
 
 	cmp	r0, #0x5
-	bls	.L2919	@cond_branch
-.LM3600:
+	bls	.L2918	@cond_branch
+.LM3596:
 
 	mov	r0, #0xff
 	strh	r0, [r5]
-	b	.L2920
-.L2922:
-	.align	2, 0
+	b	.L2919
 .L2921:
+	.align	2, 0
+.L2920:
 	.word	gSpecialVar_0x8004
-.L2919:
-.LM3601:
+.L2918:
+.LM3597:
 
-	ldr	r4, .L2923
+	ldr	r4, .L2922
 	ldrh	r1, [r5]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2923+0x4
+	ldr	r1, .L2922+0x4
 	add	r0, r0, r1
 	bl	GetNumberOfRelearnableMoves
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	strh	r0, [r4]
-.L2920:
-.LM3602:
+.L2919:
+.LM3598:
 
-	ldr	r0, .L2923+0x8
-	ldr	r1, .L2923+0xc
+	ldr	r0, .L2922+0x8
+	ldr	r1, .L2922+0xc
 	str	r1, [r0]
-.LM3603:
+.LM3599:
 
-	ldr	r0, .L2923+0x10
+	ldr	r0, .L2922+0x10
 	bl	SetMainCallback2
-.LM3604:
+.LM3600:
 
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2924:
-	.align	2, 0
 .L2923:
+	.align	2, 0
+.L2922:
 	.word	gSpecialVar_0x8005
 	.word	gPlayerParty
 	.word	gFieldCallback2
@@ -32398,61 +32378,61 @@ CB2_ChooseMonForMoveRelearner:
 	.thumb_func
 DoBattlePyramidMonsHaveHeldItem:
 .LFB347:
-.LM3605:
+.LM3601:
 
 	push	{r4, r5, lr}
-.LM3606:
+.LM3602:
 
 .LBB159:
-.LM3607:
+.LM3603:
 
-	ldr	r1, .L2932
+	ldr	r1, .L2931
 	mov	r0, #0x0
 	strh	r0, [r1]
-.LM3608:
+.LM3604:
 
 	mov	r4, #0x0
 	add	r5, r1, #0
-	b	.L2926
-.L2933:
-	.align	2, 0
+	b	.L2925
 .L2932:
+	.align	2, 0
+.L2931:
 	.word	gSpecialVar_Result
-.LM3609:
+.LM3605:
 
-.L2928:
+.L2927:
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
-.L2926:
+.L2925:
 	cmp	r4, #0x2
-	bhi	.L2927	@cond_branch
-.LM3610:
+	bhi	.L2926	@cond_branch
+.LM3606:
 
 	mov	r0, #0x64
 	mul	r0, r0, r4
-	ldr	r1, .L2934
+	ldr	r1, .L2933
 	add	r0, r0, r1
 	mov	r1, #0xc
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2928	@cond_branch
-.LM3611:
+	beq	.L2927	@cond_branch
+.LM3607:
 
 	mov	r0, #0x1
 	strh	r0, [r5]
-.LM3612:
+.LM3608:
 
-.L2927:
-.LM3613:
+.L2926:
+.LM3609:
 
 .LBE159:
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2935:
-	.align	2, 0
 .L2934:
+	.align	2, 0
+.L2933:
 	.word	gPlayerParty
 .LFE347:
 .Lfe347:
@@ -32463,29 +32443,29 @@ DoBattlePyramidMonsHaveHeldItem:
 	.thumb_func
 BattlePyramidChooseMonHeldItems:
 .LFB348:
-.LM3614:
+.LM3610:
 
 	push	{lr}
-.LM3615:
+.LM3611:
 
 	bl	ScriptContext2_Enable
-.LM3616:
+.LM3612:
 
 	mov	r0, #0x1
 	mov	r1, #0x0
 	bl	FadeScreen
-.LM3617:
+.LM3613:
 
-	ldr	r0, .L2937
+	ldr	r0, .L2936
 	mov	r1, #0xa
 	bl	CreateTask
-.LM3618:
+.LM3614:
 
 	pop	{r0}
 	bx	r0
-.L2938:
-	.align	2, 0
 .L2937:
+	.align	2, 0
+.L2936:
 	.word	Task_BattlePyramidChooseMonHeldItems
 .LFE348:
 .Lfe348:
@@ -32495,51 +32475,51 @@ BattlePyramidChooseMonHeldItems:
 	.thumb_func
 Task_BattlePyramidChooseMonHeldItems:
 .LFB349:
-.LM3619:
+.LM3615:
 
 	push	{r4, r5, lr}
 	add	sp, sp, #-0xc
 	lsl	r0, r0, #0x18
 	lsr	r5, r0, #0x18
-.LM3620:
+.LM3616:
 
-	ldr	r0, .L2941
+	ldr	r0, .L2940
 	ldrb	r1, [r0, #0x7]
 	mov	r0, #0x80
 	and	r0, r0, r1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0
-	bne	.L2940	@cond_branch
-.LM3621:
+	bne	.L2939	@cond_branch
+.LM3617:
 
 	bl	CleanupOverworldWindowsAndTilemaps
-.LM3622:
+.LM3618:
 
 	str	r4, [sp]
-	ldr	r0, .L2941+0x4
+	ldr	r0, .L2940+0x4
 	str	r0, [sp, #0x4]
-	ldr	r0, .L2941+0x8
+	ldr	r0, .L2940+0x8
 	str	r0, [sp, #0x8]
 	mov	r0, #0xc
 	mov	r1, #0x0
 	mov	r2, #0x0
 	mov	r3, #0x0
 	bl	InitPartyMenu
-.LM3623:
+.LM3619:
 
 	add	r0, r5, #0
 	bl	DestroyTask
-.L2940:
-.LM3624:
+.L2939:
+.LM3620:
 
 	add	sp, sp, #0xc
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2942:
-	.align	2, 0
 .L2941:
+	.align	2, 0
+.L2940:
 	.word	gPaletteFade
 	.word	Task_HandleChooseMonInput
 	.word	BufferMonSelection
@@ -32552,37 +32532,37 @@ Task_BattlePyramidChooseMonHeldItems:
 	.thumb_func
 MoveDeleterChooseMoveToForget:
 .LFB350:
-.LM3625:
+.LM3621:
 
 	push	{lr}
 	add	sp, sp, #-0x4
-.LM3626:
+.LM3622:
 
-	ldr	r1, .L2944
-	ldr	r0, .L2944+0x4
+	ldr	r1, .L2943
+	ldr	r0, .L2943+0x4
 	ldrb	r2, [r0]
-	ldr	r0, .L2944+0x8
+	ldr	r0, .L2943+0x8
 	ldrb	r3, [r0]
 	sub	r3, r3, #0x1
 	lsl	r3, r3, #0x18
 	lsr	r3, r3, #0x18
-	ldr	r0, .L2944+0xc
+	ldr	r0, .L2943+0xc
 	str	r0, [sp]
 	mov	r0, #0x3
 	bl	ShowPokemonSummaryScreen
-.LM3627:
+.LM3623:
 
-	ldr	r1, .L2944+0x10
-	ldr	r0, .L2944+0x14
+	ldr	r1, .L2943+0x10
+	ldr	r0, .L2943+0x14
 	str	r0, [r1]
-.LM3628:
+.LM3624:
 
 	add	sp, sp, #0x4
 	pop	{r0}
 	bx	r0
-.L2945:
-	.align	2, 0
 .L2944:
+	.align	2, 0
+.L2943:
 	.word	gPlayerParty
 	.word	gSpecialVar_0x8004
 	.word	gPlayerPartyCount
@@ -32598,57 +32578,57 @@ MoveDeleterChooseMoveToForget:
 	.thumb_func
 GetNumMovesSelectedMonHas:
 .LFB351:
-.LM3629:
+.LM3625:
 
 	push	{r4, r5, lr}
-.LM3630:
+.LM3626:
 
 .LBB160:
-.LM3631:
+.LM3627:
 
-	ldr	r1, .L2953
+	ldr	r1, .L2952
 	mov	r0, #0x0
 	strh	r0, [r1]
-.LM3632:
+.LM3628:
 
 	mov	r4, #0x0
 	add	r5, r1, #0
-.L2950:
-.LM3633:
+.L2949:
+.LM3629:
 
-	ldr	r0, .L2953+0x4
+	ldr	r0, .L2952+0x4
 	ldrh	r1, [r0]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2953+0x8
+	ldr	r1, .L2952+0x8
 	add	r0, r0, r1
 	add	r1, r4, #0
 	add	r1, r1, #0xd
 	bl	GetMonData
 	cmp	r0, #0
-	beq	.L2949	@cond_branch
-.LM3634:
+	beq	.L2948	@cond_branch
+.LM3630:
 
 	ldrh	r0, [r5]
 	add	r0, r0, #0x1
 	strh	r0, [r5]
-.LM3635:
+.LM3631:
 
-.L2949:
+.L2948:
 	add	r0, r4, #0x1
 	lsl	r0, r0, #0x18
 	lsr	r4, r0, #0x18
 	cmp	r4, #0x3
-	bls	.L2950	@cond_branch
-.LM3636:
+	bls	.L2949	@cond_branch
+.LM3632:
 
 .LBE160:
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2954:
-	.align	2, 0
 .L2953:
+	.align	2, 0
+.L2952:
 	.word	gSpecialVar_Result
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
@@ -32661,22 +32641,22 @@ GetNumMovesSelectedMonHas:
 	.thumb_func
 BufferMoveDeleterNicknameAndMove:
 .LFB352:
-.LM3637:
+.LM3633:
 
 	push	{r4, r5, lr}
-.LM3638:
+.LM3634:
 
 .LBB161:
-	ldr	r0, .L2956
+	ldr	r0, .L2955
 	ldrh	r1, [r0]
 	mov	r0, #0x64
 	mov	r5, r1
 	mul	r5, r5, r0
-	ldr	r0, .L2956+0x4
+	ldr	r0, .L2955+0x4
 	add	r5, r5, r0
-.LM3639:
+.LM3635:
 
-	ldr	r0, .L2956+0x8
+	ldr	r0, .L2955+0x8
 	ldrh	r1, [r0]
 	add	r1, r1, #0xd
 	add	r0, r5, #0
@@ -32684,28 +32664,28 @@ BufferMoveDeleterNicknameAndMove:
 	add	r4, r0, #0
 	lsl	r4, r4, #0x10
 	lsr	r4, r4, #0x10
-.LM3640:
+.LM3636:
 
-	ldr	r1, .L2956+0xc
+	ldr	r1, .L2955+0xc
 	add	r0, r5, #0
 	bl	GetMonNickname
-.LM3641:
+.LM3637:
 
-	ldr	r0, .L2956+0x10
+	ldr	r0, .L2955+0x10
 	mov	r1, #0xd
 	mul	r1, r1, r4
-	ldr	r2, .L2956+0x14
+	ldr	r2, .L2955+0x14
 	add	r1, r1, r2
 	bl	StringCopy
-.LM3642:
+.LM3638:
 
 .LBE161:
 	pop	{r4, r5}
 	pop	{r0}
 	bx	r0
-.L2957:
-	.align	2, 0
 .L2956:
+	.align	2, 0
+.L2955:
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
 	.word	gSpecialVar_0x8005
@@ -32721,28 +32701,28 @@ BufferMoveDeleterNicknameAndMove:
 	.thumb_func
 MoveDeleterForgetMove:
 .LFB353:
-.LM3643:
+.LM3639:
 
 	push	{r4, r5, r6, lr}
 	mov	r6, r8
 	push	{r6}
-.LM3644:
+.LM3640:
 
 .LBB162:
-.LM3645:
+.LM3641:
 
-	ldr	r0, .L2964
+	ldr	r0, .L2963
 	mov	r8, r0
 	ldrh	r0, [r0]
 	mov	r6, #0x64
 	mul	r0, r0, r6
-	ldr	r5, .L2964+0x4
+	ldr	r5, .L2963+0x4
 	add	r0, r0, r5
-	ldr	r4, .L2964+0x8
+	ldr	r4, .L2963+0x8
 	ldrb	r2, [r4]
 	mov	r1, #0x0
 	bl	SetMonMoveSlot
-.LM3646:
+.LM3642:
 
 	mov	r1, r8
 	ldrh	r0, [r1]
@@ -32750,19 +32730,19 @@ MoveDeleterForgetMove:
 	add	r0, r0, r5
 	ldrb	r1, [r4]
 	bl	RemoveMonPPBonus
-.LM3647:
+.LM3643:
 
 	ldrh	r4, [r4]
 	cmp	r4, #0x2
-	bhi	.L2960	@cond_branch
-.L2962:
-.LM3648:
+	bhi	.L2959	@cond_branch
+.L2961:
+.LM3644:
 
-	ldr	r0, .L2964
+	ldr	r0, .L2963
 	ldrh	r1, [r0]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2964+0x4
+	ldr	r1, .L2963+0x4
 	add	r0, r0, r1
 	lsl	r1, r4, #0x18
 	lsr	r1, r1, #0x18
@@ -32770,14 +32750,14 @@ MoveDeleterForgetMove:
 	lsl	r2, r4, #0x18
 	lsr	r2, r2, #0x18
 	bl	ShiftMoveSlot
-.LM3649:
+.LM3645:
 
 	lsl	r4, r4, #0x10
 	lsr	r4, r4, #0x10
 	cmp	r4, #0x2
-	bls	.L2962	@cond_branch
-.L2960:
-.LM3650:
+	bls	.L2961	@cond_branch
+.L2959:
+.LM3646:
 
 .LBE162:
 	pop	{r3}
@@ -32785,9 +32765,9 @@ MoveDeleterForgetMove:
 	pop	{r4, r5, r6}
 	pop	{r0}
 	bx	r0
-.L2965:
-	.align	2, 0
 .L2964:
+	.align	2, 0
+.L2963:
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
 	.word	gSpecialVar_0x8005
@@ -32799,7 +32779,7 @@ MoveDeleterForgetMove:
 	.thumb_func
 ShiftMoveSlot:
 .LFB354:
-.LM3651:
+.LM3647:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, sl
@@ -32814,7 +32794,7 @@ ShiftMoveSlot:
 	lsr	r5, r5, #0x18
 	lsl	r4, r4, #0x18
 	lsr	r4, r4, #0x18
-.LM3652:
+.LM3648:
 
 .LBB163:
 	add	r0, r5, #0
@@ -32827,7 +32807,7 @@ ShiftMoveSlot:
 	add	r1, r1, #0x2
 	str	r1, [sp, #0x14]
 	strh	r0, [r1]
-.LM3653:
+.LM3649:
 
 	add	r3, r4, #0
 	add	r3, r3, #0xd
@@ -32837,7 +32817,7 @@ ShiftMoveSlot:
 	bl	GetMonData
 	mov	r1, sp
 	strh	r0, [r1]
-.LM3654:
+.LM3650:
 
 	add	r7, r5, #0
 	add	r7, r7, #0x11
@@ -32849,7 +32829,7 @@ ShiftMoveSlot:
 	add	r1, r1, #0x5
 	str	r1, [sp, #0x18]
 	strb	r0, [r1]
-.LM3655:
+.LM3651:
 
 	add	r3, r4, #0
 	add	r3, r3, #0x11
@@ -32860,7 +32840,7 @@ ShiftMoveSlot:
 	add	r7, sp, #0x4
 	mov	sl, r7
 	strb	r0, [r7]
-.LM3656:
+.LM3652:
 
 	mov	r0, r8
 	mov	r1, #0x15
@@ -32868,13 +32848,13 @@ ShiftMoveSlot:
 	mov	r6, sp
 	add	r6, r6, #0x6
 	strb	r0, [r6]
-.LM3657:
+.LM3653:
 
-	ldr	r1, .L2967
+	ldr	r1, .L2966
 	add	r0, r5, r1
 	ldrb	r0, [r0]
 	mov	r9, r0
-.LM3658:
+.LM3654:
 
 	ldrb	r0, [r6]
 	add	r2, r0, #0
@@ -32884,11 +32864,11 @@ ShiftMoveSlot:
 	asr	r2, r2, r5
 	lsl	r2, r2, #0x18
 	lsr	r2, r2, #0x18
-.LM3659:
+.LM3655:
 
 	add	r1, r4, r1
 	ldrb	r3, [r1]
-.LM3660:
+.LM3656:
 
 	add	r1, r0, #0
 	and	r1, r1, r3
@@ -32896,17 +32876,17 @@ ShiftMoveSlot:
 	asr	r1, r1, r4
 	lsl	r1, r1, #0x18
 	lsr	r1, r1, #0x18
-.LM3661:
+.LM3657:
 
 	mov	r7, r9
 	bic	r0, r0, r7
 	strb	r0, [r6]
-.LM3662:
+.LM3658:
 
 	ldrb	r0, [r6]
 	bic	r0, r0, r3
 	strb	r0, [r6]
-.LM3663:
+.LM3659:
 
 	lsl	r2, r2, r4
 	lsl	r1, r1, r5
@@ -32914,37 +32894,37 @@ ShiftMoveSlot:
 	ldrb	r0, [r6]
 	orr	r0, r0, r2
 	strb	r0, [r6]
-.LM3664:
+.LM3660:
 
 	mov	r0, r8
 	ldr	r1, [sp, #0x8]
 	mov	r2, sp
 	bl	SetMonData
-.LM3665:
+.LM3661:
 
 	mov	r0, r8
 	ldr	r1, [sp, #0xc]
 	ldr	r2, [sp, #0x14]
 	bl	SetMonData
-.LM3666:
+.LM3662:
 
 	mov	r0, r8
 	ldr	r1, [sp, #0x10]
 	mov	r2, sl
 	bl	SetMonData
-.LM3667:
+.LM3663:
 
 	mov	r0, r8
 	ldr	r1, [sp, #0x1c]
 	ldr	r2, [sp, #0x18]
 	bl	SetMonData
-.LM3668:
+.LM3664:
 
 	mov	r0, r8
 	mov	r1, #0x15
 	add	r2, r6, #0
 	bl	SetMonData
-.LM3669:
+.LM3665:
 
 .LBE163:
 	add	sp, sp, #0x20
@@ -32955,9 +32935,9 @@ ShiftMoveSlot:
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2968:
-	.align	2, 0
 .L2967:
+	.align	2, 0
+.L2966:
 	.word	gPPUpGetMask
 .LFE354:
 .Lfe354:
@@ -32968,47 +32948,47 @@ ShiftMoveSlot:
 	.thumb_func
 IsSelectedMonEgg:
 .LFB355:
-.LM3670:
+.LM3666:
 
 	push	{lr}
-.LM3671:
+.LM3667:
 
-	ldr	r0, .L2972
+	ldr	r0, .L2971
 	ldrh	r1, [r0]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2972+0x4
+	ldr	r1, .L2971+0x4
 	add	r0, r0, r1
 	mov	r1, #0x2d
 	bl	GetMonData
 	add	r1, r0, #0
 	cmp	r1, #0
-	beq	.L2970	@cond_branch
-.LM3672:
+	beq	.L2969	@cond_branch
+.LM3668:
 
-	ldr	r1, .L2972+0x8
+	ldr	r1, .L2971+0x8
 	mov	r0, #0x1
 	strh	r0, [r1]
-	b	.L2971
-.L2973:
-	.align	2, 0
+	b	.L2970
 .L2972:
+	.align	2, 0
+.L2971:
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
 	.word	gSpecialVar_Result
-.L2970:
-.LM3673:
+.L2969:
+.LM3669:
 
-	ldr	r0, .L2974
+	ldr	r0, .L2973
 	strh	r1, [r0]
-.L2971:
-.LM3674:
+.L2970:
+.LM3670:
 
 	pop	{r0}
 	bx	r0
-.L2975:
-	.align	2, 0
 .L2974:
+	.align	2, 0
+.L2973:
 	.word	gSpecialVar_Result
 .LFE355:
 .Lfe355:
@@ -33019,110 +32999,110 @@ IsSelectedMonEgg:
 	.thumb_func
 IsLastMonThatKnowsSurf:
 .LFB356:
-.LM3675:
+.LM3671:
 
 	push	{r4, r5, r6, r7, lr}
 	mov	r7, r8
 	push	{r7}
-.LM3676:
+.LM3672:
 
 .LBB164:
-.LM3677:
+.LM3673:
 
-	ldr	r1, .L2991
+	ldr	r1, .L2990
 	mov	r0, #0x0
 	strh	r0, [r1]
-.LM3678:
+.LM3674:
 
-	ldr	r0, .L2991+0x4
+	ldr	r0, .L2990+0x4
 	ldrh	r1, [r0]
 	mov	r0, #0x64
 	mul	r0, r0, r1
-	ldr	r1, .L2991+0x8
+	ldr	r1, .L2990+0x8
 	add	r0, r0, r1
-	ldr	r1, .L2991+0xc
+	ldr	r1, .L2990+0xc
 	ldrh	r1, [r1]
 	add	r1, r1, #0xd
 	bl	GetMonData
 	lsl	r0, r0, #0x10
 	lsr	r0, r0, #0x10
 	mov	r8, r0
-.LM3679:
+.LM3675:
 
 	cmp	r0, #0x39
-	bne	.L2976	@cond_branch
-.LM3680:
+	bne	.L2975	@cond_branch
+.LM3676:
 
 	mov	r6, #0x0
-	b	.L2978
-.L2992:
-	.align	2, 0
+	b	.L2977
 .L2991:
+	.align	2, 0
+.L2990:
 	.word	gSpecialVar_Result
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
 	.word	gSpecialVar_0x8005
-.L2981:
-.LM3681:
+.L2980:
+.LM3677:
 
-	ldr	r0, .L2993
+	ldr	r0, .L2992
 	ldrh	r0, [r0]
 	cmp	r6, r0
-	beq	.L2980	@cond_branch
-.LM3682:
+	beq	.L2979	@cond_branch
+.LM3678:
 
 	mov	r4, #0x0
 	mov	r0, #0x64
 	mov	r5, r6
 	mul	r5, r5, r0
-	ldr	r7, .L2993+0x4
-.L2986:
-.LM3683:
+	ldr	r7, .L2992+0x4
+.L2985:
+.LM3679:
 
 	add	r1, r4, #0
 	add	r1, r1, #0xd
 	add	r0, r5, r7
 	bl	GetMonData
 	cmp	r0, #0x39
-	beq	.L2976	@cond_branch
-.LM3684:
+	beq	.L2975	@cond_branch
+.LM3680:
 
 	add	r4, r4, #0x1
 	cmp	r4, #0x3
-	bls	.L2986	@cond_branch
-.LM3685:
+	bls	.L2985	@cond_branch
+.LM3681:
 
-.L2980:
+.L2979:
 	add	r6, r6, #0x1
-.L2978:
+.L2977:
 	bl	CalculatePlayerPartyCount
 	lsl	r0, r0, #0x18
 	lsr	r0, r0, #0x18
 	cmp	r6, r0
-	bcc	.L2981	@cond_branch
-.LM3686:
+	bcc	.L2980	@cond_branch
+.LM3682:
 
 	mov	r0, r8
 	bl	AnyStorageMonWithMove
 	cmp	r0, #0x1
-	beq	.L2976	@cond_branch
-.LM3687:
+	beq	.L2975	@cond_branch
+.LM3683:
 
-	ldr	r1, .L2993+0x8
+	ldr	r1, .L2992+0x8
 	mov	r0, #0x1
 	strh	r0, [r1]
-.LM3688:
+.LM3684:
 
 .LBE164:
-.L2976:
+.L2975:
 	pop	{r3}
 	mov	r8, r3
 	pop	{r4, r5, r6, r7}
 	pop	{r0}
 	bx	r0
-.L2994:
-	.align	2, 0
 .L2993:
+	.align	2, 0
+.L2992:
 	.word	gSpecialVar_0x8004
 	.word	gPlayerParty
 	.word	gSpecialVar_Result
@@ -33135,7 +33115,7 @@ IsLastMonThatKnowsSurf:
 .Letext0:
 
 	.section	.debug_line
-	.4byte	0x7978
+	.4byte	0x7958
 	.2byte	0x2
 	.4byte	0x613
 	.byte	0x4
@@ -46747,12 +46727,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2654
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2655
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46762,7 +46742,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2657
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46777,7 +46757,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2660
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46792,7 +46772,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2663
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46802,7 +46782,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2665
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46812,27 +46792,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2667
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2668
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2669
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2670
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2671
+	.4byte	.LM2670
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2671
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46847,12 +46827,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2674
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2675
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46867,47 +46847,47 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2678
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2679
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2680
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2681
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2682
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2683
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2684
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2685
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2686
+	.4byte	.LM2682
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2683
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2684
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2685
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2686
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46917,42 +46897,42 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2688
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2689
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2690
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2691
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2692
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2693
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2694
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2695
+	.4byte	.LM2691
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2692
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2693
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2694
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2695
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46962,12 +46942,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2697
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2698
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46977,17 +46957,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2700
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2701
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2702
+	.4byte	.LM2701
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2702
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -46997,17 +46977,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2704
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2705
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2706
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47017,7 +46997,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2708
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47027,7 +47007,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2710
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47042,12 +47022,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2713
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2714
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47057,17 +47037,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2716
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2717
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2718
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47077,22 +47057,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2720
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2721
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2722
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2723
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47107,12 +47087,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2726
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2727
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47127,7 +47107,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2730
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47137,7 +47117,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2732
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47147,32 +47127,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2734
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2735
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2736
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2737
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2738
+	.4byte	.LM2737
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2739
+	.4byte	.LM2738
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2739
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47182,17 +47162,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2741
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2742
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2743
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47202,7 +47182,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2745
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47212,22 +47192,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2747
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2748
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2749
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2750
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47237,12 +47217,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2752
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2753
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47252,7 +47232,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2755
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47267,7 +47247,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2758
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47292,17 +47272,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2763
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2764
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2765
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47317,17 +47297,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2768
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2769
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2770
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47337,17 +47317,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2772
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2773
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2774
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47357,12 +47337,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2776
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2777
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47382,7 +47362,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2781
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47412,12 +47392,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2787
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2788
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47432,12 +47412,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2791
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2792
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47472,7 +47452,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2799
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47482,7 +47462,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2801
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47492,17 +47472,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2803
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2804
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2805
+	.4byte	.LM2804
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2805
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47512,27 +47492,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2807
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2808
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2809
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2810
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2811
+	.4byte	.LM2809
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2810
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2811
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47542,17 +47522,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2813
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2814
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM2814
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM2815
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47562,12 +47542,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2817
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2818
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47577,7 +47557,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2820
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47587,7 +47567,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2822
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47597,7 +47577,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2824
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47607,17 +47587,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2826
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2827
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2828
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47627,12 +47607,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2830
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2831
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47642,7 +47622,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2833
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47652,7 +47632,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2835
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47667,12 +47647,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2838
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2839
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47687,37 +47667,37 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2842
-	.byte	0x18
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2843
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2844
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2845
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2846
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2847
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM2846
+	.byte	0x18
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2847
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM2848
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47727,17 +47707,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2850
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2851
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2852
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47752,27 +47732,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2855
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2856
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2857
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2858
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2859
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47782,17 +47762,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2861
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2862
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2863
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47817,7 +47797,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2868
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47837,7 +47817,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2872
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47862,7 +47842,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2877
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47882,7 +47862,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2881
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47902,7 +47882,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2885
-	.byte	0x15
+	.byte	0x1b
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47922,7 +47902,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2889
-	.byte	0x1b
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47932,7 +47912,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2891
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47942,32 +47922,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2893
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2894
-	.byte	0x15
+	.byte	0x1a
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2895
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2896
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM2896
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM2897
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2898
-	.byte	0x1a
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47977,7 +47957,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2900
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -47987,7 +47967,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2902
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48022,7 +48002,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2909
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48032,22 +48012,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2911
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2912
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2913
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2914
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48067,17 +48047,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2918
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2919
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2920
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48087,7 +48067,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2922
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48097,22 +48077,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2924
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2925
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2926
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2927
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48122,17 +48102,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2929
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2930
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2931
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48147,7 +48127,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2934
-	.byte	0x15
+	.byte	0x1b
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48167,7 +48147,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2938
-	.byte	0x1b
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48187,12 +48167,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2942
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2943
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48202,47 +48182,47 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2945
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2946
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2947
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2948
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2949
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2950
+	.4byte	.LM2946
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2951
+	.4byte	.LM2947
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2952
+	.4byte	.LM2948
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM2953
+	.4byte	.LM2949
 	.byte	0x18
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2950
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2951
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2952
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM2953
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48252,12 +48232,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2955
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2956
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48267,7 +48247,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2958
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48277,7 +48257,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2960
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48287,7 +48267,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2962
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48297,7 +48277,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2964
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48347,12 +48327,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2974
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2975
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48367,12 +48347,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2978
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2979
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48457,42 +48437,42 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2996
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM2997
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2998
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM2999
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3000
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3001
 	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3002
+	.4byte	.LM2998
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3003
+	.4byte	.LM2999
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3000
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3001
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3002
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3003
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48502,12 +48482,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3005
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3006
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48522,17 +48502,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3009
-	.byte	0x15
+	.byte	0x1d
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3010
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3011
-	.byte	0x15
+	.byte	0xb
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48542,42 +48522,42 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3013
-	.byte	0x1d
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3014
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3015
-	.byte	0xb
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3016
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3017
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3018
+	.4byte	.LM3014
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3019
+	.4byte	.LM3015
 	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3020
+	.4byte	.LM3016
 	.byte	0x19
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3017
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3018
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3019
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3020
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48587,12 +48567,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3022
-	.byte	0x16
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3023
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48607,12 +48587,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3026
-	.byte	0x19
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3027
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48627,12 +48607,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3030
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3031
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48642,17 +48622,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3033
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3034
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3035
+	.4byte	.LM3034
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3035
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48667,27 +48647,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3038
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3039
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3040
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3041
+	.4byte	.LM3040
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3041
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3042
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48697,17 +48677,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3044
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3045
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3046
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48717,7 +48697,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3048
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48727,7 +48707,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3050
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48737,22 +48717,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3052
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3053
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3054
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3055
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48762,7 +48742,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3057
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48772,47 +48752,47 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3059
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3060
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3061
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3062
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3063
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3064
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3065
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3066
+	.4byte	.LM3062
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3067
+	.4byte	.LM3063
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3064
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3065
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3066
+	.byte	0x19
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3067
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48827,12 +48807,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3070
-	.byte	0x19
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3071
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48847,12 +48827,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3074
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3075
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48862,17 +48842,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3077
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3078
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3079
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48882,17 +48862,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3081
-	.byte	0x18
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3082
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3082
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3083
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48907,52 +48887,52 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3086
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3087
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3088
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3089
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3090
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3091
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3092
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3093
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3094
+	.4byte	.LM3093
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3095
+	.4byte	.LM3094
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3095
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48967,7 +48947,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3098
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48977,17 +48957,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3100
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3101
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3102
+	.4byte	.LM3101
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3102
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -48997,17 +48977,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3104
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3105
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3105
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3106
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49017,52 +48997,52 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3108
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3109
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3110
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3111
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3112
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3113
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3114
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3115
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3116
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3117
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49077,17 +49057,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3120
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3121
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3122
-	.byte	0x15
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49097,32 +49077,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3124
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3125
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3126
-	.byte	0x19
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3127
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3128
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3129
+	.4byte	.LM3125
 	.byte	0x12
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3126
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3127
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3128
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3129
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49132,12 +49112,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3131
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3132
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49147,22 +49127,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3134
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3135
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3136
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3137
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49172,17 +49152,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3139
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3140
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3140
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3141
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49192,12 +49172,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3143
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3144
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49212,12 +49192,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3147
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3148
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49232,12 +49212,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3151
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3152
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49252,37 +49232,37 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3155
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3156
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3157
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3158
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3159
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3160
 	.byte	0x13
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3161
+	.4byte	.LM3157
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3158
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3159
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3160
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3161
+	.byte	0x1d
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49292,67 +49272,67 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3163
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3164
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3165
-	.byte	0x1d
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3166
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3167
 	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3168
+	.4byte	.LM3164
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3169
+	.4byte	.LM3165
 	.byte	0x10
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3170
+	.4byte	.LM3166
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3171
+	.4byte	.LM3167
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3172
+	.4byte	.LM3168
 	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3173
+	.4byte	.LM3169
 	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3174
+	.4byte	.LM3170
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3175
+	.4byte	.LM3171
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3172
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3173
+	.byte	0x18
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3174
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3175
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49362,17 +49342,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3177
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3178
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3179
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49387,17 +49367,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3182
-	.byte	0x15
+	.byte	0x1e
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3183
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3184
-	.byte	0x15
+	.byte	0xa
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49407,22 +49387,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3186
-	.byte	0x1e
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3187
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3187
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3188
-	.byte	0xa
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3189
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49432,94 +49412,94 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3191
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3192
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3193
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3194
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3195
 	.byte	0x10
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3196
+	.4byte	.LM3192
 	.byte	0x1b
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3197
+	.4byte	.LM3193
 	.byte	0x3
 	.byte	0x75
 	.byte	0x1
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3198
+	.4byte	.LM3194
 	.byte	0x21
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3199
+	.4byte	.LM3195
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3196
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3197
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3198
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3199
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3200
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3201
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3202
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3203
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3204
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3205
 	.byte	0x11
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3206
+	.4byte	.LM3202
 	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3207
+	.4byte	.LM3203
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3208
+	.4byte	.LM3204
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3205
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3206
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3207
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3208
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49529,12 +49509,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3210
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3211
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49544,42 +49524,42 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3213
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3214
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3215
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3216
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3217
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3218
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3219
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3220
+	.4byte	.LM3218
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3219
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3220
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49589,7 +49569,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3222
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49599,12 +49579,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3224
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3225
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49614,12 +49594,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3227
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3228
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49629,12 +49609,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3230
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3231
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49644,12 +49624,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3233
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3234
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49659,7 +49639,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3236
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49674,27 +49654,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3239
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3240
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3241
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3241
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3242
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3243
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49714,7 +49694,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3247
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49724,17 +49704,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3249
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3250
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3251
+	.4byte	.LM3250
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3251
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49744,12 +49724,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3253
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3254
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49759,12 +49739,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3256
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3257
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49779,47 +49759,47 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3260
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3261
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3262
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3263
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3264
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3265
 	.byte	0x13
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3266
+	.4byte	.LM3262
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3267
+	.4byte	.LM3263
 	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3268
+	.4byte	.LM3264
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3265
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3266
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3267
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3268
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49839,12 +49819,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3272
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3273
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49854,7 +49834,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3275
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49864,7 +49844,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3277
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49884,7 +49864,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3281
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49894,17 +49874,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3283
-	.byte	0x16
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3284
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3285
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49914,7 +49894,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3287
-	.byte	0x19
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49944,12 +49924,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3293
-	.byte	0x15
+	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3294
-	.byte	0x15
+	.byte	0x1d
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49959,22 +49939,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3296
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3297
-	.byte	0x12
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3298
-	.byte	0x1d
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3299
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -49999,17 +49979,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3304
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3305
-	.byte	0x16
+	.byte	0x1b
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3306
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50019,12 +49999,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3308
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3309
-	.byte	0x1b
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50034,7 +50014,9 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3311
-	.byte	0x15
+	.byte	0x3
+	.byte	0x5f
+	.byte	0x1
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50049,14 +50031,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3314
-	.byte	0x15
+	.byte	0x2d
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3315
-	.byte	0x3
-	.byte	0x5f
-	.byte	0x1
+	.byte	0x10
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50071,17 +50051,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3318
-	.byte	0x2d
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3319
-	.byte	0x10
+	.byte	0x1c
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3320
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50096,27 +50076,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3323
-	.byte	0x1c
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3324
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3325
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3326
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3327
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50126,17 +50106,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3329
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3330
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3331
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50151,17 +50131,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3334
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3335
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3336
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50171,7 +50151,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3338
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50191,17 +50171,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3342
-	.byte	0x15
+	.byte	0xf
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3343
-	.byte	0x16
+	.byte	0x1c
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3344
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50211,22 +50191,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3346
-	.byte	0xf
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3347
-	.byte	0x1c
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3348
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3349
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50236,32 +50216,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3351
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3352
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3353
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3354
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3355
 	.byte	0xf
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3356
+	.4byte	.LM3352
 	.byte	0x1d
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3353
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3354
+	.byte	0x13
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3355
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3356
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50271,32 +50251,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3358
-	.byte	0x13
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3359
-	.byte	0x16
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3360
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3361
-	.byte	0x15
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3362
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3363
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50306,27 +50286,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3365
-	.byte	0x19
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3366
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3367
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3368
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3369
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50336,17 +50316,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3371
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3372
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3373
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50361,17 +50341,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3376
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3377
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3378
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50381,7 +50361,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3380
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50401,17 +50381,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3384
-	.byte	0x15
+	.byte	0xf
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3385
-	.byte	0x16
+	.byte	0x1c
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3386
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50421,22 +50401,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3388
-	.byte	0xf
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3389
-	.byte	0x1c
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3390
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3391
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50446,32 +50426,32 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3393
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3394
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3395
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3396
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3397
 	.byte	0xf
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3398
+	.4byte	.LM3394
 	.byte	0x1e
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3395
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3396
+	.byte	0x13
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3397
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3398
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50481,17 +50461,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3400
-	.byte	0x13
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3401
-	.byte	0x16
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3402
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50501,27 +50481,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3404
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3405
-	.byte	0x19
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3406
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3407
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3406
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3407
+	.byte	0x10
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3408
-	.byte	0x16
+	.byte	0x1a
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50531,17 +50511,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3410
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3411
-	.byte	0x10
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3412
-	.byte	0x1a
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50551,7 +50531,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3414
-	.byte	0x16
+	.byte	0xe
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50561,7 +50541,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3416
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50571,12 +50551,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3418
-	.byte	0xe
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3419
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50596,17 +50576,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3423
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3424
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3425
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50616,27 +50596,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3427
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3428
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3429
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3430
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3429
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3430
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3431
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50646,17 +50626,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3433
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3434
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3435
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50666,22 +50646,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3437
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3438
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3439
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3440
+	.4byte	.LM3439
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3440
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50691,7 +50671,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3442
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50701,12 +50681,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3444
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3445
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50716,17 +50696,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3447
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3448
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3449
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50736,17 +50716,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3451
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3452
-	.byte	0x16
+	.byte	0xe
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3453
-	.byte	0x16
+	.byte	0x21
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50756,17 +50736,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3455
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3456
-	.byte	0xe
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3457
-	.byte	0x21
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50776,17 +50756,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3459
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3460
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3460
+	.byte	0x13
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3461
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50796,17 +50776,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3463
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3464
-	.byte	0x13
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3465
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50816,17 +50796,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3467
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3468
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3468
+	.byte	0x13
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3469
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50836,42 +50816,42 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3471
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3472
-	.byte	0x13
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3473
-	.byte	0x16
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3474
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3475
-	.byte	0x18
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3476
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3476
+	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3477
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3478
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50881,17 +50861,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3480
-	.byte	0x16
+	.byte	0xc
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3481
-	.byte	0x15
+	.byte	0x1f
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3482
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50901,17 +50881,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3484
-	.byte	0xc
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3485
-	.byte	0x1f
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3486
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50921,12 +50901,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3488
-	.byte	0x15
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3489
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50941,17 +50921,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3492
-	.byte	0x19
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3493
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3494
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50961,17 +50941,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3496
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3497
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3498
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50981,7 +50961,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3500
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -50996,57 +50976,57 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3503
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3504
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3505
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3506
-	.byte	0x15
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3507
 	.byte	0x11
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3508
+	.4byte	.LM3504
 	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3509
+	.4byte	.LM3505
 	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3506
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3507
+	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3508
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3509
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3510
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3511
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3512
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3513
+	.4byte	.LM3511
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3512
 	.byte	0x17
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3513
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51071,17 +51051,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3518
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3519
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3520
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51091,22 +51071,22 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3522
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3523
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3524
-	.byte	0x16
+	.byte	0xd
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3525
-	.byte	0x15
+	.byte	0x1e
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51116,27 +51096,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3527
-	.byte	0x15
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3528
-	.byte	0xd
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3529
-	.byte	0x1e
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3530
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
+	.4byte	.LM3529
+	.byte	0x15
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3530
+	.byte	0x18
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
 	.4byte	.LM3531
-	.byte	0x19
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51151,7 +51131,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3534
-	.byte	0x18
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51171,7 +51151,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3538
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51186,7 +51166,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3541
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51206,12 +51186,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3545
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3546
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51221,7 +51201,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3548
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51231,17 +51211,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3550
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3551
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3552
+	.4byte	.LM3551
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3552
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51256,17 +51236,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3555
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3556
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3557
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51276,7 +51256,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3559
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51286,17 +51266,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3561
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3562
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3563
+	.4byte	.LM3562
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3563
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51311,12 +51291,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3566
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3567
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51336,7 +51316,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3571
-	.byte	0x15
+	.byte	0x18
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51356,12 +51336,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3575
-	.byte	0x18
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3576
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51371,7 +51351,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3578
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51381,17 +51361,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3580
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3581
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3582
+	.4byte	.LM3581
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3582
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51406,17 +51386,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3585
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3586
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3587
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51426,7 +51406,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3589
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51436,17 +51416,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3591
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3592
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3593
+	.4byte	.LM3592
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3593
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51461,12 +51441,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3596
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3597
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51486,7 +51466,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3601
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51496,7 +51476,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3603
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51506,12 +51486,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3605
-	.byte	0x17
+	.byte	0x14
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3606
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51526,17 +51506,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3609
-	.byte	0x14
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3610
-	.byte	0x16
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3611
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51546,17 +51526,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3613
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3614
-	.byte	0x19
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3615
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51566,7 +51546,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3617
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51576,17 +51556,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3619
-	.byte	0x17
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3620
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3621
+	.4byte	.LM3620
 	.byte	0x16
+	.byte	0x0
+	.byte	0x5
+	.byte	0x2
+	.4byte	.LM3621
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51601,7 +51581,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3624
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51616,7 +51596,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3627
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51626,7 +51606,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3629
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51636,17 +51616,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3631
-	.byte	0x16
+	.byte	0x11
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3632
-	.byte	0x15
+	.byte	0x19
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3633
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51656,17 +51636,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3635
-	.byte	0x11
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3636
-	.byte	0x19
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3637
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51676,17 +51656,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3639
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3640
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3641
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51696,7 +51676,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3643
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51706,17 +51686,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3645
-	.byte	0x16
+	.byte	0x13
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3646
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3647
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51726,17 +51706,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3649
-	.byte	0x13
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3650
-	.byte	0x16
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3651
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51811,7 +51791,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3666
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51826,17 +51806,17 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3669
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3670
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3671
-	.byte	0x15
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51846,7 +51826,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3673
-	.byte	0x16
+	.byte	0x17
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
@@ -51856,71 +51836,51 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3675
-	.byte	0x17
+	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3676
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3677
-	.byte	0x17
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3678
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3679
-	.byte	0x15
+	.byte	0x16
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
 	.4byte	.LM3680
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3681
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3682
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3683
-	.byte	0x16
-	.byte	0x0
-	.byte	0x5
-	.byte	0x2
-	.4byte	.LM3684
 	.byte	0x12
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3685
+	.4byte	.LM3681
 	.byte	0x10
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3686
+	.4byte	.LM3682
 	.byte	0x1f
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3687
+	.4byte	.LM3683
 	.byte	0x15
 	.byte	0x0
 	.byte	0x5
 	.byte	0x2
-	.4byte	.LM3688
+	.4byte	.LM3684
 	.byte	0x16
 	.byte	0x0
 	.byte	0x5
@@ -52693,7 +52653,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0,0
 
 	.section	.debug_info
-	.4byte	0x21f15
+	.4byte	0x21f13
 	.2byte	0x2
 	.4byte	.debug_abbrev
 	.byte	0x4
@@ -62832,7 +62792,7 @@ IsLastMonThatKnowsSurf:
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x67a5
+	.4byte	0x67a3
 	.ascii	"Task_LearnedMove\000"
 
 	.byte	0x1
@@ -62849,7 +62809,7 @@ IsLastMonThatKnowsSurf:
 	.2byte	0x12ba
 	.4byte	0x127
 	.byte	0x1
-	.byte	0x57
+	.byte	0x56
 	.byte	0x4
 	.ascii	"mon\000"
 
@@ -62857,15 +62817,13 @@ IsLastMonThatKnowsSurf:
 	.2byte	0x12bc
 	.4byte	0x4f6
 	.byte	0x1
-	.byte	0x55
-	.byte	0x4
+	.byte	0x54
+	.byte	0x16
 	.ascii	"move\000"
 
 	.byte	0x1
 	.2byte	0x12bd
 	.4byte	0x1cd2
-	.byte	0x1
-	.byte	0x56
 	.byte	0x16
 	.ascii	"item\000"
 
@@ -62874,11 +62832,11 @@ IsLastMonThatKnowsSurf:
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x67eb
+	.4byte	0x67e9
 	.ascii	"Task_DoLearnedMoveFanfareAfterText\000"
 
 	.byte	0x1
-	.2byte	0x12cf
+	.2byte	0x12cd
 	.byte	0x1
 	.4byte	.LFB246
 	.4byte	.LFE246
@@ -62888,15 +62846,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x12ce
+	.2byte	0x12cc
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6833
+	.4byte	0x6831
 	.ascii	"Task_LearnNextMoveOrClosePartyMenu\000"
 
 	.byte	0x1
-	.2byte	0x12d8
+	.2byte	0x12d6
 	.byte	0x1
 	.4byte	.LFB247
 	.4byte	.LFE247
@@ -62906,17 +62864,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x12d7
+	.2byte	0x12d5
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x686c
+	.4byte	0x686a
 	.ascii	"Task_ReplaceMoveYesNo\000"
 
 	.byte	0x1
-	.2byte	0x12e7
+	.2byte	0x12e5
 	.byte	0x1
 	.4byte	.LFB248
 	.4byte	.LFE248
@@ -62926,15 +62884,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x12e6
+	.2byte	0x12e4
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x68b2
+	.4byte	0x68b0
 	.ascii	"Task_HandleReplaceMoveYesNoInput\000"
 
 	.byte	0x1
-	.2byte	0x12f0
+	.2byte	0x12ee
 	.byte	0x1
 	.4byte	.LFB249
 	.4byte	.LFE249
@@ -62944,17 +62902,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x12ef
+	.2byte	0x12ed
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x68f8
+	.4byte	0x68f6
 	.ascii	"Task_ShowSummaryScreenToForgetMove\000"
 
 	.byte	0x1
-	.2byte	0x1301
+	.2byte	0x12ff
 	.byte	0x1
 	.4byte	.LFB250
 	.4byte	.LFE250
@@ -62964,14 +62922,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1300
+	.2byte	0x12fe
 	.4byte	0x127
 	.byte	0x0
 	.byte	0xa
 	.ascii	"CB2_ShowSummaryScreenToForgetMove\000"
 
 	.byte	0x1
-	.2byte	0x130a
+	.2byte	0x1308
 	.byte	0x1
 	.4byte	.LFB251
 	.4byte	.LFE251
@@ -62981,18 +62939,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"CB2_ReturnToPartyMenuWhileLearningMove\000"
 
 	.byte	0x1
-	.2byte	0x130f
+	.2byte	0x130d
 	.byte	0x1
 	.4byte	.LFB252
 	.4byte	.LFE252
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x69ac
+	.4byte	0x69aa
 	.ascii	"Task_ReturnToPartyMenuWhileLearningMove\000"
 
 	.byte	0x1
-	.2byte	0x1314
+	.2byte	0x1312
 	.byte	0x1
 	.4byte	.LFB253
 	.4byte	.LFE253
@@ -63002,17 +62960,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1313
+	.2byte	0x1311
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6a0c
+	.4byte	0x6a0a
 	.ascii	"DisplayPartyMenuForgotMoveMessage\000"
 
 	.byte	0x1
-	.2byte	0x131f
+	.2byte	0x131d
 	.byte	0x1
 	.4byte	.LFB254
 	.4byte	.LFE254
@@ -63022,13 +62980,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x131e
+	.2byte	0x131c
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1320
+	.2byte	0x131e
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -63036,15 +62994,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x1321
+	.2byte	0x131f
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6a64
+	.4byte	0x6a62
 	.ascii	"Task_PartyMenuReplaceMove\000"
 
 	.byte	0x1
-	.2byte	0x132a
+	.2byte	0x1328
 	.byte	0x1
 	.4byte	.LFB255
 	.4byte	.LFE255
@@ -63054,13 +63012,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1329
+	.2byte	0x1327
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x132b
+	.2byte	0x1329
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x54
@@ -63068,15 +63026,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x132c
+	.2byte	0x132a
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6a9e
+	.4byte	0x6a9c
 	.ascii	"StopLearningMovePrompt\000"
 
 	.byte	0x1
-	.2byte	0x1339
+	.2byte	0x1337
 	.byte	0x1
 	.4byte	.LFB256
 	.4byte	.LFE256
@@ -63086,15 +63044,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1338
+	.2byte	0x1336
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6adc
+	.4byte	0x6ada
 	.ascii	"Task_StopLearningMoveYesNo\000"
 
 	.byte	0x1
-	.2byte	0x1342
+	.2byte	0x1340
 	.byte	0x1
 	.4byte	.LFB257
 	.4byte	.LFE257
@@ -63104,15 +63062,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1341
+	.2byte	0x133f
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6b35
+	.4byte	0x6b33
 	.ascii	"Task_HandleStopLearningMoveYesNoInput\000"
 
 	.byte	0x1
-	.2byte	0x134b
+	.2byte	0x1349
 	.byte	0x1
 	.4byte	.LFB258
 	.4byte	.LFE258
@@ -63122,7 +63080,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x134a
+	.2byte	0x1348
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -63130,17 +63088,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x134c
+	.2byte	0x134a
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6b7a
+	.4byte	0x6b78
 	.ascii	"Task_TryLearningNextMoveAfterText\000"
 
 	.byte	0x1
-	.2byte	0x136d
+	.2byte	0x136b
 	.byte	0x1
 	.4byte	.LFB259
 	.4byte	.LFE259
@@ -63150,16 +63108,16 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x136c
+	.2byte	0x136a
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x6c1e
+	.4byte	0x6c1c
 	.byte	0x1
 	.ascii	"ItemUseCB_RareCandy\000"
 
 	.byte	0x1
-	.2byte	0x1373
+	.2byte	0x1371
 	.byte	0x1
 	.4byte	.LFB260
 	.4byte	.LFE260
@@ -63169,7 +63127,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1372
+	.2byte	0x1370
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x57
@@ -63177,7 +63135,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"task\000"
 
 	.byte	0x1
-	.2byte	0x1372
+	.2byte	0x1370
 	.4byte	0x142
 	.byte	0x1
 	.byte	0x5a
@@ -63185,7 +63143,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1374
+	.2byte	0x1372
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -63193,15 +63151,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ptr\000"
 
 	.byte	0x1
-	.2byte	0x1375
-	.4byte	0x6d54
+	.2byte	0x1373
+	.4byte	0x6d52
 	.byte	0x1
 	.byte	0x56
 	.byte	0x4
 	.ascii	"arrayPtr\000"
 
 	.byte	0x1
-	.2byte	0x1376
+	.2byte	0x1374
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x54
@@ -63209,7 +63167,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"itemPtr\000"
 
 	.byte	0x1
-	.2byte	0x1377
+	.2byte	0x1375
 	.4byte	0x1eb5
 	.byte	0x1
 	.byte	0x58
@@ -63217,13 +63175,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"cannotUseEffect\000"
 
 	.byte	0x1
-	.2byte	0x1378
+	.2byte	0x1376
 	.4byte	0x12d
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x6d54
+	.4byte	0x6d52
 	.ascii	"PartyMenuInternal\000"
 
 	.2byte	0x238
@@ -63312,7 +63270,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x77
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -63321,7 +63279,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x78
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -63339,7 +63297,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x7e
-	.4byte	0x6d72
+	.4byte	0x6d70
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -63348,44 +63306,44 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x7f
-	.4byte	0x6d7e
+	.4byte	0x6d7c
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x6c1e
+	.4byte	0x6c1c
 	.byte	0x11
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.4byte	0x127
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x6d72
+	.4byte	0x6d70
 	.4byte	0x127
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x6d7e
+	.4byte	0x6d7c
 	.4byte	0x150
 	.byte	0x12
 	.byte	0xff
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x6d8a
+	.4byte	0x6d88
 	.4byte	0x1cd8
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6dde
+	.4byte	0x6ddc
 	.ascii	"UpdateMonDisplayInfoAfterRareCandy\000"
 
 	.byte	0x1
-	.2byte	0x139c
+	.2byte	0x139a
 	.byte	0x1
 	.4byte	.LFB261
 	.4byte	.LFE261
@@ -63395,7 +63353,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x139b
+	.2byte	0x1399
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x57
@@ -63403,17 +63361,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x139b
+	.2byte	0x1399
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6e1f
+	.4byte	0x6e1d
 	.ascii	"Task_DisplayLevelUpStatsPg1\000"
 
 	.byte	0x1
-	.2byte	0x13a9
+	.2byte	0x13a7
 	.byte	0x1
 	.4byte	.LFB262
 	.4byte	.LFE262
@@ -63423,17 +63381,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13a8
+	.2byte	0x13a6
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6e60
+	.4byte	0x6e5e
 	.ascii	"Task_DisplayLevelUpStatsPg2\000"
 
 	.byte	0x1
-	.2byte	0x13b3
+	.2byte	0x13b1
 	.byte	0x1
 	.4byte	.LFB263
 	.4byte	.LFE263
@@ -63443,17 +63401,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13b2
+	.2byte	0x13b0
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6ead
+	.4byte	0x6eab
 	.ascii	"DisplayLevelUpStatsPg1\000"
 
 	.byte	0x1
-	.2byte	0x13bd
+	.2byte	0x13bb
 	.byte	0x1
 	.4byte	.LFB264
 	.4byte	.LFE264
@@ -63463,23 +63421,23 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13bc
+	.2byte	0x13ba
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"arrayPtr\000"
 
 	.byte	0x1
-	.2byte	0x13be
+	.2byte	0x13bc
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6efa
+	.4byte	0x6ef8
 	.ascii	"DisplayLevelUpStatsPg2\000"
 
 	.byte	0x1
-	.2byte	0x13c7
+	.2byte	0x13c5
 	.byte	0x1
 	.4byte	.LFB265
 	.4byte	.LFE265
@@ -63489,23 +63447,23 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13c6
+	.2byte	0x13c4
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"arrayPtr\000"
 
 	.byte	0x1
-	.2byte	0x13c8
+	.2byte	0x13c6
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6f49
+	.4byte	0x6f47
 	.ascii	"Task_TryLearnNewMoves\000"
 
 	.byte	0x1
-	.2byte	0x13d0
+	.2byte	0x13ce
 	.byte	0x1
 	.4byte	.LFB266
 	.4byte	.LFE266
@@ -63515,7 +63473,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13cf
+	.2byte	0x13cd
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -63523,17 +63481,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"learnMove\000"
 
 	.byte	0x1
-	.2byte	0x13d1
+	.2byte	0x13cf
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6f98
+	.4byte	0x6f96
 	.ascii	"Task_TryLearningNextMove\000"
 
 	.byte	0x1
-	.2byte	0x13eb
+	.2byte	0x13e9
 	.byte	0x1
 	.4byte	.LFB267
 	.4byte	.LFE267
@@ -63543,7 +63501,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13ea
+	.2byte	0x13e8
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -63551,17 +63509,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"result\000"
 
 	.byte	0x1
-	.2byte	0x13ec
+	.2byte	0x13ea
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x6ff7
+	.4byte	0x6ff5
 	.ascii	"PartyMenuTryEvolution\000"
 
 	.byte	0x1
-	.2byte	0x13ff
+	.2byte	0x13fd
 	.byte	0x1
 	.4byte	.LFB268
 	.4byte	.LFE268
@@ -63571,7 +63529,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x13fe
+	.2byte	0x13fc
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -63579,7 +63537,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1400
+	.2byte	0x13fe
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x57
@@ -63587,15 +63545,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"targetSpecies\000"
 
 	.byte	0x1
-	.2byte	0x1401
+	.2byte	0x13ff
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7037
+	.4byte	0x7035
 	.ascii	"DisplayMonNeedsToReplaceMove\000"
 
 	.byte	0x1
-	.2byte	0x1411
+	.2byte	0x140f
 	.byte	0x1
 	.4byte	.LFB269
 	.4byte	.LFE269
@@ -63605,15 +63563,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1410
+	.2byte	0x140e
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x707d
+	.4byte	0x707b
 	.ascii	"DisplayMonLearnedMove\000"
 
 	.byte	0x1
-	.2byte	0x141c
+	.2byte	0x141a
 	.byte	0x1
 	.4byte	.LFB270
 	.4byte	.LFE270
@@ -63623,21 +63581,21 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x141b
+	.2byte	0x1419
 	.4byte	0x127
 	.byte	0xc
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x141b
+	.2byte	0x1419
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x70c7
+	.4byte	0x70c5
 	.ascii	"BufferMonStatsToTaskData\000"
 
 	.byte	0x1
-	.2byte	0x1427
+	.2byte	0x1425
 	.byte	0x1
 	.4byte	.LFB271
 	.4byte	.LFE271
@@ -63647,7 +63605,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1426
+	.2byte	0x1424
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x54
@@ -63655,18 +63613,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"data\000"
 
 	.byte	0x1
-	.2byte	0x1426
+	.2byte	0x1424
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x55
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x710e
+	.4byte	0x710c
 	.byte	0x1
 	.ascii	"ItemUseCB_SacredAsh\000"
 
 	.byte	0x1
-	.2byte	0x1435
+	.2byte	0x1433
 	.byte	0x1
 	.4byte	.LFB272
 	.4byte	.LFE272
@@ -63676,23 +63634,23 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1434
+	.2byte	0x1432
 	.4byte	0x127
 	.byte	0x3
 	.ascii	"task\000"
 
 	.byte	0x1
-	.2byte	0x1434
+	.2byte	0x1432
 	.4byte	0x142
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x715b
+	.4byte	0x7159
 	.ascii	"UseSacredAsh\000"
 
 	.byte	0x1
-	.2byte	0x143d
+	.2byte	0x143b
 	.byte	0x1
 	.4byte	.LFB273
 	.4byte	.LFE273
@@ -63702,7 +63660,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x143c
+	.2byte	0x143a
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x58
@@ -63710,7 +63668,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x143e
+	.2byte	0x143c
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -63718,17 +63676,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"hp\000"
 
 	.byte	0x1
-	.2byte	0x143f
+	.2byte	0x143d
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x57
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7193
+	.4byte	0x7191
 	.ascii	"Task_SacredAshLoop\000"
 
 	.byte	0x1
-	.2byte	0x145b
+	.2byte	0x1459
 	.byte	0x1
 	.4byte	.LFB274
 	.4byte	.LFE274
@@ -63738,17 +63696,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x145a
+	.2byte	0x1458
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x71d6
+	.4byte	0x71d4
 	.ascii	"Task_SacredAshDisplayHPRestored\000"
 
 	.byte	0x1
-	.2byte	0x147b
+	.2byte	0x1479
 	.byte	0x1
 	.4byte	.LFB275
 	.4byte	.LFE275
@@ -63758,16 +63716,16 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x147a
+	.2byte	0x1478
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x7222
+	.4byte	0x7220
 	.byte	0x1
 	.ascii	"ItemUseCB_EvolutionStone\000"
 
 	.byte	0x1
-	.2byte	0x1488
+	.2byte	0x1486
 	.byte	0x1
 	.4byte	.LFB276
 	.4byte	.LFE276
@@ -63777,24 +63735,24 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1487
+	.2byte	0x1485
 	.4byte	0x127
 	.byte	0x3
 	.ascii	"task\000"
 
 	.byte	0x1
-	.2byte	0x1487
+	.2byte	0x1485
 	.4byte	0x142
 	.byte	0x1
 	.byte	0x56
 	.byte	0x0
 	.byte	0x1b
-	.4byte	0x7286
+	.4byte	0x7284
 	.byte	0x1
 	.ascii	"GetItemEffectType\000"
 
 	.byte	0x1
-	.2byte	0x149a
+	.2byte	0x1498
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB277
@@ -63805,7 +63763,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x1499
+	.2byte	0x1497
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x51
@@ -63813,7 +63771,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"itemEffect\000"
 
 	.byte	0x1
-	.2byte	0x149b
+	.2byte	0x1499
 	.4byte	0x1050
 	.byte	0x1
 	.byte	0x54
@@ -63821,17 +63779,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"statusCure\000"
 
 	.byte	0x1
-	.2byte	0x149c
+	.2byte	0x149a
 	.4byte	0x2b2
 	.byte	0x1
 	.byte	0x52
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x72dc
+	.4byte	0x72da
 	.ascii	"TryTutorSelectedMon\000"
 
 	.byte	0x1
-	.2byte	0x14de
+	.2byte	0x14dc
 	.byte	0x1
 	.4byte	.LFB278
 	.4byte	.LFE278
@@ -63841,7 +63799,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x14dd
+	.2byte	0x14db
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -63849,7 +63807,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x14df
+	.2byte	0x14dd
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -63857,7 +63815,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x14e0
+	.2byte	0x14de
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x58
@@ -63867,19 +63825,19 @@ IsLastMonThatKnowsSurf:
 	.ascii	"CB2_PartyMenuFromStartMenu\000"
 
 	.byte	0x1
-	.2byte	0x1500
+	.2byte	0x14fe
 	.byte	0x1
 	.4byte	.LFB279
 	.4byte	.LFE279
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x19
-	.4byte	0x7347
+	.4byte	0x7345
 	.byte	0x1
 	.ascii	"CB2_ChooseMonToGiveItem\000"
 
 	.byte	0x1
-	.2byte	0x1507
+	.2byte	0x1505
 	.byte	0x1
 	.4byte	.LFB280
 	.4byte	.LFE280
@@ -63889,17 +63847,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"callback\000"
 
 	.byte	0x1
-	.2byte	0x1508
+	.2byte	0x1506
 	.4byte	0x14a
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x738b
+	.4byte	0x7389
 	.ascii	"TryGiveItemOrMailToSelectedMon\000"
 
 	.byte	0x1
-	.2byte	0x150e
+	.2byte	0x150c
 	.byte	0x1
 	.4byte	.LFB281
 	.4byte	.LFE281
@@ -63909,17 +63867,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x150d
+	.2byte	0x150b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x73cc
+	.4byte	0x73ca
 	.ascii	"GiveItemOrMailToSelectedMon\000"
 
 	.byte	0x1
-	.2byte	0x1520
+	.2byte	0x151e
 	.byte	0x1
 	.4byte	.LFB282
 	.4byte	.LFE282
@@ -63929,17 +63887,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x151f
+	.2byte	0x151d
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7412
+	.4byte	0x7410
 	.ascii	"GiveItemToSelectedMon\000"
 
 	.byte	0x1
-	.2byte	0x152e
+	.2byte	0x152c
 	.byte	0x1
 	.4byte	.LFB283
 	.4byte	.LFE283
@@ -63949,21 +63907,21 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x152d
+	.2byte	0x152b
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x152f
+	.2byte	0x152d
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x746d
+	.4byte	0x746b
 	.ascii	"Task_UpdateHeldItemSpriteAndClosePartyMenu\000"
 
 	.byte	0x1
-	.2byte	0x153c
+	.2byte	0x153a
 	.byte	0x1
 	.4byte	.LFB284
 	.4byte	.LFE284
@@ -63973,21 +63931,21 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x153b
+	.2byte	0x1539
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x153d
+	.2byte	0x153b
 	.4byte	0x1496
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x74ac
+	.4byte	0x74aa
 	.ascii	"CB2_WriteMailToGiveMonFromBag\000"
 
 	.byte	0x1
-	.2byte	0x1547
+	.2byte	0x1545
 	.byte	0x1
 	.4byte	.LFB285
 	.4byte	.LFE285
@@ -63997,15 +63955,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mail\000"
 
 	.byte	0x1
-	.2byte	0x1548
+	.2byte	0x1546
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7505
+	.4byte	0x7503
 	.ascii	"CB2_ReturnToPartyOrBagMenuFromWritingMail\000"
 
 	.byte	0x1
-	.2byte	0x1554
+	.2byte	0x1552
 	.byte	0x1
 	.4byte	.LFB286
 	.4byte	.LFE286
@@ -64015,7 +63973,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1555
+	.2byte	0x1553
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -64023,15 +63981,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x1556
+	.2byte	0x1554
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x754d
+	.4byte	0x754b
 	.ascii	"Task_DisplayGaveMailFromBagMessage\000"
 
 	.byte	0x1
-	.2byte	0x1569
+	.2byte	0x1567
 	.byte	0x1
 	.4byte	.LFB287
 	.4byte	.LFE287
@@ -64041,17 +63999,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1568
+	.2byte	0x1566
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x758d
+	.4byte	0x758b
 	.ascii	"Task_SwitchItemsFromBagYesNo\000"
 
 	.byte	0x1
-	.2byte	0x1575
+	.2byte	0x1573
 	.byte	0x1
 	.4byte	.LFB288
 	.4byte	.LFE288
@@ -64061,15 +64019,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1574
+	.2byte	0x1572
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x75e9
+	.4byte	0x75e7
 	.ascii	"Task_HandleSwitchItemsFromBagYesNoInput\000"
 
 	.byte	0x1
-	.2byte	0x157e
+	.2byte	0x157c
 	.byte	0x1
 	.4byte	.LFB289
 	.4byte	.LFE289
@@ -64079,7 +64037,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x157d
+	.2byte	0x157b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -64087,17 +64045,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x157f
+	.2byte	0x157d
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7631
+	.4byte	0x762f
 	.ascii	"DisplayItemMustBeRemovedFirstMessage\000"
 
 	.byte	0x1
-	.2byte	0x15a3
+	.2byte	0x15a1
 	.byte	0x1
 	.4byte	.LFB290
 	.4byte	.LFE290
@@ -64107,15 +64065,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x15a2
+	.2byte	0x15a0
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x766c
+	.4byte	0x766a
 	.ascii	"RemoveItemToGiveFromBag\000"
 
 	.byte	0x1
-	.2byte	0x15aa
+	.2byte	0x15a8
 	.byte	0x1
 	.4byte	.LFB291
 	.4byte	.LFE291
@@ -64125,17 +64083,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x15a9
+	.2byte	0x15a7
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x76ab
+	.4byte	0x76a9
 	.ascii	"ReturnGiveItemToBagOrPC\000"
 
 	.byte	0x1
-	.2byte	0x15b4
+	.2byte	0x15b2
 	.byte	0x1
 	.4byte	0x12d
 	.4byte	.LFB292
@@ -64146,7 +64104,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x15b3
+	.2byte	0x15b1
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x51
@@ -64156,18 +64114,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonToGiveMailFromMailbox\000"
 
 	.byte	0x1
-	.2byte	0x15bc
+	.2byte	0x15ba
 	.byte	0x1
 	.4byte	.LFB293
 	.4byte	.LFE293
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x7735
+	.4byte	0x7733
 	.ascii	"TryGiveMailToSelectedMon\000"
 
 	.byte	0x1
-	.2byte	0x15c1
+	.2byte	0x15bf
 	.byte	0x1
 	.4byte	.LFB294
 	.4byte	.LFE294
@@ -64177,7 +64135,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x15c0
+	.2byte	0x15be
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -64185,7 +64143,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x15c2
+	.2byte	0x15c0
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -64193,13 +64151,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mail\000"
 
 	.byte	0x1
-	.2byte	0x15c3
-	.4byte	0x77ab
+	.2byte	0x15c1
+	.4byte	0x77a9
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x77ab
+	.4byte	0x77a9
 	.ascii	"MailStruct\000"
 
 	.byte	0x24
@@ -64210,7 +64168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x25d
-	.4byte	0x77b1
+	.4byte	0x77af
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -64219,7 +64177,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x25e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -64253,20 +64211,20 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x7735
+	.4byte	0x7733
 	.byte	0x11
-	.4byte	0x77bd
+	.4byte	0x77bb
 	.4byte	0x150
 	.byte	0x12
 	.byte	0x8
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x77fe
+	.4byte	0x77fc
 	.byte	0x1
 	.ascii	"InitChooseHalfPartyForBattle\000"
 
 	.byte	0x1
-	.2byte	0x15d6
+	.2byte	0x15d4
 	.byte	0x1
 	.4byte	.LFB295
 	.4byte	.LFE295
@@ -64276,7 +64234,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"unused\000"
 
 	.byte	0x1
-	.2byte	0x15d5
+	.2byte	0x15d3
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -64284,18 +64242,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ClearSelectedPartyOrder\000"
 
 	.byte	0x1
-	.2byte	0x15dd
+	.2byte	0x15db
 	.byte	0x1
 	.4byte	.LFB296
 	.4byte	.LFE296
 	.byte	0x1
 	.byte	0x5d
 	.byte	0xd
-	.4byte	0x7863
+	.4byte	0x7861
 	.ascii	"GetPartySlotEntryStatus\000"
 
 	.byte	0x1
-	.2byte	0x15e2
+	.2byte	0x15e0
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB297
@@ -64306,15 +64264,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x15e1
+	.2byte	0x15df
 	.4byte	0x1496
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x78c1
+	.4byte	0x78bf
 	.ascii	"GetBattleEntryEligibility\000"
 
 	.byte	0x1
-	.2byte	0x15eb
+	.2byte	0x15e9
 	.byte	0x1
 	.4byte	0x12d
 	.4byte	.LFB298
@@ -64325,7 +64283,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x15ea
+	.2byte	0x15e8
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -64333,7 +64291,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x15ec
+	.2byte	0x15ea
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x56
@@ -64341,17 +64299,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"species\000"
 
 	.byte	0x1
-	.2byte	0x15ed
+	.2byte	0x15eb
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x79a5
+	.4byte	0x79a3
 	.ascii	"CheckBattleEntriesAndGetMessage\000"
 
 	.byte	0x1
-	.2byte	0x160c
+	.2byte	0x160a
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB299
@@ -64362,7 +64320,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"maxBattlers\000"
 
 	.byte	0x1
-	.2byte	0x160d
+	.2byte	0x160b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x58
@@ -64370,7 +64328,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x160e
+	.2byte	0x160c
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -64378,7 +64336,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x160e
+	.2byte	0x160c
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -64386,22 +64344,22 @@ IsLastMonThatKnowsSurf:
 	.ascii	"facility\000"
 
 	.byte	0x1
-	.2byte	0x160f
+	.2byte	0x160d
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"party\000"
 
 	.byte	0x1
-	.2byte	0x1610
+	.2byte	0x160e
 	.4byte	0x4f6
 	.byte	0x5
 	.byte	0x3
-	.4byte	.L2575+4
+	.4byte	.L2574+4
 	.byte	0x4
 	.ascii	"minBattlers\000"
 
 	.byte	0x1
-	.2byte	0x1611
+	.2byte	0x160f
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x51
@@ -64409,20 +64367,20 @@ IsLastMonThatKnowsSurf:
 	.ascii	"order\000"
 
 	.byte	0x1
-	.2byte	0x1612
+	.2byte	0x1610
 	.4byte	0xc63
 	.byte	0x5
 	.byte	0x3
-	.4byte	.L2569
+	.4byte	.L2568
 	.byte	0x18
-	.4byte	0x79a4
+	.4byte	0x79a2
 	.4byte	.LBB137
 	.4byte	.LBE137
 	.byte	0x4
 	.ascii	"species\000"
 
 	.byte	0x1
-	.2byte	0x1623
+	.2byte	0x1621
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x5a
@@ -64430,18 +64388,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"item\000"
 
 	.byte	0x1
-	.2byte	0x1624
+	.2byte	0x1622
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x56
 	.byte	0x0
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x79f8
+	.4byte	0x79f6
 	.ascii	"HasPartySlotAlreadyBeenSelected\000"
 
 	.byte	0x1
-	.2byte	0x1632
+	.2byte	0x1630
 	.byte	0x1
 	.4byte	0x12d
 	.4byte	.LFB300
@@ -64452,7 +64410,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x1631
+	.2byte	0x162f
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x52
@@ -64460,17 +64418,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x1633
+	.2byte	0x1631
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7a48
+	.4byte	0x7a46
 	.ascii	"Task_ValidateChosenHalfParty\000"
 
 	.byte	0x1
-	.2byte	0x163e
+	.2byte	0x163c
 	.byte	0x1
 	.4byte	.LFB301
 	.4byte	.LFE301
@@ -64480,7 +64438,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x163d
+	.2byte	0x163b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -64488,15 +64446,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"msgId\000"
 
 	.byte	0x1
-	.2byte	0x163f
+	.2byte	0x163d
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7a8c
+	.4byte	0x7a8a
 	.ascii	"Task_ContinueChoosingHalfParty\000"
 
 	.byte	0x1
-	.2byte	0x164f
+	.2byte	0x164d
 	.byte	0x1
 	.4byte	.LFB302
 	.4byte	.LFE302
@@ -64506,7 +64464,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x164e
+	.2byte	0x164c
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -64515,7 +64473,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"GetMaxBattleEntries\000"
 
 	.byte	0x1
-	.2byte	0x1659
+	.2byte	0x1657
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB303
@@ -64526,7 +64484,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"GetMinBattleEntries\000"
 
 	.byte	0x1
-	.2byte	0x1666
+	.2byte	0x1664
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB304
@@ -64537,7 +64495,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"GetBattleEntryLevelCap\000"
 
 	.byte	0x1
-	.2byte	0x1673
+	.2byte	0x1671
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB305
@@ -64545,11 +64503,11 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x5d
 	.byte	0xd
-	.4byte	0x7b4a
+	.4byte	0x7b48
 	.ascii	"GetFacilityCancelString\000"
 
 	.byte	0x1
-	.2byte	0x1682
+	.2byte	0x1680
 	.byte	0x1
 	.4byte	0x1050
 	.4byte	.LFB306
@@ -64560,18 +64518,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"facilityNum\000"
 
 	.byte	0x1
-	.2byte	0x1683
+	.2byte	0x1681
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x7b9c
+	.4byte	0x7b9a
 	.byte	0x1
 	.ascii	"ChooseMonForTradingBoard\000"
 
 	.byte	0x1
-	.2byte	0x168e
+	.2byte	0x168c
 	.byte	0x1
 	.4byte	.LFB307
 	.4byte	.LFE307
@@ -64581,13 +64539,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"menuType\000"
 
 	.byte	0x1
-	.2byte	0x168d
+	.2byte	0x168b
 	.4byte	0x127
 	.byte	0x3
 	.ascii	"callback\000"
 
 	.byte	0x1
-	.2byte	0x168d
+	.2byte	0x168b
 	.4byte	0x14a
 	.byte	0x1
 	.byte	0x51
@@ -64597,7 +64555,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonForMoveTutor\000"
 
 	.byte	0x1
-	.2byte	0x1693
+	.2byte	0x1691
 	.byte	0x1
 	.4byte	.LFB308
 	.4byte	.LFE308
@@ -64608,7 +64566,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonForWirelessMinigame\000"
 
 	.byte	0x1
-	.2byte	0x1698
+	.2byte	0x1696
 	.byte	0x1
 	.4byte	.LFB309
 	.4byte	.LFE309
@@ -64618,7 +64576,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"GetPartyLayoutFromBattleType\000"
 
 	.byte	0x1
-	.2byte	0x169d
+	.2byte	0x169b
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB310
@@ -64626,12 +64584,12 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x19
-	.4byte	0x7c5e
+	.4byte	0x7c5c
 	.byte	0x1
 	.ascii	"OpenPartyMenuInBattle\000"
 
 	.byte	0x1
-	.2byte	0x16a6
+	.2byte	0x16a4
 	.byte	0x1
 	.4byte	.LFB311
 	.4byte	.LFE311
@@ -64641,7 +64599,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyAction\000"
 
 	.byte	0x1
-	.2byte	0x16a5
+	.2byte	0x16a3
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -64649,18 +64607,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonForInBattleItem\000"
 
 	.byte	0x1
-	.2byte	0x16ad
+	.2byte	0x16ab
 	.byte	0x1
 	.4byte	.LFB312
 	.4byte	.LFE312
 	.byte	0x1
 	.byte	0x5d
 	.byte	0xd
-	.4byte	0x7ccd
+	.4byte	0x7ccb
 	.ascii	"GetPartyMenuActionsTypeInBattle\000"
 
 	.byte	0x1
-	.2byte	0x16b4
+	.2byte	0x16b2
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB313
@@ -64671,17 +64629,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x16b3
+	.2byte	0x16b1
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x7d45
+	.4byte	0x7d43
 	.ascii	"TrySwitchInPokemon\000"
 
 	.byte	0x1
-	.2byte	0x16c0
+	.2byte	0x16be
 	.byte	0x1
 	.4byte	0x12d
 	.4byte	.LFB314
@@ -64692,7 +64650,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x16c1
+	.2byte	0x16bf
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -64700,25 +64658,25 @@ IsLastMonThatKnowsSurf:
 	.ascii	"newSlot\000"
 
 	.byte	0x1
-	.2byte	0x16c2
+	.2byte	0x16c0
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x16c3
+	.2byte	0x16c1
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x18
-	.4byte	0x7d44
+	.4byte	0x7d42
 	.4byte	.LBB145
 	.4byte	.LBE145
 	.byte	0x16
 	.ascii	"currBattler\000"
 
 	.byte	0x1
-	.2byte	0x16ed
+	.2byte	0x16eb
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x0
@@ -64727,18 +64685,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"BufferBattlePartyCurrentOrder\000"
 
 	.byte	0x1
-	.2byte	0x16fb
+	.2byte	0x16f9
 	.byte	0x1
 	.4byte	.LFB315
 	.4byte	.LFE315
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.ascii	"BufferBattlePartyOrder\000"
 
 	.byte	0x1
-	.2byte	0x1700
+	.2byte	0x16fe
 	.byte	0x1
 	.4byte	.LFB316
 	.4byte	.LFE316
@@ -64748,7 +64706,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyBattleOrder\000"
 
 	.byte	0x1
-	.2byte	0x16ff
+	.2byte	0x16fd
 	.4byte	0xc63
 	.byte	0x1
 	.byte	0x56
@@ -64756,14 +64714,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"flankId\000"
 
 	.byte	0x1
-	.2byte	0x16ff
+	.2byte	0x16fd
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"partyIds\000"
 
 	.byte	0x1
-	.2byte	0x1701
-	.4byte	0x7df5
+	.2byte	0x16ff
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x91
 	.byte	0x0
@@ -64771,7 +64729,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x1702
+	.2byte	0x1700
 	.4byte	0x2a8c
 	.byte	0x1
 	.byte	0x54
@@ -64779,24 +64737,24 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x1702
+	.2byte	0x1700
 	.4byte	0x2a8c
 	.byte	0x1
 	.byte	0x55
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x7e01
+	.4byte	0x7dff
 	.4byte	0x127
 	.byte	0x12
 	.byte	0x5
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x7e5c
+	.4byte	0x7e5a
 	.byte	0x1
 	.ascii	"BufferBattlePartyCurrentOrderBySide\000"
 
 	.byte	0x1
-	.2byte	0x1736
+	.2byte	0x1734
 	.byte	0x1
 	.4byte	.LFB317
 	.4byte	.LFE317
@@ -64806,21 +64764,21 @@ IsLastMonThatKnowsSurf:
 	.ascii	"battlerId\000"
 
 	.byte	0x1
-	.2byte	0x1735
+	.2byte	0x1733
 	.4byte	0x127
 	.byte	0xc
 	.ascii	"flankId\000"
 
 	.byte	0x1
-	.2byte	0x1735
+	.2byte	0x1733
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x7f29
+	.4byte	0x7f27
 	.ascii	"BufferBattlePartyOrderBySide\000"
 
 	.byte	0x1
-	.2byte	0x173c
+	.2byte	0x173a
 	.byte	0x1
 	.4byte	.LFB318
 	.4byte	.LFE318
@@ -64830,7 +64788,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyBattleOrder\000"
 
 	.byte	0x1
-	.2byte	0x173b
+	.2byte	0x1739
 	.4byte	0xc63
 	.byte	0x1
 	.byte	0x55
@@ -64838,7 +64796,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"flankId\000"
 
 	.byte	0x1
-	.2byte	0x173b
+	.2byte	0x1739
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x57
@@ -64846,14 +64804,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"battlerId\000"
 
 	.byte	0x1
-	.2byte	0x173b
+	.2byte	0x1739
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"partyIndexes\000"
 
 	.byte	0x1
-	.2byte	0x173d
-	.4byte	0x7df5
+	.2byte	0x173b
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x91
 	.byte	0x0
@@ -64861,7 +64819,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x173e
+	.2byte	0x173c
 	.4byte	0x2a8c
 	.byte	0x1
 	.byte	0x54
@@ -64869,7 +64827,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x173e
+	.2byte	0x173c
 	.4byte	0x2a8c
 	.byte	0x1
 	.byte	0x53
@@ -64877,7 +64835,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"leftBattler\000"
 
 	.byte	0x1
-	.2byte	0x173f
+	.2byte	0x173d
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -64885,18 +64843,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"rightBattler\000"
 
 	.byte	0x1
-	.2byte	0x1740
+	.2byte	0x173e
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x7ff9
+	.4byte	0x7ff7
 	.byte	0x1
 	.ascii	"SwitchPartyOrderLinkMulti\000"
 
 	.byte	0x1
-	.2byte	0x177e
+	.2byte	0x177c
 	.byte	0x1
 	.4byte	.LFB319
 	.4byte	.LFE319
@@ -64906,13 +64864,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"battlerId\000"
 
 	.byte	0x1
-	.2byte	0x177d
+	.2byte	0x177b
 	.4byte	0x127
 	.byte	0x3
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x177d
+	.2byte	0x177b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -64920,7 +64878,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot2\000"
 
 	.byte	0x1
-	.2byte	0x177d
+	.2byte	0x177b
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -64928,8 +64886,8 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyIds\000"
 
 	.byte	0x1
-	.2byte	0x177f
-	.4byte	0x7df5
+	.2byte	0x177d
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x91
 	.byte	0x0
@@ -64937,7 +64895,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"tempSlot\000"
 
 	.byte	0x1
-	.2byte	0x1780
+	.2byte	0x177e
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x57
@@ -64945,7 +64903,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x1781
+	.2byte	0x177f
 	.4byte	0x2a8c
 	.byte	0x1
 	.byte	0x52
@@ -64953,13 +64911,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x1781
+	.2byte	0x177f
 	.4byte	0x2a8c
 	.byte	0x4
 	.ascii	"partyBattleOrder\000"
 
 	.byte	0x1
-	.2byte	0x1782
+	.2byte	0x1780
 	.4byte	0xc63
 	.byte	0x1
 	.byte	0x54
@@ -64967,17 +64925,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyIdBuffer\000"
 
 	.byte	0x1
-	.2byte	0x1783
+	.2byte	0x1781
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x53
 	.byte	0x0
 	.byte	0xd
-	.4byte	0x805c
+	.4byte	0x805a
 	.ascii	"GetPartyIdFromBattleSlot\000"
 
 	.byte	0x1
-	.2byte	0x17a3
+	.2byte	0x17a1
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB320
@@ -64988,7 +64946,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x17a2
+	.2byte	0x17a0
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x52
@@ -64996,23 +64954,23 @@ IsLastMonThatKnowsSurf:
 	.ascii	"modResult\000"
 
 	.byte	0x1
-	.2byte	0x17a4
+	.2byte	0x17a2
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"retVal\000"
 
 	.byte	0x1
-	.2byte	0x17a5
+	.2byte	0x17a3
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x51
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x80b9
+	.4byte	0x80b7
 	.ascii	"SetPartyIdAtBattleSlot\000"
 
 	.byte	0x1
-	.2byte	0x17b0
+	.2byte	0x17ae
 	.byte	0x1
 	.4byte	.LFB321
 	.4byte	.LFE321
@@ -65022,7 +64980,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x17af
+	.2byte	0x17ad
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x53
@@ -65030,7 +64988,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"setVal\000"
 
 	.byte	0x1
-	.2byte	0x17af
+	.2byte	0x17ad
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -65038,16 +64996,16 @@ IsLastMonThatKnowsSurf:
 	.ascii	"modResult\000"
 
 	.byte	0x1
-	.2byte	0x17b1
+	.2byte	0x17af
 	.4byte	0x4a48
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x810d
+	.4byte	0x810b
 	.byte	0x1
 	.ascii	"SwitchPartyMonSlots\000"
 
 	.byte	0x1
-	.2byte	0x17bb
+	.2byte	0x17b9
 	.byte	0x1
 	.4byte	.LFB322
 	.4byte	.LFE322
@@ -65057,28 +65015,28 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slot\000"
 
 	.byte	0x1
-	.2byte	0x17ba
+	.2byte	0x17b8
 	.4byte	0x127
 	.byte	0xc
 	.ascii	"slot2\000"
 
 	.byte	0x1
-	.2byte	0x17ba
+	.2byte	0x17b8
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"partyId\000"
 
 	.byte	0x1
-	.2byte	0x17bc
+	.2byte	0x17ba
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1b
-	.4byte	0x8172
+	.4byte	0x8170
 	.byte	0x1
 	.ascii	"GetPartyIdFromBattlePartyId\000"
 
 	.byte	0x1
-	.2byte	0x17c2
+	.2byte	0x17c0
 	.byte	0x1
 	.4byte	0x127
 	.4byte	.LFB323
@@ -65089,7 +65047,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"battlePartyId\000"
 
 	.byte	0x1
-	.2byte	0x17c1
+	.2byte	0x17bf
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -65097,7 +65055,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x17c3
+	.2byte	0x17c1
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x53
@@ -65105,17 +65063,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x17c3
+	.2byte	0x17c1
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x52
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x81c1
+	.4byte	0x81bf
 	.ascii	"UpdatePartyToBattleOrder\000"
 
 	.byte	0x1
-	.2byte	0x17d6
+	.2byte	0x17d4
 	.byte	0x1
 	.4byte	.LFB324
 	.4byte	.LFE324
@@ -65125,7 +65083,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyBuffer\000"
 
 	.byte	0x1
-	.2byte	0x17d7
+	.2byte	0x17d5
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -65133,17 +65091,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x17d8
+	.2byte	0x17d6
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x820f
+	.4byte	0x820d
 	.ascii	"UpdatePartyToFieldOrder\000"
 
 	.byte	0x1
-	.2byte	0x17e1
+	.2byte	0x17df
 	.byte	0x1
 	.4byte	.LFB325
 	.4byte	.LFE325
@@ -65153,7 +65111,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyBuffer\000"
 
 	.byte	0x1
-	.2byte	0x17e2
+	.2byte	0x17e0
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -65161,17 +65119,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x17e3
+	.2byte	0x17e1
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8268
+	.4byte	0x8266
 	.ascii	"SwitchAliveMonIntoLeadSlot\000"
 
 	.byte	0x1
-	.2byte	0x17ed
+	.2byte	0x17eb
 	.byte	0x1
 	.4byte	.LFB326
 	.4byte	.LFE326
@@ -65181,7 +65139,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x17ee
+	.2byte	0x17ec
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -65189,7 +65147,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x17ef
+	.2byte	0x17ed
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -65197,14 +65155,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"partyId\000"
 
 	.byte	0x1
-	.2byte	0x17f0
+	.2byte	0x17ee
 	.4byte	0x127
 	.byte	0x0
 	.byte	0xa
 	.ascii	"CB2_SetUpExitToBattleScreen\000"
 
 	.byte	0x1
-	.2byte	0x1800
+	.2byte	0x17fe
 	.byte	0x1
 	.4byte	.LFB327
 	.4byte	.LFE327
@@ -65215,18 +65173,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ShowPartyMenuToShowcaseMultiBattleParty\000"
 
 	.byte	0x1
-	.2byte	0x1805
+	.2byte	0x1803
 	.byte	0x1
 	.4byte	.LFB328
 	.4byte	.LFE328
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x8310
+	.4byte	0x830e
 	.ascii	"Task_InitMultiPartnerPartySlideIn\000"
 
 	.byte	0x1
-	.2byte	0x180c
+	.2byte	0x180a
 	.byte	0x1
 	.4byte	.LFB329
 	.4byte	.LFE329
@@ -65236,15 +65194,15 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x180b
+	.2byte	0x1809
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x836e
+	.4byte	0x836c
 	.ascii	"Task_MultiPartnerPartySlideIn\000"
 
 	.byte	0x1
-	.2byte	0x1815
+	.2byte	0x1813
 	.byte	0x1
 	.4byte	.LFB330
 	.4byte	.LFE330
@@ -65254,7 +65212,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1814
+	.2byte	0x1812
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x55
@@ -65262,7 +65220,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"data\000"
 
 	.byte	0x1
-	.2byte	0x1816
+	.2byte	0x1814
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x54
@@ -65270,17 +65228,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x1817
+	.2byte	0x1815
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x83c7
+	.4byte	0x83c5
 	.ascii	"Task_WaitAfterMultiPartnerPartySlideIn\000"
 
 	.byte	0x1
-	.2byte	0x182b
+	.2byte	0x1829
 	.byte	0x1
 	.4byte	.LFB331
 	.4byte	.LFE331
@@ -65290,23 +65248,23 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x182a
+	.2byte	0x1828
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"data\000"
 
 	.byte	0x1
-	.2byte	0x182c
+	.2byte	0x182a
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x50
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8412
+	.4byte	0x8410
 	.ascii	"MoveMultiPartyMenuBoxSprite\000"
 
 	.byte	0x1
-	.2byte	0x1834
+	.2byte	0x1832
 	.byte	0x1
 	.4byte	.LFB332
 	.4byte	.LFE332
@@ -65316,21 +65274,21 @@ IsLastMonThatKnowsSurf:
 	.ascii	"spriteId\000"
 
 	.byte	0x1
-	.2byte	0x1833
+	.2byte	0x1831
 	.4byte	0x127
 	.byte	0xc
 	.ascii	"x\000"
 
 	.byte	0x1
-	.2byte	0x1833
+	.2byte	0x1831
 	.4byte	0x1cd8
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8475
+	.4byte	0x8473
 	.ascii	"SlideMultiPartyMenuBoxSpritesOneStep\000"
 
 	.byte	0x1
-	.2byte	0x183a
+	.2byte	0x1838
 	.byte	0x1
 	.4byte	.LFB333
 	.4byte	.LFE333
@@ -65340,13 +65298,13 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1839
+	.2byte	0x1837
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"data\000"
 
 	.byte	0x1
-	.2byte	0x183b
+	.2byte	0x1839
 	.4byte	0x1cd2
 	.byte	0x1
 	.byte	0x55
@@ -65354,7 +65312,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x183c
+	.2byte	0x183a
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x56
@@ -65364,18 +65322,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonForDaycare\000"
 
 	.byte	0x1
-	.2byte	0x184e
+	.2byte	0x184c
 	.byte	0x1
 	.4byte	.LFB334
 	.4byte	.LFE334
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x84d7
+	.4byte	0x84d5
 	.ascii	"ChoosePartyMonByMenuType\000"
 
 	.byte	0x1
-	.2byte	0x1854
+	.2byte	0x1852
 	.byte	0x1
 	.4byte	.LFB335
 	.4byte	.LFE335
@@ -65385,14 +65343,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"menuType\000"
 
 	.byte	0x1
-	.2byte	0x1853
+	.2byte	0x1851
 	.4byte	0x127
 	.byte	0x0
 	.byte	0xa
 	.ascii	"BufferMonSelection\000"
 
 	.byte	0x1
-	.2byte	0x185a
+	.2byte	0x1858
 	.byte	0x1
 	.4byte	.LFB336
 	.4byte	.LFE336
@@ -65403,7 +65361,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"CB2_FadeFromPartyMenu\000"
 
 	.byte	0x1
-	.2byte	0x1863
+	.2byte	0x1861
 	.byte	0x1
 	.4byte	0x12d
 	.4byte	.LFB337
@@ -65411,11 +65369,11 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x8560
+	.4byte	0x855e
 	.ascii	"Task_PartyMenuWaitForFade\000"
 
 	.byte	0x1
-	.2byte	0x186a
+	.2byte	0x1868
 	.byte	0x1
 	.4byte	.LFB338
 	.4byte	.LFE338
@@ -65425,7 +65383,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1869
+	.2byte	0x1867
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -65433,18 +65391,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseContestMon\000"
 
 	.byte	0x1
-	.2byte	0x1874
+	.2byte	0x1872
 	.byte	0x1
 	.4byte	.LFB339
 	.4byte	.LFE339
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x85ba
+	.4byte	0x85b8
 	.ascii	"Task_ChooseContestMon\000"
 
 	.byte	0x1
-	.2byte	0x187b
+	.2byte	0x1879
 	.byte	0x1
 	.4byte	.LFB340
 	.4byte	.LFE340
@@ -65454,14 +65412,14 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x187a
+	.2byte	0x1878
 	.4byte	0x127
 	.byte	0x0
 	.byte	0xa
 	.ascii	"CB2_ChooseContestMon\000"
 
 	.byte	0x1
-	.2byte	0x1885
+	.2byte	0x1883
 	.byte	0x1
 	.4byte	.LFB341
 	.4byte	.LFE341
@@ -65472,18 +65430,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChoosePartyMon\000"
 
 	.byte	0x1
-	.2byte	0x1890
+	.2byte	0x188e
 	.byte	0x1
 	.4byte	.LFB342
 	.4byte	.LFE342
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x8634
+	.4byte	0x8632
 	.ascii	"Task_ChoosePartyMon\000"
 
 	.byte	0x1
-	.2byte	0x1897
+	.2byte	0x1895
 	.byte	0x1
 	.4byte	.LFB343
 	.4byte	.LFE343
@@ -65493,7 +65451,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x1896
+	.2byte	0x1894
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -65501,18 +65459,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ChooseMonForMoveRelearner\000"
 
 	.byte	0x1
-	.2byte	0x18a1
+	.2byte	0x189f
 	.byte	0x1
 	.4byte	.LFB344
 	.4byte	.LFE344
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x86a0
+	.4byte	0x869e
 	.ascii	"Task_ChooseMonForMoveRelearner\000"
 
 	.byte	0x1
-	.2byte	0x18a8
+	.2byte	0x18a6
 	.byte	0x1
 	.4byte	.LFB345
 	.4byte	.LFE345
@@ -65522,26 +65480,26 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x18a7
+	.2byte	0x18a5
 	.4byte	0x127
 	.byte	0x0
 	.byte	0xa
 	.ascii	"CB2_ChooseMonForMoveRelearner\000"
 
 	.byte	0x1
-	.2byte	0x18b2
+	.2byte	0x18b0
 	.byte	0x1
 	.4byte	.LFB346
 	.4byte	.LFE346
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x19
-	.4byte	0x870e
+	.4byte	0x870c
 	.byte	0x1
 	.ascii	"DoBattlePyramidMonsHaveHeldItem\000"
 
 	.byte	0x1
-	.2byte	0x18bd
+	.2byte	0x18bb
 	.byte	0x1
 	.4byte	.LFB347
 	.4byte	.LFE347
@@ -65551,7 +65509,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x18be
+	.2byte	0x18bc
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
@@ -65561,18 +65519,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"BattlePyramidChooseMonHeldItems\000"
 
 	.byte	0x1
-	.2byte	0x18ce
+	.2byte	0x18cc
 	.byte	0x1
 	.4byte	.LFB348
 	.4byte	.LFE348
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x2
-	.4byte	0x8786
+	.4byte	0x8784
 	.ascii	"Task_BattlePyramidChooseMonHeldItems\000"
 
 	.byte	0x1
-	.2byte	0x18d5
+	.2byte	0x18d3
 	.byte	0x1
 	.4byte	.LFB349
 	.4byte	.LFE349
@@ -65582,7 +65540,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"taskId\000"
 
 	.byte	0x1
-	.2byte	0x18d4
+	.2byte	0x18d2
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -65590,19 +65548,19 @@ IsLastMonThatKnowsSurf:
 	.ascii	"MoveDeleterChooseMoveToForget\000"
 
 	.byte	0x1
-	.2byte	0x18df
+	.2byte	0x18dd
 	.byte	0x1
 	.4byte	.LFB350
 	.4byte	.LFE350
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x19
-	.4byte	0x87ef
+	.4byte	0x87ed
 	.byte	0x1
 	.ascii	"GetNumMovesSelectedMonHas\000"
 
 	.byte	0x1
-	.2byte	0x18e5
+	.2byte	0x18e3
 	.byte	0x1
 	.4byte	.LFB351
 	.4byte	.LFE351
@@ -65612,18 +65570,18 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x18e6
+	.2byte	0x18e4
 	.4byte	0x127
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x8840
+	.4byte	0x883e
 	.byte	0x1
 	.ascii	"BufferMoveDeleterNicknameAndMove\000"
 
 	.byte	0x1
-	.2byte	0x18f1
+	.2byte	0x18ef
 	.byte	0x1
 	.4byte	.LFB352
 	.4byte	.LFE352
@@ -65633,7 +65591,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x18f2
+	.2byte	0x18f0
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x55
@@ -65641,16 +65599,16 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x18f3
+	.2byte	0x18f1
 	.4byte	0x150
 	.byte	0x0
 	.byte	0x19
-	.4byte	0x8877
+	.4byte	0x8875
 	.byte	0x1
 	.ascii	"MoveDeleterForgetMove\000"
 
 	.byte	0x1
-	.2byte	0x18fa
+	.2byte	0x18f8
 	.byte	0x1
 	.4byte	.LFB353
 	.4byte	.LFE353
@@ -65660,17 +65618,17 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x18fb
+	.2byte	0x18f9
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x54
 	.byte	0x0
 	.byte	0x2
-	.4byte	0x8970
+	.4byte	0x896e
 	.ascii	"ShiftMoveSlot\000"
 
 	.byte	0x1
-	.2byte	0x1904
+	.2byte	0x1902
 	.byte	0x1
 	.4byte	.LFB354
 	.4byte	.LFE354
@@ -65680,7 +65638,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"mon\000"
 
 	.byte	0x1
-	.2byte	0x1903
+	.2byte	0x1901
 	.4byte	0x4f6
 	.byte	0x1
 	.byte	0x58
@@ -65688,19 +65646,19 @@ IsLastMonThatKnowsSurf:
 	.ascii	"slotTo\000"
 
 	.byte	0x1
-	.2byte	0x1903
+	.2byte	0x1901
 	.4byte	0x127
 	.byte	0xc
 	.ascii	"slotFrom\000"
 
 	.byte	0x1
-	.2byte	0x1903
+	.2byte	0x1901
 	.4byte	0x127
 	.byte	0x4
 	.ascii	"move1\000"
 
 	.byte	0x1
-	.2byte	0x1905
+	.2byte	0x1903
 	.4byte	0x150
 	.byte	0x2
 	.byte	0x91
@@ -65709,7 +65667,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move0\000"
 
 	.byte	0x1
-	.2byte	0x1906
+	.2byte	0x1904
 	.4byte	0x150
 	.byte	0x2
 	.byte	0x91
@@ -65718,7 +65676,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"pp1\000"
 
 	.byte	0x1
-	.2byte	0x1907
+	.2byte	0x1905
 	.4byte	0x127
 	.byte	0x2
 	.byte	0x91
@@ -65727,7 +65685,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"pp0\000"
 
 	.byte	0x1
-	.2byte	0x1908
+	.2byte	0x1906
 	.4byte	0x127
 	.byte	0x2
 	.byte	0x91
@@ -65736,7 +65694,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ppBonuses\000"
 
 	.byte	0x1
-	.2byte	0x1909
+	.2byte	0x1907
 	.4byte	0x127
 	.byte	0x2
 	.byte	0x91
@@ -65745,25 +65703,25 @@ IsLastMonThatKnowsSurf:
 	.ascii	"ppBonusMask1\000"
 
 	.byte	0x1
-	.2byte	0x190a
+	.2byte	0x1908
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"ppBonusMove1\000"
 
 	.byte	0x1
-	.2byte	0x190b
+	.2byte	0x1909
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"ppBonusMask2\000"
 
 	.byte	0x1
-	.2byte	0x190c
+	.2byte	0x190a
 	.4byte	0x127
 	.byte	0x16
 	.ascii	"ppBonusMove2\000"
 
 	.byte	0x1
-	.2byte	0x190d
+	.2byte	0x190b
 	.4byte	0x127
 	.byte	0x0
 	.byte	0x1f
@@ -65771,19 +65729,19 @@ IsLastMonThatKnowsSurf:
 	.ascii	"IsSelectedMonEgg\000"
 
 	.byte	0x1
-	.2byte	0x1919
+	.2byte	0x1917
 	.byte	0x1
 	.4byte	.LFB355
 	.4byte	.LFE355
 	.byte	0x1
 	.byte	0x5d
 	.byte	0x19
-	.4byte	0x89e4
+	.4byte	0x89e2
 	.byte	0x1
 	.ascii	"IsLastMonThatKnowsSurf\000"
 
 	.byte	0x1
-	.2byte	0x1921
+	.2byte	0x191f
 	.byte	0x1
 	.4byte	.LFB356
 	.4byte	.LFE356
@@ -65793,7 +65751,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"move\000"
 
 	.byte	0x1
-	.2byte	0x1922
+	.2byte	0x1920
 	.4byte	0x150
 	.byte	0x1
 	.byte	0x58
@@ -65801,7 +65759,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"i\000"
 
 	.byte	0x1
-	.2byte	0x1923
+	.2byte	0x1921
 	.4byte	0x2b2
 	.byte	0x1
 	.byte	0x56
@@ -65809,7 +65767,7 @@ IsLastMonThatKnowsSurf:
 	.ascii	"j\000"
 
 	.byte	0x1
-	.2byte	0x1923
+	.2byte	0x1921
 	.4byte	0x2b2
 	.byte	0x1
 	.byte	0x54
@@ -65825,7 +65783,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x9
 	.byte	0x68
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x5
 	.ascii	"unsigned int\000"
 
@@ -65836,7 +65794,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xa
 	.byte	0x6
-	.4byte	0x8a28
+	.4byte	0x8a26
 	.byte	0x5
 	.ascii	"long int\000"
 
@@ -65847,7 +65805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xa
 	.byte	0xa
-	.4byte	0x8a42
+	.4byte	0x8a40
 	.byte	0x5
 	.ascii	"long unsigned int\000"
 
@@ -65864,7 +65822,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x23
-	.4byte	0x8a74
+	.4byte	0x8a72
 	.byte	0x5
 	.ascii	"signed char\000"
 
@@ -65875,7 +65833,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x24
-	.4byte	0x8a92
+	.4byte	0x8a90
 	.byte	0x5
 	.ascii	"short int\000"
 
@@ -65892,7 +65850,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x26
-	.4byte	0x8abd
+	.4byte	0x8abb
 	.byte	0x5
 	.ascii	"long long int\000"
 
@@ -65903,7 +65861,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x27
-	.4byte	0x8add
+	.4byte	0x8adb
 	.byte	0x5
 	.ascii	"unsigned char\000"
 
@@ -65914,7 +65872,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x28
-	.4byte	0x8afe
+	.4byte	0x8afc
 	.byte	0x5
 	.ascii	"short unsigned int\000"
 
@@ -65925,13 +65883,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x29
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"uint64_t\000"
 
 	.byte	0xb
 	.byte	0x2a
-	.4byte	0x8b34
+	.4byte	0x8b32
 	.byte	0x5
 	.ascii	"long long unsigned int\000"
 
@@ -65942,13 +65900,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x2e
-	.4byte	0x8a74
+	.4byte	0x8a72
 	.byte	0x23
 	.ascii	"int_least16_t\000"
 
 	.byte	0xb
 	.byte	0x2f
-	.4byte	0x8a92
+	.4byte	0x8a90
 	.byte	0x23
 	.ascii	"int_least32_t\000"
 
@@ -65960,31 +65918,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x31
-	.4byte	0x8abd
+	.4byte	0x8abb
 	.byte	0x23
 	.ascii	"uint_least8_t\000"
 
 	.byte	0xb
 	.byte	0x32
-	.4byte	0x8add
+	.4byte	0x8adb
 	.byte	0x23
 	.ascii	"uint_least16_t\000"
 
 	.byte	0xb
 	.byte	0x33
-	.4byte	0x8afe
+	.4byte	0x8afc
 	.byte	0x23
 	.ascii	"uint_least32_t\000"
 
 	.byte	0xb
 	.byte	0x34
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"uint_least64_t\000"
 
 	.byte	0xb
 	.byte	0x35
-	.4byte	0x8b34
+	.4byte	0x8b32
 	.byte	0x23
 	.ascii	"int_fast8_t\000"
 
@@ -66008,31 +65966,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x3c
-	.4byte	0x8abd
+	.4byte	0x8abb
 	.byte	0x23
 	.ascii	"uint_fast8_t\000"
 
 	.byte	0xb
 	.byte	0x3d
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"uint_fast16_t\000"
 
 	.byte	0xb
 	.byte	0x3e
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"uint_fast32_t\000"
 
 	.byte	0xb
 	.byte	0x3f
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"uint_fast64_t\000"
 
 	.byte	0xb
 	.byte	0x40
-	.4byte	0x8b34
+	.4byte	0x8b32
 	.byte	0x23
 	.ascii	"intptr_t\000"
 
@@ -66044,137 +66002,137 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xb
 	.byte	0x45
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0x23
 	.ascii	"intmax_t\000"
 
 	.byte	0xb
 	.byte	0x49
-	.4byte	0x8abd
+	.4byte	0x8abb
 	.byte	0x23
 	.ascii	"uintmax_t\000"
 
 	.byte	0xb
 	.byte	0x4a
-	.4byte	0x8b34
+	.4byte	0x8b32
 	.byte	0x23
 	.ascii	"u8\000"
 
 	.byte	0x7
 	.byte	0x6
-	.4byte	0x8ace
+	.4byte	0x8acc
 	.byte	0x23
 	.ascii	"u16\000"
 
 	.byte	0x7
 	.byte	0x7
-	.4byte	0x8aee
+	.4byte	0x8aec
 	.byte	0x23
 	.ascii	"u32\000"
 
 	.byte	0x7
 	.byte	0x8
-	.4byte	0x8b14
+	.4byte	0x8b12
 	.byte	0x23
 	.ascii	"u64\000"
 
 	.byte	0x7
 	.byte	0x9
-	.4byte	0x8b24
+	.4byte	0x8b22
 	.byte	0x23
 	.ascii	"s8\000"
 
 	.byte	0x7
 	.byte	0xa
-	.4byte	0x8a66
+	.4byte	0x8a64
 	.byte	0x23
 	.ascii	"s16\000"
 
 	.byte	0x7
 	.byte	0xb
-	.4byte	0x8a83
+	.4byte	0x8a81
 	.byte	0x23
 	.ascii	"s32\000"
 
 	.byte	0x7
 	.byte	0xc
-	.4byte	0x8a9f
+	.4byte	0x8a9d
 	.byte	0x23
 	.ascii	"s64\000"
 
 	.byte	0x7
 	.byte	0xd
-	.4byte	0x8aae
+	.4byte	0x8aac
 	.byte	0x23
 	.ascii	"vu8\000"
 
 	.byte	0x7
 	.byte	0xf
-	.4byte	0x8d3d
+	.4byte	0x8d3b
 	.byte	0x24
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x23
 	.ascii	"vu16\000"
 
 	.byte	0x7
 	.byte	0x10
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x24
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x23
 	.ascii	"vu32\000"
 
 	.byte	0x7
 	.byte	0x11
-	.4byte	0x8d5f
+	.4byte	0x8d5d
 	.byte	0x24
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x23
 	.ascii	"vu64\000"
 
 	.byte	0x7
 	.byte	0x12
-	.4byte	0x8d70
+	.4byte	0x8d6e
 	.byte	0x24
-	.4byte	0x8cfc
+	.4byte	0x8cfa
 	.byte	0x23
 	.ascii	"vs8\000"
 
 	.byte	0x7
 	.byte	0x13
-	.4byte	0x8d80
+	.4byte	0x8d7e
 	.byte	0x24
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x23
 	.ascii	"vs16\000"
 
 	.byte	0x7
 	.byte	0x14
-	.4byte	0x8d91
+	.4byte	0x8d8f
 	.byte	0x24
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x23
 	.ascii	"vs32\000"
 
 	.byte	0x7
 	.byte	0x15
-	.4byte	0x8da2
+	.4byte	0x8da0
 	.byte	0x24
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x23
 	.ascii	"vs64\000"
 
 	.byte	0x7
 	.byte	0x16
-	.4byte	0x8db3
+	.4byte	0x8db1
 	.byte	0x24
-	.4byte	0x8d27
+	.4byte	0x8d25
 	.byte	0x23
 	.ascii	"f32\000"
 
 	.byte	0x7
 	.byte	0x18
-	.4byte	0x8dc3
+	.4byte	0x8dc1
 	.byte	0x5
 	.ascii	"float\000"
 
@@ -66185,7 +66143,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x19
-	.4byte	0x8dd7
+	.4byte	0x8dd5
 	.byte	0x5
 	.ascii	"double\000"
 
@@ -66196,45 +66154,45 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x1b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x23
 	.ascii	"bool16\000"
 
 	.byte	0x7
 	.byte	0x1c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x23
 	.ascii	"bool32\000"
 
 	.byte	0x7
 	.byte	0x1d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x23
 	.ascii	"vbool8\000"
 
 	.byte	0x7
 	.byte	0x1e
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x24
-	.4byte	0x8add
+	.4byte	0x8adb
 	.byte	0x23
 	.ascii	"vbool16\000"
 
 	.byte	0x7
 	.byte	0x1f
-	.4byte	0x8e2c
+	.4byte	0x8e2a
 	.byte	0x24
-	.4byte	0x8afe
+	.4byte	0x8afc
 	.byte	0x23
 	.ascii	"vbool32\000"
 
 	.byte	0x7
 	.byte	0x20
-	.4byte	0x8e40
+	.4byte	0x8e3e
 	.byte	0x24
-	.4byte	0x8a07
+	.4byte	0x8a05
 	.byte	0xe
-	.4byte	0x8f15
+	.4byte	0x8f13
 	.ascii	"BgCnt\000"
 
 	.byte	0x4
@@ -66245,7 +66203,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x24
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -66257,7 +66215,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x25
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xc
@@ -66269,7 +66227,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x26
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xa
@@ -66281,7 +66239,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x27
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -66293,7 +66251,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x28
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -66305,7 +66263,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x29
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x3
@@ -66317,7 +66275,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x2a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x2
@@ -66329,7 +66287,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x2b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x0
@@ -66342,11 +66300,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x2d
-	.4byte	0x8f23
+	.4byte	0x8f21
 	.byte	0x24
-	.4byte	0x8e45
+	.4byte	0x8e43
 	.byte	0xe
-	.4byte	0x8f7e
+	.4byte	0x8f7c
 	.ascii	"PlttData\000"
 
 	.byte	0x4
@@ -66357,7 +66315,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x31
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0xb
@@ -66369,7 +66327,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x32
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x6
@@ -66381,7 +66339,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x33
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x1
@@ -66393,7 +66351,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x34
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x0
@@ -66402,7 +66360,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x8ffd
+	.4byte	0x8ffb
 	.ascii	"BgAffineSrcData\000"
 
 	.byte	0x14
@@ -66413,7 +66371,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7a
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66422,7 +66380,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7b
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -66431,7 +66389,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7c
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -66440,7 +66398,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7d
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -66449,7 +66407,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7e
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -66458,7 +66416,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x7f
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -66467,13 +66425,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x80
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9064
+	.4byte	0x9062
 	.ascii	"BgAffineDstData\000"
 
 	.byte	0x10
@@ -66484,7 +66442,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x85
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66493,7 +66451,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x86
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -66502,7 +66460,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x87
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -66511,7 +66469,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x88
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -66520,7 +66478,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x89
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -66529,13 +66487,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x8a
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x90b3
+	.4byte	0x90b1
 	.ascii	"ObjAffineSrcData\000"
 
 	.byte	0x8
@@ -66546,7 +66504,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x8f
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66555,7 +66513,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x90
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -66564,13 +66522,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x91
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x919e
+	.4byte	0x919c
 	.ascii	"SioMultiCnt\000"
 
 	.byte	0x4
@@ -66581,7 +66539,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x97
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -66593,7 +66551,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x98
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -66605,7 +66563,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x99
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -66617,7 +66575,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xa
@@ -66629,7 +66587,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -66641,7 +66599,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -66653,7 +66611,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0x4
@@ -66665,7 +66623,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x2
@@ -66677,7 +66635,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0x9f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x1
@@ -66689,7 +66647,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0xa0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x0
@@ -66701,13 +66659,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x7
 	.byte	0xa1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9354
+	.4byte	0x9352
 	.ascii	"MultiBootParam\000"
 
 	.byte	0x4c
@@ -66718,7 +66676,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0xb
-	.4byte	0x9354
+	.4byte	0x9352
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66727,7 +66685,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -66736,7 +66694,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -66745,7 +66703,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0xe
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -66754,7 +66712,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0xf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -66763,7 +66721,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x10
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -66772,7 +66730,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -66781,7 +66739,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -66790,7 +66748,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -66799,7 +66757,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x14
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -66835,7 +66793,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x18
-	.4byte	0x9360
+	.4byte	0x935e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -66844,7 +66802,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x19
-	.4byte	0x936c
+	.4byte	0x936a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -66853,7 +66811,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x1a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -66862,7 +66820,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x1b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x49
@@ -66871,7 +66829,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x1c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -66880,31 +66838,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xc
 	.byte	0x1d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4b
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x9360
-	.4byte	0x8cf1
+	.4byte	0x935e
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x936c
+	.4byte	0x936a
 	.4byte	0xc63
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x9378
-	.4byte	0x8cf1
+	.4byte	0x9376
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x93a1
+	.4byte	0x939f
 	.ascii	"Coords8\000"
 
 	.byte	0x4
@@ -66915,7 +66873,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x88
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66924,13 +66882,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x89
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x93cb
+	.4byte	0x93c9
 	.ascii	"UCoords8\000"
 
 	.byte	0x4
@@ -66941,7 +66899,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x8e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66950,13 +66908,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x8f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x93f6
+	.4byte	0x93f4
 	.ascii	"UCoords16\000"
 
 	.byte	0x4
@@ -66967,7 +66925,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x9a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -66976,13 +66934,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0x9b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9420
+	.4byte	0x941e
 	.ascii	"Coords32\000"
 
 	.byte	0x8
@@ -66993,7 +66951,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xa0
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67002,13 +66960,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xa1
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x944b
+	.4byte	0x9449
 	.ascii	"UCoords32\000"
 
 	.byte	0x8
@@ -67019,7 +66977,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xa6
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67028,13 +66986,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xa7
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x949c
+	.4byte	0x949a
 	.ascii	"Time\000"
 
 	.byte	0x8
@@ -67045,7 +67003,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xac
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67054,7 +67012,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xad
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67063,7 +67021,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xae
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -67072,13 +67030,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xaf
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9552
+	.4byte	0x9550
 	.ascii	"Pokedex\000"
 
 	.byte	0x78
@@ -67089,7 +67047,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67098,7 +67056,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -67107,7 +67065,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67116,7 +67074,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -67125,7 +67083,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb8
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67134,7 +67092,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xb9
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -67143,7 +67101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xba
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -67152,19 +67110,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xbb
-	.4byte	0x9552
+	.4byte	0x9550
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x955e
-	.4byte	0x8cdc
+	.4byte	0x955c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x67
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x95f4
+	.4byte	0x95f2
 	.ascii	"PokemonJumpResults\000"
 
 	.byte	0x10
@@ -67175,7 +67133,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67184,7 +67142,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67193,7 +67151,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67202,7 +67160,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -67211,7 +67169,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -67220,13 +67178,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xc5
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x96ea
+	.4byte	0x96e8
 	.ascii	"BerryPickingResults\000"
 
 	.byte	0x10
@@ -67237,7 +67195,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xca
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67246,7 +67204,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xcb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67255,7 +67213,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xcc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -67264,7 +67222,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xcd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -67273,7 +67231,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -67282,7 +67240,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xcf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -67291,7 +67249,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xd0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -67300,7 +67258,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xd1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -67309,7 +67267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xd2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -67318,7 +67276,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xd3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -67327,13 +67285,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9722
+	.4byte	0x9720
 	.ascii	"PyramidBag\000"
 
 	.byte	0x3c
@@ -67344,7 +67302,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xda
-	.4byte	0x9722
+	.4byte	0x9720
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67353,29 +67311,29 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xdb
-	.4byte	0x9730
+	.4byte	0x972e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x9730
-	.4byte	0x8ce6
+	.4byte	0x972e
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x9
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x973e
-	.4byte	0x8cdc
+	.4byte	0x973c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x9
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9798
+	.4byte	0x9796
 	.ascii	"BerryCrush\000"
 
 	.byte	0x10
@@ -67395,7 +67353,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xe1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -67404,13 +67362,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xe2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x97e0
+	.4byte	0x97de
 	.ascii	"ApprenticeMon\000"
 
 	.byte	0xc
@@ -67421,7 +67379,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xe7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67439,13 +67397,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xe9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x98b3
+	.4byte	0x98b1
 	.ascii	"Apprentice\000"
 
 	.byte	0x44
@@ -67456,7 +67414,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -67468,7 +67426,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x1
@@ -67480,7 +67438,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -67489,7 +67447,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67498,7 +67456,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf4
-	.4byte	0x98b3
+	.4byte	0x98b1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67534,7 +67492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3f
@@ -67543,19 +67501,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xf9
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x98bf
-	.4byte	0x9798
+	.4byte	0x98bd
+	.4byte	0x9796
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x9ab7
+	.4byte	0x9ab5
 	.ascii	"BattleTowerPokemon\000"
 
 	.byte	0x2c
@@ -67566,7 +67524,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xfe
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67575,7 +67533,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.byte	0xff
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67593,7 +67551,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x101
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -67602,7 +67560,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x102
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -67611,7 +67569,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x103
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -67620,7 +67578,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x104
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -67629,7 +67587,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x105
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -67638,7 +67596,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x106
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -67647,7 +67605,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x107
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -67656,7 +67614,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x108
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -67665,7 +67623,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x109
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -67674,7 +67632,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1b
@@ -67686,7 +67644,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x16
@@ -67698,7 +67656,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x11
@@ -67710,7 +67668,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0xc
@@ -67722,7 +67680,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x7
@@ -67734,7 +67692,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x10f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x2
@@ -67746,7 +67704,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x110
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1
@@ -67758,7 +67716,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x111
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x0
@@ -67770,7 +67728,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x112
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -67788,13 +67746,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x114
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9bba
+	.4byte	0x9bb8
 	.ascii	"EmeraldBattleTowerRecord\000"
 
 	.byte	0xec
@@ -67805,7 +67763,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x11b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67814,7 +67772,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x11c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -67823,7 +67781,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x11d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67832,7 +67790,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x11e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67877,7 +67835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x123
-	.4byte	0x9bba
+	.4byte	0x9bb8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -67886,7 +67844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x124
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe4,0x1
@@ -67895,19 +67853,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x125
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x9bc6
-	.4byte	0x98bf
+	.4byte	0x9bc4
+	.4byte	0x98bd
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9c6c
+	.4byte	0x9c6a
 	.ascii	"BattleTowerInterview\000"
 
 	.byte	0x18
@@ -67918,7 +67876,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x12a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67927,7 +67885,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x12b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67936,7 +67894,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x12c
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -67954,13 +67912,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x12e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9d68
+	.4byte	0x9d66
 	.ascii	"BattleTowerEReaderTrainer\000"
 
 	.byte	0xbc
@@ -67971,7 +67929,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x133
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -67980,7 +67938,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x134
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -67989,7 +67947,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x135
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -67998,7 +67956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x136
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -68043,7 +68001,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x13b
-	.4byte	0x9d68
+	.4byte	0x9d66
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -68052,19 +68010,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x13c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x9d74
-	.4byte	0x98bf
+	.4byte	0x9d72
+	.4byte	0x98bd
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9dbc
+	.4byte	0x9dba
 	.ascii	"DomeMonData\000"
 
 	.byte	0x10
@@ -68084,7 +68042,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x143
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -68093,13 +68051,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x144
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9e1d
+	.4byte	0x9e1b
 	.ascii	"RentalMon\000"
 
 	.byte	0xc
@@ -68110,7 +68068,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x149
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -68119,7 +68077,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x14a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -68128,7 +68086,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x14b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -68137,13 +68095,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x14c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x9e9f
+	.4byte	0x9e9d
 	.ascii	"BattleDomeTrainer\000"
 
 	.byte	0x4
@@ -68154,7 +68112,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x151
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0xa
 	.byte	0x6
@@ -68166,7 +68124,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x152
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -68178,7 +68136,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x153
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x3
@@ -68190,7 +68148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x154
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x3
 	.byte	0x0
@@ -68199,7 +68157,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xa795
+	.4byte	0xa793
 	.ascii	"BattleFrontier\000"
 
 	.2byte	0x8e0
@@ -68210,7 +68168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x15c
-	.4byte	0x9ab7
+	.4byte	0x9ab5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -68219,7 +68177,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x15d
-	.4byte	0xa795
+	.4byte	0xa793
 	.byte	0x3
 	.byte	0x23
 	.byte	0xec,0x1
@@ -68228,7 +68186,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x15e
-	.4byte	0x9bc6
+	.4byte	0x9bc4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0xb
@@ -68237,7 +68195,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x15f
-	.4byte	0x9c6c
+	.4byte	0x9c6a
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0xb
@@ -68246,7 +68204,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x160
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0xc
@@ -68255,7 +68213,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x161
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -68267,7 +68225,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x162
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -68279,7 +68237,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x163
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -68300,7 +68258,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x165
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe6,0xc
@@ -68309,7 +68267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x166
-	.4byte	0xa7a1
+	.4byte	0xa79f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0xc
@@ -68318,7 +68276,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x167
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0xd
@@ -68327,7 +68285,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x168
-	.4byte	0xa7ad
+	.4byte	0xa7ab
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0xd
@@ -68336,7 +68294,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x169
-	.4byte	0xa7ad
+	.4byte	0xa7ab
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0xd
@@ -68345,7 +68303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb4,0xd
@@ -68354,7 +68312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb6,0xd
@@ -68363,7 +68321,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0xd
@@ -68372,7 +68330,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xba,0xd
@@ -68381,7 +68339,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbb,0xd
@@ -68390,7 +68348,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x16f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -68402,7 +68360,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x170
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -68414,7 +68372,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x171
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -68426,7 +68384,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x172
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -68438,7 +68396,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x173
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -68450,7 +68408,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x174
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -68462,7 +68420,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x175
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -68474,7 +68432,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x176
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -68486,7 +68444,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x177
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbd,0xd
@@ -68495,7 +68453,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x178
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbe,0xd
@@ -68504,7 +68462,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x179
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbf,0xd
@@ -68513,7 +68471,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17a
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0xd
@@ -68522,7 +68480,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17b
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0xd
@@ -68531,7 +68489,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17c
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0xd
@@ -68540,7 +68498,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17d
-	.4byte	0xa7c9
+	.4byte	0xa7c7
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0xd
@@ -68549,7 +68507,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17e
-	.4byte	0xa7d5
+	.4byte	0xa7d3
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0xe
@@ -68558,7 +68516,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x17f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf8,0xe
@@ -68567,7 +68525,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x180
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0xe
@@ -68576,7 +68534,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x181
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0xe
@@ -68585,7 +68543,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x182
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0xf
@@ -68594,7 +68552,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x183
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0xf
@@ -68621,7 +68579,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x186
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0x96,0xf
@@ -68630,7 +68588,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x187
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9e,0xf
@@ -68639,7 +68597,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x188
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa6,0xf
@@ -68648,7 +68606,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x189
-	.4byte	0xa7bb
+	.4byte	0xa7b9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xae,0xf
@@ -68657,7 +68615,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x18a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb6,0xf
@@ -68693,7 +68651,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x18e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -68705,7 +68663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x18f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x1
@@ -68717,7 +68675,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x190
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -68729,7 +68687,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x191
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc6,0xf
@@ -68738,7 +68696,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x192
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcc,0xf
@@ -68774,7 +68732,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x196
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xde,0xf
@@ -68783,7 +68741,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x197
-	.4byte	0x96ea
+	.4byte	0x96e8
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0xf
@@ -68792,7 +68750,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x198
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x10
@@ -68801,7 +68759,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x199
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9e,0x10
@@ -68810,7 +68768,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x10
@@ -68819,7 +68777,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa2,0x10
@@ -68828,7 +68786,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19c
-	.4byte	0xa7ef
+	.4byte	0xa7ed
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x10
@@ -68837,7 +68795,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xec,0x10
@@ -68846,7 +68804,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xee,0x10
@@ -68855,7 +68813,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x19f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x10
@@ -68864,7 +68822,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a0
-	.4byte	0xa7fb
+	.4byte	0xa7f9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x10
@@ -68873,7 +68831,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x11
@@ -68882,7 +68840,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a2
-	.4byte	0xa807
+	.4byte	0xa805
 	.byte	0x3
 	.byte	0x23
 	.byte	0x95,0x11
@@ -68891,7 +68849,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a3
-	.4byte	0xa815
+	.4byte	0xa813
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa5,0x11
@@ -68900,7 +68858,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -68912,7 +68870,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -68924,7 +68882,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xae,0x11
@@ -68933,7 +68891,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xaf,0x11
@@ -68942,95 +68900,95 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1a8
-	.4byte	0xa823
+	.4byte	0xa821
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0x11
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7a1
-	.4byte	0x9ab7
+	.4byte	0xa79f
+	.4byte	0x9ab5
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7ad
-	.4byte	0x8ce6
+	.4byte	0xa7ab
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7bb
-	.4byte	0x8ce6
+	.4byte	0xa7b9
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7c9
-	.4byte	0x8ce6
+	.4byte	0xa7c7
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7d5
-	.4byte	0x9e1d
+	.4byte	0xa7d3
+	.4byte	0x9e1b
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7e3
-	.4byte	0x8ce6
+	.4byte	0xa7e1
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0xf
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7ef
-	.4byte	0x8ce6
+	.4byte	0xa7ed
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa7fb
-	.4byte	0x9dbc
+	.4byte	0xa7f9
+	.4byte	0x9dba
 	.byte	0x12
 	.byte	0x5
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa807
-	.4byte	0x8ce6
+	.4byte	0xa805
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa815
-	.4byte	0x8cdc
+	.4byte	0xa813
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa823
-	.4byte	0x8cdc
+	.4byte	0xa821
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa82f
-	.4byte	0x9d74
+	.4byte	0xa82d
+	.4byte	0x9d72
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xa8be
+	.4byte	0xa8bc
 	.ascii	"ApprenticeQuestion\000"
 
 	.byte	0x4
@@ -69041,7 +68999,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ad
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -69053,7 +69011,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ae
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x4
@@ -69065,7 +69023,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1af
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x2
@@ -69077,7 +69035,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -69089,13 +69047,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xa99c
+	.4byte	0xa99a
 	.ascii	"PlayersApprentice\000"
 
 	.byte	0x2c
@@ -69106,7 +69064,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -69115,7 +69073,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -69127,7 +69085,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x2
@@ -69139,7 +69097,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1b9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -69151,7 +69109,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -69163,7 +69121,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1bb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x3
@@ -69175,7 +69133,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1bc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -69184,7 +69142,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1bd
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -69193,19 +69151,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1be
-	.4byte	0xa99c
+	.4byte	0xa99a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xa9a8
-	.4byte	0xa82f
+	.4byte	0xa9a6
+	.4byte	0xa82d
 	.byte	0x12
 	.byte	0x8
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xaa07
+	.4byte	0xaa05
 	.ascii	"RankingHall1P\000"
 
 	.byte	0x10
@@ -69225,7 +69183,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1c4
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -69234,7 +69192,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1c5
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -69243,13 +69201,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1c6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xaa88
+	.4byte	0xaa86
 	.ascii	"RankingHall2P\000"
 
 	.byte	0x1c
@@ -69278,7 +69236,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1cd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -69287,7 +69245,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ce
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -69296,7 +69254,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1cf
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -69305,13 +69263,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1d0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xadc5
+	.4byte	0xadc3
 	.ascii	"SaveBlock2\000"
 
 	.2byte	0xf2c
@@ -69322,7 +69280,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1d5
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -69331,7 +69289,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1d6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -69340,7 +69298,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1d7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -69358,7 +69316,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1d9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -69367,7 +69325,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1da
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -69376,7 +69334,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1db
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -69385,7 +69343,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1dc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -69394,7 +69352,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1dd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -69403,7 +69361,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1de
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x3
 	.byte	0xd
@@ -69415,7 +69373,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1df
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x8
@@ -69427,7 +69385,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x7
@@ -69439,7 +69397,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -69451,7 +69409,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -69463,7 +69421,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x4
@@ -69475,7 +69433,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e4
-	.4byte	0x949c
+	.4byte	0x949a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -69484,7 +69442,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e5
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x1
@@ -69493,7 +69451,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e6
-	.4byte	0x944b
+	.4byte	0x9449
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x1
@@ -69502,7 +69460,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e7
-	.4byte	0x944b
+	.4byte	0x9449
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x1
@@ -69511,7 +69469,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e8
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x1
@@ -69520,7 +69478,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1e9
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xac,0x1
@@ -69529,7 +69487,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ea
-	.4byte	0xa8be
+	.4byte	0xa8bc
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0x1
@@ -69538,7 +69496,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1eb
-	.4byte	0xadc5
+	.4byte	0xadc3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x1
@@ -69547,7 +69505,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ec
-	.4byte	0x973e
+	.4byte	0x973c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xec,0x3
@@ -69556,7 +69514,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ed
-	.4byte	0x955e
+	.4byte	0x955c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0x3
@@ -69565,7 +69523,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ee
-	.4byte	0x95f4
+	.4byte	0x95f2
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0x4
@@ -69574,7 +69532,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1ef
-	.4byte	0xadd1
+	.4byte	0xadcf
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x4
@@ -69583,7 +69541,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1f0
-	.4byte	0xade1
+	.4byte	0xaddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0xa
@@ -69592,7 +69550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1f1
-	.4byte	0xadef
+	.4byte	0xaded
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0xc
@@ -69601,20 +69559,20 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1f2
-	.4byte	0x9e9f
+	.4byte	0x9e9d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcc,0xc
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xadd1
-	.4byte	0x97e0
+	.4byte	0xadcf
+	.4byte	0x97de
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xade1
-	.4byte	0xa9a8
+	.4byte	0xaddf
+	.4byte	0xa9a6
 	.byte	0x12
 	.byte	0x8
 	.byte	0x12
@@ -69623,23 +69581,23 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xadef
-	.4byte	0xaa07
+	.4byte	0xaded
+	.4byte	0xaa05
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xadfd
-	.4byte	0x8ce6
+	.4byte	0xadfb
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xae88
+	.4byte	0xae86
 	.ascii	"SecretBaseParty\000"
 
 	.byte	0x6c
@@ -69650,7 +69608,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1f9
-	.4byte	0xae88
+	.4byte	0xae86
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -69659,7 +69617,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1fa
-	.4byte	0xae94
+	.4byte	0xae92
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -69686,7 +69644,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1fd
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -69695,25 +69653,25 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x1fe
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xae94
-	.4byte	0x8cf1
+	.4byte	0xae92
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x5
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xaea0
-	.4byte	0x8ce6
+	.4byte	0xae9e
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x17
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xb017
+	.4byte	0xb015
 	.ascii	"SecretBase\000"
 
 	.byte	0xa0
@@ -69724,7 +69682,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x203
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -69733,7 +69691,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x204
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -69745,7 +69703,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x205
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -69757,7 +69715,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x206
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -69769,7 +69727,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x207
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -69799,7 +69757,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -69808,7 +69766,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -69817,7 +69775,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -69826,7 +69784,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -69835,7 +69793,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20e
-	.4byte	0xb017
+	.4byte	0xb015
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -69844,7 +69802,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x20f
-	.4byte	0xb017
+	.4byte	0xb015
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -69853,19 +69811,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x210
-	.4byte	0xadfd
+	.4byte	0xadfb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xb023
-	.4byte	0x8cdc
+	.4byte	0xb021
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x27
-	.4byte	0xb09c
+	.4byte	0xb09a
 	.byte	0x4
 	.byte	0x4
 	.byte	0xe
@@ -69899,12 +69857,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0x17
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x8
 	.byte	0x4
 	.4byte	0x148
 	.byte	0xe
-	.4byte	0xb0fb
+	.4byte	0xb0f9
 	.ascii	"BackupMapLayout\000"
 
 	.byte	0xc
@@ -69915,7 +69873,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0x30
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -69924,7 +69882,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0x31
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -69939,7 +69897,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xb6e5
+	.4byte	0xb6e3
 	.ascii	"ObjectEvent\000"
 
 	.byte	0x24
@@ -69950,7 +69908,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0x9e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1f
@@ -69962,7 +69920,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0x9f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1e
@@ -69974,7 +69932,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa0
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1d
@@ -69986,7 +69944,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1c
@@ -69998,7 +69956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1b
@@ -70010,7 +69968,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa3
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1a
@@ -70022,7 +69980,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x19
@@ -70034,7 +69992,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa5
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x18
@@ -70046,7 +70004,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa6
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x17
@@ -70058,7 +70016,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa7
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x16
@@ -70070,7 +70028,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa8
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x15
@@ -70082,7 +70040,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xa9
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x14
@@ -70094,7 +70052,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xaa
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x13
@@ -70106,7 +70064,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xab
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x12
@@ -70118,7 +70076,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xac
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x11
@@ -70130,7 +70088,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xad
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x10
@@ -70142,7 +70100,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xae
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xf
@@ -70154,7 +70112,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xaf
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xe
@@ -70166,7 +70124,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb0
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xd
@@ -70178,7 +70136,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xc
@@ -70190,7 +70148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xb
@@ -70202,7 +70160,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb3
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xa
@@ -70214,7 +70172,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x9
@@ -70226,7 +70184,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb5
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x8
@@ -70238,7 +70196,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb6
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x7
@@ -70250,7 +70208,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb7
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x6
@@ -70262,7 +70220,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb8
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x5
@@ -70274,7 +70232,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xb9
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x4
@@ -70286,7 +70244,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -70295,7 +70253,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xbb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -70304,7 +70262,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xbc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -70313,7 +70271,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xbd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -70322,7 +70280,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xbe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -70331,7 +70289,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xbf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -70340,7 +70298,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -70349,7 +70307,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -70361,7 +70319,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -70400,7 +70358,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0xc
@@ -70412,7 +70370,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0x8
@@ -70424,7 +70382,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0x4
@@ -70436,7 +70394,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xc9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0x0
@@ -70448,7 +70406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xca
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -70457,7 +70415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xcb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -70466,7 +70424,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xcc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -70475,7 +70433,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xcd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -70484,7 +70442,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -70493,7 +70451,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xcf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -70502,7 +70460,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xd0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -70511,7 +70469,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xd1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -70520,13 +70478,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xd2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xb85e
+	.4byte	0xb85c
 	.ascii	"ObjectEventGraphicsInfo\000"
 
 	.byte	0x24
@@ -70537,7 +70495,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xd8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -70546,7 +70504,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xd9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -70555,7 +70513,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xda
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -70564,7 +70522,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xdb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -70573,7 +70531,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xdc
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -70582,7 +70540,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xdd
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -70591,7 +70549,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xde
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -70603,7 +70561,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xdf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x2
@@ -70615,7 +70573,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xe0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -70627,7 +70585,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xe1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -70639,7 +70597,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.byte	0xe2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -70690,7 +70648,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x20
 	.byte	0x0
 	.byte	0x27
-	.4byte	0xb961
+	.4byte	0xb95f
 	.byte	0x4
 	.byte	0x4
 	.byte	0xea
@@ -70728,7 +70686,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x27
-	.4byte	0xba05
+	.4byte	0xba03
 	.byte	0x4
 	.byte	0x4
 	.byte	0xff
@@ -70762,7 +70720,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x6
 	.byte	0x0
 	.byte	0x29
-	.4byte	0xbb84
+	.4byte	0xbb82
 	.byte	0x4
 	.byte	0x4
 	.2byte	0x10a
@@ -70824,7 +70782,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x29
-	.4byte	0xbbb5
+	.4byte	0xbbb3
 	.byte	0x4
 	.byte	0x4
 	.2byte	0x11d
@@ -70842,7 +70800,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x29
-	.4byte	0xbbf2
+	.4byte	0xbbf0
 	.byte	0x4
 	.byte	0x4
 	.2byte	0x125
@@ -70860,7 +70818,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xbda0
+	.4byte	0xbd9e
 	.ascii	"PlayerAvatar\000"
 
 	.byte	0x24
@@ -70871,7 +70829,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x12d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -70880,7 +70838,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x12e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -70889,7 +70847,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x12f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -70898,7 +70856,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x130
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -70907,7 +70865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x131
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -70916,7 +70874,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x132
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -70925,7 +70883,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x133
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -70934,7 +70892,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x134
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -70943,7 +70901,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x135
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -70952,7 +70910,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x136
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -70961,7 +70919,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x137
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -70970,7 +70928,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x138
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -70979,7 +70937,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x13a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -70988,7 +70946,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x13b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -70997,7 +70955,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x13d
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -71006,13 +70964,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x13e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xbde0
+	.4byte	0xbdde
 	.ascii	"Camera\000"
 
 	.byte	0xc
@@ -71023,7 +70981,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x143
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -71035,7 +70993,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x144
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -71044,7 +71002,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x4
 	.2byte	0x145
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -71058,7 +71016,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0xbf04
+	.4byte	0xbf02
 	.ascii	"Berry\000"
 
 	.byte	0x1c
@@ -71069,7 +71027,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x9
-	.4byte	0xbf10
+	.4byte	0xbf0e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71078,7 +71036,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0xa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -71087,7 +71045,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0xb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -71096,7 +71054,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -71105,7 +71063,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -71132,7 +71090,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x10
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -71141,7 +71099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -71150,7 +71108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -71159,7 +71117,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -71168,7 +71126,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x14
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -71177,7 +71135,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x15
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -71186,21 +71144,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x16
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xbf10
+	.4byte	0xbf0e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
 	.byte	0x17
-	.4byte	0xbf04
+	.4byte	0xbf02
 	.byte	0xe
-	.4byte	0xc025
+	.4byte	0xc023
 	.ascii	"Berry2\000"
 
 	.byte	0x1c
@@ -71220,7 +71178,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x1e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -71229,7 +71187,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x1f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -71238,7 +71196,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x20
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -71247,7 +71205,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x21
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -71274,7 +71232,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x24
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -71283,7 +71241,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x25
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -71292,7 +71250,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -71301,7 +71259,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x27
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -71310,7 +71268,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x28
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -71319,7 +71277,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -71328,13 +71286,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xc0a1
+	.4byte	0xc09f
 	.ascii	"EnigmaBerry\000"
 
 	.byte	0x34
@@ -71345,7 +71303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x2f
-	.4byte	0xbf15
+	.4byte	0xbf13
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71354,7 +71312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x30
-	.4byte	0xc0a1
+	.4byte	0xc09f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -71363,7 +71321,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x31
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -71372,7 +71330,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x32
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -71381,19 +71339,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x33
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc0ad
-	.4byte	0x8cdc
+	.4byte	0xc0ab
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x11
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xc11b
+	.4byte	0xc119
 	.ascii	"BattleEnigmaBerry\000"
 
 	.byte	0x1c
@@ -71413,7 +71371,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -71422,7 +71380,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x3a
-	.4byte	0xc0a1
+	.4byte	0xc09f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -71431,13 +71389,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xc214
+	.4byte	0xc212
 	.ascii	"BerryTree\000"
 
 	.byte	0x8
@@ -71448,7 +71406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x40
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71457,7 +71415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x41
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -71469,7 +71427,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -71481,7 +71439,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x43
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -71490,7 +71448,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x44
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -71499,7 +71457,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x45
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -71511,7 +71469,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x46
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -71523,7 +71481,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x47
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -71535,7 +71493,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x48
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -71547,7 +71505,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xd
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -71556,7 +71514,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc313
+	.4byte	0xc311
 	.byte	0x24
 	.byte	0xe
 	.byte	0x13
@@ -71565,7 +71523,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71574,7 +71532,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x9
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71583,7 +71541,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa
-	.4byte	0xc313
+	.4byte	0xc311
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -71592,7 +71550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -71601,7 +71559,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -71610,7 +71568,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -71619,7 +71577,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -71628,7 +71586,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -71637,7 +71595,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x10
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -71646,7 +71604,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -71655,19 +71613,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc31f
-	.4byte	0x8cdc
+	.4byte	0xc31d
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x19
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc358
+	.4byte	0xc356
 	.byte	0x24
 	.byte	0xe
 	.byte	0x1a
@@ -71676,7 +71634,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x17
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71685,7 +71643,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x18
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71694,19 +71652,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x19
-	.4byte	0xc358
+	.4byte	0xc356
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc364
-	.4byte	0x8cdc
+	.4byte	0xc362
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x21
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc3d7
+	.4byte	0xc3d5
 	.byte	0x1c
 	.byte	0xe
 	.byte	0x25
@@ -71715,7 +71673,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x1f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71724,7 +71682,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x20
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71733,7 +71691,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -71751,7 +71709,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x23
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -71760,13 +71718,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x24
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc448
+	.4byte	0xc446
 	.byte	0x1c
 	.byte	0xe
 	.byte	0x2f
@@ -71775,7 +71733,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71784,7 +71742,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x2a
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71793,7 +71751,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x2b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -71811,7 +71769,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x2d
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -71820,13 +71778,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x2e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x24
 	.byte	0xe
 	.byte	0x3f
@@ -71835,7 +71793,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x33
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71844,7 +71802,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x34
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71853,7 +71811,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x35
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -71862,7 +71820,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x36
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -71874,7 +71832,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x37
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -71886,7 +71844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x38
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -71895,7 +71853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -71904,7 +71862,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -71913,7 +71871,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x3b
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -71922,7 +71880,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x3c
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -71946,13 +71904,13 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc55b
-	.4byte	0x8cdc
+	.4byte	0xc559
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x18
 	.byte	0xe
 	.byte	0x4a
@@ -71961,7 +71919,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x43
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -71970,7 +71928,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x44
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -71988,7 +71946,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x46
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -71997,7 +71955,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x47
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -72006,7 +71964,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x48
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -72015,19 +71973,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc5e8
-	.4byte	0x8cdc
+	.4byte	0xc5e6
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xb
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc6bb
+	.4byte	0xc6b9
 	.byte	0x20
 	.byte	0xe
 	.byte	0x58
@@ -72036,7 +71994,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x4e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72045,7 +72003,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x4f
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72054,7 +72012,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x50
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72081,7 +72039,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x53
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -72090,7 +72048,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -72099,7 +72057,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x55
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -72108,7 +72066,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x56
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -72117,13 +72075,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x57
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc7c6
+	.4byte	0xc7c4
 	.byte	0x20
 	.byte	0xe
 	.byte	0x68
@@ -72132,7 +72090,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x5c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72141,7 +72099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x5d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72150,7 +72108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x5e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72177,7 +72135,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x61
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -72189,7 +72147,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x62
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x3
@@ -72201,7 +72159,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x63
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x1
@@ -72213,7 +72171,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x64
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72222,7 +72180,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x65
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -72231,7 +72189,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x66
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -72240,13 +72198,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x67
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xc8e4
+	.4byte	0xc8e2
 	.byte	0x20
 	.byte	0xe
 	.byte	0x79
@@ -72255,7 +72213,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x6c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72264,7 +72222,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x6d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72273,7 +72231,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x6e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72282,7 +72240,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x6f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -72291,7 +72249,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x70
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -72300,7 +72258,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x71
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72309,7 +72267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x72
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -72318,7 +72276,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x73
-	.4byte	0xc8e4
+	.4byte	0xc8e2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -72327,7 +72285,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x74
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -72336,7 +72294,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x75
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -72345,7 +72303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x76
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -72354,7 +72312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x77
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -72363,19 +72321,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x78
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xc8f0
-	.4byte	0x8ce6
+	.4byte	0xc8ee
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xca4b
+	.4byte	0xca49
 	.byte	0x20
 	.byte	0xe
 	.byte	0x8b
@@ -72384,7 +72342,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x7d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72393,7 +72351,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x7e
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72402,7 +72360,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x7f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72411,7 +72369,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x80
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -72420,7 +72378,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x81
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -72429,7 +72387,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x82
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -72438,7 +72396,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x83
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -72447,7 +72405,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x84
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -72456,7 +72414,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x85
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -72465,7 +72423,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x86
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -72474,7 +72432,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x87
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72483,7 +72441,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x88
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -72492,7 +72450,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x89
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -72501,13 +72459,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x8a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xcb0d
+	.4byte	0xcb0b
 	.byte	0x18
 	.byte	0xe
 	.byte	0x98
@@ -72516,7 +72474,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x8f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72525,7 +72483,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x90
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72534,7 +72492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x91
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72543,7 +72501,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x92
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -72555,7 +72513,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x93
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x3
@@ -72567,7 +72525,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x94
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -72576,7 +72534,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x95
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -72585,7 +72543,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x96
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72594,13 +72552,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x97
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xcbee
+	.4byte	0xcbec
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xa6
@@ -72609,7 +72567,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x9c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72618,7 +72576,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x9d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72627,7 +72585,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x9e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72636,7 +72594,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x9f
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -72645,7 +72603,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa0
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -72654,7 +72612,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72663,7 +72621,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -72672,7 +72630,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -72681,7 +72639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -72690,13 +72648,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xa5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xccab
+	.4byte	0xcca9
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xb4
@@ -72705,7 +72663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xaa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72714,7 +72672,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xab
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72723,7 +72681,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xac
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72732,7 +72690,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xad
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -72741,7 +72699,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xae
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -72750,7 +72708,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xaf
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -72759,7 +72717,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb0
-	.4byte	0xc8e4
+	.4byte	0xc8e2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -72768,7 +72726,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -72777,7 +72735,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -72786,13 +72744,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xcd60
+	.4byte	0xcd5e
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xc0
@@ -72801,7 +72759,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72810,7 +72768,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xb9
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72819,7 +72777,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xba
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72828,7 +72786,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xbb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -72846,7 +72804,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xbd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -72855,7 +72813,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xbe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -72864,13 +72822,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xbf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xce0e
+	.4byte	0xce0c
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xce
@@ -72879,7 +72837,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xc5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72888,7 +72846,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xc6
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72897,7 +72855,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xc7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72906,7 +72864,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xc8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -72924,7 +72882,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xca
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -72933,7 +72891,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xcb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -72942,7 +72900,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xcc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -72951,13 +72909,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xcd
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xcec5
+	.4byte	0xcec3
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xdb
@@ -72966,7 +72924,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -72975,7 +72933,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd3
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -72984,7 +72942,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -72993,7 +72951,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -73011,7 +72969,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd7
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73020,7 +72978,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd8
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -73029,7 +72987,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xd9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -73038,13 +72996,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xda
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xcf85
+	.4byte	0xcf83
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xe9
@@ -73053,7 +73011,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xdf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73062,7 +73020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe0
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73071,7 +73029,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73080,7 +73038,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe2
-	.4byte	0xcf85
+	.4byte	0xcf83
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -73089,7 +73047,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -73098,7 +73056,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe4
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -73107,7 +73065,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -73116,7 +73074,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -73125,7 +73083,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -73134,19 +73092,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xe8
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xcf91
-	.4byte	0x8cdc
+	.4byte	0xcf8f
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x8
 	.byte	0x0
 	.byte	0x1d
-	.4byte	0xd026
+	.4byte	0xd024
 	.byte	0x1c
 	.byte	0xe
 	.byte	0xf5
@@ -73155,7 +73113,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xed
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73164,7 +73122,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xee
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73173,7 +73131,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xef
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73182,7 +73140,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -73191,7 +73149,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73200,7 +73158,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73209,7 +73167,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf3
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -73218,13 +73176,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf4
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd0ed
+	.4byte	0xd0eb
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x103
@@ -73233,7 +73191,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xf9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73242,7 +73200,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xfa
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73251,7 +73209,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xfb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73260,7 +73218,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xfc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73269,7 +73227,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xfd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73278,7 +73236,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xfe
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73287,7 +73245,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0xff
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -73296,7 +73254,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x100
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -73314,13 +73272,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x102
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd1f7
+	.4byte	0xd1f5
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x113
@@ -73329,7 +73287,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x107
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73338,7 +73296,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x108
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73347,7 +73305,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x109
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73356,7 +73314,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73365,7 +73323,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -73374,7 +73332,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73383,7 +73341,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -73392,7 +73350,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73401,7 +73359,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x10f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -73410,7 +73368,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x110
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -73419,7 +73377,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x111
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -73428,13 +73386,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x112
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd29a
+	.4byte	0xd298
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x11f
@@ -73443,7 +73401,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x117
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73452,7 +73410,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x118
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73479,7 +73437,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x11b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73488,7 +73446,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x11c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -73497,7 +73455,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x11d
-	.4byte	0xcf85
+	.4byte	0xcf83
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -73506,13 +73464,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x11e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd340
+	.4byte	0xd33e
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x12b
@@ -73521,7 +73479,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x123
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73530,7 +73488,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x124
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73539,7 +73497,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x125
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73548,7 +73506,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x126
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73557,7 +73515,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x127
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -73566,7 +73524,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x128
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73584,13 +73542,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x12a
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd3f6
+	.4byte	0xd3f4
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x138
@@ -73599,7 +73557,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x12f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73608,7 +73566,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x130
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73617,7 +73575,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x131
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73626,7 +73584,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x132
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -73635,7 +73593,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x133
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73653,7 +73611,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x135
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73671,13 +73629,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x137
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd501
+	.4byte	0xd4ff
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x148
@@ -73686,7 +73644,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x13c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73695,7 +73653,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x13d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73704,7 +73662,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x13e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73713,7 +73671,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x13f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73722,7 +73680,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x140
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -73731,7 +73689,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x141
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73740,7 +73698,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x142
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73749,7 +73707,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x143
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -73758,7 +73716,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x144
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -73767,7 +73725,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x145
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -73785,13 +73743,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x147
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd5d2
+	.4byte	0xd5d0
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x156
@@ -73800,7 +73758,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x14c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73809,7 +73767,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x14d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73818,7 +73776,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x14e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73827,7 +73785,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x14f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -73845,7 +73803,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x151
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -73854,7 +73812,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x152
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -73863,7 +73821,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x153
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -73872,7 +73830,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x154
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -73881,13 +73839,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x155
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd663
+	.4byte	0xd661
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x161
@@ -73896,7 +73854,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73905,7 +73863,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15b
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73914,7 +73872,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73923,7 +73881,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -73932,7 +73890,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -73941,7 +73899,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x15f
-	.4byte	0xd663
+	.4byte	0xd661
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -73950,19 +73908,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x160
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xd66f
-	.4byte	0x8cdc
+	.4byte	0xd66d
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xc
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd756
+	.4byte	0xd754
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x170
@@ -73971,7 +73929,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x165
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -73980,7 +73938,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x166
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -73989,7 +73947,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x167
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -73998,7 +73956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x168
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -74007,7 +73965,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x169
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -74016,7 +73974,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16a
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -74025,7 +73983,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -74034,7 +73992,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -74043,7 +74001,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -74052,7 +74010,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16e
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -74061,13 +74019,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x16f
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd7e7
+	.4byte	0xd7e5
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x17b
@@ -74076,7 +74034,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x174
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74085,7 +74043,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x175
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74112,7 +74070,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x178
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -74130,13 +74088,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x17a
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd8b3
+	.4byte	0xd8b1
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x188
@@ -74145,7 +74103,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x17f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74154,7 +74112,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x180
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74163,7 +74121,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x181
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74172,7 +74130,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x182
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -74190,7 +74148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x184
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -74199,7 +74157,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x185
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -74217,13 +74175,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x187
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x197
@@ -74232,7 +74190,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x18c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74241,7 +74199,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x18d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74250,7 +74208,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x18e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74259,7 +74217,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x18f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -74268,7 +74226,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x190
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -74277,7 +74235,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x191
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -74286,7 +74244,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x192
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -74295,7 +74253,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x193
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -74304,7 +74262,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x194
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -74313,7 +74271,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x195
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -74322,19 +74280,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x196
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xd9a3
-	.4byte	0x8cdc
+	.4byte	0xd9a1
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xda34
+	.4byte	0xda32
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x1a2
@@ -74343,7 +74301,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x19b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74352,7 +74310,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x19c
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74361,7 +74319,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x19d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74370,7 +74328,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x19e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -74379,7 +74337,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x19f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -74388,7 +74346,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a0
-	.4byte	0xd663
+	.4byte	0xd661
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -74397,13 +74355,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a1
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xdb14
+	.4byte	0xdb12
 	.byte	0x20
 	.byte	0xe
 	.2byte	0x1b0
@@ -74412,7 +74370,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74421,7 +74379,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a7
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74430,7 +74388,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74439,7 +74397,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1a9
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -74448,7 +74406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1aa
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -74457,7 +74415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ab
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -74466,7 +74424,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ac
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -74475,7 +74433,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ad
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -74484,7 +74442,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ae
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -74493,13 +74451,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1af
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x1bb
@@ -74508,7 +74466,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74517,7 +74475,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b5
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74526,7 +74484,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74535,7 +74493,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -74544,7 +74502,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -74553,7 +74511,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1b9
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -74562,19 +74520,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ba
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xdbb8
-	.4byte	0x8cdc
+	.4byte	0xdbb6
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0xdce3
+	.4byte	0xdce1
 	.byte	0x1c
 	.byte	0xe
 	.2byte	0x1cf
@@ -74583,7 +74541,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74592,7 +74550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c1
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74601,7 +74559,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74610,7 +74568,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -74628,7 +74586,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c5
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -74637,7 +74595,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -74646,7 +74604,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -74655,7 +74613,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -74664,7 +74622,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1c9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -74673,7 +74631,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ca
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -74682,7 +74640,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1cb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -74691,7 +74649,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1cc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -74700,7 +74658,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1cd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -74709,13 +74667,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x2c
-	.4byte	0xdfcb
+	.4byte	0xdfc9
 	.byte	0x24
 	.byte	0xe
 	.2byte	0x1d0
@@ -74724,214 +74682,214 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.byte	0x13
-	.4byte	0xc214
+	.4byte	0xc212
 	.byte	0x14
 	.ascii	"commonInit\000"
 
 	.byte	0xe
 	.byte	0x1a
-	.4byte	0xc31f
+	.4byte	0xc31d
 	.byte	0x14
 	.ascii	"fanclubLetter\000"
 
 	.byte	0xe
 	.byte	0x25
-	.4byte	0xc364
+	.4byte	0xc362
 	.byte	0x14
 	.ascii	"recentHappenings\000"
 
 	.byte	0xe
 	.byte	0x2f
-	.4byte	0xc3d7
+	.4byte	0xc3d5
 	.byte	0x14
 	.ascii	"fanclubOpinions\000"
 
 	.byte	0xe
 	.byte	0x3f
-	.4byte	0xc448
+	.4byte	0xc446
 	.byte	0x14
 	.ascii	"unkShow04\000"
 
 	.byte	0xe
 	.byte	0x4a
-	.4byte	0xc55b
+	.4byte	0xc559
 	.byte	0x14
 	.ascii	"nameRaterShow\000"
 
 	.byte	0xe
 	.byte	0x58
-	.4byte	0xc5e8
+	.4byte	0xc5e6
 	.byte	0x14
 	.ascii	"bravoTrainer\000"
 
 	.byte	0xe
 	.byte	0x68
-	.4byte	0xc6bb
+	.4byte	0xc6b9
 	.byte	0x14
 	.ascii	"bravoTrainerTower\000"
 
 	.byte	0xe
 	.byte	0x79
-	.4byte	0xc7c6
+	.4byte	0xc7c4
 	.byte	0x14
 	.ascii	"contestLiveUpdates\000"
 
 	.byte	0xe
 	.byte	0x8b
-	.4byte	0xc8f0
+	.4byte	0xc8ee
 	.byte	0x14
 	.ascii	"threeCheers\000"
 
 	.byte	0xe
 	.byte	0x98
-	.4byte	0xca4b
+	.4byte	0xca49
 	.byte	0x14
 	.ascii	"battleUpdate\000"
 
 	.byte	0xe
 	.byte	0xa6
-	.4byte	0xcb0d
+	.4byte	0xcb0b
 	.byte	0x14
 	.ascii	"fanClubSpecial\000"
 
 	.byte	0xe
 	.byte	0xb4
-	.4byte	0xcbee
+	.4byte	0xcbec
 	.byte	0x14
 	.ascii	"contestLiveUpdates2\000"
 
 	.byte	0xe
 	.byte	0xc0
-	.4byte	0xccab
+	.4byte	0xcca9
 	.byte	0x14
 	.ascii	"pokemonToday\000"
 
 	.byte	0xe
 	.byte	0xce
-	.4byte	0xcd60
+	.4byte	0xcd5e
 	.byte	0x14
 	.ascii	"smartshopperShow\000"
 
 	.byte	0xe
 	.byte	0xdb
-	.4byte	0xce0e
+	.4byte	0xce0c
 	.byte	0x14
 	.ascii	"pokemonTodayFailed\000"
 
 	.byte	0xe
 	.byte	0xe9
-	.4byte	0xcec5
+	.4byte	0xcec3
 	.byte	0x14
 	.ascii	"pokemonAngler\000"
 
 	.byte	0xe
 	.byte	0xf5
-	.4byte	0xcf91
+	.4byte	0xcf8f
 	.byte	0x2d
 	.ascii	"worldOfMasters\000"
 
 	.byte	0xe
 	.2byte	0x103
-	.4byte	0xd026
+	.4byte	0xd024
 	.byte	0x2d
 	.ascii	"rivalTrainer\000"
 
 	.byte	0xe
 	.2byte	0x113
-	.4byte	0xd0ed
+	.4byte	0xd0eb
 	.byte	0x2d
 	.ascii	"trendWatcher\000"
 
 	.byte	0xe
 	.2byte	0x11f
-	.4byte	0xd1f7
+	.4byte	0xd1f5
 	.byte	0x2d
 	.ascii	"treasureInvestigators\000"
 
 	.byte	0xe
 	.2byte	0x12b
-	.4byte	0xd29a
+	.4byte	0xd298
 	.byte	0x2d
 	.ascii	"findThatGamer\000"
 
 	.byte	0xe
 	.2byte	0x138
-	.4byte	0xd340
+	.4byte	0xd33e
 	.byte	0x2d
 	.ascii	"breakingNews\000"
 
 	.byte	0xe
 	.2byte	0x148
-	.4byte	0xd3f6
+	.4byte	0xd3f4
 	.byte	0x2d
 	.ascii	"secretBaseVisit\000"
 
 	.byte	0xe
 	.2byte	0x156
-	.4byte	0xd501
+	.4byte	0xd4ff
 	.byte	0x2d
 	.ascii	"lottoWinner\000"
 
 	.byte	0xe
 	.2byte	0x161
-	.4byte	0xd5d2
+	.4byte	0xd5d0
 	.byte	0x2d
 	.ascii	"battleSeminar\000"
 
 	.byte	0xe
 	.2byte	0x170
-	.4byte	0xd66f
+	.4byte	0xd66d
 	.byte	0x2d
 	.ascii	"trainerFanClub\000"
 
 	.byte	0xe
 	.2byte	0x17b
-	.4byte	0xd756
+	.4byte	0xd754
 	.byte	0x2d
 	.ascii	"cuties\000"
 
 	.byte	0xe
 	.2byte	0x188
-	.4byte	0xd7e7
+	.4byte	0xd7e5
 	.byte	0x2d
 	.ascii	"frontier\000"
 
 	.byte	0xe
 	.2byte	0x197
-	.4byte	0xd8b3
+	.4byte	0xd8b1
 	.byte	0x2d
 	.ascii	"numberOne\000"
 
 	.byte	0xe
 	.2byte	0x1a2
-	.4byte	0xd9a3
+	.4byte	0xd9a1
 	.byte	0x2d
 	.ascii	"secretBaseSecrets\000"
 
 	.byte	0xe
 	.2byte	0x1b0
-	.4byte	0xda34
+	.4byte	0xda32
 	.byte	0x2d
 	.ascii	"safariFanClub\000"
 
 	.byte	0xe
 	.2byte	0x1bb
-	.4byte	0xdb14
+	.4byte	0xdb12
 	.byte	0x2d
 	.ascii	"massOutbreak\000"
 
 	.byte	0xe
 	.2byte	0x1cf
-	.4byte	0xdbb8
+	.4byte	0xdbb6
 	.byte	0x0
 	.byte	0x2e
 	.ascii	"TVShow\000"
 
 	.byte	0xe
 	.2byte	0x1d0
-	.4byte	0xdce3
+	.4byte	0xdce1
 	.byte	0x2b
-	.4byte	0xe015
+	.4byte	0xe013
 	.byte	0x4
 	.byte	0xe
 	.2byte	0x1d7
@@ -74940,7 +74898,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1d4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74949,7 +74907,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1d5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -74958,7 +74916,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1d6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74968,9 +74926,9 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1d7
-	.4byte	0xdfda
+	.4byte	0xdfd8
 	.byte	0x21
-	.4byte	0xe1fd
+	.4byte	0xe1fb
 	.ascii	"GabbyAndTyData\000"
 
 	.byte	0xc
@@ -74981,7 +74939,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1db
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -74990,7 +74948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1dc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -74999,7 +74957,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1dd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75008,7 +74966,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1de
-	.4byte	0xc8e4
+	.4byte	0xc8e2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -75017,7 +74975,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1df
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -75026,7 +74984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -75035,7 +74993,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -75047,7 +75005,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -75059,7 +75017,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -75071,7 +75029,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -75083,7 +75041,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -75095,7 +75053,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -75107,7 +75065,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -75119,7 +75077,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -75131,7 +75089,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1e9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -75143,7 +75101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1ea
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -75155,7 +75113,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xe
 	.2byte	0x1eb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -75164,7 +75122,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xb
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xe23e
+	.4byte	0xe23c
 	.ascii	"SpriteSheet\000"
 
 	.byte	0x8
@@ -75184,7 +75142,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xa
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75193,13 +75151,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xe289
+	.4byte	0xe287
 	.ascii	"CompressedSpriteSheet\000"
 
 	.byte	0x8
@@ -75210,7 +75168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x10
-	.4byte	0xe289
+	.4byte	0xe287
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75219,7 +75177,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x11
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75228,18 +75186,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x12
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0xe28f
+	.4byte	0xe28d
 	.byte	0x17
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0xe
-	.4byte	0xe2c8
+	.4byte	0xe2c6
 	.ascii	"SpritePalette\000"
 
 	.byte	0x8
@@ -75250,7 +75208,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x21
-	.4byte	0xe2c8
+	.4byte	0xe2c6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75259,18 +75217,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x22
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0xe2ce
+	.4byte	0xe2cc
 	.byte	0x17
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0xe
-	.4byte	0xe311
+	.4byte	0xe30f
 	.ascii	"CompressedSpritePalette\000"
 
 	.byte	0x8
@@ -75281,7 +75239,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x27
-	.4byte	0xe289
+	.4byte	0xe287
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75290,13 +75248,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x28
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xe3b5
+	.4byte	0xe3b3
 	.ascii	"AffineAnimState\000"
 
 	.byte	0xc
@@ -75307,7 +75265,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75316,7 +75274,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -75325,7 +75283,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -75334,7 +75292,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -75343,7 +75301,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8e
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75352,7 +75310,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x8f
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -75361,13 +75319,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0x90
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x27
-	.4byte	0xe3fc
+	.4byte	0xe3fa
 	.byte	0x4
 	.byte	0x5
 	.byte	0x94
@@ -75389,12 +75347,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xac
-	.4byte	0xe412
+	.4byte	0xe410
 	.byte	0x8
 	.byte	0x4
 	.4byte	0x529d
 	.byte	0xe
-	.4byte	0xe45b
+	.4byte	0xe459
 	.ascii	"OamMatrix\000"
 
 	.byte	0x8
@@ -75405,7 +75363,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xf1
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75414,7 +75372,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xf2
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -75423,7 +75381,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xf3
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75432,13 +75390,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xf4
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xe467
+	.4byte	0xe465
 	.4byte	0x519a
 	.byte	0x12
 	.byte	0x0
@@ -75448,13 +75406,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xf9
-	.4byte	0xe48c
+	.4byte	0xe48a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0xe45b
+	.4byte	0xe459
 	.byte	0x11
-	.4byte	0xe49d
+	.4byte	0xe49b
 	.4byte	0x4c18
 	.byte	0x12
 	.byte	0x0
@@ -75464,11 +75422,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x5
 	.byte	0xfd
-	.4byte	0xe491
+	.4byte	0xe48f
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0xe5a2
+	.4byte	0xe5a0
 	.ascii	"Unknown_806F160_Struct\000"
 
 	.byte	0x14
@@ -75479,7 +75437,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x84
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x4
 	.byte	0x1c
@@ -75491,7 +75449,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x85
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x4
 	.byte	0x18
@@ -75503,7 +75461,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x86
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x8
 	.byte	0x10
@@ -75515,7 +75473,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x87
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x8
 	.byte	0x8
@@ -75527,7 +75485,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x88
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x4
 	.byte	0x4
@@ -75539,7 +75497,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x89
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x4
 	.byte	0x0
@@ -75560,7 +75518,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x8b
-	.4byte	0xe5a2
+	.4byte	0xe5a0
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -75569,7 +75527,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x8c
-	.4byte	0xe5a8
+	.4byte	0xe5a6
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -75578,7 +75536,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x8d
-	.4byte	0xe5ae
+	.4byte	0xe5ac
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -75593,7 +75551,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.4byte	0x50fe
 	.byte	0xe
-	.4byte	0xe82f
+	.4byte	0xe82d
 	.ascii	"BattlePokemon\000"
 
 	.byte	0x5c
@@ -75604,7 +75562,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x92
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75613,7 +75571,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x93
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -75622,7 +75580,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x94
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75631,7 +75589,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x95
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -75640,7 +75598,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x96
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -75649,7 +75607,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x97
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -75667,7 +75625,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x99
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x1b
@@ -75679,7 +75637,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x16
@@ -75691,7 +75649,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x11
@@ -75703,7 +75661,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0xc
@@ -75715,7 +75673,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x7
@@ -75727,7 +75685,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x5
 	.byte	0x2
@@ -75739,7 +75697,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0x9f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x0
@@ -75751,7 +75709,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa0
-	.4byte	0xe82f
+	.4byte	0xe82d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -75760,7 +75718,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -75769,7 +75727,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -75778,7 +75736,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
@@ -75787,7 +75745,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -75805,7 +75763,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -75814,7 +75772,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -75823,7 +75781,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -75832,7 +75790,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xa9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -75841,7 +75799,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xaa
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -75859,7 +75817,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xac
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3d
@@ -75868,7 +75826,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xad
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3e
@@ -75877,7 +75835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xae
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -75886,7 +75844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xaf
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -75895,7 +75853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb0
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -75904,7 +75862,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -75913,19 +75871,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xe83b
-	.4byte	0x8d07
+	.4byte	0xe839
+	.4byte	0x8d05
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xeadd
+	.4byte	0xeadb
 	.ascii	"BaseStats\000"
 
 	.byte	0x24
@@ -75936,7 +75894,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -75945,7 +75903,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -75954,7 +75912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xb9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -75963,7 +75921,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -75972,7 +75930,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xbb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -75981,7 +75939,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xbc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -75990,7 +75948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xbd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -75999,7 +75957,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xbe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -76008,7 +75966,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xbf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -76017,7 +75975,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -76026,7 +75984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -76038,7 +75996,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xc
@@ -76050,7 +76008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xa
@@ -76062,7 +76020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc4
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x8
@@ -76074,7 +76032,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc5
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x6
@@ -76086,7 +76044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x4
@@ -76098,7 +76056,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -76107,7 +76065,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -76116,7 +76074,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xc9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -76125,7 +76083,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xca
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -76134,7 +76092,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xcb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -76143,7 +76101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xcc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -76152,7 +76110,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xcd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -76161,7 +76119,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -76179,7 +76137,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xd1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -76188,7 +76146,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xd3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -76197,7 +76155,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -76209,7 +76167,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xd5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -76221,13 +76179,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xd6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xebb8
+	.4byte	0xebb6
 	.ascii	"BattleMove\000"
 
 	.byte	0x14
@@ -76238,7 +76196,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xdc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76247,7 +76205,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xdd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76256,7 +76214,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xde
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -76265,7 +76223,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xdf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -76274,7 +76232,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -76283,7 +76241,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -76292,7 +76250,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -76301,7 +76259,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe3
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -76310,7 +76268,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -76319,7 +76277,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -76328,13 +76286,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xe6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xebf4
+	.4byte	0xebf2
 	.ascii	"SpindaSpot\000"
 
 	.byte	0x24
@@ -76345,7 +76303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xeb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76354,7 +76312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xeb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -76363,13 +76321,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xec
-	.4byte	0xa7fb
+	.4byte	0xa7f9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xec28
+	.4byte	0xec26
 	.ascii	"LevelUpMove\000"
 
 	.byte	0x4
@@ -76380,7 +76338,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xf1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76389,13 +76347,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xf2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0xec74
+	.4byte	0xec72
 	.ascii	"Evolution\000"
 
 	.byte	0x8
@@ -76406,7 +76364,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xf7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76415,7 +76373,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xf8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76424,7 +76382,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xf9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -76434,11 +76392,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xfc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0xec9b
+	.4byte	0xec99
 	.4byte	0x430
 	.byte	0x12
 	.byte	0x5
@@ -76448,7 +76406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xfd
-	.4byte	0xec8f
+	.4byte	0xec8d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -76456,30 +76414,30 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.byte	0xff
-	.4byte	0xec8f
+	.4byte	0xec8d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0xecd2
-	.4byte	0xecd2
+	.4byte	0xecd0
+	.4byte	0xecd0
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
 	.byte	0x17
-	.4byte	0xe83b
+	.4byte	0xe839
 	.byte	0x2a
 	.ascii	"gBaseStats\000"
 
 	.byte	0x2
 	.2byte	0x105
-	.4byte	0xecec
+	.4byte	0xecea
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0xecc6
+	.4byte	0xecc4
 	.byte	0x11
-	.4byte	0xecfd
-	.4byte	0xecfd
+	.4byte	0xecfb
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -76490,13 +76448,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.2byte	0x106
-	.4byte	0xed1d
+	.4byte	0xed1b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0xecf1
+	.4byte	0xecef
 	.byte	0x11
-	.4byte	0xed2e
+	.4byte	0xed2c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -76506,13 +76464,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2
 	.2byte	0x10a
-	.4byte	0xed45
+	.4byte	0xed43
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0xed22
+	.4byte	0xed20
 	.byte	0x21
-	.4byte	0xedaf
+	.4byte	0xedad
 	.ascii	"WarpData\000"
 
 	.byte	0x8
@@ -76523,7 +76481,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x21b
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76532,7 +76490,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x21c
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -76541,7 +76499,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x21d
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76550,7 +76508,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x21e
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -76559,13 +76517,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x21e
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xede8
+	.4byte	0xede6
 	.ascii	"ItemSlot\000"
 
 	.byte	0x4
@@ -76576,7 +76534,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x223
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76585,13 +76543,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x224
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xee70
+	.4byte	0xee6e
 	.ascii	"Pokeblock\000"
 
 	.byte	0x8
@@ -76602,7 +76560,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x229
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76611,7 +76569,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -76620,7 +76578,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76629,7 +76587,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -76638,7 +76596,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -76647,7 +76605,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -76656,13 +76614,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x22f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xef63
+	.4byte	0xef61
 	.ascii	"Roamer\000"
 
 	.byte	0x1c
@@ -76673,7 +76631,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x234
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76682,7 +76640,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x235
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -76691,7 +76649,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x236
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -76700,7 +76658,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x237
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -76709,7 +76667,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x238
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -76718,7 +76676,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x239
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -76727,7 +76685,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -76736,7 +76694,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -76745,7 +76703,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -76754,7 +76712,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -76763,7 +76721,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -76772,7 +76730,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x23f
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -76781,13 +76739,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x240
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xefd9
+	.4byte	0xefd7
 	.ascii	"RamScriptData\000"
 
 	.2byte	0x3e8
@@ -76798,7 +76756,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x245
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76807,7 +76765,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x246
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -76816,7 +76774,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x247
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76825,7 +76783,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x248
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -76834,19 +76792,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x249
-	.4byte	0xefd9
+	.4byte	0xefd7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xefe6
-	.4byte	0x8cdc
+	.4byte	0xefe4
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x3e2
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xf01f
+	.4byte	0xf01d
 	.ascii	"RamScript\000"
 
 	.2byte	0x3ec
@@ -76857,7 +76815,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x24e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76866,13 +76824,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x24f
-	.4byte	0xef63
+	.4byte	0xef61
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf096
+	.4byte	0xf094
 	.ascii	"EasyChatPair\000"
 
 	.byte	0x8
@@ -76883,7 +76841,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x254
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x7
 	.byte	0x9
@@ -76895,7 +76853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x255
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x7
 	.byte	0x2
@@ -76907,7 +76865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x256
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x1
@@ -76919,7 +76877,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x257
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -76934,7 +76892,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf0c0
+	.4byte	0xf0be
 	.ascii	"MauvilleManCommon\000"
 
 	.byte	0x4
@@ -76945,13 +76903,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x266
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf18f
+	.4byte	0xf18d
 	.ascii	"MauvilleManBard\000"
 
 	.byte	0x2c
@@ -76962,7 +76920,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x26b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -76989,7 +76947,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x26e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -76998,7 +76956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x26f
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -77016,7 +76974,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x271
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -77025,13 +76983,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x272
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf245
+	.4byte	0xf243
 	.ascii	"MauvilleManStoryteller\000"
 
 	.byte	0x38
@@ -77042,7 +77000,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x277
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77051,7 +77009,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x278
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77078,7 +77036,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x27b
-	.4byte	0xf245
+	.4byte	0xf243
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -77087,7 +77045,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x27c
-	.4byte	0xf253
+	.4byte	0xf251
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -77102,23 +77060,23 @@ IsLastMonThatKnowsSurf:
 	.byte	0x34
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf253
-	.4byte	0x8cdc
+	.4byte	0xf251
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf261
-	.4byte	0x8cdc
+	.4byte	0xf25f
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf2fb
+	.4byte	0xf2f9
 	.ascii	"MauvilleManGiddy\000"
 
 	.byte	0x24
@@ -77129,7 +77087,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x282
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77138,7 +77096,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x283
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77147,7 +77105,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x284
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -77156,7 +77114,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x285
-	.4byte	0xf2fb
+	.4byte	0xf2f9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -77165,7 +77123,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x286
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -77174,19 +77132,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x287
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf307
-	.4byte	0x8ce6
+	.4byte	0xf305
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x9
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf35f
+	.4byte	0xf35d
 	.ascii	"MauvilleManHipster\000"
 
 	.byte	0x4
@@ -77197,7 +77155,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x28c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77206,7 +77164,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x28d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77215,13 +77173,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x28e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf3e7
+	.4byte	0xf3e5
 	.ascii	"MauvilleOldManTrader\000"
 
 	.byte	0x38
@@ -77232,7 +77190,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x293
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77250,7 +77208,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x295
-	.4byte	0xf3e7
+	.4byte	0xf3e5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -77259,7 +77217,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x296
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x31
@@ -77274,15 +77232,15 @@ IsLastMonThatKnowsSurf:
 	.byte	0x32
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf3f5
-	.4byte	0x8cdc
+	.4byte	0xf3f3
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0xa
 	.byte	0x0
 	.byte	0x31
-	.4byte	0xf472
+	.4byte	0xf470
 	.ascii	"OldMan\000"
 
 	.byte	0x40
@@ -77293,47 +77251,47 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x29c
-	.4byte	0xf096
+	.4byte	0xf094
 	.byte	0x2d
 	.ascii	"bard\000"
 
 	.byte	0x6
 	.2byte	0x29d
-	.4byte	0xf0c0
+	.4byte	0xf0be
 	.byte	0x2d
 	.ascii	"giddy\000"
 
 	.byte	0x6
 	.2byte	0x29e
-	.4byte	0xf261
+	.4byte	0xf25f
 	.byte	0x2d
 	.ascii	"hipster\000"
 
 	.byte	0x6
 	.2byte	0x29f
-	.4byte	0xf307
+	.4byte	0xf305
 	.byte	0x2d
 	.ascii	"trader\000"
 
 	.byte	0x6
 	.2byte	0x2a0
-	.4byte	0xf35f
+	.4byte	0xf35d
 	.byte	0x2d
 	.ascii	"storyteller\000"
 
 	.byte	0x6
 	.2byte	0x2a1
-	.4byte	0xf18f
+	.4byte	0xf18d
 	.byte	0x2d
 	.ascii	"filler\000"
 
 	.byte	0x6
 	.2byte	0x2a2
-	.4byte	0xf472
+	.4byte	0xf470
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf47e
-	.4byte	0x8cdc
+	.4byte	0xf47c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3f
 	.byte	0x0
@@ -77342,9 +77300,9 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2a3
-	.4byte	0xf3f5
+	.4byte	0xf3f3
 	.byte	0x21
-	.4byte	0xf4d5
+	.4byte	0xf4d3
 	.ascii	"RecordMixing_UnknownStructSub\000"
 
 	.byte	0x38
@@ -77355,7 +77313,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2a7
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77364,19 +77322,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2a8
-	.4byte	0xf4d5
+	.4byte	0xf4d3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf4e1
-	.4byte	0x8cdc
+	.4byte	0xf4df
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x33
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf538
+	.4byte	0xf536
 	.ascii	"RecordMixing_UnknownStruct\000"
 
 	.byte	0x78
@@ -77387,7 +77345,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2ae
-	.4byte	0xf538
+	.4byte	0xf536
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77396,7 +77354,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2af
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x70
@@ -77411,13 +77369,13 @@ IsLastMonThatKnowsSurf:
 	.byte	0x74
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf544
-	.4byte	0xf48d
+	.4byte	0xf542
+	.4byte	0xf48b
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf5b7
+	.4byte	0xf5b5
 	.ascii	"LinkBattleRecord\000"
 
 	.byte	0x10
@@ -77428,7 +77386,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2b7
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77437,7 +77395,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2b8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -77446,7 +77404,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2b9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -77455,7 +77413,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2ba
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -77464,13 +77422,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2bb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf5fb
+	.4byte	0xf5f9
 	.ascii	"LinkBattleRecords\000"
 
 	.byte	0x58
@@ -77481,7 +77439,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c0
-	.4byte	0xf5fb
+	.4byte	0xf5f9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77490,19 +77448,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c1
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf607
-	.4byte	0xf544
+	.4byte	0xf605
+	.4byte	0xf542
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf66f
+	.4byte	0xf66d
 	.ascii	"RecordMixingGiftData\000"
 
 	.byte	0xc
@@ -77513,7 +77471,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77522,7 +77480,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77531,7 +77489,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -77540,13 +77498,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2c9
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf6ae
+	.4byte	0xf6ac
 	.ascii	"RecordMixingGift\000"
 
 	.byte	0x10
@@ -77566,13 +77524,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2cf
-	.4byte	0xf607
+	.4byte	0xf605
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf761
+	.4byte	0xf75f
 	.ascii	"ContestWinner\000"
 
 	.byte	0x20
@@ -77583,7 +77541,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2d4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77592,7 +77550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2d5
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -77601,7 +77559,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2d6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -77610,7 +77568,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2d7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -77628,7 +77586,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2d9
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -77637,13 +77595,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2da
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf7e5
+	.4byte	0xf7e3
 	.ascii	"DayCareMail\000"
 
 	.byte	0x38
@@ -77654,7 +77612,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2df
-	.4byte	0x7735
+	.4byte	0x7733
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77663,7 +77621,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2e0
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -77681,7 +77639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2e2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -77693,7 +77651,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2e3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -77702,7 +77660,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x37
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf82b
+	.4byte	0xf829
 	.ascii	"DaycareMon\000"
 
 	.byte	0x8c
@@ -77722,7 +77680,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2e9
-	.4byte	0xf761
+	.4byte	0xf75f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -77731,13 +77689,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2ea
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0x1
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xf887
+	.4byte	0xf885
 	.ascii	"DayCare\000"
 
 	.2byte	0x120
@@ -77748,7 +77706,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2ef
-	.4byte	0xf887
+	.4byte	0xf885
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77757,7 +77715,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2f0
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x2
@@ -77766,19 +77724,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2f1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf893
-	.4byte	0xf7e5
+	.4byte	0xf891
+	.4byte	0xf7e3
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xf8f4
+	.4byte	0xf8f2
 	.ascii	"RecordMixingDayCareMail\000"
 
 	.byte	0x78
@@ -77789,7 +77747,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2f6
-	.4byte	0xf8f4
+	.4byte	0xf8f2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77798,7 +77756,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2f7
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x70
@@ -77807,25 +77765,25 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2f8
-	.4byte	0xf900
+	.4byte	0xf8fe
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf900
-	.4byte	0xf761
+	.4byte	0xf8fe
+	.4byte	0xf75f
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xf90c
-	.4byte	0x8dee
+	.4byte	0xf90a
+	.4byte	0x8dec
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfa31
+	.4byte	0xfa2f
 	.ascii	"LilycoveLadyQuiz\000"
 
 	.byte	0x30
@@ -77836,7 +77794,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2fd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77845,7 +77803,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2fe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77854,7 +77812,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x2ff
-	.4byte	0x77b1
+	.4byte	0x77af
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -77863,7 +77821,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x300
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -77872,7 +77830,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x301
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -77881,7 +77839,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x302
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -77899,7 +77857,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x304
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -77908,7 +77866,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x305
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -77917,7 +77875,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x306
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -77926,7 +77884,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x307
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -77935,13 +77893,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x308
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfafd
+	.4byte	0xfafb
 	.ascii	"LilycoveLadyFavor\000"
 
 	.byte	0x14
@@ -77952,7 +77910,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x30d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -77961,7 +77919,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x30e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -77970,7 +77928,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x30f
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -77979,7 +77937,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x310
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -77988,7 +77946,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x311
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -77997,7 +77955,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x312
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -78006,7 +77964,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x313
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -78015,7 +77973,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x314
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -78024,13 +77982,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x315
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfbda
+	.4byte	0xfbd8
 	.ascii	"LilycoveLadyContest\000"
 
 	.byte	0x10
@@ -78041,7 +77999,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78050,7 +78008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31b
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -78059,7 +78017,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -78068,7 +78026,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -78077,7 +78035,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31e
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78086,7 +78044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x31f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -78095,7 +78053,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x320
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -78104,13 +78062,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x321
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0x2c
-	.4byte	0xfc26
+	.4byte	0xfc24
 	.byte	0x40
 	.byte	0x6
 	.2byte	0x32b
@@ -78119,40 +78077,40 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x326
-	.4byte	0xf90c
+	.4byte	0xf90a
 	.byte	0x2d
 	.ascii	"favor\000"
 
 	.byte	0x6
 	.2byte	0x327
-	.4byte	0xfa31
+	.4byte	0xfa2f
 	.byte	0x2d
 	.ascii	"contest\000"
 
 	.byte	0x6
 	.2byte	0x328
-	.4byte	0xfafd
+	.4byte	0xfafb
 	.byte	0x2d
 	.ascii	"id\000"
 
 	.byte	0x6
 	.2byte	0x329
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2d
 	.ascii	"pad\000"
 
 	.byte	0x6
 	.2byte	0x32a
-	.4byte	0xf472
+	.4byte	0xf470
 	.byte	0x0
 	.byte	0x2e
 	.ascii	"LilycoveLady\000"
 
 	.byte	0x6
 	.2byte	0x32b
-	.4byte	0xfbda
+	.4byte	0xfbd8
 	.byte	0x21
-	.4byte	0xfcb5
+	.4byte	0xfcb3
 	.ascii	"WaldaPhrase\000"
 
 	.byte	0x18
@@ -78172,7 +78130,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x330
-	.4byte	0xb017
+	.4byte	0xb015
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78181,7 +78139,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x331
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -78190,7 +78148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x332
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -78199,13 +78157,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x333
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfcfd
+	.4byte	0xfcfb
 	.ascii	"TrainerNameRecord\000"
 
 	.byte	0xc
@@ -78216,7 +78174,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x338
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78225,13 +78183,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x339
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfe28
+	.4byte	0xfe26
 	.ascii	"SaveTrainerHill\000"
 
 	.byte	0xc
@@ -78242,7 +78200,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x33e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78251,7 +78209,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x33f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78260,7 +78218,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x340
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -78269,7 +78227,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x341
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -78278,7 +78236,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x342
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xf
@@ -78290,7 +78248,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x343
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -78302,7 +78260,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x344
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -78314,7 +78272,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x345
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -78326,7 +78284,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x346
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -78338,7 +78296,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x347
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -78350,7 +78308,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x348
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x8
@@ -78359,7 +78317,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xa
 	.byte	0x0
 	.byte	0x21
-	.4byte	0xfe98
+	.4byte	0xfe96
 	.ascii	"MysteryEventStruct\000"
 
 	.byte	0x4
@@ -78370,7 +78328,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x34d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -78382,7 +78340,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x34e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x3
@@ -78394,7 +78352,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x34f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -78406,13 +78364,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x350
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xff08
+	.4byte	0xff06
 	.ascii	"WonderNews\000"
 
 	.2byte	0x1bc
@@ -78423,7 +78381,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x355
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78432,7 +78390,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x356
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -78441,7 +78399,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x357
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -78450,7 +78408,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x358
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78459,27 +78417,27 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x359
-	.4byte	0xff14
+	.4byte	0xff12
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xff14
-	.4byte	0x8cdc
+	.4byte	0xff12
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x27
 	.byte	0x0
 	.byte	0x11
-	.4byte	0xff22
-	.4byte	0x8cdc
+	.4byte	0xff20
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x9
 	.byte	0x12
 	.byte	0x27
 	.byte	0x0
 	.byte	0x26
-	.4byte	0xff61
+	.4byte	0xff5f
 	.ascii	"WonderNewsSaveStruct\000"
 
 	.2byte	0x1c0
@@ -78490,7 +78448,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x35e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78499,13 +78457,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x35f
-	.4byte	0xfe98
+	.4byte	0xfe96
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x10061
+	.4byte	0x1005f
 	.ascii	"WonderCard\000"
 
 	.2byte	0x14c
@@ -78516,7 +78474,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x364
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78525,7 +78483,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x365
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -78534,7 +78492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x366
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78543,7 +78501,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x367
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -78555,7 +78513,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x368
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x2
@@ -78567,7 +78525,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x369
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -78579,7 +78537,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -78588,7 +78546,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36b
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -78597,7 +78555,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36c
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -78606,7 +78564,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36d
-	.4byte	0x10061
+	.4byte	0x1005f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -78615,7 +78573,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36e
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0x1
@@ -78624,21 +78582,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x36f
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa2,0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1006f
-	.4byte	0x8cdc
+	.4byte	0x1006d
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x27
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x100ae
+	.4byte	0x100ac
 	.ascii	"WonderCardSaveStruct\000"
 
 	.2byte	0x150
@@ -78649,7 +78607,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x374
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78658,13 +78616,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x375
-	.4byte	0xff61
+	.4byte	0xff5f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x10128
+	.4byte	0x10126
 	.ascii	"MEventBuffer_3430_Sub\000"
 
 	.byte	0x24
@@ -78675,7 +78633,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x37a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78684,7 +78642,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x37b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -78693,7 +78651,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x37c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78702,7 +78660,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x37d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -78711,21 +78669,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x37e
-	.4byte	0x10128
+	.4byte	0x10126
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10136
-	.4byte	0x8ce6
+	.4byte	0x10134
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x10171
+	.4byte	0x1016f
 	.ascii	"MEventBuffer_3430\000"
 
 	.byte	0x28
@@ -78736,7 +78694,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x383
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78745,13 +78703,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x384
-	.4byte	0x100ae
+	.4byte	0x100ac
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x1020a
+	.4byte	0x10208
 	.ascii	"MEventBuffers\000"
 
 	.2byte	0x36c
@@ -78762,7 +78720,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x389
-	.4byte	0xff22
+	.4byte	0xff20
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -78771,7 +78729,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x38a
-	.4byte	0x1006f
+	.4byte	0x1006d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x3
@@ -78780,7 +78738,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x38b
-	.4byte	0x10136
+	.4byte	0x10134
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x6
@@ -78798,7 +78756,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x38d
-	.4byte	0xfe28
+	.4byte	0xfe26
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x6
@@ -78807,21 +78765,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x38e
-	.4byte	0x1020a
+	.4byte	0x10208
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10218
-	.4byte	0x8cf1
+	.4byte	0x10216
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x10ae5
+	.4byte	0x10ae3
 	.ascii	"SaveBlock1\000"
 
 	.2byte	0x3cb0
@@ -78841,7 +78799,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x394
-	.4byte	0xed4a
+	.4byte	0xed48
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -78850,7 +78808,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x395
-	.4byte	0xed4a
+	.4byte	0xed48
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -78859,7 +78817,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x396
-	.4byte	0xed4a
+	.4byte	0xed48
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -78868,7 +78826,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x397
-	.4byte	0xed4a
+	.4byte	0xed48
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -78877,7 +78835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x398
-	.4byte	0xed4a
+	.4byte	0xed48
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -78886,7 +78844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x399
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -78895,7 +78853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -78904,7 +78862,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2f
@@ -78913,7 +78871,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -78922,7 +78880,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -78931,7 +78889,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39e
-	.4byte	0x6d72
+	.4byte	0x6d70
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -78940,7 +78898,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x39f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb4,0x4
@@ -78949,7 +78907,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a0
-	.4byte	0xec8f
+	.4byte	0xec8d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0x4
@@ -78958,7 +78916,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x9
@@ -78967,7 +78925,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x9
@@ -78976,7 +78934,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x96,0x9
@@ -78985,7 +78943,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a4
-	.4byte	0x10ae5
+	.4byte	0x10ae3
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x9
@@ -78994,7 +78952,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a5
-	.4byte	0x10af1
+	.4byte	0x10aef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0xa
@@ -79003,7 +78961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a6
-	.4byte	0x10af1
+	.4byte	0x10aef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0xb
@@ -79012,7 +78970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a7
-	.4byte	0x10afd
+	.4byte	0x10afb
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0xc
@@ -79021,7 +78979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a8
-	.4byte	0x10b09
+	.4byte	0x10b07
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0xd
@@ -79030,7 +78988,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3a9
-	.4byte	0x10b15
+	.4byte	0x10b13
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0xf
@@ -79039,7 +78997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3aa
-	.4byte	0x10b21
+	.4byte	0x10b1f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0x10
@@ -79048,7 +79006,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ab
-	.4byte	0xf4d5
+	.4byte	0xf4d3
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0x13
@@ -79057,7 +79015,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ac
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbc,0x13
@@ -79066,7 +79024,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ad
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc2,0x13
@@ -79075,7 +79033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ae
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0x13
@@ -79084,7 +79042,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3af
-	.4byte	0x10b2d
+	.4byte	0x10b2b
 	.byte	0x3
 	.byte	0x23
 	.byte	0xca,0x13
@@ -79093,7 +79051,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b0
-	.4byte	0x10b39
+	.4byte	0x10b37
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0x14
@@ -79102,7 +79060,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b1
-	.4byte	0x10b45
+	.4byte	0x10b43
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x18
@@ -79111,7 +79069,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b2
-	.4byte	0x10b51
+	.4byte	0x10b4f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x24
@@ -79120,7 +79078,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b3
-	.4byte	0x6d72
+	.4byte	0x6d70
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x27
@@ -79129,7 +79087,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b4
-	.4byte	0x10b5e
+	.4byte	0x10b5c
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x2b
@@ -79138,7 +79096,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b5
-	.4byte	0x10b6a
+	.4byte	0x10b68
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x2d
@@ -79147,7 +79105,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b6
-	.4byte	0x10b76
+	.4byte	0x10b74
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x35
@@ -79156,7 +79114,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b7
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x4e
@@ -79165,7 +79123,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3b8
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x4e
@@ -79201,7 +79159,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3bc
-	.4byte	0x10b82
+	.4byte	0x10b80
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd2,0x4e
@@ -79210,7 +79168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3bd
-	.4byte	0x10b82
+	.4byte	0x10b80
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x4e
@@ -79228,7 +79186,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3bf
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x4f
@@ -79255,7 +79213,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c2
-	.4byte	0x10b8e
+	.4byte	0x10b8c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcc,0x4f
@@ -79264,7 +79222,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c3
-	.4byte	0x10b9a
+	.4byte	0x10b98
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0x56
@@ -79273,7 +79231,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c4
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x57
@@ -79282,7 +79240,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x92,0x57
@@ -79291,7 +79249,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x93,0x57
@@ -79300,7 +79258,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x57
@@ -79309,7 +79267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x95,0x57
@@ -79318,7 +79276,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3c9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x96,0x57
@@ -79336,7 +79294,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3cb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x57
@@ -79345,7 +79303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3cc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa1,0x57
@@ -79354,7 +79312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3cd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa2,0x57
@@ -79363,7 +79321,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ce
-	.4byte	0xe026
+	.4byte	0xe024
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x57
@@ -79408,7 +79366,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d3
-	.4byte	0x10ba6
+	.4byte	0x10ba4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0x57
@@ -79417,7 +79375,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d4
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x5c
@@ -79426,7 +79384,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d5
-	.4byte	0xf47e
+	.4byte	0xf47c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x5c
@@ -79435,7 +79393,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d6
-	.4byte	0x10bb2
+	.4byte	0x10bb0
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x5c
@@ -79444,7 +79402,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d7
-	.4byte	0x10bbe
+	.4byte	0x10bbc
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x5d
@@ -79453,7 +79411,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d8
-	.4byte	0xf82b
+	.4byte	0xf829
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0x60
@@ -79462,7 +79420,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3d9
-	.4byte	0xf5b7
+	.4byte	0xf5b5
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0x62
@@ -79471,7 +79429,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3da
-	.4byte	0xf4d5
+	.4byte	0xf4d3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x63
@@ -79480,7 +79438,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3db
-	.4byte	0xee70
+	.4byte	0xee6e
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x63
@@ -79489,7 +79447,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3dc
-	.4byte	0xc025
+	.4byte	0xc023
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf8,0x63
@@ -79498,7 +79456,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3dd
-	.4byte	0x10171
+	.4byte	0x1016f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xac,0x64
@@ -79507,7 +79465,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3de
-	.4byte	0x10bca
+	.4byte	0x10bc8
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x6b
@@ -79516,7 +79474,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3df
-	.4byte	0x10bca
+	.4byte	0x10bc8
 	.byte	0x3
 	.byte	0x23
 	.byte	0x89,0x6c
@@ -79525,7 +79483,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e0
-	.4byte	0x936c
+	.4byte	0x936a
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0x6c
@@ -79534,7 +79492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e1
-	.4byte	0xefe6
+	.4byte	0xefe4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0x6d
@@ -79543,7 +79501,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e2
-	.4byte	0xf66f
+	.4byte	0xf66d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf8,0x74
@@ -79552,7 +79510,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e3
-	.4byte	0xfc26
+	.4byte	0xfc24
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0x75
@@ -79561,7 +79519,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e4
-	.4byte	0x10bd6
+	.4byte	0x10bd4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0x75
@@ -79570,7 +79528,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e5
-	.4byte	0x10be2
+	.4byte	0x10be0
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0x77
@@ -79579,7 +79537,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e6
-	.4byte	0xfcfd
+	.4byte	0xfcfb
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0x79
@@ -79588,140 +79546,140 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3e7
-	.4byte	0xfc3b
+	.4byte	0xfc39
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x79
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10af1
-	.4byte	0xedaf
+	.4byte	0x10aef
+	.4byte	0xedad
 	.byte	0x12
 	.byte	0x31
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10afd
-	.4byte	0xedaf
+	.4byte	0x10afb
+	.4byte	0xedad
 	.byte	0x12
 	.byte	0x1d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b09
-	.4byte	0xedaf
+	.4byte	0x10b07
+	.4byte	0xedad
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b15
-	.4byte	0xedaf
+	.4byte	0x10b13
+	.4byte	0xedad
 	.byte	0x12
 	.byte	0x3f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b21
-	.4byte	0xedaf
+	.4byte	0x10b1f
+	.4byte	0xedad
 	.byte	0x12
 	.byte	0x2d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b2d
-	.4byte	0xede8
+	.4byte	0x10b2b
+	.4byte	0xede6
 	.byte	0x12
 	.byte	0x27
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b39
-	.4byte	0x8cdc
+	.4byte	0x10b37
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x63
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b45
-	.4byte	0xb0fb
+	.4byte	0x10b43
+	.4byte	0xb0f9
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b51
+	.4byte	0x10b4f
 	.4byte	0x42be
 	.byte	0x12
 	.byte	0x3f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b5e
-	.4byte	0x8cdc
+	.4byte	0x10b5c
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x12b
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b6a
-	.4byte	0x8cf1
+	.4byte	0x10b68
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x3f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b76
-	.4byte	0xc11b
+	.4byte	0x10b74
+	.4byte	0xc119
 	.byte	0x12
 	.byte	0x7f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b82
-	.4byte	0xaea0
+	.4byte	0x10b80
+	.4byte	0xae9e
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b8e
-	.4byte	0x8cdc
+	.4byte	0x10b8c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10b9a
-	.4byte	0xdfcb
+	.4byte	0x10b98
+	.4byte	0xdfc9
 	.byte	0x12
 	.byte	0x18
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10ba6
-	.4byte	0xe015
+	.4byte	0x10ba4
+	.4byte	0xe013
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10bb2
-	.4byte	0x7735
+	.4byte	0x10bb0
+	.4byte	0x7733
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10bbe
-	.4byte	0xf01f
+	.4byte	0x10bbc
+	.4byte	0xf01d
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10bca
-	.4byte	0xf6ae
+	.4byte	0x10bc8
+	.4byte	0xf6ac
 	.byte	0x12
 	.byte	0xc
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10bd6
-	.4byte	0x8cdc
+	.4byte	0x10bd4
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x70
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10be2
-	.4byte	0xfcb5
+	.4byte	0x10be0
+	.4byte	0xfcb3
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10bf0
-	.4byte	0x8cdc
+	.4byte	0x10bee
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x9
 	.byte	0x12
@@ -79732,14 +79690,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3eb
-	.4byte	0x10c09
+	.4byte	0x10c07
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x10218
+	.4byte	0x10216
 	.byte	0x21
-	.4byte	0x10c51
+	.4byte	0x10c4f
 	.ascii	"MapPosition\000"
 
 	.byte	0x8
@@ -79750,7 +79708,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3ef
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -79759,7 +79717,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f0
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -79768,13 +79726,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f1
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x10cd9
+	.4byte	0x10cd7
 	.ascii	"TradeRoomPlayer\000"
 
 	.byte	0x10
@@ -79785,7 +79743,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -79794,7 +79752,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -79803,7 +79761,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -79812,7 +79770,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3f9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -79821,7 +79779,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3fa
-	.4byte	0x10c0f
+	.4byte	0x10c0d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -79830,13 +79788,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x6
 	.2byte	0x3fb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x10d11
+	.4byte	0x10d0f
 	.ascii	"TrainerMoney\000"
 
 	.byte	0x4
@@ -79847,7 +79805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -79856,13 +79814,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x10de0
+	.4byte	0x10dde
 	.ascii	"UnknownPokemonStruct4\000"
 
 	.byte	0x20
@@ -79873,7 +79831,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0xc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -79882,7 +79840,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0xd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -79900,7 +79858,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0xf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -79909,7 +79867,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x10
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -79918,7 +79876,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x11
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -79927,7 +79885,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x12
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -79936,7 +79894,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x13
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -79945,7 +79903,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x14
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -79954,14 +79912,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x15
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10dec
-	.4byte	0x10d11
+	.4byte	0x10dea
+	.4byte	0x10d0f
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
@@ -79970,11 +79928,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x4b
-	.4byte	0x10de0
+	.4byte	0x10dde
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0x10e16
+	.4byte	0x10e14
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -79986,13 +79944,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0xf
 	.byte	0x52
-	.4byte	0x10e2d
+	.4byte	0x10e2b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x10e08
+	.4byte	0x10e06
 	.byte	0xe
-	.4byte	0x10f35
+	.4byte	0x10f33
 	.ascii	"BattleMsgData\000"
 
 	.byte	0x48
@@ -80003,7 +79961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -80012,7 +79970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd3
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -80021,7 +79979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd4
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -80030,7 +79988,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd5
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -80039,7 +79997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -80048,7 +80006,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -80057,7 +80015,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -80066,7 +80024,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xd9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -80075,7 +80033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xda
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -80093,21 +80051,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x10
 	.byte	0xdc
-	.4byte	0x10f35
+	.4byte	0x10f33
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x10f43
-	.4byte	0x8cdc
+	.4byte	0x10f41
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x2
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x10fa1
+	.4byte	0x10f9f
 	.byte	0x4
 	.byte	0x10
 	.byte	0xe0
@@ -80125,7 +80083,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x10fe4
+	.4byte	0x10fe2
 	.ascii	"TypePower\000"
 
 	.byte	0x4
@@ -80136,7 +80094,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x11
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -80145,7 +80103,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x11
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -80154,13 +80112,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x11
 	.byte	0x2b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x11071
+	.4byte	0x1106f
 	.byte	0x4
 	.byte	0x12
 	.byte	0x5
@@ -80190,7 +80148,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x6
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x111e7
+	.4byte	0x111e5
 	.byte	0x4
 	.byte	0x13
 	.byte	0x5
@@ -80308,7 +80266,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1b
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x11256
+	.4byte	0x11254
 	.byte	0x4
 	.byte	0x13
 	.byte	0x24
@@ -80334,7 +80292,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1127d
+	.4byte	0x1127b
 	.ascii	"ResourceFlags\000"
 
 	.byte	0x10
@@ -80345,13 +80303,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x3b
-	.4byte	0x936c
+	.4byte	0x936a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x116f1
+	.4byte	0x116ef
 	.ascii	"DisableStruct\000"
 
 	.byte	0x28
@@ -80362,7 +80320,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x47
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -80371,7 +80329,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x48
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -80380,7 +80338,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x49
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -80389,7 +80347,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -80398,7 +80356,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -80407,7 +80365,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4c
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -80416,7 +80374,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4d
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -80425,7 +80383,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4e
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -80434,7 +80392,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x4f
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -80443,7 +80401,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x50
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -80452,7 +80410,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x51
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80464,7 +80422,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x52
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80476,7 +80434,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x53
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -80485,7 +80443,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80497,7 +80455,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x55
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80509,7 +80467,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x56
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80521,7 +80479,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x57
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80533,7 +80491,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x58
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -80542,7 +80500,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x59
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80554,7 +80512,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80566,7 +80524,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80578,7 +80536,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80590,7 +80548,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80602,7 +80560,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -80614,7 +80572,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x5f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -80623,7 +80581,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x60
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -80632,7 +80590,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x61
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -80641,7 +80599,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x62
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -80653,7 +80611,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x63
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -80665,7 +80623,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x64
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x2
@@ -80677,7 +80635,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x65
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -80686,7 +80644,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x66
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -80695,7 +80653,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x67
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -80704,7 +80662,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x68
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -80713,7 +80671,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x69
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -80722,7 +80680,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -80731,7 +80689,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -80740,7 +80698,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -80749,7 +80707,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
@@ -80758,7 +80716,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -80770,13 +80728,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x6f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x25
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x11a6a
+	.4byte	0x11a68
 	.ascii	"ProtectStruct\000"
 
 	.byte	0x10
@@ -80787,7 +80745,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x74
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1f
@@ -80799,7 +80757,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x75
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1e
@@ -80811,7 +80769,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x76
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1d
@@ -80823,7 +80781,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x77
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1c
@@ -80835,7 +80793,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x78
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1b
@@ -80847,7 +80805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x79
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1a
@@ -80859,7 +80817,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x19
@@ -80871,7 +80829,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x18
@@ -80883,7 +80841,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x17
@@ -80895,7 +80853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x16
@@ -80907,7 +80865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x15
@@ -80919,7 +80877,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x7f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x14
@@ -80931,7 +80889,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x80
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x13
@@ -80943,7 +80901,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x81
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x11
@@ -80955,7 +80913,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x82
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x10
@@ -80967,7 +80925,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x83
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xf
@@ -80979,7 +80937,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x84
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xe
@@ -80991,7 +80949,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x85
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xd
@@ -81003,7 +80961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x86
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xc
@@ -81015,7 +80973,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x87
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xb
@@ -81027,7 +80985,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x88
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0xa
@@ -81039,7 +80997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x89
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x9
@@ -81051,7 +81009,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x8
@@ -81063,7 +81021,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x7
@@ -81075,7 +81033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x6
@@ -81087,7 +81045,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x5
@@ -81099,7 +81057,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x4
@@ -81111,7 +81069,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x8f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -81120,7 +81078,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x90
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -81129,7 +81087,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x91
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -81138,13 +81096,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x92
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x11d41
+	.4byte	0x11d3f
 	.ascii	"SpecialStatus\000"
 
 	.byte	0x18
@@ -81155,7 +81113,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x97
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -81167,7 +81125,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x98
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -81179,7 +81137,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x99
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -81191,7 +81149,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -81203,7 +81161,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -81215,7 +81173,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -81227,7 +81185,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -81239,7 +81197,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -81251,7 +81209,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0x9f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -81263,7 +81221,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -81275,7 +81233,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -81287,7 +81245,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -81299,7 +81257,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -81311,7 +81269,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -81323,7 +81281,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -81335,7 +81293,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -81347,7 +81305,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -81356,7 +81314,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -81368,7 +81326,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xa9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -81380,7 +81338,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xaa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -81392,7 +81350,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xab
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -81401,7 +81359,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xac
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -81410,7 +81368,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xad
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -81419,7 +81377,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xae
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -81428,7 +81386,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xaf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -81437,13 +81395,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x11f60
+	.4byte	0x11f5e
 	.ascii	"SideTimer\000"
 
 	.byte	0x14
@@ -81454,7 +81412,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -81463,7 +81421,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -81472,7 +81430,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -81481,7 +81439,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -81490,7 +81448,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xb9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -81499,7 +81457,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -81508,7 +81466,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xbb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -81517,7 +81475,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xbc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -81526,7 +81484,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xbd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -81535,7 +81493,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xbe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -81544,7 +81502,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xbf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -81553,7 +81511,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -81562,7 +81520,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -81571,7 +81529,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -81580,7 +81538,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -81589,7 +81547,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -81598,7 +81556,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -81607,7 +81565,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -81616,7 +81574,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -81625,13 +81583,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xc8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x120b3
+	.4byte	0x120b1
 	.ascii	"FieldTimer\000"
 
 	.byte	0xc
@@ -81642,7 +81600,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xcd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -81651,7 +81609,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -81660,7 +81618,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xcf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -81669,7 +81627,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -81678,7 +81636,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -81687,7 +81645,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -81696,7 +81654,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -81705,7 +81663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -81714,7 +81672,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -81723,7 +81681,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -81732,7 +81690,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -81741,13 +81699,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xd8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1217e
+	.4byte	0x1217c
 	.ascii	"WishFutureKnock\000"
 
 	.byte	0x1c
@@ -81803,7 +81761,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xe2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -81818,7 +81776,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x19
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x121e0
+	.4byte	0x121de
 	.ascii	"AI_SavedBattleMon\000"
 
 	.byte	0x10
@@ -81829,7 +81787,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xe8
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -81847,7 +81805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xea
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -81856,13 +81814,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xeb
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x122d9
+	.4byte	0x122d7
 	.ascii	"AI_ThinkingStruct\000"
 
 	.2byte	0x158
@@ -81873,7 +81831,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -81882,7 +81840,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -81891,7 +81849,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -81900,7 +81858,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf3
-	.4byte	0x122d9
+	.4byte	0x122d7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -81909,7 +81867,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf4
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -81918,7 +81876,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf5
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -81927,7 +81885,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -81936,7 +81894,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -81945,7 +81903,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf8
-	.4byte	0x122e5
+	.4byte	0x122e3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -81954,7 +81912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xf9
-	.4byte	0x122f5
+	.4byte	0x122f3
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x2
@@ -81963,20 +81921,20 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.byte	0xfa
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x122e5
-	.4byte	0x8d07
+	.4byte	0x122e3
+	.4byte	0x8d05
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x122f5
-	.4byte	0x8d1c
+	.4byte	0x122f3
+	.4byte	0x8d1a
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
@@ -81985,13 +81943,13 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x12301
-	.4byte	0x1217e
+	.4byte	0x122ff
+	.4byte	0x1217c
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x123b8
+	.4byte	0x123b6
 	.ascii	"BattleHistory\000"
 
 	.byte	0x54
@@ -82020,7 +81978,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x103
-	.4byte	0x123b8
+	.4byte	0x123b6
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -82029,7 +81987,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x104
-	.4byte	0x123c6
+	.4byte	0x123c4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -82056,29 +82014,29 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x107
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x123c6
-	.4byte	0x8ce6
+	.4byte	0x123c4
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x123d4
-	.4byte	0x8ce6
+	.4byte	0x123d2
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12410
+	.4byte	0x1240e
 	.ascii	"BattleScriptsStack\000"
 
 	.byte	0x24
@@ -82089,7 +82047,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x10c
-	.4byte	0x12410
+	.4byte	0x1240e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -82098,19 +82056,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x10d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1241c
+	.4byte	0x1241a
 	.4byte	0x1050
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1245f
+	.4byte	0x1245d
 	.ascii	"BattleCallbacksStack\000"
 
 	.byte	0x24
@@ -82121,7 +82079,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x112
-	.4byte	0x1245f
+	.4byte	0x1245d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -82130,19 +82088,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x113
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1246b
-	.4byte	0xb0ad
+	.4byte	0x12469
+	.4byte	0xb0ab
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12491
+	.4byte	0x1248f
 	.ascii	"StatsArray\000"
 
 	.byte	0xc
@@ -82159,7 +82117,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x12590
+	.4byte	0x1258e
 	.ascii	"BattleResources\000"
 
 	.2byte	0x1020
@@ -82170,7 +82128,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x11d
-	.4byte	0x12590
+	.4byte	0x1258e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -82179,7 +82137,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x11e
-	.4byte	0x12596
+	.4byte	0x12594
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -82188,7 +82146,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x11f
-	.4byte	0x1259c
+	.4byte	0x1259a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -82197,7 +82155,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x120
-	.4byte	0x125a2
+	.4byte	0x125a0
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -82206,7 +82164,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x121
-	.4byte	0x125a8
+	.4byte	0x125a6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -82215,7 +82173,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x122
-	.4byte	0x125ae
+	.4byte	0x125ac
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -82224,7 +82182,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x123
-	.4byte	0x125b4
+	.4byte	0x125b2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -82233,7 +82191,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x124
-	.4byte	0x1259c
+	.4byte	0x1259a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -82242,7 +82200,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x125
-	.4byte	0x125ba
+	.4byte	0x125b8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -82251,42 +82209,42 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x126
-	.4byte	0x125ba
+	.4byte	0x125b8
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x10
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0xaea0
+	.4byte	0xae9e
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x11256
+	.4byte	0x11254
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x123d4
+	.4byte	0x123d2
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1241c
+	.4byte	0x1241a
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1246b
+	.4byte	0x12469
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x121e0
+	.4byte	0x121de
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x12301
+	.4byte	0x122ff
 	.byte	0x11
-	.4byte	0x125c9
-	.4byte	0x8cdc
+	.4byte	0x125c7
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x30
 	.2byte	0x1ff
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12854
+	.4byte	0x12852
 	.ascii	"BattleResults\000"
 
 	.byte	0x50
@@ -82297,7 +82255,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x12b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -82306,7 +82264,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x12c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -82315,7 +82273,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x12d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -82324,7 +82282,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x12e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -82333,7 +82291,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x12f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -82342,7 +82300,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x130
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -82354,7 +82312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x131
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -82366,7 +82324,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x132
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x2
@@ -82378,7 +82336,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x133
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -82390,7 +82348,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x134
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -82408,7 +82366,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x136
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -82426,7 +82384,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x138
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -82435,7 +82393,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x139
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -82444,7 +82402,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x13a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -82453,7 +82411,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x13b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -82462,7 +82420,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x13c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -82471,7 +82429,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x13d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -82489,7 +82447,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x13f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x35
@@ -82498,13 +82456,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x140
-	.4byte	0xc313
+	.4byte	0xc311
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12bb7
+	.4byte	0x12bb5
 	.ascii	"BattleTv_Side\000"
 
 	.byte	0xc
@@ -82515,7 +82473,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x145
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1d
@@ -82527,7 +82485,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x146
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1a
@@ -82539,7 +82497,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x147
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x17
@@ -82551,7 +82509,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x148
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x14
@@ -82563,7 +82521,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x149
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x11
@@ -82575,7 +82533,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0xe
@@ -82587,7 +82545,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0xb
@@ -82599,7 +82557,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x8
@@ -82611,7 +82569,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x5
@@ -82623,7 +82581,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x2
@@ -82635,7 +82593,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x14f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x0
@@ -82647,7 +82605,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x150
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1e
@@ -82659,7 +82617,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x151
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1c
@@ -82671,7 +82629,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x152
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1a
@@ -82683,7 +82641,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x153
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x18
@@ -82695,7 +82653,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x154
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x16
@@ -82707,7 +82665,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x155
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x14
@@ -82719,7 +82677,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x156
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x12
@@ -82731,7 +82689,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x157
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x10
@@ -82743,7 +82701,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x158
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xe
@@ -82755,7 +82713,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x159
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xc
@@ -82767,7 +82725,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x9
@@ -82779,7 +82737,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x7
@@ -82791,7 +82749,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x4
 	.byte	0x3
@@ -82803,7 +82761,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x0
@@ -82815,7 +82773,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1f
@@ -82827,7 +82785,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x15f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1d
@@ -82839,7 +82797,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x160
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1a
@@ -82851,7 +82809,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x161
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x19
@@ -82860,7 +82818,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12e1d
+	.4byte	0x12e1b
 	.ascii	"BattleTv_Position\000"
 
 	.byte	0x8
@@ -82871,7 +82829,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x166
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1d
@@ -82883,7 +82841,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x167
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1a
@@ -82895,7 +82853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x168
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x17
@@ -82907,7 +82865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x169
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x14
@@ -82919,7 +82877,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x11
@@ -82931,7 +82889,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0xe
@@ -82943,7 +82901,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xc
@@ -82955,7 +82913,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xa
@@ -82967,7 +82925,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x8
@@ -82979,7 +82937,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x16f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x6
@@ -82991,7 +82949,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x170
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x4
@@ -83003,7 +82961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x171
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x2
@@ -83015,7 +82973,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x172
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x0
@@ -83027,7 +82985,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x173
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1d
@@ -83039,7 +82997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x174
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1a
@@ -83051,7 +83009,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x175
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x18
@@ -83063,7 +83021,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x176
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x15
@@ -83075,7 +83033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x177
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x13
@@ -83087,7 +83045,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x178
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x10
@@ -83099,7 +83057,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x179
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xe
@@ -83108,7 +83066,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12f62
+	.4byte	0x12f60
 	.ascii	"BattleTv_Mon\000"
 
 	.byte	0x4
@@ -83119,7 +83077,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x17e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1d
@@ -83131,7 +83089,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x17f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1a
@@ -83143,7 +83101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x180
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x17
@@ -83155,7 +83113,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x181
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x14
@@ -83167,7 +83125,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x182
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x11
@@ -83179,7 +83137,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x183
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0xe
@@ -83191,7 +83149,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x184
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xc
@@ -83203,7 +83161,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x185
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0xa
@@ -83215,7 +83173,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x186
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x8
@@ -83227,7 +83185,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x187
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x6
@@ -83239,7 +83197,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x188
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x4
@@ -83251,7 +83209,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x189
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x2
@@ -83260,7 +83218,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12fa3
+	.4byte	0x12fa1
 	.ascii	"BattleTv\000"
 
 	.byte	0x68
@@ -83271,7 +83229,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x18e
-	.4byte	0x12fa3
+	.4byte	0x12fa1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -83280,7 +83238,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x18f
-	.4byte	0x12fb1
+	.4byte	0x12faf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -83289,35 +83247,35 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x190
-	.4byte	0x12fbf
+	.4byte	0x12fbd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x12fb1
-	.4byte	0x12e1d
+	.4byte	0x12faf
+	.4byte	0x12e1b
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x5
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x12fbf
-	.4byte	0x12bb7
+	.4byte	0x12fbd
+	.4byte	0x12bb5
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x12fcb
-	.4byte	0x12854
+	.4byte	0x12fc9
+	.4byte	0x12852
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x12ffa
+	.4byte	0x12ff8
 	.ascii	"BattleTvMovePoints\000"
 
 	.byte	0x60
@@ -83328,21 +83286,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x195
-	.4byte	0x12ffa
+	.4byte	0x12ff8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13008
-	.4byte	0x8d11
+	.4byte	0x13006
+	.4byte	0x8d0f
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0x17
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x13108
+	.4byte	0x13106
 	.ascii	"MegaEvolutionData\000"
 
 	.byte	0x18
@@ -83353,7 +83311,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x19a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -83371,7 +83329,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x19c
-	.4byte	0x13108
+	.4byte	0x13106
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -83389,7 +83347,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x19e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -83398,7 +83356,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x19f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -83407,7 +83365,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a0
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -83416,7 +83374,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -83425,19 +83383,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a2
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13114
-	.4byte	0x8de1
+	.4byte	0x13112
+	.4byte	0x8ddf
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x13178
+	.4byte	0x13176
 	.ascii	"Illusion\000"
 
 	.byte	0x8
@@ -83448,7 +83406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -83457,7 +83415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -83466,7 +83424,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1a9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -83475,7 +83433,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1aa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -83490,7 +83448,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x26
-	.4byte	0x13dc5
+	.4byte	0x13dc3
 	.ascii	"BattleStruct\000"
 
 	.2byte	0x354
@@ -83501,7 +83459,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -83510,7 +83468,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -83519,7 +83477,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -83546,7 +83504,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -83555,7 +83513,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -83564,7 +83522,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -83582,7 +83540,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1b9
-	.4byte	0xae94
+	.4byte	0xae92
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -83591,7 +83549,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -83600,7 +83558,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1bb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x49
@@ -83609,7 +83567,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1bc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -83618,7 +83576,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1bd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4b
@@ -83627,7 +83585,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1be
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -83636,7 +83594,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1bf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4d
@@ -83645,7 +83603,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4e
@@ -83654,7 +83612,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -83663,7 +83621,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x52
@@ -83672,7 +83630,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x53
@@ -83681,7 +83639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c4
-	.4byte	0x13108
+	.4byte	0x13106
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -83708,7 +83666,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c7
-	.4byte	0x13dc5
+	.4byte	0x13dc3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -83717,7 +83675,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1c8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
@@ -83735,7 +83693,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ca
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x78
@@ -83744,7 +83702,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1cb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x79
@@ -83753,7 +83711,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1cc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7a
@@ -83762,7 +83720,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1cd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7b
@@ -83771,7 +83729,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7c
@@ -83780,7 +83738,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1cf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7d
@@ -83789,7 +83747,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7e
@@ -83816,7 +83774,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x87,0x1
@@ -83825,7 +83783,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0x1
@@ -83834,7 +83792,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x89,0x1
@@ -83843,7 +83801,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8a,0x1
@@ -83852,7 +83810,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8b,0x1
@@ -83861,7 +83819,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0x1
@@ -83870,7 +83828,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1d9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8d,0x1
@@ -83879,7 +83837,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1da
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8e,0x1
@@ -83888,7 +83846,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1db
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8f,0x1
@@ -83897,7 +83855,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1dc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x1
@@ -83924,7 +83882,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1df
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x1
@@ -83933,7 +83891,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1e0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x1
@@ -83942,7 +83900,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1e1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa6,0x1
@@ -83951,7 +83909,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1e2
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x1
@@ -83960,7 +83918,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1e3
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xaa,0x1
@@ -83969,7 +83927,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1e4
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x3
 	.byte	0x23
 	.byte	0xac,0x1
@@ -84032,7 +83990,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1eb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0x1
@@ -84041,7 +83999,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ec
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd5,0x1
@@ -84050,7 +84008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ed
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd6,0x1
@@ -84059,7 +84017,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ee
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd7,0x1
@@ -84068,7 +84026,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ef
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0x1
@@ -84077,7 +84035,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f0
-	.4byte	0x123b8
+	.4byte	0x123b6
 	.byte	0x3
 	.byte	0x23
 	.byte	0xda,0x1
@@ -84086,7 +84044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f1
-	.4byte	0x13dd3
+	.4byte	0x13dd1
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0x1
@@ -84095,7 +84053,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0x2
@@ -84104,7 +84062,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfb,0x2
@@ -84113,7 +84071,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0x2
@@ -84122,7 +84080,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfd,0x2
@@ -84131,7 +84089,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f6
-	.4byte	0xc0ad
+	.4byte	0xc0ab
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x3
@@ -84140,7 +84098,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x3
@@ -84149,7 +84107,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9d,0x3
@@ -84158,7 +84116,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1f9
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9e,0x3
@@ -84167,7 +84125,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1fa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9f,0x3
@@ -84176,7 +84134,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1fb
-	.4byte	0x12fcb
+	.4byte	0x12fc9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x3
@@ -84185,7 +84143,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1fc
-	.4byte	0x12f62
+	.4byte	0x12f60
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x4
@@ -84203,7 +84161,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1fe
-	.4byte	0x13de1
+	.4byte	0x13ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xec,0x4
@@ -84212,7 +84170,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x1ff
-	.4byte	0x13de1
+	.4byte	0x13ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xee,0x4
@@ -84230,7 +84188,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x201
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x4
@@ -84239,7 +84197,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x202
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf5,0x4
@@ -84248,7 +84206,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x203
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf6,0x4
@@ -84257,7 +84215,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x204
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf7,0x4
@@ -84266,7 +84224,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x205
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf8,0x4
@@ -84275,7 +84233,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x206
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf9,0x4
@@ -84284,7 +84242,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x207
-	.4byte	0x13dc5
+	.4byte	0x13dc3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0x4
@@ -84293,7 +84251,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x208
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x86,0x5
@@ -84302,7 +84260,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x209
-	.4byte	0x13108
+	.4byte	0x13106
 	.byte	0x3
 	.byte	0x23
 	.byte	0x87,0x5
@@ -84311,7 +84269,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x20a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8b,0x5
@@ -84320,7 +84278,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x20b
-	.4byte	0x13ded
+	.4byte	0x13deb
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8c,0x5
@@ -84329,7 +84287,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x20c
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x5
@@ -84338,7 +84296,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x20d
-	.4byte	0x13008
+	.4byte	0x13006
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x5
@@ -84356,7 +84314,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x20f
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb4,0x5
@@ -84365,7 +84323,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x210
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb5,0x5
@@ -84383,7 +84341,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x212
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0x5
@@ -84392,7 +84350,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x213
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x5
@@ -84437,7 +84395,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x218
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xda,0x5
@@ -84446,7 +84404,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x219
-	.4byte	0x13dfb
+	.4byte	0x13df9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x5
@@ -84455,7 +84413,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x21a
-	.4byte	0x13e07
+	.4byte	0x13e05
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0x5
@@ -84464,7 +84422,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x21b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbc,0x6
@@ -84473,7 +84431,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x21c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbd,0x6
@@ -84482,7 +84440,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x21d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbe,0x6
@@ -84500,7 +84458,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x21f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0x6
@@ -84515,44 +84473,44 @@ IsLastMonThatKnowsSurf:
 	.byte	0xc6,0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13dd3
-	.4byte	0x8cdc
+	.4byte	0x13dd1
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13de1
-	.4byte	0x8ce6
+	.4byte	0x13ddf
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13ded
-	.4byte	0x8d07
+	.4byte	0x13deb
+	.4byte	0x8d05
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13dfb
-	.4byte	0x8cdc
+	.4byte	0x13df9
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13e07
-	.4byte	0x13114
+	.4byte	0x13e05
+	.4byte	0x13112
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x13e17
-	.4byte	0x8d07
+	.4byte	0x13e15
+	.4byte	0x8d05
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
@@ -84561,7 +84519,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x14175
+	.4byte	0x14173
 	.ascii	"BattleScripting\000"
 
 	.byte	0x34
@@ -84572,7 +84530,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x246
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -84581,7 +84539,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x247
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -84590,7 +84548,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x248
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -84599,7 +84557,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x249
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -84608,7 +84566,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -84617,7 +84575,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -84626,7 +84584,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -84635,7 +84593,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -84644,7 +84602,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -84653,7 +84611,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x24f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -84662,7 +84620,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x250
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -84671,7 +84629,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x251
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -84680,7 +84638,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x252
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -84689,7 +84647,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x253
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -84698,7 +84656,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x254
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -84707,7 +84665,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x255
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -84716,7 +84674,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x256
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -84725,7 +84683,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x257
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -84734,7 +84692,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x258
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -84743,7 +84701,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x259
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -84752,7 +84710,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -84761,7 +84719,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -84770,7 +84728,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x22
@@ -84779,7 +84737,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x23
@@ -84788,7 +84746,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -84797,7 +84755,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x25f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x25
@@ -84806,7 +84764,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x260
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -84815,7 +84773,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x261
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -84824,7 +84782,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x262
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -84833,7 +84791,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x263
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -84842,7 +84800,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x264
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -84851,7 +84809,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x265
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -84860,7 +84818,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x266
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -84869,13 +84827,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x267
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x33
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1422f
+	.4byte	0x1422d
 	.ascii	"BattleSpriteInfo\000"
 
 	.byte	0x4
@@ -84886,7 +84844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x26f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xf
@@ -84898,7 +84856,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x270
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -84910,7 +84868,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x271
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -84922,7 +84880,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x272
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -84934,7 +84892,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x273
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -84946,13 +84904,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x274
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1443f
+	.4byte	0x1443d
 	.ascii	"BattleAnimationInfo\000"
 
 	.byte	0x10
@@ -84963,7 +84921,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x279
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -84972,7 +84930,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -84981,7 +84939,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -84990,7 +84948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -84999,7 +84957,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -85008,7 +84966,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -85017,7 +84975,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x27f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -85026,7 +84984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x280
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x6
 	.byte	0x2
@@ -85038,7 +84996,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x281
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -85050,7 +85008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x282
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -85062,7 +85020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x283
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -85074,7 +85032,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x284
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -85086,7 +85044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x285
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x3
@@ -85098,7 +85056,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x286
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -85110,7 +85068,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x287
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -85122,7 +85080,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x288
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -85134,7 +85092,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x289
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -85143,7 +85101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x28a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -85152,7 +85110,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x28b
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -85161,7 +85119,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x28c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -85170,13 +85128,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x28d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x146da
+	.4byte	0x146d8
 	.ascii	"BattleHealthboxInfo\000"
 
 	.byte	0xc
@@ -85187,7 +85145,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x292
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -85199,7 +85157,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x293
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -85211,7 +85169,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x294
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -85223,7 +85181,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x295
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -85235,7 +85193,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x296
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -85247,7 +85205,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x297
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -85259,7 +85217,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x298
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -85271,7 +85229,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x299
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -85283,7 +85241,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -85295,7 +85253,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x3
@@ -85307,7 +85265,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -85319,7 +85277,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -85331,7 +85289,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -85343,7 +85301,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x29f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -85352,7 +85310,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -85361,7 +85319,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85370,7 +85328,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -85379,7 +85337,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -85388,7 +85346,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -85397,7 +85355,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -85406,7 +85364,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -85415,7 +85373,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -85424,13 +85382,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2a8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x14765
+	.4byte	0x14763
 	.ascii	"BattleBarInfo\000"
 
 	.byte	0x14
@@ -85441,7 +85399,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2ad
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -85450,7 +85408,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2ae
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85459,7 +85417,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2af
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -85468,7 +85426,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b0
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -85477,13 +85435,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b1
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x147e1
+	.4byte	0x147df
 	.ascii	"BattleSpriteData\000"
 
 	.byte	0x10
@@ -85494,7 +85452,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b6
-	.4byte	0x147e1
+	.4byte	0x147df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -85503,7 +85461,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b7
-	.4byte	0x147e7
+	.4byte	0x147e5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85512,7 +85470,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b8
-	.4byte	0x147ed
+	.4byte	0x147eb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -85521,25 +85479,25 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2b9
-	.4byte	0x147f3
+	.4byte	0x147f1
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x14175
+	.4byte	0x14173
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1443f
+	.4byte	0x1443d
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1422f
+	.4byte	0x1422d
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x146da
+	.4byte	0x146d8
 	.byte	0x26
-	.4byte	0x148c0
+	.4byte	0x148be
 	.ascii	"MonSpritesGfx\000"
 
 	.2byte	0x180
@@ -85559,7 +85517,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2c5
-	.4byte	0x148c0
+	.4byte	0x148be
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85568,7 +85526,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2c6
-	.4byte	0x148e3
+	.4byte	0x148e1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -85577,7 +85535,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2c7
-	.4byte	0x148ef
+	.4byte	0x148ed
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
@@ -85586,7 +85544,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2c8
-	.4byte	0x148fd
+	.4byte	0x148fb
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x1
@@ -85619,7 +85577,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xfc,0x2
 	.byte	0x0
 	.byte	0x2c
-	.4byte	0x148e3
+	.4byte	0x148e1
 	.byte	0x10
 	.byte	0x14
 	.2byte	0x2c5
@@ -85628,22 +85586,22 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2c3
-	.4byte	0x14909
+	.4byte	0x14907
 	.byte	0x2d
 	.ascii	"byte\000"
 
 	.byte	0x14
 	.2byte	0x2c4
-	.4byte	0x14915
+	.4byte	0x14913
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x148ef
+	.4byte	0x148ed
 	.4byte	0x51aa
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x148fd
+	.4byte	0x148fb
 	.4byte	0x50fe
 	.byte	0x12
 	.byte	0x3
@@ -85651,19 +85609,19 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x14909
-	.4byte	0x8cdc
+	.4byte	0x14907
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x7f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x14915
+	.4byte	0x14913
 	.4byte	0x4663
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x14921
+	.4byte	0x1491f
 	.4byte	0xc63
 	.byte	0x12
 	.byte	0x3
@@ -85673,7 +85631,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2df
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2a
@@ -85681,7 +85639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x2e6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2a
@@ -85697,18 +85655,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x324
-	.4byte	0x1498c
+	.4byte	0x1498a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x13178
+	.4byte	0x13176
 	.byte	0x2a
 	.ascii	"gBattlerInMenuId\000"
 
 	.byte	0x14
 	.2byte	0x32b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2a
@@ -85716,7 +85674,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x14
 	.2byte	0x334
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x23
@@ -85724,12 +85682,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0xa
-	.4byte	0x149d4
+	.4byte	0x149d2
 	.byte	0x8
 	.byte	0x4
 	.4byte	0x136
 	.byte	0xe
-	.4byte	0x14a4a
+	.4byte	0x14a48
 	.ascii	"Task\000"
 
 	.byte	0x28
@@ -85740,7 +85698,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0xe
-	.4byte	0x149c4
+	.4byte	0x149c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -85749,7 +85707,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0xf
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85758,7 +85716,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0x10
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -85767,7 +85725,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -85776,7 +85734,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -85785,14 +85743,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0x13
-	.4byte	0x6d7e
+	.4byte	0x6d7c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x14a56
-	.4byte	0x149da
+	.4byte	0x14a54
+	.4byte	0x149d8
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -85801,11 +85759,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x15
 	.byte	0x16
-	.4byte	0x14a4a
+	.4byte	0x14a48
 	.byte	0x1
 	.byte	0x1
 	.byte	0x27
-	.4byte	0x14b14
+	.4byte	0x14b12
 	.byte	0x4
 	.byte	0x16
 	.byte	0x9
@@ -85839,7 +85797,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x6
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x14b9e
+	.4byte	0x14b9c
 	.ascii	"BattleAnimBgData\000"
 
 	.byte	0x10
@@ -85868,7 +85826,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x17
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -85877,7 +85835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x18
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -85886,7 +85844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x19
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -85895,13 +85853,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x1a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x14bf0
+	.4byte	0x14bee
 	.ascii	"BattleAnimBackground\000"
 
 	.byte	0xc
@@ -85912,7 +85870,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x1f
-	.4byte	0xe289
+	.4byte	0xe287
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -85921,7 +85879,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x20
-	.4byte	0xe289
+	.4byte	0xe287
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -85930,13 +85888,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x16
 	.byte	0x21
-	.4byte	0xe289
+	.4byte	0xe287
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x14c73
+	.4byte	0x14c71
 	.byte	0x4
 	.byte	0x16
 	.byte	0xa8
@@ -85962,7 +85920,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x14d3d
+	.4byte	0x14d3b
 	.byte	0x4
 	.byte	0x16
 	.byte	0xb1
@@ -85996,7 +85954,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x6
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1531c
+	.4byte	0x1531a
 	.byte	0x4
 	.byte	0x17
 	.byte	0x5
@@ -86242,7 +86200,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3b
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15367
+	.4byte	0x15365
 	.ascii	"UnusedControllerStruct\000"
 
 	.byte	0x4
@@ -86253,7 +86211,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x59
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -86265,7 +86223,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x5a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -86274,7 +86232,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1539a
+	.4byte	0x15398
 	.ascii	"HpAndStatus\000"
 
 	.byte	0x8
@@ -86285,7 +86243,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x5f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -86294,13 +86252,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x60
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x153df
+	.4byte	0x153dd
 	.ascii	"MovePpInfo\000"
 
 	.byte	0x10
@@ -86329,13 +86287,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x67
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15487
+	.4byte	0x15485
 	.ascii	"ChooseMoveStruct\000"
 
 	.byte	0x30
@@ -86373,7 +86331,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x6f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -86382,7 +86340,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x70
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -86391,7 +86349,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x71
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -86400,7 +86358,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x72
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -86409,13 +86367,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x17
 	.byte	0x73
-	.4byte	0x13008
+	.4byte	0x13006
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15a97
+	.4byte	0x15a95
 	.byte	0x4
 	.byte	0x17
 	.byte	0x77
@@ -86657,7 +86615,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3a
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15ab6
+	.4byte	0x15ab4
 	.byte	0x4
 	.byte	0x18
 	.byte	0x7
@@ -86671,7 +86629,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15ad6
+	.4byte	0x15ad4
 	.byte	0x4
 	.byte	0x18
 	.byte	0xd
@@ -86685,7 +86643,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15b28
+	.4byte	0x15b26
 	.byte	0x4
 	.byte	0x18
 	.byte	0x13
@@ -86711,7 +86669,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15c35
+	.4byte	0x15c33
 	.byte	0x4
 	.byte	0x18
 	.byte	0x36
@@ -86765,7 +86723,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xb
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15cd0
+	.4byte	0x15cce
 	.byte	0x4
 	.byte	0x3
 	.byte	0x7
@@ -86803,7 +86761,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x7
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15d04
+	.4byte	0x15d02
 	.ascii	"Window\000"
 
 	.byte	0xc
@@ -86829,7 +86787,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x15d5c
+	.4byte	0x15d5a
 	.byte	0x4
 	.byte	0x19
 	.byte	0xf
@@ -86851,7 +86809,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15df2
+	.4byte	0x15df0
 	.ascii	"ListMenu\000"
 
 	.byte	0x20
@@ -86862,7 +86820,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x36
-	.4byte	0x15df2
+	.4byte	0x15df0
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -86871,7 +86829,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x37
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -86880,7 +86838,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x38
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -86889,7 +86847,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -86898,7 +86856,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -86907,7 +86865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -86916,13 +86874,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x3c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15fa6
+	.4byte	0x15fa4
 	.ascii	"ListMenuTemplate\000"
 
 	.byte	0x18
@@ -86933,7 +86891,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x20
-	.4byte	0x15fd8
+	.4byte	0x15fd6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -86942,7 +86900,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x21
-	.4byte	0x15fff
+	.4byte	0x15ffd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -86951,7 +86909,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x22
-	.4byte	0x1601b
+	.4byte	0x16019
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -86960,7 +86918,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x23
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -86969,7 +86927,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x24
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -86978,7 +86936,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x25
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -86987,7 +86945,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -86996,7 +86954,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x27
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -87005,7 +86963,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x28
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -87014,7 +86972,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -87026,7 +86984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -87038,7 +86996,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -87050,7 +87008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -87062,7 +87020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x5
@@ -87074,7 +87032,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x2
@@ -87086,7 +87044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x2f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -87098,7 +87056,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x30
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x6
 	.byte	0x2
@@ -87110,7 +87068,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x31
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -87119,7 +87077,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x17
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x15fd8
+	.4byte	0x15fd6
 	.ascii	"ListMenuItem\000"
 
 	.byte	0x8
@@ -87139,47 +87097,47 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x1b
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x15fde
+	.4byte	0x15fdc
 	.byte	0x17
-	.4byte	0x15fa6
+	.4byte	0x15fa4
 	.byte	0x6
-	.4byte	0x15ff9
+	.4byte	0x15ff7
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x7
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x7
-	.4byte	0x15ff9
+	.4byte	0x15ff7
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x15d5c
+	.4byte	0x15d5a
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x15fe3
+	.4byte	0x15fe1
 	.byte	0x6
-	.4byte	0x1601b
+	.4byte	0x16019
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x7
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x16005
+	.4byte	0x16003
 	.byte	0xe
-	.4byte	0x16087
+	.4byte	0x16085
 	.ascii	"ListMenuWindowRect\000"
 
 	.byte	0x8
@@ -87190,7 +87148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x41
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87199,7 +87157,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -87208,7 +87166,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x43
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -87217,7 +87175,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x44
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -87226,13 +87184,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x45
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1618a
+	.4byte	0x16188
 	.ascii	"ScrollArrowsTemplate\000"
 
 	.byte	0x10
@@ -87243,7 +87201,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87252,7 +87210,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -87261,7 +87219,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -87270,7 +87228,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -87279,7 +87237,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -87288,7 +87246,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x4f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -87297,7 +87255,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x50
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -87306,7 +87264,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x51
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -87315,7 +87273,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x52
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -87324,7 +87282,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x53
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -87333,13 +87291,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x16218
+	.4byte	0x16216
 	.ascii	"CursorStruct\000"
 
 	.byte	0xc
@@ -87350,7 +87308,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x59
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87359,7 +87317,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -87368,7 +87326,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -87377,7 +87335,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -87386,7 +87344,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -87395,7 +87353,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -87404,13 +87362,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x19
 	.byte	0x5f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x163ab
+	.4byte	0x163a9
 	.ascii	"PyramidBagResources\000"
 
 	.2byte	0x98c
@@ -87421,7 +87379,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x8
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87430,7 +87388,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x9
-	.4byte	0x163ab
+	.4byte	0x163a9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -87448,7 +87406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0xb
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8f,0x10
@@ -87457,7 +87415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x10
@@ -87466,7 +87424,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x95,0x10
@@ -87475,7 +87433,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0xe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x96,0x10
@@ -87502,7 +87460,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x10
@@ -87511,7 +87469,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa1,0x10
@@ -87520,7 +87478,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa2,0x10
@@ -87529,7 +87487,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x14
-	.4byte	0x163b8
+	.4byte	0x163b6
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x10
@@ -87538,7 +87496,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x15
-	.4byte	0x163c4
+	.4byte	0x163c2
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0x10
@@ -87547,7 +87505,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x16
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x13
@@ -87556,33 +87514,33 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x17
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x3
 	.byte	0x23
 	.byte	0x86,0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x163b8
-	.4byte	0x8cdc
+	.4byte	0x163b6
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x7ff
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x163c4
-	.4byte	0x15fa6
+	.4byte	0x163c2
+	.4byte	0x15fa4
 	.byte	0x12
 	.byte	0xa
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x163d2
-	.4byte	0x8cdc
+	.4byte	0x163d0
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xa
 	.byte	0x12
 	.byte	0x17
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x16444
+	.4byte	0x16442
 	.ascii	"PyramidBagCursorData\000"
 
 	.byte	0xc
@@ -87593,7 +87551,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x1c
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87602,7 +87560,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x1d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -87611,7 +87569,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x1e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -87620,7 +87578,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x1f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -87630,11 +87588,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1a
 	.byte	0x23
-	.4byte	0x163d2
+	.4byte	0x163d0
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x16511
+	.4byte	0x1650f
 	.ascii	"BGCntrlBitfield\000"
 
 	.byte	0x4
@@ -87645,7 +87603,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x6
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -87657,7 +87615,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x7
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x2
 	.byte	0xc
@@ -87669,7 +87627,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x8
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x4
 	.byte	0x8
@@ -87681,7 +87639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x9
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x5
 	.byte	0x3
@@ -87693,7 +87651,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0xa
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x1
 	.byte	0x2
@@ -87705,7 +87663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0xb
-	.4byte	0x8d4e
+	.4byte	0x8d4c
 	.byte	0x2
 	.byte	0x2
 	.byte	0x0
@@ -87714,7 +87672,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x165e0
+	.4byte	0x165de
 	.byte	0x4
 	.byte	0x1b
 	.byte	0xf
@@ -87760,7 +87718,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xa
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x16696
+	.4byte	0x16694
 	.ascii	"BgTemplate\000"
 
 	.byte	0x4
@@ -87771,7 +87729,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x1e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xe
@@ -87783,7 +87741,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x1f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0xc
@@ -87795,7 +87753,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x20
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x7
@@ -87807,7 +87765,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x5
@@ -87819,7 +87777,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x22
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x4
@@ -87831,7 +87789,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x23
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x2
@@ -87843,7 +87801,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1b
 	.byte	0x24
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0xa
 	.byte	0x8
@@ -87852,7 +87810,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x16705
+	.4byte	0x16703
 	.byte	0x4
 	.byte	0x1c
 	.byte	0x12
@@ -87874,7 +87832,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x168cf
+	.4byte	0x168cd
 	.ascii	"PaletteFadeControl\000"
 
 	.byte	0xc
@@ -87885,7 +87843,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x1b
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -87894,7 +87852,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x1c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x6
 	.byte	0x2
@@ -87906,7 +87864,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x1d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x5
@@ -87918,7 +87876,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x1e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0x0
@@ -87930,7 +87888,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x1f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0xf
 	.byte	0x1
@@ -87942,7 +87900,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x20
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x0
@@ -87954,7 +87912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x6
 	.byte	0xa
@@ -87966,7 +87924,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x22
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -87978,7 +87936,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x23
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -87990,7 +87948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x24
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x2
 	.byte	0x6
@@ -88002,7 +87960,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x25
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -88014,7 +87972,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x26
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x4
@@ -88026,7 +87984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x27
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x5
 	.byte	0xf
@@ -88038,7 +87996,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x28
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -88050,7 +88008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x29
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -88062,7 +88020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x1
@@ -88075,12 +88033,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x2d
-	.4byte	0x16705
+	.4byte	0x16703
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0x168f1
-	.4byte	0x8ce6
+	.4byte	0x168ef
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -88089,12 +88047,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x30
-	.4byte	0x168e5
+	.4byte	0x168e3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0x16919
-	.4byte	0x8ce6
+	.4byte	0x16917
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -88103,11 +88061,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1c
 	.byte	0x31
-	.4byte	0x1690d
+	.4byte	0x1690b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x27
-	.4byte	0x17136
+	.4byte	0x17134
 	.byte	0x4
 	.byte	0x1d
 	.byte	0x8
@@ -88365,7 +88323,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xff
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x17191
+	.4byte	0x1718f
 	.byte	0x4
 	.byte	0x1d
 	.byte	0x4a
@@ -88383,7 +88341,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x171d2
+	.4byte	0x171d0
 	.byte	0x4
 	.byte	0x1d
 	.byte	0x51
@@ -88401,7 +88359,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x173b7
+	.4byte	0x173b5
 	.ascii	"ContestPokemon\000"
 
 	.byte	0x40
@@ -88412,7 +88370,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x59
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -88430,7 +88388,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x5b
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -88439,7 +88397,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x5c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -88448,7 +88406,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x5d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -88457,7 +88415,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x5e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -88469,7 +88427,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x5f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -88481,7 +88439,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x60
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -88493,7 +88451,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x61
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -88505,7 +88463,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x62
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -88517,7 +88475,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x63
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -88538,7 +88496,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x65
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x26
@@ -88547,7 +88505,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x66
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x27
@@ -88556,7 +88514,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x67
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -88565,7 +88523,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x68
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x29
@@ -88574,7 +88532,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x69
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -88583,7 +88541,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x6a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2b
@@ -88592,7 +88550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x6b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -88601,7 +88559,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x6c
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -88619,7 +88577,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x6e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -88628,13 +88586,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x6f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x17429
+	.4byte	0x17427
 	.ascii	"Shared1A004\000"
 
 	.2byte	0x1200
@@ -88645,7 +88603,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x74
-	.4byte	0x17429
+	.4byte	0x17427
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -88654,7 +88612,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x75
-	.4byte	0x17437
+	.4byte	0x17435
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x4
@@ -88663,7 +88621,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x76
-	.4byte	0x17437
+	.4byte	0x17435
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0xc
@@ -88672,27 +88630,27 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x77
-	.4byte	0x163ab
+	.4byte	0x163a9
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x14
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x17437
-	.4byte	0x8ce6
+	.4byte	0x17435
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0xf
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x17444
-	.4byte	0x8ce6
+	.4byte	0x17442
+	.4byte	0x8ce4
 	.byte	0x30
 	.2byte	0x1ff
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x174fc
+	.4byte	0x174fa
 	.ascii	"ContestMoveAnimData\000"
 
 	.byte	0x14
@@ -88703,7 +88661,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x7c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -88712,7 +88670,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x7d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -88721,7 +88679,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x7e
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -88733,7 +88691,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x7f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -88742,7 +88700,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x80
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -88751,7 +88709,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x81
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -88760,13 +88718,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x82
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1781c
+	.4byte	0x1781a
 	.ascii	"Contest\000"
 
 	.byte	0x5c
@@ -88777,7 +88735,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x87
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -88786,7 +88744,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x88
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -88804,7 +88762,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8a
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xf
@@ -88816,7 +88774,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8b
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xe
@@ -88828,7 +88786,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8c
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xd
@@ -88840,7 +88798,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8d
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xc
@@ -88852,7 +88810,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8e
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -88864,7 +88822,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x8f
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -88876,7 +88834,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x90
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -88888,7 +88846,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x91
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -88900,7 +88858,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x92
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x7
@@ -88912,7 +88870,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x93
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -88924,7 +88882,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x94
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x1
 	.byte	0x5
@@ -88936,7 +88894,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x95
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -88954,7 +88912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x97
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -88963,7 +88921,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x98
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -88972,7 +88930,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x99
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -88981,7 +88939,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x9a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -88990,7 +88948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x9b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -88999,7 +88957,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x9c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -89008,7 +88966,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x9d
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -89026,7 +88984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0x9f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -89035,7 +88993,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa0
-	.4byte	0xadef
+	.4byte	0xaded
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -89044,7 +89002,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa1
-	.4byte	0x1781c
+	.4byte	0x1781a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -89053,7 +89011,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -89062,7 +89020,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x59
@@ -89071,21 +89029,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1782a
-	.4byte	0x8cdc
+	.4byte	0x17828
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x17c76
+	.4byte	0x17c74
 	.ascii	"ContestantStatus\000"
 
 	.byte	0x1c
@@ -89096,7 +89054,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xa9
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89105,7 +89063,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xaa
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -89114,7 +89072,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xab
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -89123,7 +89081,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xac
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -89132,7 +89090,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xad
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -89141,7 +89099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xae
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -89150,7 +89108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xaf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -89162,7 +89120,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x4
@@ -89174,7 +89132,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x1
@@ -89186,7 +89144,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb2
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -89198,7 +89156,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb3
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89210,7 +89168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x5
@@ -89222,7 +89180,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb5
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -89231,7 +89189,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -89240,7 +89198,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xb7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -89249,7 +89207,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xba
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89261,7 +89219,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xbb
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -89273,7 +89231,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xbc
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -89285,7 +89243,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xbd
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -89297,7 +89255,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xbe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x2
@@ -89309,7 +89267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xbf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -89321,7 +89279,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -89333,7 +89291,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc1
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -89345,7 +89303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc2
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -89357,7 +89315,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc3
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -89369,7 +89327,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc4
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -89381,7 +89339,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -89390,7 +89348,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -89399,7 +89357,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -89408,7 +89366,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xc9
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89420,7 +89378,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xca
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -89432,7 +89390,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xcb
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -89444,7 +89402,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xcc
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -89456,7 +89414,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xcd
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -89468,7 +89426,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xce
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -89480,7 +89438,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xcf
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -89492,7 +89450,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd0
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -89501,7 +89459,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -89510,7 +89468,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -89519,7 +89477,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -89528,7 +89486,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -89537,13 +89495,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xd5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x17d09
+	.4byte	0x17d07
 	.ascii	"ContestAppealMoveResults\000"
 
 	.byte	0x14
@@ -89563,7 +89521,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xdb
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -89572,7 +89530,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xdc
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -89581,7 +89539,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xdd
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -89599,13 +89557,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xdf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x17e21
+	.4byte	0x17e1f
 	.ascii	"ContestAIInfo\000"
 
 	.byte	0x44
@@ -89616,7 +89574,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xe4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89625,7 +89583,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xe5
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -89634,7 +89592,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xe6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -89652,7 +89610,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xe8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -89661,7 +89619,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xe9
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -89670,7 +89628,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xea
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -89679,7 +89637,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xeb
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -89688,7 +89646,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xec
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -89697,7 +89655,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xed
-	.4byte	0x17e21
+	.4byte	0x17e1f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -89706,7 +89664,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xee
-	.4byte	0x12410
+	.4byte	0x1240e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -89715,7 +89673,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xef
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -89724,19 +89682,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xf0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x41
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x17e2d
-	.4byte	0x8d11
+	.4byte	0x17e2b
+	.4byte	0x8d0f
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x17eaa
+	.4byte	0x17ea8
 	.ascii	"ContestExcitement\000"
 
 	.byte	0x4
@@ -89747,7 +89705,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xf5
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89756,7 +89714,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xf6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89768,7 +89726,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xf7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x4
@@ -89780,13 +89738,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xf8
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x17f5a
+	.4byte	0x17f58
 	.ascii	"ContestGraphicsState\000"
 
 	.byte	0x4
@@ -89797,7 +89755,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xfd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89806,7 +89764,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xfe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -89815,7 +89773,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.byte	0xff
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89827,7 +89785,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x100
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -89839,7 +89797,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x101
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -89848,7 +89806,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x17fd1
+	.4byte	0x17fcf
 	.ascii	"ContestFinalStandings\000"
 
 	.byte	0x10
@@ -89859,7 +89817,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x106
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89868,7 +89826,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x107
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -89877,7 +89835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x108
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -89886,13 +89844,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x109
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1806f
+	.4byte	0x1806d
 	.ascii	"ContestTV\000"
 
 	.byte	0x10
@@ -89903,7 +89861,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x10e
-	.4byte	0x1806f
+	.4byte	0x1806d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -89912,7 +89870,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x10f
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -89921,7 +89879,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x110
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -89930,7 +89888,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x111
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -89939,7 +89897,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x112
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -89951,7 +89909,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x113
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -89960,13 +89918,13 @@ IsLastMonThatKnowsSurf:
 	.byte	0xe
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1807b
-	.4byte	0x8ce6
+	.4byte	0x18079
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x180a5
+	.4byte	0x180a3
 	.ascii	"ContestUnused\000"
 
 	.byte	0xc
@@ -89977,13 +89935,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x118
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x181d3
+	.4byte	0x181d1
 	.ascii	"ContestResources\000"
 
 	.byte	0x40
@@ -89994,7 +89952,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x11d
-	.4byte	0x181d3
+	.4byte	0x181d1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90003,7 +89961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x11e
-	.4byte	0x181d9
+	.4byte	0x181d7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90012,7 +89970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x11f
-	.4byte	0x181df
+	.4byte	0x181dd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -90021,7 +89979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x120
-	.4byte	0x181e5
+	.4byte	0x181e3
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -90030,7 +89988,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x121
-	.4byte	0x181eb
+	.4byte	0x181e9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -90039,7 +89997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x122
-	.4byte	0x181f1
+	.4byte	0x181ef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -90048,7 +90006,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x123
-	.4byte	0x181f7
+	.4byte	0x181f5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -90057,7 +90015,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x124
-	.4byte	0x181fd
+	.4byte	0x181fb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -90066,7 +90024,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x125
-	.4byte	0x18203
+	.4byte	0x18201
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -90075,7 +90033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1d
 	.2byte	0x126
-	.4byte	0x14915
+	.4byte	0x14913
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -90109,41 +90067,41 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x174fc
+	.4byte	0x174fa
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1782a
+	.4byte	0x17828
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17c76
+	.4byte	0x17c74
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17d09
+	.4byte	0x17d07
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17e2d
+	.4byte	0x17e2b
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17eaa
+	.4byte	0x17ea8
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17444
+	.4byte	0x17442
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x17fd1
+	.4byte	0x17fcf
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1807b
+	.4byte	0x18079
 	.byte	0x2a
 	.ascii	"gContestMonPartyIndex\000"
 
 	.byte	0x1d
 	.2byte	0x13d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x1825e
+	.4byte	0x1825c
 	.ascii	"MonCoords\000"
 
 	.byte	0x4
@@ -90154,7 +90112,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90163,13 +90121,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x182b1
+	.4byte	0x182af
 	.ascii	"TrainerMonNoItemDefaultMoves\000"
 
 	.byte	0x8
@@ -90180,7 +90138,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x12
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90189,7 +90147,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90198,13 +90156,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x14
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18315
+	.4byte	0x18313
 	.ascii	"TrainerMonItemDefaultMoves\000"
 
 	.byte	0x8
@@ -90215,7 +90173,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x19
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90224,7 +90182,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x1a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90233,7 +90191,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x1b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90242,13 +90200,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x1c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18377
+	.4byte	0x18375
 	.ascii	"TrainerMonNoItemCustomMoves\000"
 
 	.byte	0x10
@@ -90259,7 +90217,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90268,7 +90226,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x22
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90277,7 +90235,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x23
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90292,7 +90250,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x6
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x183ea
+	.4byte	0x183e8
 	.ascii	"TrainerMonItemCustomMoves\000"
 
 	.byte	0x10
@@ -90303,7 +90261,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x29
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90312,7 +90270,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90321,7 +90279,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x2b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90330,7 +90288,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x2c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -90345,7 +90303,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x15
-	.4byte	0x18463
+	.4byte	0x18461
 	.ascii	"TrainerMonPtr\000"
 
 	.byte	0x4
@@ -90356,48 +90314,48 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x32
-	.4byte	0x18463
+	.4byte	0x18461
 	.byte	0x14
 	.ascii	"NoItemCustomMoves\000"
 
 	.byte	0x1e
 	.byte	0x33
-	.4byte	0x1846e
+	.4byte	0x1846c
 	.byte	0x14
 	.ascii	"ItemDefaultMoves\000"
 
 	.byte	0x1e
 	.byte	0x34
-	.4byte	0x18479
+	.4byte	0x18477
 	.byte	0x14
 	.ascii	"ItemCustomMoves\000"
 
 	.byte	0x1e
 	.byte	0x35
-	.4byte	0x18484
+	.4byte	0x18482
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x18469
+	.4byte	0x18467
 	.byte	0x17
-	.4byte	0x1825e
+	.4byte	0x1825c
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x18474
+	.4byte	0x18472
 	.byte	0x17
-	.4byte	0x18315
+	.4byte	0x18313
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1847f
+	.4byte	0x1847d
 	.byte	0x17
-	.4byte	0x182b1
+	.4byte	0x182af
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1848a
+	.4byte	0x18488
 	.byte	0x17
-	.4byte	0x18377
+	.4byte	0x18375
 	.byte	0xe
-	.4byte	0x18574
+	.4byte	0x18572
 	.ascii	"Trainer\000"
 
 	.byte	0x28
@@ -90408,7 +90366,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90417,7 +90375,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -90426,7 +90384,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x3c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90435,7 +90393,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x3d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -90444,7 +90402,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x3e
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90462,7 +90420,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x40
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -90471,7 +90429,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x41
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -90480,7 +90438,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -90489,13 +90447,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x43
-	.4byte	0x183ea
+	.4byte	0x183e8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18582
+	.4byte	0x18580
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -90507,13 +90465,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x77
-	.4byte	0x18599
+	.4byte	0x18597
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x18574
+	.4byte	0x18572
 	.byte	0x11
-	.4byte	0x185ad
+	.4byte	0x185ab
 	.4byte	0x1056
 	.byte	0x30
 	.2byte	0x2f2
@@ -90525,31 +90483,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1e
 	.byte	0x78
-	.4byte	0x185c1
+	.4byte	0x185bf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1859e
+	.4byte	0x1859c
 	.byte	0x23
 	.ascii	"MainCallback\000"
 
 	.byte	0x1f
 	.byte	0x4
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x23
 	.ascii	"IntrCallback\000"
 
 	.byte	0x1f
 	.byte	0x5
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x23
 	.ascii	"IntrFunc\000"
 
 	.byte	0x1f
 	.byte	0x6
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x20
-	.4byte	0x1882b
+	.4byte	0x18829
 	.ascii	"Main\000"
 
 	.2byte	0x43c
@@ -90560,7 +90518,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0xa
-	.4byte	0x185c6
+	.4byte	0x185c4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90569,7 +90527,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0xb
-	.4byte	0x185c6
+	.4byte	0x185c4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90578,7 +90536,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0xd
-	.4byte	0x185c6
+	.4byte	0x185c4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -90587,7 +90545,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0xf
-	.4byte	0x185da
+	.4byte	0x185d8
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -90596,7 +90554,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x10
-	.4byte	0x185da
+	.4byte	0x185d8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -90605,7 +90563,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x11
-	.4byte	0x185da
+	.4byte	0x185d8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -90614,7 +90572,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x12
-	.4byte	0x185da
+	.4byte	0x185d8
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -90623,7 +90581,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x14
-	.4byte	0x8e2c
+	.4byte	0x8e2a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -90632,7 +90590,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x16
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -90641,7 +90599,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x17
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -90650,7 +90608,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x19
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -90659,7 +90617,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2a
@@ -90668,7 +90626,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -90677,7 +90635,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -90686,7 +90644,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -90695,7 +90653,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x32
@@ -90704,7 +90662,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x1f
-	.4byte	0x8dee
+	.4byte	0x8dec
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -90713,7 +90671,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x20
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x36
@@ -90722,7 +90680,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x22
-	.4byte	0x1882b
+	.4byte	0x18829
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -90731,7 +90689,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x24
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0x8
@@ -90740,7 +90698,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -90752,7 +90710,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x27
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -90764,7 +90722,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x28
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -90773,7 +90731,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xb9,0x8
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18837
+	.4byte	0x18835
 	.4byte	0x4f90
 	.byte	0x12
 	.byte	0x7f
@@ -90783,11 +90741,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1f
 	.byte	0x32
-	.4byte	0x185fe
+	.4byte	0x185fc
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x1894a
+	.4byte	0x18948
 	.ascii	"EasyChatScreenTemplate\000"
 
 	.byte	0x18
@@ -90798,7 +90756,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90807,7 +90765,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0xa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -90816,7 +90774,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0xb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90825,7 +90783,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -90837,7 +90795,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -90891,7 +90849,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x14
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18b2b
+	.4byte	0x18b29
 	.ascii	"EasyChatScreen\000"
 
 	.byte	0x50
@@ -90902,7 +90860,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x17
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -90911,7 +90869,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x18
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -90920,7 +90878,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x19
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -90929,7 +90887,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -90938,7 +90896,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -90947,7 +90905,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1c
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -90956,7 +90914,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1d
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -90965,7 +90923,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -90974,7 +90932,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x1f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -90983,7 +90941,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x20
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -90992,7 +90950,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x21
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -91001,7 +90959,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x22
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -91010,7 +90968,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x23
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -91019,7 +90977,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x24
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -91028,7 +90986,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x25
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -91037,7 +90995,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -91046,7 +91004,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x27
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -91055,7 +91013,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x28
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -91064,7 +91022,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -91073,7 +91031,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -91082,7 +91040,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x2b
-	.4byte	0x18b2b
+	.4byte	0x18b29
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -91109,19 +91067,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x2e
-	.4byte	0x77b1
+	.4byte	0x77af
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18b37
-	.4byte	0x8cdc
+	.4byte	0x18b35
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1f
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x18cf6
+	.4byte	0x18cf4
 	.ascii	"Unk203A11C\000"
 
 	.2byte	0x1300
@@ -91132,7 +91090,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x33
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -91141,7 +91099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x34
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -91150,7 +91108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x35
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -91159,7 +91117,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x36
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -91168,7 +91126,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x37
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -91177,7 +91135,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x38
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -91186,7 +91144,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -91195,7 +91153,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -91204,7 +91162,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x3b
-	.4byte	0x18cf6
+	.4byte	0x18cf4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -91213,7 +91171,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x3c
-	.4byte	0x18d02
+	.4byte	0x18d00
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcc,0x1
@@ -91222,7 +91180,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x3d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xce,0x5
@@ -91339,7 +91297,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x4a
-	.4byte	0x18d0f
+	.4byte	0x18d0d
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x6
@@ -91348,31 +91306,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x4b
-	.4byte	0x18d0f
+	.4byte	0x18d0d
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x16
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18d02
-	.4byte	0x8cdc
+	.4byte	0x18d00
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xc0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18d0f
-	.4byte	0x8cdc
+	.4byte	0x18d0d
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x201
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18d1c
-	.4byte	0x8ce6
+	.4byte	0x18d1a
+	.4byte	0x8ce4
 	.byte	0x30
 	.2byte	0x3ff
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18d9a
+	.4byte	0x18d98
 	.ascii	"EasyChatPhraseFrameDimensions\000"
 
 	.byte	0x4
@@ -91383,7 +91341,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x50
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -91395,7 +91353,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x51
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -91407,7 +91365,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x52
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -91416,7 +91374,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x53
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -91425,13 +91383,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18df1
+	.4byte	0x18def
 	.ascii	"EasyChatWordInfo\000"
 
 	.byte	0xc
@@ -91466,7 +91424,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x13
-	.4byte	0x18e18
+	.4byte	0x18e16
 	.byte	0x4
 	.byte	0x20
 	.byte	0x62
@@ -91475,27 +91433,27 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x60
-	.4byte	0xe2c8
+	.4byte	0xe2c6
 	.byte	0x14
 	.ascii	"words\000"
 
 	.byte	0x20
 	.byte	0x61
-	.4byte	0x18e18
+	.4byte	0x18e16
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x18e1e
+	.4byte	0x18e1c
 	.byte	0x17
-	.4byte	0x18d9a
+	.4byte	0x18d98
 	.byte	0x23
 	.ascii	"EasyChatGroupWordData\000"
 
 	.byte	0x20
 	.byte	0x62
-	.4byte	0x18df1
+	.4byte	0x18def
 	.byte	0xe
-	.4byte	0x18e97
+	.4byte	0x18e95
 	.ascii	"EasyChatGroup\000"
 
 	.byte	0x8
@@ -91506,7 +91464,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x66
-	.4byte	0x18e23
+	.4byte	0x18e21
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -91515,7 +91473,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x67
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -91524,13 +91482,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x68
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x18f26
+	.4byte	0x18f24
 	.ascii	"Unk203A120\000"
 
 	.2byte	0x3ba4
@@ -91541,7 +91499,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x6d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -91550,7 +91508,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x6e
-	.4byte	0x18f26
+	.4byte	0x18f24
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -91559,7 +91517,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x6f
-	.4byte	0x18f32
+	.4byte	0x18f30
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -91568,7 +91526,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x70
-	.4byte	0x18f3e
+	.4byte	0x18f3c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -91577,7 +91535,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x71
-	.4byte	0x18f4d
+	.4byte	0x18f4b
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0x72
@@ -91586,7 +91544,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x72
-	.4byte	0x18f59
+	.4byte	0x18f57
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x73
@@ -91595,45 +91553,45 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x73
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x77
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18f32
-	.4byte	0x8ce6
+	.4byte	0x18f30
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x15
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18f3e
-	.4byte	0x8ce6
+	.4byte	0x18f3c
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18f4d
-	.4byte	0x8ce6
+	.4byte	0x18f4b
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x1a
 	.byte	0x30
 	.2byte	0x10d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18f59
-	.4byte	0x8cdc
+	.4byte	0x18f57
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x2b
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x18f66
-	.4byte	0x8ce6
+	.4byte	0x18f64
+	.4byte	0x8ce4
 	.byte	0x30
 	.2byte	0x10d
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x18fa8
+	.4byte	0x18fa6
 	.ascii	"EasyChatWordsByLetter\000"
 
 	.byte	0x8
@@ -91644,7 +91602,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x20
 	.byte	0x78
-	.4byte	0xe2c8
+	.4byte	0xe2c6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -91663,7 +91621,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x21
 	.byte	0x22
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -91671,7 +91629,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x21
 	.byte	0x23
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -91679,7 +91637,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x21
 	.byte	0x2a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -91687,11 +91645,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x22
 	.byte	0x8
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x1921b
+	.4byte	0x19219
 	.ascii	"FieldInput\000"
 
 	.byte	0x4
@@ -91702,7 +91660,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x6
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -91714,7 +91672,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x7
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -91726,7 +91684,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x8
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -91738,7 +91696,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x9
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -91750,7 +91708,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xa
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -91762,7 +91720,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xb
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -91774,7 +91732,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xc
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -91786,7 +91744,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xd
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -91798,7 +91756,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xe
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -91810,7 +91768,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0xf
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -91822,7 +91780,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x10
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -91834,7 +91792,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x11
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -91846,7 +91804,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x12
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -91858,7 +91816,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x13
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2
@@ -91870,7 +91828,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x14
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -91882,7 +91840,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x15
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -91894,14 +91852,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x23
 	.byte	0x16
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19227
-	.4byte	0x8d1c
+	.4byte	0x19225
+	.4byte	0x8d1a
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
@@ -91910,7 +91868,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x24
 	.byte	0x8
-	.4byte	0x1921b
+	.4byte	0x19219
 	.byte	0x1
 	.byte	0x1
 	.byte	0x32
@@ -91918,27 +91876,27 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x95
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
 	.4byte	gPostMenuFieldCallback
 	.byte	0x33
 	.byte	0x1
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2f
 	.ascii	"gFieldCallback2\000"
 
 	.byte	0x25
 	.byte	0x34
-	.4byte	0x1928a
+	.4byte	0x19288
 	.byte	0x1
 	.byte	0x1
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1926b
+	.4byte	0x19269
 	.byte	0x20
-	.4byte	0x19c19
+	.4byte	0x19c17
 	.ascii	"Weather\000"
 
 	.2byte	0x750
@@ -91949,7 +91907,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1a
-	.4byte	0x19c19
+	.4byte	0x19c17
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -91958,7 +91916,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1b
-	.4byte	0x19c37
+	.4byte	0x19c35
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x4
@@ -91967,7 +91925,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1c
-	.4byte	0x19c37
+	.4byte	0x19c35
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0x8
@@ -91976,7 +91934,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1d
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0xd
@@ -91985,7 +91943,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1e
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc1,0xd
@@ -91994,7 +91952,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x1f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc2,0xd
@@ -92003,7 +91961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x20
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc3,0xd
@@ -92012,7 +91970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0xd
@@ -92021,7 +91979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x22
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc6,0xd
@@ -92030,7 +91988,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x23
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc7,0xd
@@ -92039,7 +91997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x24
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0xd
@@ -92048,7 +92006,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x25
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc9,0xd
@@ -92057,7 +92015,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xca,0xd
@@ -92066,7 +92024,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x27
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcb,0xd
@@ -92075,7 +92033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x28
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcc,0xd
@@ -92084,7 +92042,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x29
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xce,0xd
@@ -92093,7 +92051,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0xd
@@ -92102,7 +92060,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd1,0xd
@@ -92111,7 +92069,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd2,0xd
@@ -92120,7 +92078,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2d
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd3,0xd
@@ -92129,7 +92087,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0xd
@@ -92138,7 +92096,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x2f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd5,0xd
@@ -92147,7 +92105,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x30
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd6,0xd
@@ -92156,7 +92114,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x31
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd8,0xd
@@ -92165,7 +92123,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x32
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd9,0xd
@@ -92174,7 +92132,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x33
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xda,0xd
@@ -92183,7 +92141,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x34
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdb,0xd
@@ -92192,7 +92150,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x35
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0xd
@@ -92201,7 +92159,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x36
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdd,0xd
@@ -92210,7 +92168,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x37
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xde,0xd
@@ -92219,7 +92177,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x38
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdf,0xd
@@ -92228,7 +92186,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x39
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0xd
@@ -92237,7 +92195,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe2,0xd
@@ -92246,7 +92204,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe4,0xd
@@ -92255,7 +92213,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe5,0xd
@@ -92264,7 +92222,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe6,0xd
@@ -92273,7 +92231,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0xd
@@ -92282,7 +92240,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x3f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xea,0xd
@@ -92291,7 +92249,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x40
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xeb,0xd
@@ -92300,7 +92258,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x41
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xec,0xd
@@ -92309,7 +92267,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xed,0xd
@@ -92318,7 +92276,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x43
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xee,0xd
@@ -92327,7 +92285,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x44
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0xd
@@ -92336,7 +92294,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x45
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf2,0xd
@@ -92345,7 +92303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x46
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0xd
@@ -92354,7 +92312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x47
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfa,0xd
@@ -92363,7 +92321,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x48
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfb,0xd
@@ -92372,7 +92330,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x49
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfc,0xd
@@ -92381,7 +92339,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x4a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfe,0xd
@@ -92390,7 +92348,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0xe
@@ -92399,7 +92357,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x4c
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x3
 	.byte	0x23
 	.byte	0x81,0xe
@@ -92408,7 +92366,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x4d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0xe
@@ -92417,7 +92375,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x4e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x3
 	.byte	0x23
 	.byte	0x88,0xe
@@ -92435,7 +92393,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x50
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8e,0xe
@@ -92444,7 +92402,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x51
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0xe
@@ -92453,7 +92411,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x52
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x92,0xe
@@ -92462,7 +92420,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x53
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0xe
@@ -92471,7 +92429,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x96,0xe
@@ -92480,7 +92438,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x55
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x97,0xe
@@ -92489,7 +92447,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x56
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0xe
@@ -92498,7 +92456,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x57
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9a,0xe
@@ -92507,7 +92465,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x58
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0xe
@@ -92516,7 +92474,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x59
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9e,0xe
@@ -92525,7 +92483,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0xe
@@ -92534,7 +92492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa2,0xe
@@ -92543,7 +92501,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0xe
@@ -92552,7 +92510,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5d
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa5,0xe
@@ -92561,7 +92519,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa6,0xe
@@ -92570,7 +92528,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x5f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0xe
@@ -92579,7 +92537,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x60
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xaa,0xe
@@ -92588,7 +92546,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x61
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xac,0xe
@@ -92597,7 +92555,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x62
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xae,0xe
@@ -92606,7 +92564,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x63
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xaf,0xe
@@ -92615,7 +92573,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x64
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0xe
@@ -92624,7 +92582,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x65
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb2,0xe
@@ -92633,7 +92591,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x66
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb4,0xe
@@ -92642,7 +92600,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x67
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb6,0xe
@@ -92651,7 +92609,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x68
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb8,0xe
@@ -92660,7 +92618,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x69
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb9,0xe
@@ -92669,7 +92627,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xba,0xe
@@ -92678,7 +92636,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6b
-	.4byte	0xc54f
+	.4byte	0xc54d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbb,0xe
@@ -92687,7 +92645,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6c
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbc,0xe
@@ -92696,7 +92654,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6d
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbe,0xe
@@ -92705,7 +92663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6e
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0xe
@@ -92714,7 +92672,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x6f
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc2,0xe
@@ -92723,7 +92681,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x70
-	.4byte	0xcf85
+	.4byte	0xcf83
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0xe
@@ -92732,7 +92690,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x71
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcd,0xe
@@ -92741,13 +92699,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x72
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xce,0xe
 	.byte	0x0
 	.byte	0x34
-	.4byte	0x19c37
+	.4byte	0x19c35
 	.2byte	0x200
 	.byte	0x26
 	.byte	0x1a
@@ -92756,24 +92714,24 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x10
-	.4byte	0x19c45
+	.4byte	0x19c43
 	.byte	0x14
 	.ascii	"s2\000"
 
 	.byte	0x26
 	.byte	0x19
-	.4byte	0x19c98
+	.4byte	0x19c96
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19c45
-	.4byte	0x8cdc
+	.4byte	0x19c43
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x12
 	.byte	0x12
 	.byte	0x1f
 	.byte	0x0
 	.byte	0x35
-	.4byte	0x19c98
+	.4byte	0x19c96
 	.2byte	0x200
 	.byte	0x26
 	.byte	0x10
@@ -92782,7 +92740,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0xd
-	.4byte	0x19d56
+	.4byte	0x19d54
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -92791,7 +92749,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0xe
-	.4byte	0x19d62
+	.4byte	0x19d60
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -92800,13 +92758,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0xf
-	.4byte	0x19d6e
+	.4byte	0x19d6c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x3
 	.byte	0x0
 	.byte	0x35
-	.4byte	0x19d32
+	.4byte	0x19d30
 	.2byte	0x1f4
 	.byte	0x26
 	.byte	0x19
@@ -92815,7 +92773,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x13
-	.4byte	0x19d32
+	.4byte	0x19d30
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -92824,7 +92782,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x14
-	.4byte	0x19d3e
+	.4byte	0x19d3c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x1
@@ -92833,7 +92791,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x15
-	.4byte	0x19d3e
+	.4byte	0x19d3c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x1
@@ -92842,7 +92800,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x16
-	.4byte	0x19d3e
+	.4byte	0x19d3c
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x2
@@ -92851,7 +92809,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x17
-	.4byte	0x19d3e
+	.4byte	0x19d3c
 	.byte	0x3
 	.byte	0x23
 	.byte	0x90,0x3
@@ -92860,50 +92818,50 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x26
 	.byte	0x18
-	.4byte	0x19d4a
+	.4byte	0x19d48
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe0,0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d3e
-	.4byte	0x8cdc
+	.4byte	0x19d3c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x9f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d4a
+	.4byte	0x19d48
 	.4byte	0x4f8a
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d56
+	.4byte	0x19d54
 	.4byte	0x4f8a
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d62
+	.4byte	0x19d60
 	.4byte	0x4f8a
 	.byte	0x12
 	.byte	0x17
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d6e
+	.4byte	0x19d6c
 	.4byte	0x4f8a
 	.byte	0x12
 	.byte	0x64
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d7a
+	.4byte	0x19d78
 	.4byte	0x4f8a
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x19d86
-	.4byte	0xe2ce
+	.4byte	0x19d84
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92912,14 +92870,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x27
 	.byte	0x1c
-	.4byte	0x19da6
+	.4byte	0x19da4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19d7a
+	.4byte	0x19d78
 	.byte	0x11
-	.4byte	0x19db7
-	.4byte	0xe28f
+	.4byte	0x19db5
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92928,14 +92886,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x1ee9
-	.4byte	0x19dd2
+	.4byte	0x19dd0
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19dab
+	.4byte	0x19da9
 	.byte	0x11
-	.4byte	0x19de3
-	.4byte	0xe28f
+	.4byte	0x19de1
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92944,14 +92902,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x1eea
-	.4byte	0x19e02
+	.4byte	0x19e00
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19dd7
+	.4byte	0x19dd5
 	.byte	0x11
-	.4byte	0x19e13
-	.4byte	0xe28f
+	.4byte	0x19e11
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92960,14 +92918,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x1eeb
-	.4byte	0x19e2e
+	.4byte	0x19e2c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19e07
+	.4byte	0x19e05
 	.byte	0x11
-	.4byte	0x19e3f
-	.4byte	0xe28f
+	.4byte	0x19e3d
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92976,14 +92934,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x1f97
-	.4byte	0x19e5a
+	.4byte	0x19e58
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19e33
+	.4byte	0x19e31
 	.byte	0x11
-	.4byte	0x19e6b
-	.4byte	0xe28f
+	.4byte	0x19e69
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -92992,14 +92950,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x243e
-	.4byte	0x19e86
+	.4byte	0x19e84
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19e5f
+	.4byte	0x19e5d
 	.byte	0x11
-	.4byte	0x19e97
-	.4byte	0xe2ce
+	.4byte	0x19e95
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -93008,14 +92966,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x29
 	.byte	0x2c
-	.4byte	0x19eb2
+	.4byte	0x19eb0
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19e8b
+	.4byte	0x19e89
 	.byte	0x11
-	.4byte	0x19ec3
-	.4byte	0xe28f
+	.4byte	0x19ec1
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -93024,14 +92982,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x243a
-	.4byte	0x19ee4
+	.4byte	0x19ee2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19eb7
+	.4byte	0x19eb5
 	.byte	0x11
-	.4byte	0x19ef5
-	.4byte	0xe28f
+	.4byte	0x19ef3
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -93040,14 +92998,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x243b
-	.4byte	0x19f1b
+	.4byte	0x19f19
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19ee9
+	.4byte	0x19ee7
 	.byte	0x11
-	.4byte	0x19f2c
-	.4byte	0xe28f
+	.4byte	0x19f2a
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -93056,13 +93014,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x28
 	.2byte	0x243d
-	.4byte	0x19f4d
+	.4byte	0x19f4b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x19f20
+	.4byte	0x19f1e
 	.byte	0x29
-	.4byte	0x1a02a
+	.4byte	0x1a028
 	.byte	0x4
 	.byte	0x2a
 	.2byte	0x111
@@ -93100,7 +93058,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1a109
+	.4byte	0x1a107
 	.ascii	"TextPrinterSubStruct\000"
 
 	.byte	0x4
@@ -93111,7 +93069,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x11e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -93123,7 +93081,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x11f
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3
@@ -93135,7 +93093,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x120
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x3
 	.byte	0x0
@@ -93147,7 +93105,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x121
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -93159,7 +93117,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x122
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x1
@@ -93171,7 +93129,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x123
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -93183,13 +93141,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x124
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1a22e
+	.4byte	0x1a22c
 	.ascii	"TextPrinterTemplate\000"
 
 	.byte	0x10
@@ -93209,7 +93167,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -93218,7 +93176,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -93227,7 +93185,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -93236,7 +93194,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -93245,7 +93203,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -93254,7 +93212,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x12f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -93263,7 +93221,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x130
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -93272,7 +93230,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x131
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -93281,7 +93239,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x132
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -93293,7 +93251,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x133
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -93305,7 +93263,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x134
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -93317,7 +93275,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x135
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -93326,7 +93284,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1a328
+	.4byte	0x1a326
 	.ascii	"TextPrinter\000"
 
 	.byte	0x24
@@ -93337,7 +93295,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x13a
-	.4byte	0x1a109
+	.4byte	0x1a107
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93346,7 +93304,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x13c
-	.4byte	0x1a33f
+	.4byte	0x1a33d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -93364,7 +93322,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x13f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -93373,7 +93331,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x140
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -93382,7 +93340,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x141
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -93391,7 +93349,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x142
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -93400,7 +93358,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x143
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -93409,7 +93367,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x144
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -93418,27 +93376,27 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x145
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
 	.byte	0x0
 	.byte	0x6
-	.4byte	0x1a339
+	.4byte	0x1a337
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x1a339
+	.4byte	0x1a337
 	.byte	0x7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a109
+	.4byte	0x1a107
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a328
+	.4byte	0x1a326
 	.byte	0x21
-	.4byte	0x1a42d
+	.4byte	0x1a42b
 	.ascii	"FontInfo\000"
 
 	.byte	0xc
@@ -93449,7 +93407,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14a
-	.4byte	0x1a443
+	.4byte	0x1a441
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93458,7 +93416,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -93467,7 +93425,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -93476,7 +93434,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -93485,7 +93443,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -93494,7 +93452,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x14f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -93506,7 +93464,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x150
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -93518,7 +93476,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x151
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -93530,7 +93488,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x152
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x0
@@ -93539,20 +93497,20 @@ IsLastMonThatKnowsSurf:
 	.byte	0x9
 	.byte	0x0
 	.byte	0x36
-	.4byte	0x1a43d
+	.4byte	0x1a43b
 	.byte	0x1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x7
-	.4byte	0x1a43d
+	.4byte	0x1a43b
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a22e
+	.4byte	0x1a22c
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a42d
+	.4byte	0x1a42b
 	.byte	0x21
-	.4byte	0x1a484
+	.4byte	0x1a482
 	.ascii	"GlyphWidthFunc\000"
 
 	.byte	0x8
@@ -93563,7 +93521,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x159
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93572,25 +93530,25 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x15a
-	.4byte	0x1a499
+	.4byte	0x1a497
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x36
-	.4byte	0x1a499
+	.4byte	0x1a497
 	.byte	0x1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x7
-	.4byte	0x8dfc
+	.4byte	0x8dfa
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a484
+	.4byte	0x1a482
 	.byte	0x21
-	.4byte	0x1a4ed
+	.4byte	0x1a4eb
 	.ascii	"KeypadIcon\000"
 
 	.byte	0x4
@@ -93601,7 +93559,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x15f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93610,7 +93568,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x160
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -93619,13 +93577,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x161
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0x1a574
+	.4byte	0x1a572
 	.byte	0x4
 	.byte	0x2a
 	.2byte	0x169
@@ -93634,7 +93592,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x165
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -93646,7 +93604,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x166
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x6
@@ -93658,7 +93616,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x167
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -93670,7 +93628,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x168
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x4
@@ -93683,9 +93641,9 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x169
-	.4byte	0x1a4ed
+	.4byte	0x1a4eb
 	.byte	0x21
-	.4byte	0x1a608
+	.4byte	0x1a606
 	.ascii	"Struct_03002F90\000"
 
 	.byte	0x84
@@ -93696,7 +93654,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x16d
-	.4byte	0x1a608
+	.4byte	0x1a606
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93705,7 +93663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x16e
-	.4byte	0x1a608
+	.4byte	0x1a606
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -93714,7 +93672,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x16f
-	.4byte	0x1a608
+	.4byte	0x1a606
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -93723,7 +93681,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x170
-	.4byte	0x1a608
+	.4byte	0x1a606
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -93732,7 +93690,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x171
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x1
@@ -93741,14 +93699,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x172
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x81,0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1a614
-	.4byte	0x8cf1
+	.4byte	0x1a612
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
@@ -93757,11 +93715,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2a
 	.2byte	0x175
-	.4byte	0x1a574
+	.4byte	0x1a572
 	.byte	0x1
 	.byte	0x1
 	.byte	0x27
-	.4byte	0x1a694
+	.4byte	0x1a692
 	.byte	0x4
 	.byte	0x29
 	.byte	0x1b
@@ -93787,7 +93745,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1a6c6
+	.4byte	0x1a6c4
 	.ascii	"MenuAction\000"
 
 	.byte	0x8
@@ -93807,13 +93765,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x29
 	.byte	0x29
-	.4byte	0x1a6c6
+	.4byte	0x1a6c4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x13
-	.4byte	0x1a6ed
+	.4byte	0x1a6eb
 	.byte	0x4
 	.byte	0x29
 	.byte	0x29
@@ -93822,28 +93780,28 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x29
 	.byte	0x27
-	.4byte	0x149d4
+	.4byte	0x149d2
 	.byte	0x14
 	.ascii	"u8_void\000"
 
 	.byte	0x29
 	.byte	0x28
-	.4byte	0x1a6f3
+	.4byte	0x1a6f1
 	.byte	0x0
 	.byte	0x33
 	.byte	0x1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1a6ed
+	.4byte	0x1a6eb
 	.byte	0x23
 	.ascii	"ItemUseFunc\000"
 
 	.byte	0x2b
 	.byte	0x7
-	.4byte	0x149d4
+	.4byte	0x149d2
 	.byte	0xe
-	.4byte	0x1a82f
+	.4byte	0x1a82d
 	.ascii	"Item\000"
 
 	.byte	0x2c
@@ -93854,7 +93812,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0xb
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93863,7 +93821,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0xc
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -93872,7 +93830,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0xd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -93881,7 +93839,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0xe
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -93890,7 +93848,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0xf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -93908,7 +93866,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x11
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -93917,7 +93875,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x12
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -93926,7 +93884,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -93935,7 +93893,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x14
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -93944,7 +93902,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x15
-	.4byte	0x1a6f9
+	.4byte	0x1a6f7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -93953,7 +93911,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x16
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -93962,7 +93920,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x17
-	.4byte	0x1a6f9
+	.4byte	0x1a6f7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -93971,13 +93929,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x18
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1a869
+	.4byte	0x1a867
 	.ascii	"BagPocket\000"
 
 	.byte	0x8
@@ -93988,7 +93946,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x1d
-	.4byte	0x1a869
+	.4byte	0x1a867
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -93997,16 +93955,16 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2b
 	.byte	0x1e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0xedaf
+	.4byte	0xedad
 	.byte	0xe
-	.4byte	0x1a8aa
+	.4byte	0x1a8a8
 	.ascii	"YesNoFuncTable\000"
 
 	.byte	0x8
@@ -94017,7 +93975,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2c
 	.byte	0xe
-	.4byte	0x149c4
+	.4byte	0x149c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94026,13 +93984,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2c
 	.byte	0xf
-	.4byte	0x149c4
+	.4byte	0x149c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1a938
+	.4byte	0x1a936
 	.ascii	"BagStruct\000"
 
 	.byte	0x1c
@@ -94043,7 +94001,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x28
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94052,7 +94010,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x29
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -94061,7 +94019,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x2a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -94070,7 +94028,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x2b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -94079,7 +94037,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x2c
-	.4byte	0x1806f
+	.4byte	0x1806d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -94088,13 +94046,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x2d
-	.4byte	0x1806f
+	.4byte	0x1806d
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1ab9c
+	.4byte	0x1ab9a
 	.ascii	"BagMenuStruct\000"
 
 	.2byte	0xc48
@@ -94105,7 +94063,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x34
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94114,7 +94072,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x35
-	.4byte	0x163ab
+	.4byte	0x163a9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -94123,7 +94081,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x36
-	.4byte	0xc5dc
+	.4byte	0xc5da
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x10
@@ -94141,7 +94099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x38
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9a,0x10
@@ -94150,7 +94108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x4
 	.byte	0x4
@@ -94162,7 +94120,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x2
@@ -94174,7 +94132,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x1
@@ -94186,7 +94144,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x3c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -94207,7 +94165,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x3e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9e,0x10
@@ -94216,7 +94174,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x3f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9f,0x10
@@ -94243,7 +94201,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa8,0x10
@@ -94252,7 +94210,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x43
-	.4byte	0xd997
+	.4byte	0xd995
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa9,0x10
@@ -94261,7 +94219,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x44
-	.4byte	0x7df5
+	.4byte	0x7df3
 	.byte	0x3
 	.byte	0x23
 	.byte	0xae,0x10
@@ -94270,7 +94228,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x45
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb4,0x10
@@ -94279,7 +94237,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x46
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb6,0x10
@@ -94288,7 +94246,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x47
-	.4byte	0x1ab9c
+	.4byte	0x1ab9a
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc4,0x10
@@ -94303,8 +94261,8 @@ IsLastMonThatKnowsSurf:
 	.byte	0xc4,0x18
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1abaa
-	.4byte	0x8cdc
+	.4byte	0x1aba8
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1f
 	.byte	0x12
@@ -94315,11 +94273,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2d
 	.byte	0x4f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x1ac96
+	.4byte	0x1ac94
 	.ascii	"LinkStatus\000"
 
 	.byte	0x4
@@ -94330,7 +94288,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x6c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x2
 	.byte	0x1e
@@ -94342,7 +94300,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x6d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x3
 	.byte	0x1b
@@ -94354,7 +94312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x6e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x1a
@@ -94366,7 +94324,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x6f
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x19
@@ -94378,7 +94336,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x70
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x18
@@ -94390,7 +94348,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x71
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x1
 	.byte	0x17
@@ -94402,7 +94360,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x72
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x7
 	.byte	0x10
@@ -94414,7 +94372,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0x73
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x4
 	.byte	0x7
 	.byte	0x9
@@ -94423,7 +94381,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x0
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1ad14
+	.4byte	0x1ad12
 	.byte	0x4
 	.byte	0x2e
 	.byte	0x7c
@@ -94449,7 +94407,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1ade0
+	.4byte	0x1adde
 	.byte	0x4
 	.byte	0x2e
 	.byte	0x85
@@ -94487,7 +94445,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x7
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1ae1f
+	.4byte	0x1ae1d
 	.byte	0x4
 	.byte	0x2e
 	.byte	0x91
@@ -94505,7 +94463,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1ae4c
+	.4byte	0x1ae4a
 	.byte	0x4
 	.byte	0x2e
 	.byte	0x98
@@ -94523,7 +94481,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1af36
+	.4byte	0x1af34
 	.ascii	"LinkPlayer\000"
 
 	.byte	0x1c
@@ -94534,7 +94492,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94543,7 +94501,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa1
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -94552,7 +94510,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -94561,7 +94519,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa3
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -94570,7 +94528,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -94579,7 +94537,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -94588,7 +94546,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -94597,7 +94555,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -94606,7 +94564,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa8
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -94615,7 +94573,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xa9
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -94624,13 +94582,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xaa
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1af86
+	.4byte	0x1af84
 	.ascii	"LinkPlayerBlock\000"
 
 	.byte	0x3c
@@ -94641,7 +94599,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xaf
-	.4byte	0x1af86
+	.4byte	0x1af84
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94650,7 +94608,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xb0
-	.4byte	0x1ae4c
+	.4byte	0x1ae4a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -94659,14 +94617,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xb1
-	.4byte	0x1af86
+	.4byte	0x1af84
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1af92
-	.4byte	0x1af92
+	.4byte	0x1af90
+	.4byte	0x1af90
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
@@ -94676,7 +94634,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x8
 	.byte	0x20
-	.4byte	0x1afdd
+	.4byte	0x1afdb
 	.ascii	"SendQueue\000"
 
 	.2byte	0x324
@@ -94687,7 +94645,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xb8
-	.4byte	0x1afdd
+	.4byte	0x1afdb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94696,7 +94654,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xb9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x6
@@ -94705,21 +94663,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xba
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa1,0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1afeb
-	.4byte	0x8ce6
+	.4byte	0x1afe9
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x7
 	.byte	0x12
 	.byte	0x31
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1b02e
+	.4byte	0x1b02c
 	.ascii	"RecvQueue\000"
 
 	.2byte	0xc84
@@ -94730,7 +94688,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xbf
-	.4byte	0x1b02e
+	.4byte	0x1b02c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94739,7 +94697,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x19
@@ -94748,14 +94706,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x81,0x19
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b03e
-	.4byte	0x8ce6
+	.4byte	0x1b03c
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
@@ -94764,7 +94722,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x31
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1b1d4
+	.4byte	0x1b1d2
 	.ascii	"Link\000"
 
 	.2byte	0xfc0
@@ -94775,7 +94733,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -94784,7 +94742,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -94793,7 +94751,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -94802,7 +94760,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xc9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -94820,7 +94778,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xcb
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -94829,7 +94787,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xcc
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -94838,7 +94796,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xcd
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -94847,7 +94805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xce
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -94856,7 +94814,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd1
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -94865,7 +94823,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd2
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -94874,7 +94832,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -94883,7 +94841,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -94892,7 +94850,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd6
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -94901,7 +94859,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -94910,7 +94868,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xd9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -94919,7 +94877,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xdb
-	.4byte	0x1af9a
+	.4byte	0x1af98
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -94928,13 +94886,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xdc
-	.4byte	0x1afeb
+	.4byte	0x1afe9
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbc,0x6
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1b20b
+	.4byte	0x1b209
 	.ascii	"BlockRequest\000"
 
 	.byte	0x8
@@ -94954,7 +94912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2e
 	.byte	0xe2
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -94964,7 +94922,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x21
-	.4byte	0x1b241
+	.4byte	0x1b23f
 	.ascii	"RfuPacket8\000"
 
 	.byte	0x74
@@ -94975,19 +94933,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x119
-	.4byte	0x1b241
+	.4byte	0x1b23f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b24d
-	.4byte	0x8cdc
+	.4byte	0x1b24b
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x73
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b286
+	.4byte	0x1b284
 	.ascii	"RfuPacket32\000"
 
 	.byte	0x74
@@ -94998,7 +94956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x11e
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95007,19 +94965,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x11f
-	.4byte	0x1b286
+	.4byte	0x1b284
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b292
-	.4byte	0x8cf1
+	.4byte	0x1b290
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x1b
 	.byte	0x0
 	.byte	0x31
-	.4byte	0x1b2cd
+	.4byte	0x1b2cb
 	.ascii	"RfuPacket\000"
 
 	.byte	0x74
@@ -95030,16 +94988,16 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x124
-	.4byte	0x1b24d
+	.4byte	0x1b24b
 	.byte	0x2d
 	.ascii	"rfuPacket8\000"
 
 	.byte	0x2f
 	.2byte	0x125
-	.4byte	0x1b21c
+	.4byte	0x1b21a
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b4bd
+	.4byte	0x1b4bb
 	.ascii	"STWIStatus\000"
 
 	.byte	0x30
@@ -95050,7 +95008,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12a
-	.4byte	0x1b4bd
+	.4byte	0x1b4bb
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95059,7 +95017,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95068,7 +95026,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -95077,7 +95035,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -95086,7 +95044,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -95095,7 +95053,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x12f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -95104,7 +95062,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x130
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -95113,7 +95071,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x131
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -95122,7 +95080,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x132
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -95131,7 +95089,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x134
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -95140,7 +95098,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x138
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -95149,7 +95107,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x139
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -95158,7 +95116,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13a
-	.4byte	0x8e2c
+	.4byte	0x8e2a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -95167,7 +95125,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13b
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -95176,7 +95134,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -95185,7 +95143,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -95194,7 +95152,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -95203,7 +95161,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x13f
-	.4byte	0x1b4c9
+	.4byte	0x1b4c7
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -95212,7 +95170,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x140
-	.4byte	0x1b4db
+	.4byte	0x1b4d9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -95221,7 +95179,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x141
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -95230,7 +95188,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x142
-	.4byte	0x1b4e1
+	.4byte	0x1b4df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -95239,7 +95197,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x143
-	.4byte	0x1b4e1
+	.4byte	0x1b4df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -95248,7 +95206,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x144
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -95256,26 +95214,26 @@ IsLastMonThatKnowsSurf:
 	.byte	0x24
 	.4byte	0x2a8c
 	.byte	0x38
-	.4byte	0x1b4c9
+	.4byte	0x1b4c7
 	.byte	0x39
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1b4c2
+	.4byte	0x1b4c0
 	.byte	0x6
-	.4byte	0x1b4db
+	.4byte	0x1b4d9
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1b4cf
+	.4byte	0x1b4cd
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1b292
+	.4byte	0x1b290
 	.byte	0x26
-	.4byte	0x1b558
+	.4byte	0x1b556
 	.ascii	"RfuIntrStruct\000"
 
 	.2byte	0xa78
@@ -95286,7 +95244,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x14a
-	.4byte	0x1b292
+	.4byte	0x1b290
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95295,7 +95253,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x14b
-	.4byte	0x1b292
+	.4byte	0x1b290
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
@@ -95304,7 +95262,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x14c
-	.4byte	0x1b558
+	.4byte	0x1b556
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x1
@@ -95313,19 +95271,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x14d
-	.4byte	0x1b2cd
+	.4byte	0x1b2cb
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0x14
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b565
-	.4byte	0x8cdc
+	.4byte	0x1b563
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x95f
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b5d9
+	.4byte	0x1b5d7
 	.ascii	"UNISend\000"
 
 	.byte	0xc
@@ -95336,7 +95294,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x153
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95345,7 +95303,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x154
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -95354,7 +95312,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x156
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -95363,7 +95321,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x157
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95378,7 +95336,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x8
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b655
+	.4byte	0x1b653
 	.ascii	"UNIRecv\000"
 
 	.byte	0x8
@@ -95389,7 +95347,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x15e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95398,7 +95356,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x15f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -95407,7 +95365,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x160
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95416,7 +95374,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x161
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -95425,13 +95383,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x163
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b6c0
+	.4byte	0x1b6be
 	.ascii	"RfuSlotStatusUNI\000"
 
 	.byte	0x1c
@@ -95442,7 +95400,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x169
-	.4byte	0x1b565
+	.4byte	0x1b563
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95451,7 +95409,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x16a
-	.4byte	0x1b5d9
+	.4byte	0x1b5d7
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -95469,13 +95427,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x16c
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b7ee
+	.4byte	0x1b7ec
 	.ascii	"NIComm\000"
 
 	.byte	0x34
@@ -95486,7 +95444,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x173
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95495,7 +95453,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x174
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -95504,7 +95462,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x175
-	.4byte	0x1b7ee
+	.4byte	0x1b7ec
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95513,7 +95471,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x176
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -95522,7 +95480,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x177
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -95531,7 +95489,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x178
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -95549,7 +95507,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x17c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -95558,7 +95516,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x17d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -95585,7 +95543,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x181
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -95594,7 +95552,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x182
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2d
@@ -95603,7 +95561,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x183
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2e
@@ -95612,19 +95570,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x184
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b7fa
+	.4byte	0x1b7f8
 	.4byte	0x1050
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b864
+	.4byte	0x1b862
 	.ascii	"RfuSlotStatusNI\000"
 
 	.byte	0x70
@@ -95635,7 +95593,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x18a
-	.4byte	0x1b6c0
+	.4byte	0x1b6be
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95644,7 +95602,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x18b
-	.4byte	0x1b6c0
+	.4byte	0x1b6be
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -95662,13 +95620,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x18d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1b8e2
+	.4byte	0x1b8e0
 	.ascii	"RfuTgtData\000"
 
 	.byte	0x20
@@ -95679,7 +95637,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x193
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95688,7 +95646,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x194
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -95697,7 +95655,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x195
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -95706,7 +95664,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x197
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95715,7 +95673,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x198
-	.4byte	0x1b8e2
+	.4byte	0x1b8e0
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -95724,19 +95682,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x199
-	.4byte	0xcf85
+	.4byte	0xcf83
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1b8ee
-	.4byte	0x8cdc
+	.4byte	0x1b8ec
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xe
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1ba93
+	.4byte	0x1ba91
 	.ascii	"RfuLinkStatus\000"
 
 	.byte	0xb4
@@ -95747,7 +95705,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x19e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95756,7 +95714,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x19f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -95765,7 +95723,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -95774,7 +95732,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -95783,7 +95741,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95792,7 +95750,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -95801,7 +95759,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -95810,7 +95768,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -95819,7 +95777,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -95828,7 +95786,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1a8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -95846,7 +95804,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1aa
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -95855,7 +95813,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1ab
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -95873,7 +95831,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1ad
-	.4byte	0x1ba93
+	.4byte	0x1ba91
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -95882,19 +95840,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1b0
-	.4byte	0x1b864
+	.4byte	0x1b862
 	.byte	0x3
 	.byte	0x23
 	.byte	0x94,0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ba9f
-	.4byte	0x1b864
+	.4byte	0x1ba9d
+	.4byte	0x1b862
 	.byte	0x12
 	.byte	0x3
 	.byte	0x0
 	.byte	0x21
-	.4byte	0x1bb41
+	.4byte	0x1bb3f
 	.ascii	"RfuFixed\000"
 
 	.byte	0xe0
@@ -95905,7 +95863,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1b6
-	.4byte	0x1bb52
+	.4byte	0x1bb50
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -95914,7 +95872,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1b7
-	.4byte	0x1bb74
+	.4byte	0x1bb72
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -95923,7 +95881,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1b8
-	.4byte	0xae94
+	.4byte	0xae92
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -95941,7 +95899,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1ba
-	.4byte	0x1bb7a
+	.4byte	0x1bb78
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
@@ -95950,49 +95908,49 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1bb
-	.4byte	0x1bb86
+	.4byte	0x1bb84
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x1
 	.byte	0x0
 	.byte	0x6
-	.4byte	0x1bb52
+	.4byte	0x1bb50
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x7
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1bb41
+	.4byte	0x1bb3f
 	.byte	0x6
-	.4byte	0x1bb6e
+	.4byte	0x1bb6c
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x1bb6e
+	.4byte	0x1bb6c
 	.byte	0x7
-	.4byte	0xe5a2
+	.4byte	0xe5a0
 	.byte	0x7
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
 	.4byte	0x1050
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1bb58
+	.4byte	0x1bb56
 	.byte	0x11
-	.4byte	0x1bb86
-	.4byte	0x8cf1
+	.4byte	0x1bb84
+	.4byte	0x8cef
 	.byte	0x12
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1b4e7
+	.4byte	0x1b4e5
 	.byte	0x21
-	.4byte	0x1bd54
+	.4byte	0x1bd52
 	.ascii	"RfuStatic\000"
 
 	.byte	0x28
@@ -96003,7 +95961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96012,7 +95970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -96021,7 +95979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -96030,7 +95988,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -96039,7 +95997,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -96048,7 +96006,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -96057,7 +96015,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -96066,7 +96024,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -96075,7 +96033,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -96084,7 +96042,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1c9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -96120,7 +96078,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1cd
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -96129,7 +96087,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1ce
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -96138,7 +96096,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1cf
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -96147,7 +96105,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1d0
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -96156,13 +96114,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x2f
 	.2byte	0x1d1
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1bd77
+	.4byte	0x1bd75
 	.ascii	"Padded_U8\000"
 
 	.byte	0x4
@@ -96173,13 +96131,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x73
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1bea6
+	.4byte	0x1bea4
 	.ascii	"InitializeParametersTag\000"
 
 	.byte	0x18
@@ -96190,7 +96148,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x79
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96199,7 +96157,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x7a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -96208,7 +96166,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x7b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -96217,7 +96175,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x7e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -96226,7 +96184,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x7f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -96253,7 +96211,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x84
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -96262,7 +96220,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x87
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -96271,7 +96229,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x88
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -96280,7 +96238,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x8b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -96290,9 +96248,9 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x8c
-	.4byte	0x1bd77
+	.4byte	0x1bd75
 	.byte	0xe
-	.4byte	0x1bf05
+	.4byte	0x1bf03
 	.ascii	"VblankTimerTag\000"
 
 	.byte	0xc
@@ -96303,7 +96261,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x91
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96312,7 +96270,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x92
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -96331,9 +96289,9 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x94
-	.4byte	0x1beb8
+	.4byte	0x1beb6
 	.byte	0xe
-	.4byte	0x1c20c
+	.4byte	0x1c20a
 	.ascii	"linkManagerTag\000"
 
 	.byte	0x48
@@ -96344,7 +96302,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x98
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96353,7 +96311,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x99
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -96362,7 +96320,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9a
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -96371,7 +96329,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9b
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -96380,7 +96338,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -96389,7 +96347,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -96398,7 +96356,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -96407,7 +96365,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0x9f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7
@@ -96416,7 +96374,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -96425,7 +96383,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -96434,7 +96392,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -96443,7 +96401,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -96452,7 +96410,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -96461,7 +96419,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -96470,7 +96428,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -96479,7 +96437,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -96488,7 +96446,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xa8
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -96515,7 +96473,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xab
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -96524,7 +96482,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xac
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
@@ -96533,7 +96491,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xad
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -96542,7 +96500,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xae
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -96560,7 +96518,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xb0
-	.4byte	0x1bf05
+	.4byte	0x1bf03
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -96569,7 +96527,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xb1
-	.4byte	0x1bf05
+	.4byte	0x1bf03
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -96578,7 +96536,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xb2
-	.4byte	0x1c20c
+	.4byte	0x1c20a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -96587,7 +96545,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xb3
-	.4byte	0x1c223
+	.4byte	0x1c221
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -96596,33 +96554,33 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x30
 	.byte	0xb4
-	.4byte	0x1b4db
+	.4byte	0x1b4d9
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1bea6
+	.4byte	0x1bea4
 	.byte	0x6
-	.4byte	0x1c223
+	.4byte	0x1c221
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1c212
+	.4byte	0x1c210
 	.byte	0x23
 	.ascii	"LINK_MANAGER\000"
 
 	.byte	0x30
 	.byte	0xb5
-	.4byte	0x1bf16
+	.4byte	0x1bf14
 	.byte	0xe
-	.4byte	0x1c323
+	.4byte	0x1c321
 	.ascii	"GFtgtGnameSub\000"
 
 	.byte	0x4
@@ -96633,7 +96591,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x33
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0xc
@@ -96645,7 +96603,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x34
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xb
@@ -96657,7 +96615,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x35
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0xa
@@ -96669,7 +96627,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x36
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x9
@@ -96681,7 +96639,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x37
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x8
@@ -96693,7 +96651,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x38
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x7
@@ -96705,7 +96663,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x39
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x1
 	.byte	0x6
@@ -96717,7 +96675,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x3a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x4
 	.byte	0x2
@@ -96735,7 +96693,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1c3f7
+	.4byte	0x1c3f5
 	.ascii	"GFtgtGname\000"
 
 	.byte	0xe
@@ -96746,7 +96704,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x40
-	.4byte	0x1c23d
+	.4byte	0x1c23b
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96764,7 +96722,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x45
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -96773,7 +96731,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x46
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x1
@@ -96785,7 +96743,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x47
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x0
@@ -96797,7 +96755,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x48
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -96809,7 +96767,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x7
 	.byte	0x0
@@ -96821,7 +96779,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x6
 	.byte	0x2
@@ -96833,7 +96791,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x0
@@ -96842,7 +96800,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xc
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1c4a2
+	.4byte	0x1c4a0
 	.ascii	"RfuBlockSend\000"
 
 	.byte	0x14
@@ -96853,7 +96811,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x50
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96862,7 +96820,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x51
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -96880,7 +96838,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x53
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -96889,7 +96847,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x54
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -96898,7 +96856,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x55
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -96907,7 +96865,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x56
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -96916,13 +96874,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x57
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1c512
+	.4byte	0x1c510
 	.ascii	"RfuRecvQueue\000"
 
 	.2byte	0x8c4
@@ -96933,7 +96891,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x5c
-	.4byte	0x1c512
+	.4byte	0x1c510
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -96942,7 +96900,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x5d
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x11
@@ -96951,7 +96909,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x5e
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc1,0x11
@@ -96960,7 +96918,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x5f
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc2,0x11
@@ -96969,21 +96927,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x60
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc3,0x11
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1c520
-	.4byte	0x8cdc
+	.4byte	0x1c51e
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1f
 	.byte	0x12
 	.byte	0x45
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1c590
+	.4byte	0x1c58e
 	.ascii	"RfuSendQueue\000"
 
 	.2byte	0x234
@@ -96994,7 +96952,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x65
-	.4byte	0x1c590
+	.4byte	0x1c58e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97003,7 +96961,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x66
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb0,0x4
@@ -97012,7 +96970,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x67
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb1,0x4
@@ -97021,7 +96979,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x68
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb2,0x4
@@ -97030,21 +96988,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x69
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xb3,0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1c59e
-	.4byte	0x8cdc
+	.4byte	0x1c59c
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x27
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1c5fc
+	.4byte	0x1c5fa
 	.ascii	"RfuBackupQueue\000"
 
 	.byte	0x20
@@ -97055,7 +97013,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x6e
-	.4byte	0x1c5fc
+	.4byte	0x1c5fa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97064,7 +97022,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x6f
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -97073,7 +97031,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x70
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -97082,21 +97040,21 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x71
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1c60a
-	.4byte	0x8cdc
+	.4byte	0x1c608
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x1
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1cbae
+	.4byte	0x1cbac
 	.ascii	"GFRfuManager\000"
 
 	.2byte	0xcf4
@@ -97107,7 +97065,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x76
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97116,7 +97074,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x77
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -97134,7 +97092,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x79
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -97143,7 +97101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -97152,7 +97110,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -97161,7 +97119,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7c
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -97170,7 +97128,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -97179,7 +97137,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -97188,7 +97146,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x7f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -97197,7 +97155,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x80
-	.4byte	0x1cbae
+	.4byte	0x1cbac
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -97206,7 +97164,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x81
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -97215,7 +97173,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x82
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -97224,7 +97182,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x83
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5b
@@ -97233,7 +97191,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x84
-	.4byte	0x1cbbc
+	.4byte	0x1cbba
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -97242,7 +97200,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x85
-	.4byte	0x1cbbc
+	.4byte	0x1cbba
 	.byte	0x2
 	.byte	0x23
 	.byte	0x61
@@ -97251,7 +97209,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x86
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -97260,7 +97218,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x87
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x67
@@ -97278,7 +97236,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x89
-	.4byte	0x1c3f7
+	.4byte	0x1c3f5
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
@@ -97287,7 +97245,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8a
-	.4byte	0x1cbc8
+	.4byte	0x1cbc6
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x1
@@ -97296,7 +97254,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8b
-	.4byte	0x1cbbc
+	.4byte	0x1cbba
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe4,0x1
@@ -97305,7 +97263,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8c
-	.4byte	0x1cbbc
+	.4byte	0x1cbba
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe9,0x1
@@ -97314,7 +97272,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8d
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xee,0x1
@@ -97323,7 +97281,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8e
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0xef,0x1
@@ -97332,7 +97290,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x8f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf0,0x1
@@ -97341,7 +97299,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x90
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf1,0x1
@@ -97359,7 +97317,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x92
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xfe,0x1
@@ -97368,7 +97326,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x93
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x2
@@ -97377,7 +97335,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x94
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x82,0x2
@@ -97395,7 +97353,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x96
-	.4byte	0x1c323
+	.4byte	0x1c321
 	.byte	0x3
 	.byte	0x23
 	.byte	0x8a,0x2
@@ -97404,7 +97362,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x97
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x2
@@ -97413,7 +97371,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x98
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x3
 	.byte	0x23
 	.byte	0x99,0x2
@@ -97422,7 +97380,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x99
-	.4byte	0x1c4a2
+	.4byte	0x1c4a0
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x2
@@ -97431,7 +97389,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9a
-	.4byte	0x1c520
+	.4byte	0x1c51e
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x13
@@ -97440,7 +97398,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9b
-	.4byte	0x1c59e
+	.4byte	0x1c59c
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9c,0x18
@@ -97449,7 +97407,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9c
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbc,0x18
@@ -97458,7 +97416,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbd,0x18
@@ -97467,7 +97425,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9e
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbe,0x18
@@ -97476,7 +97434,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0x9f
-	.4byte	0x1cbd4
+	.4byte	0x1cbd2
 	.byte	0x3
 	.byte	0x23
 	.byte	0xbf,0x18
@@ -97485,7 +97443,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x85,0x19
@@ -97494,7 +97452,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x86,0x19
@@ -97503,7 +97461,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa2
-	.4byte	0x1cbe0
+	.4byte	0x1cbde
 	.byte	0x3
 	.byte	0x23
 	.byte	0x87,0x19
@@ -97512,7 +97470,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcd,0x19
@@ -97521,7 +97479,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xce,0x19
@@ -97530,7 +97488,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xcf,0x19
@@ -97539,7 +97497,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa6
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0x19
@@ -97566,7 +97524,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xa9
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd9,0x19
@@ -97575,7 +97533,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xaa
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xda,0x19
@@ -97584,7 +97542,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xab
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdb,0x19
@@ -97593,7 +97551,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xac
-	.4byte	0x8e18
+	.4byte	0x8e16
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdc,0x19
@@ -97602,7 +97560,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xad
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xdd,0x19
@@ -97620,7 +97578,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xaf
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe2,0x19
@@ -97629,7 +97587,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb0
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe3,0x19
@@ -97638,7 +97596,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb1
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe4,0x19
@@ -97647,7 +97605,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb2
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe5,0x19
@@ -97656,7 +97614,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb3
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe6,0x19
@@ -97665,7 +97623,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb4
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe7,0x19
@@ -97674,7 +97632,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb5
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe8,0x19
@@ -97683,7 +97641,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x31
 	.byte	0xb6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xe9,0x19
@@ -97707,34 +97665,34 @@ IsLastMonThatKnowsSurf:
 	.byte	0xee,0x19
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cbbc
-	.4byte	0x8cdc
+	.4byte	0x1cbba
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cbc8
-	.4byte	0x8de1
+	.4byte	0x1cbc6
+	.4byte	0x8ddf
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cbd4
-	.4byte	0x1c3f7
+	.4byte	0x1cbd2
+	.4byte	0x1c3f5
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cbe0
-	.4byte	0x8cdc
+	.4byte	0x1cbde
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x45
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cbf0
-	.4byte	0x8cdc
+	.4byte	0x1cbee
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x4
 	.byte	0x12
@@ -97743,7 +97701,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1cc14
+	.4byte	0x1cc12
 	.byte	0x4
 	.byte	0x32
 	.byte	0x17
@@ -97757,7 +97715,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1cc84
+	.4byte	0x1cc82
 	.byte	0x4
 	.byte	0x32
 	.byte	0x1e
@@ -97779,7 +97737,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1cce0
+	.4byte	0x1ccde
 	.byte	0x4
 	.byte	0x32
 	.byte	0x27
@@ -97801,7 +97759,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1cd2e
+	.4byte	0x1cd2c
 	.byte	0x4
 	.byte	0x32
 	.byte	0x30
@@ -97823,7 +97781,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1ce26
+	.4byte	0x1ce24
 	.byte	0x4
 	.byte	0x32
 	.byte	0x39
@@ -97865,7 +97823,7 @@ IsLastMonThatKnowsSurf:
 	.2byte	0xffff
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1cec0
+	.4byte	0x1cebe
 	.ascii	"PlayerPCItemPageStruct\000"
 
 	.byte	0xc
@@ -97876,7 +97834,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x47
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97885,7 +97843,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x48
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -97894,7 +97852,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -97903,7 +97861,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5
@@ -97912,7 +97870,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x4b
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6
@@ -97921,7 +97879,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x4c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -97931,11 +97889,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x32
 	.byte	0x52
-	.4byte	0x1ce26
+	.4byte	0x1ce24
 	.byte	0x1
 	.byte	0x1
 	.byte	0xe
-	.4byte	0x1cf1e
+	.4byte	0x1cf1c
 	.ascii	"UnknownSubStruct_81D1ED4\000"
 
 	.byte	0x4
@@ -97946,7 +97904,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x14
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97955,13 +97913,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x15
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1cfe3
+	.4byte	0x1cfe1
 	.ascii	"ConditionGraph\000"
 
 	.2byte	0x358
@@ -97972,7 +97930,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1a
-	.4byte	0x1cfe3
+	.4byte	0x1cfe1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -97981,7 +97939,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1b
-	.4byte	0x1cff1
+	.4byte	0x1cfef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -97990,7 +97948,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1c
-	.4byte	0x1cfff
+	.4byte	0x1cffd
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -97999,7 +97957,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1d
-	.4byte	0x1d00d
+	.4byte	0x1d00b
 	.byte	0x3
 	.byte	0x23
 	.byte	0xac,0x2
@@ -98008,7 +97966,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1e
-	.4byte	0x1d019
+	.4byte	0x1d017
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x2
@@ -98017,7 +97975,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x1f
-	.4byte	0x1d019
+	.4byte	0x1d017
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc8,0x4
@@ -98026,7 +97984,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x20
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd0,0x6
@@ -98035,7 +97993,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x21
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd2,0x6
@@ -98044,7 +98002,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x22
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd4,0x6
@@ -98053,51 +98011,51 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x33
 	.byte	0x23
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0xd5,0x6
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cff1
-	.4byte	0x8cdc
+	.4byte	0x1cfef
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1cfff
-	.4byte	0x1cede
+	.4byte	0x1cffd
+	.4byte	0x1cedc
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d00d
-	.4byte	0x1cede
+	.4byte	0x1d00b
+	.4byte	0x1cedc
 	.byte	0x12
 	.byte	0x9
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d019
-	.4byte	0x1cede
+	.4byte	0x1d017
+	.4byte	0x1cedc
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d027
-	.4byte	0x8ce6
+	.4byte	0x1d025
+	.4byte	0x8ce4
 	.byte	0x12
 	.byte	0x41
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1d077
+	.4byte	0x1d075
 	.ascii	"InitialPlayerAvatarState\000"
 
 	.byte	0x4
@@ -98108,7 +98066,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x1f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -98117,13 +98075,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x20
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1d0ea
+	.4byte	0x1d0e8
 	.ascii	"LinkPlayerObjectEvent\000"
 
 	.byte	0x4
@@ -98134,7 +98092,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x25
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -98143,7 +98101,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x26
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -98152,7 +98110,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x27
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -98161,7 +98119,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x28
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -98171,7 +98129,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x25
 	.byte	0x33
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x1
 	.byte	0x1
 	.byte	0x32
@@ -98189,7 +98147,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x93
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -98199,7 +98157,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x94
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
@@ -98219,35 +98177,35 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x9b
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
 	.4byte	gBattlePartyCurrentOrder
 	.byte	0x6
-	.4byte	0x1d1c3
+	.4byte	0x1d1c1
 	.byte	0x1
 	.byte	0x7
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x7
-	.4byte	0x149c4
+	.4byte	0x149c2
 	.byte	0x0
 	.byte	0x32
 	.ascii	"gItemUseCB\000"
 
 	.byte	0x1
 	.byte	0x9e
-	.4byte	0x1d1dc
+	.4byte	0x1d1da
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
 	.4byte	gItemUseCB
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1d1b2
+	.4byte	0x1d1b0
 	.byte	0x11
-	.4byte	0x1d1ee
-	.4byte	0xe2ce
+	.4byte	0x1d1ec
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0x1d
 	.byte	0x0
@@ -98256,15 +98214,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x34
 	.byte	0x1
-	.4byte	0x1d208
+	.4byte	0x1d206
 	.byte	0x1
 	.byte	0x5
 	.byte	0x3
 	.4byte	gTutorMoves
 	.byte	0x17
-	.4byte	0x1d1e2
+	.4byte	0x1d1e0
 	.byte	0x20
-	.4byte	0x1d27a
+	.4byte	0x1d278
 	.ascii	"PokemonStorage\000"
 
 	.2byte	0x83d0
@@ -98275,7 +98233,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x35
 	.byte	0x14
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -98284,7 +98242,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x35
 	.byte	0x15
-	.4byte	0x1d27a
+	.4byte	0x1d278
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -98293,7 +98251,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x35
 	.byte	0x16
-	.4byte	0x1d288
+	.4byte	0x1d286
 	.byte	0x4
 	.byte	0x23
 	.byte	0xc4,0x86,0x2
@@ -98302,13 +98260,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x35
 	.byte	0x17
-	.4byte	0xdbac
+	.4byte	0xdbaa
 	.byte	0x4
 	.byte	0x23
 	.byte	0xc2,0x87,0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d288
+	.4byte	0x1d286
 	.4byte	0x4fc
 	.byte	0x12
 	.byte	0xd
@@ -98316,8 +98274,8 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d296
-	.4byte	0x8cdc
+	.4byte	0x1d294
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xd
 	.byte	0x12
@@ -98328,11 +98286,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x36
 	.byte	0x6
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3b
-	.4byte	0x1d323
+	.4byte	0x1d321
 	.ascii	"PokemonSummaryScreenMode\000"
 
 	.byte	0x4
@@ -98356,7 +98314,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.byte	0x0
 	.byte	0x3b
-	.4byte	0x1d3a9
+	.4byte	0x1d3a7
 	.ascii	"PokemonSummaryScreenPage\000"
 
 	.byte	0x4
@@ -98384,7 +98342,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1d42f
+	.4byte	0x1d42d
 	.byte	0x4
 	.byte	0x37
 	.byte	0xa
@@ -98414,7 +98372,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x5
 	.byte	0x0
 	.byte	0x27
-	.4byte	0x1d4ad
+	.4byte	0x1d4ab
 	.byte	0x4
 	.byte	0x37
 	.byte	0x13
@@ -98440,7 +98398,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1d960
+	.4byte	0x1d95e
 	.ascii	"RegionMap\000"
 
 	.2byte	0x884
@@ -98451,7 +98409,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x1c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -98460,7 +98418,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x1d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -98469,7 +98427,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x1e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -98478,7 +98436,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x1f
-	.4byte	0x1d960
+	.4byte	0x1d95e
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -98487,7 +98445,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x20
-	.4byte	0x1a6f3
+	.4byte	0x1a6f1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -98514,7 +98472,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x23
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x24
@@ -98523,7 +98481,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x24
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x28
@@ -98532,7 +98490,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x25
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2c
@@ -98541,7 +98499,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x26
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x30
@@ -98550,7 +98508,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x27
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x34
@@ -98559,7 +98517,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x28
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x38
@@ -98568,7 +98526,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x29
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3c
@@ -98577,7 +98535,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2a
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x40
@@ -98586,7 +98544,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2b
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x44
@@ -98595,7 +98553,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2c
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x48
@@ -98604,7 +98562,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2d
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4c
@@ -98613,7 +98571,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2e
-	.4byte	0x8d1c
+	.4byte	0x8d1a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x50
@@ -98622,7 +98580,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x2f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x54
@@ -98631,7 +98589,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x30
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x56
@@ -98640,7 +98598,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x31
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -98649,7 +98607,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x32
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5a
@@ -98658,7 +98616,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x33
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -98667,7 +98625,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x34
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5e
@@ -98676,7 +98634,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x35
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -98685,7 +98643,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x36
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x62
@@ -98694,7 +98652,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x37
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
@@ -98703,7 +98661,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x38
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x66
@@ -98712,7 +98670,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x39
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x68
@@ -98721,7 +98679,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3a
-	.4byte	0x8d11
+	.4byte	0x8d0f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6a
@@ -98730,7 +98688,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6c
@@ -98739,7 +98697,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x6e
@@ -98748,7 +98706,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x70
@@ -98757,7 +98715,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x72
@@ -98766,7 +98724,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x3f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x74
@@ -98775,7 +98733,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x40
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x76
@@ -98784,7 +98742,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x41
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x78
@@ -98793,7 +98751,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x42
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x79
@@ -98802,7 +98760,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x43
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7a
@@ -98811,7 +98769,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x44
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7b
@@ -98820,7 +98778,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x45
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7c
@@ -98829,7 +98787,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x46
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7d
@@ -98838,7 +98796,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x47
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7e
@@ -98847,7 +98805,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x48
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x2
 	.byte	0x23
 	.byte	0x7f
@@ -98856,7 +98814,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x80,0x1
@@ -98865,7 +98823,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x81,0x1
@@ -98874,7 +98832,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x3
 	.byte	0x23
 	.byte	0x82,0x1
@@ -98883,7 +98841,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4c
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x3
 	.byte	0x23
 	.byte	0x83,0x1
@@ -98892,7 +98850,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4d
-	.4byte	0x1d96c
+	.4byte	0x1d96a
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x1
@@ -98901,7 +98859,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4e
-	.4byte	0x1d96c
+	.4byte	0x1d96a
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x3
@@ -98910,31 +98868,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x4f
-	.4byte	0x1d978
+	.4byte	0x1d976
 	.byte	0x3
 	.byte	0x23
 	.byte	0x84,0x5
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d96c
-	.4byte	0x8cdc
+	.4byte	0x1d96a
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d978
-	.4byte	0x8cdc
+	.4byte	0x1d976
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xff
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1d985
-	.4byte	0x8cdc
+	.4byte	0x1d983
+	.4byte	0x8cda
 	.byte	0x30
 	.2byte	0x5ff
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1d9e8
+	.4byte	0x1d9e6
 	.ascii	"RegionMapLocation\000"
 
 	.byte	0x8
@@ -98945,7 +98903,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -98954,7 +98912,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x55
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -98963,7 +98921,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x56
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -98972,7 +98930,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x37
 	.byte	0x57
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
@@ -98987,7 +98945,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1da53
+	.4byte	0x1da51
 	.ascii	"ScanlineEffectParams\000"
 
 	.byte	0xc
@@ -98998,7 +98956,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x13
-	.4byte	0x1da53
+	.4byte	0x1da51
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -99007,7 +98965,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x14
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -99016,7 +98974,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x15
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -99025,17 +98983,17 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x16
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1da59
+	.4byte	0x1da57
 	.byte	0x3c
 	.byte	0xe
-	.4byte	0x1db2e
+	.4byte	0x1db2c
 	.ascii	"ScanlineEffect\000"
 
 	.byte	0x1c
@@ -99046,7 +99004,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x1b
-	.4byte	0x1db2e
+	.4byte	0x1db2c
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -99055,7 +99013,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x1c
-	.4byte	0x1da53
+	.4byte	0x1da51
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -99064,7 +99022,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x1d
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -99073,7 +99031,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x1e
-	.4byte	0xb0ad
+	.4byte	0xb0ab
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -99082,7 +99040,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x1f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -99091,7 +99049,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x20
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -99100,7 +99058,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x21
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -99109,7 +99067,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x22
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -99118,19 +99076,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x38
 	.byte	0x23
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1db3a
+	.4byte	0x1db38
 	.4byte	0x4663
 	.byte	0x12
 	.byte	0x1
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1dc00
+	.4byte	0x1dbfe
 	.ascii	"ScriptContext\000"
 
 	.byte	0x74
@@ -99141,7 +99099,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0xb
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -99150,7 +99108,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0xc
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -99159,7 +99117,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0xd
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -99168,7 +99126,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0xe
-	.4byte	0x1a6f3
+	.4byte	0x1a6f1
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -99186,7 +99144,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0x10
-	.4byte	0x1dc00
+	.4byte	0x1dbfe
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -99195,7 +99153,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0x11
-	.4byte	0x1dc22
+	.4byte	0x1dc20
 	.byte	0x2
 	.byte	0x23
 	.byte	0x5c
@@ -99204,7 +99162,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0x12
-	.4byte	0x1dc22
+	.4byte	0x1dc20
 	.byte	0x2
 	.byte	0x23
 	.byte	0x60
@@ -99213,56 +99171,56 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x39
 	.byte	0x13
-	.4byte	0x936c
+	.4byte	0x936a
 	.byte	0x2
 	.byte	0x23
 	.byte	0x64
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1dc0c
+	.4byte	0x1dc0a
 	.4byte	0x1050
 	.byte	0x12
 	.byte	0x13
 	.byte	0x0
 	.byte	0x36
-	.4byte	0x1dc1c
+	.4byte	0x1dc1a
 	.byte	0x1
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x7
-	.4byte	0x1dc1c
+	.4byte	0x1dc1a
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1db3a
+	.4byte	0x1db38
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1dc28
+	.4byte	0x1dc26
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1dc0c
+	.4byte	0x1dc0a
 	.byte	0x23
 	.ascii	"ScrCmdFunc\000"
 
 	.byte	0x39
 	.byte	0x6
-	.4byte	0x1dc40
+	.4byte	0x1dc3e
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1dc0c
+	.4byte	0x1dc0a
 	.byte	0x23
 	.ascii	"Script\000"
 
 	.byte	0x39
 	.byte	0x7
-	.4byte	0x1dc54
+	.4byte	0x1dc52
 	.byte	0x11
-	.4byte	0x1dc5f
-	.4byte	0x8cdc
+	.4byte	0x1dc5d
+	.4byte	0x8cda
 	.byte	0x3d
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1dc6b
-	.4byte	0x8cdc
+	.4byte	0x1dc69
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -99271,12 +99229,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3a
 	.byte	0x4
-	.4byte	0x1dc5f
+	.4byte	0x1dc5d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0x1dc8c
-	.4byte	0x8cdc
+	.4byte	0x1dc8a
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -99285,12 +99243,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3a
 	.byte	0x5
-	.4byte	0x1dc80
+	.4byte	0x1dc7e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x11
-	.4byte	0x1dcad
-	.4byte	0x8cdc
+	.4byte	0x1dcab
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x0
 	.byte	0x0
@@ -99299,11 +99257,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3a
 	.byte	0x7
-	.4byte	0x1dca1
+	.4byte	0x1dc9f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x3b
-	.4byte	0x1dd32
+	.4byte	0x1dd30
 	.ascii	"StringConvertMode\000"
 
 	.byte	0x4
@@ -99323,7 +99281,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x2
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1dd3e
+	.4byte	0x1dd3c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99333,13 +99291,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x240
-	.4byte	0x1dd55
+	.4byte	0x1dd53
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1dd32
+	.4byte	0x1dd30
 	.byte	0x11
-	.4byte	0x1dd66
+	.4byte	0x1dd64
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99349,13 +99307,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.byte	0xb2
-	.4byte	0x1dd82
+	.4byte	0x1dd80
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1dd5a
+	.4byte	0x1dd58
 	.byte	0x11
-	.4byte	0x1dd93
+	.4byte	0x1dd91
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99365,13 +99323,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.byte	0xcf
-	.4byte	0x1ddab
+	.4byte	0x1dda9
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1dd87
+	.4byte	0x1dd85
 	.byte	0x11
-	.4byte	0x1ddbc
+	.4byte	0x1ddba
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99381,13 +99339,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.byte	0xd0
-	.4byte	0x1ddd4
+	.4byte	0x1ddd2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ddb0
+	.4byte	0x1ddae
 	.byte	0x11
-	.4byte	0x1dde5
+	.4byte	0x1dde3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99397,13 +99355,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.byte	0xd7
-	.4byte	0x1de00
+	.4byte	0x1ddfe
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ddd9
+	.4byte	0x1ddd7
 	.byte	0x11
-	.4byte	0x1de11
+	.4byte	0x1de0f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99413,13 +99371,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x140
-	.4byte	0x1de2c
+	.4byte	0x1de2a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1de05
+	.4byte	0x1de03
 	.byte	0x11
-	.4byte	0x1de3d
+	.4byte	0x1de3b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99429,13 +99387,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x141
-	.4byte	0x1de5a
+	.4byte	0x1de58
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1de31
+	.4byte	0x1de2f
 	.byte	0x11
-	.4byte	0x1de6b
+	.4byte	0x1de69
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99445,13 +99403,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1bf
-	.4byte	0x1de90
+	.4byte	0x1de8e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1de5f
+	.4byte	0x1de5d
 	.byte	0x11
-	.4byte	0x1dea1
+	.4byte	0x1de9f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99461,13 +99419,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c1
-	.4byte	0x1dec5
+	.4byte	0x1dec3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1de95
+	.4byte	0x1de93
 	.byte	0x11
-	.4byte	0x1ded6
+	.4byte	0x1ded4
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99477,13 +99435,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c2
-	.4byte	0x1def7
+	.4byte	0x1def5
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1deca
+	.4byte	0x1dec8
 	.byte	0x11
-	.4byte	0x1df08
+	.4byte	0x1df06
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99493,13 +99451,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c3
-	.4byte	0x1df2d
+	.4byte	0x1df2b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1defc
+	.4byte	0x1defa
 	.byte	0x11
-	.4byte	0x1df3e
+	.4byte	0x1df3c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99509,13 +99467,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c4
-	.4byte	0x1df6b
+	.4byte	0x1df69
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1df32
+	.4byte	0x1df30
 	.byte	0x11
-	.4byte	0x1df7c
+	.4byte	0x1df7a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99525,13 +99483,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c5
-	.4byte	0x1df9d
+	.4byte	0x1df9b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1df70
+	.4byte	0x1df6e
 	.byte	0x11
-	.4byte	0x1dfae
+	.4byte	0x1dfac
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99541,13 +99499,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c6
-	.4byte	0x1dfd8
+	.4byte	0x1dfd6
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1dfa2
+	.4byte	0x1dfa0
 	.byte	0x11
-	.4byte	0x1dfe9
+	.4byte	0x1dfe7
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99557,13 +99515,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c7
-	.4byte	0x1e00d
+	.4byte	0x1e00b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1dfdd
+	.4byte	0x1dfdb
 	.byte	0x11
-	.4byte	0x1e01e
+	.4byte	0x1e01c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99573,13 +99531,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c8
-	.4byte	0x1e03d
+	.4byte	0x1e03b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e012
+	.4byte	0x1e010
 	.byte	0x11
-	.4byte	0x1e04e
+	.4byte	0x1e04c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99589,13 +99547,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1c9
-	.4byte	0x1e06c
+	.4byte	0x1e06a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e042
+	.4byte	0x1e040
 	.byte	0x11
-	.4byte	0x1e07d
+	.4byte	0x1e07b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99605,13 +99563,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ca
-	.4byte	0x1e09c
+	.4byte	0x1e09a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e071
+	.4byte	0x1e06f
 	.byte	0x11
-	.4byte	0x1e0ad
+	.4byte	0x1e0ab
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99621,13 +99579,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1cb
-	.4byte	0x1e0ca
+	.4byte	0x1e0c8
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e0a1
+	.4byte	0x1e09f
 	.byte	0x11
-	.4byte	0x1e0db
+	.4byte	0x1e0d9
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99637,13 +99595,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1cc
-	.4byte	0x1e0f8
+	.4byte	0x1e0f6
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e0cf
+	.4byte	0x1e0cd
 	.byte	0x11
-	.4byte	0x1e109
+	.4byte	0x1e107
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99653,13 +99611,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1cd
-	.4byte	0x1e127
+	.4byte	0x1e125
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e0fd
+	.4byte	0x1e0fb
 	.byte	0x11
-	.4byte	0x1e138
+	.4byte	0x1e136
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99669,13 +99627,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ce
-	.4byte	0x1e15e
+	.4byte	0x1e15c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e12c
+	.4byte	0x1e12a
 	.byte	0x11
-	.4byte	0x1e16f
+	.4byte	0x1e16d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99685,13 +99643,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1cf
-	.4byte	0x1e191
+	.4byte	0x1e18f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e163
+	.4byte	0x1e161
 	.byte	0x11
-	.4byte	0x1e1a2
+	.4byte	0x1e1a0
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99701,13 +99659,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d0
-	.4byte	0x1e1c5
+	.4byte	0x1e1c3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e196
+	.4byte	0x1e194
 	.byte	0x11
-	.4byte	0x1e1d6
+	.4byte	0x1e1d4
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99717,13 +99675,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x865
-	.4byte	0x1e1fa
+	.4byte	0x1e1f8
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e1ca
+	.4byte	0x1e1c8
 	.byte	0x11
-	.4byte	0x1e20b
+	.4byte	0x1e209
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99733,13 +99691,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x867
-	.4byte	0x1e22e
+	.4byte	0x1e22c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e1ff
+	.4byte	0x1e1fd
 	.byte	0x11
-	.4byte	0x1e23f
+	.4byte	0x1e23d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99749,13 +99707,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d3
-	.4byte	0x1e261
+	.4byte	0x1e25f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e233
+	.4byte	0x1e231
 	.byte	0x11
-	.4byte	0x1e272
+	.4byte	0x1e270
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99765,13 +99723,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d4
-	.4byte	0x1e2a4
+	.4byte	0x1e2a2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e266
+	.4byte	0x1e264
 	.byte	0x11
-	.4byte	0x1e2b5
+	.4byte	0x1e2b3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99781,13 +99739,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d5
-	.4byte	0x1e2d5
+	.4byte	0x1e2d3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e2a9
+	.4byte	0x1e2a7
 	.byte	0x11
-	.4byte	0x1e2e6
+	.4byte	0x1e2e4
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99797,13 +99755,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d6
-	.4byte	0x1e30b
+	.4byte	0x1e309
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e2da
+	.4byte	0x1e2d8
 	.byte	0x11
-	.4byte	0x1e31c
+	.4byte	0x1e31a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99813,13 +99771,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d7
-	.4byte	0x1e340
+	.4byte	0x1e33e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e310
+	.4byte	0x1e30e
 	.byte	0x11
-	.4byte	0x1e351
+	.4byte	0x1e34f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99829,13 +99787,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d8
-	.4byte	0x1e370
+	.4byte	0x1e36e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e345
+	.4byte	0x1e343
 	.byte	0x11
-	.4byte	0x1e381
+	.4byte	0x1e37f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99845,13 +99803,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1d9
-	.4byte	0x1e3a3
+	.4byte	0x1e3a1
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e375
+	.4byte	0x1e373
 	.byte	0x11
-	.4byte	0x1e3b4
+	.4byte	0x1e3b2
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99861,13 +99819,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1da
-	.4byte	0x1e3d0
+	.4byte	0x1e3ce
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e3a8
+	.4byte	0x1e3a6
 	.byte	0x11
-	.4byte	0x1e3e1
+	.4byte	0x1e3df
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99877,13 +99835,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1db
-	.4byte	0x1e400
+	.4byte	0x1e3fe
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e3d5
+	.4byte	0x1e3d3
 	.byte	0x11
-	.4byte	0x1e411
+	.4byte	0x1e40f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99893,13 +99851,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1dc
-	.4byte	0x1e42f
+	.4byte	0x1e42d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e405
+	.4byte	0x1e403
 	.byte	0x11
-	.4byte	0x1e440
+	.4byte	0x1e43e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99909,13 +99867,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1dd
-	.4byte	0x1e465
+	.4byte	0x1e463
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e434
+	.4byte	0x1e432
 	.byte	0x11
-	.4byte	0x1e476
+	.4byte	0x1e474
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99925,13 +99883,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1de
-	.4byte	0x1e49d
+	.4byte	0x1e49b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e46a
+	.4byte	0x1e468
 	.byte	0x11
-	.4byte	0x1e4ae
+	.4byte	0x1e4ac
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99941,13 +99899,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1df
-	.4byte	0x1e4d0
+	.4byte	0x1e4ce
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e4a2
+	.4byte	0x1e4a0
 	.byte	0x11
-	.4byte	0x1e4e1
+	.4byte	0x1e4df
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99957,13 +99915,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e0
-	.4byte	0x1e4f5
+	.4byte	0x1e4f3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e4d5
+	.4byte	0x1e4d3
 	.byte	0x11
-	.4byte	0x1e506
+	.4byte	0x1e504
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99973,13 +99931,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e1
-	.4byte	0x1e51d
+	.4byte	0x1e51b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e4fa
+	.4byte	0x1e4f8
 	.byte	0x11
-	.4byte	0x1e52e
+	.4byte	0x1e52c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -99989,13 +99947,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e2
-	.4byte	0x1e545
+	.4byte	0x1e543
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e522
+	.4byte	0x1e520
 	.byte	0x11
-	.4byte	0x1e556
+	.4byte	0x1e554
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100005,13 +99963,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e3
-	.4byte	0x1e580
+	.4byte	0x1e57e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e54a
+	.4byte	0x1e548
 	.byte	0x11
-	.4byte	0x1e591
+	.4byte	0x1e58f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100021,13 +99979,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e4
-	.4byte	0x1e5b2
+	.4byte	0x1e5b0
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e585
+	.4byte	0x1e583
 	.byte	0x11
-	.4byte	0x1e5c3
+	.4byte	0x1e5c1
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100037,13 +99995,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e5
-	.4byte	0x1e5e1
+	.4byte	0x1e5df
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e5b7
+	.4byte	0x1e5b5
 	.byte	0x11
-	.4byte	0x1e5f2
+	.4byte	0x1e5f0
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100053,13 +100011,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3a7
-	.4byte	0x1e611
+	.4byte	0x1e60f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e5e6
+	.4byte	0x1e5e4
 	.byte	0x11
-	.4byte	0x1e622
+	.4byte	0x1e620
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100069,13 +100027,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e7
-	.4byte	0x1e64c
+	.4byte	0x1e64a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e616
+	.4byte	0x1e614
 	.byte	0x11
-	.4byte	0x1e65d
+	.4byte	0x1e65b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100085,13 +100043,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e8
-	.4byte	0x1e686
+	.4byte	0x1e684
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e651
+	.4byte	0x1e64f
 	.byte	0x11
-	.4byte	0x1e697
+	.4byte	0x1e695
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100101,13 +100059,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1e9
-	.4byte	0x1e6c4
+	.4byte	0x1e6c2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e68b
+	.4byte	0x1e689
 	.byte	0x11
-	.4byte	0x1e6d5
+	.4byte	0x1e6d3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100117,13 +100075,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ea
-	.4byte	0x1e6fc
+	.4byte	0x1e6fa
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e6c9
+	.4byte	0x1e6c7
 	.byte	0x11
-	.4byte	0x1e70d
+	.4byte	0x1e70b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100133,13 +100091,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1eb
-	.4byte	0x1e72e
+	.4byte	0x1e72c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e701
+	.4byte	0x1e6ff
 	.byte	0x11
-	.4byte	0x1e73f
+	.4byte	0x1e73d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100149,13 +100107,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ec
-	.4byte	0x1e761
+	.4byte	0x1e75f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e733
+	.4byte	0x1e731
 	.byte	0x11
-	.4byte	0x1e772
+	.4byte	0x1e770
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100165,13 +100123,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ed
-	.4byte	0x1e799
+	.4byte	0x1e797
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e766
+	.4byte	0x1e764
 	.byte	0x11
-	.4byte	0x1e7aa
+	.4byte	0x1e7a8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100181,13 +100139,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ee
-	.4byte	0x1e7cb
+	.4byte	0x1e7c9
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e79e
+	.4byte	0x1e79c
 	.byte	0x11
-	.4byte	0x1e7dc
+	.4byte	0x1e7da
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100197,13 +100155,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ef
-	.4byte	0x1e7fe
+	.4byte	0x1e7fc
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e7d0
+	.4byte	0x1e7ce
 	.byte	0x11
-	.4byte	0x1e80f
+	.4byte	0x1e80d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100213,13 +100171,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f0
-	.4byte	0x1e830
+	.4byte	0x1e82e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e803
+	.4byte	0x1e801
 	.byte	0x11
-	.4byte	0x1e841
+	.4byte	0x1e83f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100229,13 +100187,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f1
-	.4byte	0x1e863
+	.4byte	0x1e861
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e835
+	.4byte	0x1e833
 	.byte	0x11
-	.4byte	0x1e874
+	.4byte	0x1e872
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100245,13 +100203,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f2
-	.4byte	0x1e893
+	.4byte	0x1e891
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e868
+	.4byte	0x1e866
 	.byte	0x11
-	.4byte	0x1e8a4
+	.4byte	0x1e8a2
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100261,13 +100219,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f3
-	.4byte	0x1e8c9
+	.4byte	0x1e8c7
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e898
+	.4byte	0x1e896
 	.byte	0x11
-	.4byte	0x1e8da
+	.4byte	0x1e8d8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100277,13 +100235,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f4
-	.4byte	0x1e8ff
+	.4byte	0x1e8fd
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e8ce
+	.4byte	0x1e8cc
 	.byte	0x11
-	.4byte	0x1e910
+	.4byte	0x1e90e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100293,13 +100251,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f5
-	.4byte	0x1e93c
+	.4byte	0x1e93a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e904
+	.4byte	0x1e902
 	.byte	0x11
-	.4byte	0x1e94d
+	.4byte	0x1e94b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100309,13 +100267,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f6
-	.4byte	0x1e978
+	.4byte	0x1e976
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e941
+	.4byte	0x1e93f
 	.byte	0x11
-	.4byte	0x1e989
+	.4byte	0x1e987
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100325,13 +100283,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f7
-	.4byte	0x1e9a6
+	.4byte	0x1e9a4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e97d
+	.4byte	0x1e97b
 	.byte	0x11
-	.4byte	0x1e9b7
+	.4byte	0x1e9b5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100341,13 +100299,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f8
-	.4byte	0x1e9db
+	.4byte	0x1e9d9
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e9ab
+	.4byte	0x1e9a9
 	.byte	0x11
-	.4byte	0x1e9ec
+	.4byte	0x1e9ea
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100357,13 +100315,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1f9
-	.4byte	0x1ea0c
+	.4byte	0x1ea0a
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1e9e0
+	.4byte	0x1e9de
 	.byte	0x11
-	.4byte	0x1ea1d
+	.4byte	0x1ea1b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100373,13 +100331,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1fa
-	.4byte	0x1ea40
+	.4byte	0x1ea3e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ea11
+	.4byte	0x1ea0f
 	.byte	0x11
-	.4byte	0x1ea51
+	.4byte	0x1ea4f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100389,13 +100347,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1fb
-	.4byte	0x1ea71
+	.4byte	0x1ea6f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ea45
+	.4byte	0x1ea43
 	.byte	0x11
-	.4byte	0x1ea82
+	.4byte	0x1ea80
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100405,13 +100363,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1fc
-	.4byte	0x1eaa0
+	.4byte	0x1ea9e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ea76
+	.4byte	0x1ea74
 	.byte	0x11
-	.4byte	0x1eab1
+	.4byte	0x1eaaf
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100421,13 +100379,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1fd
-	.4byte	0x1ead5
+	.4byte	0x1ead3
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eaa5
+	.4byte	0x1eaa3
 	.byte	0x11
-	.4byte	0x1eae6
+	.4byte	0x1eae4
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100437,13 +100395,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1fe
-	.4byte	0x1eb0a
+	.4byte	0x1eb08
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eada
+	.4byte	0x1ead8
 	.byte	0x11
-	.4byte	0x1eb1b
+	.4byte	0x1eb19
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100453,13 +100411,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x1ff
-	.4byte	0x1eb3d
+	.4byte	0x1eb3b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eb0f
+	.4byte	0x1eb0d
 	.byte	0x11
-	.4byte	0x1eb4e
+	.4byte	0x1eb4c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100469,13 +100427,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0xad4
-	.4byte	0x1eb66
+	.4byte	0x1eb64
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eb42
+	.4byte	0x1eb40
 	.byte	0x11
-	.4byte	0x1eb77
+	.4byte	0x1eb75
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100485,13 +100443,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x264
-	.4byte	0x1eb8d
+	.4byte	0x1eb8b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eb6b
+	.4byte	0x1eb69
 	.byte	0x11
-	.4byte	0x1eb9e
+	.4byte	0x1eb9c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100501,13 +100459,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3a9
-	.4byte	0x1ebba
+	.4byte	0x1ebb8
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eb92
+	.4byte	0x1eb90
 	.byte	0x11
-	.4byte	0x1ebcb
+	.4byte	0x1ebc9
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100517,13 +100475,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b3
-	.4byte	0x1ebdf
+	.4byte	0x1ebdd
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ebbf
+	.4byte	0x1ebbd
 	.byte	0x11
-	.4byte	0x1ebf0
+	.4byte	0x1ebee
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100533,13 +100491,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b4
-	.4byte	0x1ec08
+	.4byte	0x1ec06
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ebe4
+	.4byte	0x1ebe2
 	.byte	0x11
-	.4byte	0x1ec19
+	.4byte	0x1ec17
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100549,13 +100507,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b5
-	.4byte	0x1ec32
+	.4byte	0x1ec30
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ec0d
+	.4byte	0x1ec0b
 	.byte	0x11
-	.4byte	0x1ec43
+	.4byte	0x1ec41
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100565,13 +100523,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b6
-	.4byte	0x1ec5a
+	.4byte	0x1ec58
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ec37
+	.4byte	0x1ec35
 	.byte	0x11
-	.4byte	0x1ec6b
+	.4byte	0x1ec69
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100581,13 +100539,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b7
-	.4byte	0x1ec82
+	.4byte	0x1ec80
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ec5f
+	.4byte	0x1ec5d
 	.byte	0x11
-	.4byte	0x1ec93
+	.4byte	0x1ec91
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100597,13 +100555,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x3b8
-	.4byte	0x1ecaa
+	.4byte	0x1eca8
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ec87
+	.4byte	0x1ec85
 	.byte	0x11
-	.4byte	0x1ecbb
+	.4byte	0x1ecb9
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100613,13 +100571,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x82d
-	.4byte	0x1ecd9
+	.4byte	0x1ecd7
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ecaf
+	.4byte	0x1ecad
 	.byte	0x11
-	.4byte	0x1ecea
+	.4byte	0x1ece8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100629,13 +100587,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x82e
-	.4byte	0x1ed0e
+	.4byte	0x1ed0c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ecde
+	.4byte	0x1ecdc
 	.byte	0x11
-	.4byte	0x1ed1f
+	.4byte	0x1ed1d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100645,13 +100603,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x82f
-	.4byte	0x1ed44
+	.4byte	0x1ed42
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ed13
+	.4byte	0x1ed11
 	.byte	0x11
-	.4byte	0x1ed55
+	.4byte	0x1ed53
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100661,13 +100619,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x830
-	.4byte	0x1ed71
+	.4byte	0x1ed6f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ed49
+	.4byte	0x1ed47
 	.byte	0x11
-	.4byte	0x1ed82
+	.4byte	0x1ed80
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100677,13 +100635,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x831
-	.4byte	0x1eda4
+	.4byte	0x1eda2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ed76
+	.4byte	0x1ed74
 	.byte	0x11
-	.4byte	0x1edb5
+	.4byte	0x1edb3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100693,13 +100651,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x832
-	.4byte	0x1edd7
+	.4byte	0x1edd5
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eda9
+	.4byte	0x1eda7
 	.byte	0x11
-	.4byte	0x1ede8
+	.4byte	0x1ede6
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100709,13 +100667,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x833
-	.4byte	0x1ee0b
+	.4byte	0x1ee09
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eddc
+	.4byte	0x1edda
 	.byte	0x11
-	.4byte	0x1ee1c
+	.4byte	0x1ee1a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100725,13 +100683,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x834
-	.4byte	0x1ee39
+	.4byte	0x1ee37
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ee10
+	.4byte	0x1ee0e
 	.byte	0x11
-	.4byte	0x1ee4a
+	.4byte	0x1ee48
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100741,13 +100699,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x835
-	.4byte	0x1ee67
+	.4byte	0x1ee65
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ee3e
+	.4byte	0x1ee3c
 	.byte	0x11
-	.4byte	0x1ee78
+	.4byte	0x1ee76
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100757,13 +100715,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x836
-	.4byte	0x1ee97
+	.4byte	0x1ee95
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ee6c
+	.4byte	0x1ee6a
 	.byte	0x11
-	.4byte	0x1eea8
+	.4byte	0x1eea6
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100773,13 +100731,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x837
-	.4byte	0x1eec9
+	.4byte	0x1eec7
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ee9c
+	.4byte	0x1ee9a
 	.byte	0x11
-	.4byte	0x1eeda
+	.4byte	0x1eed8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100789,13 +100747,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x838
-	.4byte	0x1eef7
+	.4byte	0x1eef5
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eece
+	.4byte	0x1eecc
 	.byte	0x11
-	.4byte	0x1ef08
+	.4byte	0x1ef06
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100805,13 +100763,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x839
-	.4byte	0x1ef28
+	.4byte	0x1ef26
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1eefc
+	.4byte	0x1eefa
 	.byte	0x11
-	.4byte	0x1ef39
+	.4byte	0x1ef37
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100821,13 +100779,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83a
-	.4byte	0x1ef55
+	.4byte	0x1ef53
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ef2d
+	.4byte	0x1ef2b
 	.byte	0x11
-	.4byte	0x1ef66
+	.4byte	0x1ef64
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100837,13 +100795,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83b
-	.4byte	0x1ef89
+	.4byte	0x1ef87
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ef5a
+	.4byte	0x1ef58
 	.byte	0x11
-	.4byte	0x1ef9a
+	.4byte	0x1ef98
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100853,13 +100811,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83c
-	.4byte	0x1efb9
+	.4byte	0x1efb7
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1ef8e
+	.4byte	0x1ef8c
 	.byte	0x11
-	.4byte	0x1efca
+	.4byte	0x1efc8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100869,13 +100827,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83d
-	.4byte	0x1efe6
+	.4byte	0x1efe4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1efbe
+	.4byte	0x1efbc
 	.byte	0x11
-	.4byte	0x1eff7
+	.4byte	0x1eff5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100885,13 +100843,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83e
-	.4byte	0x1f018
+	.4byte	0x1f016
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1efeb
+	.4byte	0x1efe9
 	.byte	0x11
-	.4byte	0x1f029
+	.4byte	0x1f027
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100901,13 +100859,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x83f
-	.4byte	0x1f04b
+	.4byte	0x1f049
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f01d
+	.4byte	0x1f01b
 	.byte	0x11
-	.4byte	0x1f05c
+	.4byte	0x1f05a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100917,13 +100875,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x840
-	.4byte	0x1f081
+	.4byte	0x1f07f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f050
+	.4byte	0x1f04e
 	.byte	0x11
-	.4byte	0x1f092
+	.4byte	0x1f090
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100933,13 +100891,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x841
-	.4byte	0x1f0b4
+	.4byte	0x1f0b2
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f086
+	.4byte	0x1f084
 	.byte	0x11
-	.4byte	0x1f0c5
+	.4byte	0x1f0c3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100949,13 +100907,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x842
-	.4byte	0x1f0e6
+	.4byte	0x1f0e4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f0b9
+	.4byte	0x1f0b7
 	.byte	0x11
-	.4byte	0x1f0f7
+	.4byte	0x1f0f5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100965,13 +100923,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x843
-	.4byte	0x1f10f
+	.4byte	0x1f10d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f0eb
+	.4byte	0x1f0e9
 	.byte	0x11
-	.4byte	0x1f120
+	.4byte	0x1f11e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100981,13 +100939,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x844
-	.4byte	0x1f13f
+	.4byte	0x1f13d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f114
+	.4byte	0x1f112
 	.byte	0x11
-	.4byte	0x1f150
+	.4byte	0x1f14e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -100997,13 +100955,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x845
-	.4byte	0x1f16f
+	.4byte	0x1f16d
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f144
+	.4byte	0x1f142
 	.byte	0x11
-	.4byte	0x1f180
+	.4byte	0x1f17e
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101013,13 +100971,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x846
-	.4byte	0x1f1a2
+	.4byte	0x1f1a0
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f174
+	.4byte	0x1f172
 	.byte	0x11
-	.4byte	0x1f1b3
+	.4byte	0x1f1b1
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101029,13 +100987,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x847
-	.4byte	0x1f1c9
+	.4byte	0x1f1c7
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f1a7
+	.4byte	0x1f1a5
 	.byte	0x11
-	.4byte	0x1f1da
+	.4byte	0x1f1d8
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101045,13 +101003,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x848
-	.4byte	0x1f1ef
+	.4byte	0x1f1ed
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f1ce
+	.4byte	0x1f1cc
 	.byte	0x11
-	.4byte	0x1f200
+	.4byte	0x1f1fe
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101061,13 +101019,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x849
-	.4byte	0x1f219
+	.4byte	0x1f217
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f1f4
+	.4byte	0x1f1f2
 	.byte	0x11
-	.4byte	0x1f22a
+	.4byte	0x1f228
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101077,13 +101035,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84a
-	.4byte	0x1f244
+	.4byte	0x1f242
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f21e
+	.4byte	0x1f21c
 	.byte	0x11
-	.4byte	0x1f255
+	.4byte	0x1f253
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101093,13 +101051,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84b
-	.4byte	0x1f26e
+	.4byte	0x1f26c
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f249
+	.4byte	0x1f247
 	.byte	0x11
-	.4byte	0x1f27f
+	.4byte	0x1f27d
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101109,13 +101067,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84c
-	.4byte	0x1f296
+	.4byte	0x1f294
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f273
+	.4byte	0x1f271
 	.byte	0x11
-	.4byte	0x1f2a7
+	.4byte	0x1f2a5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101125,13 +101083,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84d
-	.4byte	0x1f2bd
+	.4byte	0x1f2bb
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f29b
+	.4byte	0x1f299
 	.byte	0x11
-	.4byte	0x1f2ce
+	.4byte	0x1f2cc
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101141,13 +101099,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84e
-	.4byte	0x1f2e6
+	.4byte	0x1f2e4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f2c2
+	.4byte	0x1f2c0
 	.byte	0x11
-	.4byte	0x1f2f7
+	.4byte	0x1f2f5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101157,13 +101115,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x84f
-	.4byte	0x1f30d
+	.4byte	0x1f30b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f2eb
+	.4byte	0x1f2e9
 	.byte	0x11
-	.4byte	0x1f31e
+	.4byte	0x1f31c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101173,13 +101131,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x850
-	.4byte	0x1f337
+	.4byte	0x1f335
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f312
+	.4byte	0x1f310
 	.byte	0x11
-	.4byte	0x1f348
+	.4byte	0x1f346
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101189,13 +101147,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x851
-	.4byte	0x1f360
+	.4byte	0x1f35e
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f33c
+	.4byte	0x1f33a
 	.byte	0x11
-	.4byte	0x1f371
+	.4byte	0x1f36f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101205,13 +101163,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x852
-	.4byte	0x1f386
+	.4byte	0x1f384
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f365
+	.4byte	0x1f363
 	.byte	0x11
-	.4byte	0x1f397
+	.4byte	0x1f395
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101221,13 +101179,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x853
-	.4byte	0x1f3b0
+	.4byte	0x1f3ae
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f38b
+	.4byte	0x1f389
 	.byte	0x11
-	.4byte	0x1f3c1
+	.4byte	0x1f3bf
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101237,13 +101195,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x854
-	.4byte	0x1f3d6
+	.4byte	0x1f3d4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f3b5
+	.4byte	0x1f3b3
 	.byte	0x11
-	.4byte	0x1f3e7
+	.4byte	0x1f3e5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101253,13 +101211,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x855
-	.4byte	0x1f3fc
+	.4byte	0x1f3fa
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f3db
+	.4byte	0x1f3d9
 	.byte	0x11
-	.4byte	0x1f40d
+	.4byte	0x1f40b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101269,13 +101227,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x856
-	.4byte	0x1f423
+	.4byte	0x1f421
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f401
+	.4byte	0x1f3ff
 	.byte	0x11
-	.4byte	0x1f434
+	.4byte	0x1f432
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101285,13 +101243,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x857
-	.4byte	0x1f44a
+	.4byte	0x1f448
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f428
+	.4byte	0x1f426
 	.byte	0x11
-	.4byte	0x1f45b
+	.4byte	0x1f459
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101301,13 +101259,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x859
-	.4byte	0x1f471
+	.4byte	0x1f46f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f44f
+	.4byte	0x1f44d
 	.byte	0x11
-	.4byte	0x1f482
+	.4byte	0x1f480
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101317,13 +101275,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85a
-	.4byte	0x1f49a
+	.4byte	0x1f498
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f476
+	.4byte	0x1f474
 	.byte	0x11
-	.4byte	0x1f4ab
+	.4byte	0x1f4a9
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101333,13 +101291,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85b
-	.4byte	0x1f4c1
+	.4byte	0x1f4bf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f49f
+	.4byte	0x1f49d
 	.byte	0x11
-	.4byte	0x1f4d2
+	.4byte	0x1f4d0
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101349,13 +101307,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85c
-	.4byte	0x1f4ea
+	.4byte	0x1f4e8
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f4c6
+	.4byte	0x1f4c4
 	.byte	0x11
-	.4byte	0x1f4fb
+	.4byte	0x1f4f9
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101365,13 +101323,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85d
-	.4byte	0x1f511
+	.4byte	0x1f50f
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f4ef
+	.4byte	0x1f4ed
 	.byte	0x11
-	.4byte	0x1f522
+	.4byte	0x1f520
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101381,13 +101339,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85e
-	.4byte	0x1f53b
+	.4byte	0x1f539
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f516
+	.4byte	0x1f514
 	.byte	0x11
-	.4byte	0x1f54c
+	.4byte	0x1f54a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101397,13 +101355,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x85f
-	.4byte	0x1f563
+	.4byte	0x1f561
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f540
+	.4byte	0x1f53e
 	.byte	0x11
-	.4byte	0x1f574
+	.4byte	0x1f572
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101413,13 +101371,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x860
-	.4byte	0x1f58d
+	.4byte	0x1f58b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f568
+	.4byte	0x1f566
 	.byte	0x11
-	.4byte	0x1f59e
+	.4byte	0x1f59c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101429,13 +101387,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x861
-	.4byte	0x1f5b6
+	.4byte	0x1f5b4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f592
+	.4byte	0x1f590
 	.byte	0x11
-	.4byte	0x1f5c7
+	.4byte	0x1f5c5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101445,13 +101403,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x862
-	.4byte	0x1f5dc
+	.4byte	0x1f5da
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f5bb
+	.4byte	0x1f5b9
 	.byte	0x11
-	.4byte	0x1f5ed
+	.4byte	0x1f5eb
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101461,13 +101419,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x863
-	.4byte	0x1f616
+	.4byte	0x1f614
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f5e1
+	.4byte	0x1f5df
 	.byte	0x11
-	.4byte	0x1f627
+	.4byte	0x1f625
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101477,13 +101435,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x864
-	.4byte	0x1f645
+	.4byte	0x1f643
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f61b
+	.4byte	0x1f619
 	.byte	0x11
-	.4byte	0x1f656
+	.4byte	0x1f654
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101493,13 +101451,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x866
-	.4byte	0x1f684
+	.4byte	0x1f682
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f64a
+	.4byte	0x1f648
 	.byte	0x11
-	.4byte	0x1f695
+	.4byte	0x1f693
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101509,13 +101467,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x868
-	.4byte	0x1f6c0
+	.4byte	0x1f6be
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f689
+	.4byte	0x1f687
 	.byte	0x11
-	.4byte	0x1f6d1
+	.4byte	0x1f6cf
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x0
@@ -101525,13 +101483,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3b
 	.2byte	0x869
-	.4byte	0x1f6f6
+	.4byte	0x1f6f4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x17
-	.4byte	0x1f6c5
+	.4byte	0x1f6c3
 	.byte	0xe
-	.4byte	0x1f72b
+	.4byte	0x1f729
 	.ascii	"TilesPal\000"
 
 	.byte	0x8
@@ -101551,13 +101509,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3c
 	.byte	0x9
-	.4byte	0xe2c8
+	.4byte	0xe2c6
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1f770
+	.4byte	0x1f76e
 	.ascii	"WirelessGnameUnamePair\000"
 
 	.byte	0x18
@@ -101568,7 +101526,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0xc
-	.4byte	0x1c323
+	.4byte	0x1c321
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -101577,13 +101535,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0xd
-	.4byte	0x6d66
+	.4byte	0x6d64
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1f7b1
+	.4byte	0x1f7af
 	.ascii	"UnkStruct_x1C\000"
 
 	.byte	0x1c
@@ -101594,7 +101552,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x12
-	.4byte	0x1f72b
+	.4byte	0x1f729
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -101603,7 +101561,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x13
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x7
@@ -101612,7 +101570,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x18
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1f853
+	.4byte	0x1f851
 	.ascii	"UnkStruct_x20\000"
 
 	.byte	0x20
@@ -101623,7 +101581,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x18
-	.4byte	0x1f72b
+	.4byte	0x1f729
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -101632,7 +101590,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x19
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -101641,7 +101599,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x1a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x2
 	.byte	0x6
@@ -101653,7 +101611,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x1b
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x1
 	.byte	0x1
 	.byte	0x5
@@ -101665,7 +101623,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x1c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -101674,13 +101632,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x1d
-	.4byte	0x6d5a
+	.4byte	0x6d58
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1f87b
+	.4byte	0x1f879
 	.ascii	"UnkStruct_Main0\000"
 
 	.2byte	0x100
@@ -101691,19 +101649,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x22
-	.4byte	0x1f87b
+	.4byte	0x1f879
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1f887
-	.4byte	0x1f7b1
+	.4byte	0x1f885
+	.4byte	0x1f7af
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1f8ae
+	.4byte	0x1f8ac
 	.ascii	"UnkStruct_Main4\000"
 
 	.byte	0x8c
@@ -101714,19 +101672,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x27
-	.4byte	0x1f8ae
+	.4byte	0x1f8ac
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1f8ba
-	.4byte	0x1f770
+	.4byte	0x1f8b8
+	.4byte	0x1f76e
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1f8e1
+	.4byte	0x1f8df
 	.ascii	"UnkStruct_Main8\000"
 
 	.byte	0xa0
@@ -101737,19 +101695,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x2c
-	.4byte	0x1f8e1
+	.4byte	0x1f8df
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1f8ed
-	.4byte	0x1f7b1
+	.4byte	0x1f8eb
+	.4byte	0x1f7af
 	.byte	0x12
 	.byte	0x4
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1fa8b
+	.4byte	0x1fa89
 	.ascii	"WirelessLink_Leader\000"
 
 	.byte	0x1c
@@ -101760,7 +101718,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x31
-	.4byte	0x1fa8b
+	.4byte	0x1fa89
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -101769,7 +101727,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x32
-	.4byte	0x1fa91
+	.4byte	0x1fa8f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -101778,7 +101736,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x33
-	.4byte	0x1fa97
+	.4byte	0x1fa95
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -101787,7 +101745,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x34
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -101796,7 +101754,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x35
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -101805,7 +101763,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x36
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -101814,7 +101772,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x37
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -101823,7 +101781,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x38
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -101832,7 +101790,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x39
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -101841,7 +101799,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -101850,7 +101808,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -101859,7 +101817,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3c
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -101868,7 +101826,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -101877,7 +101835,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x17
@@ -101886,7 +101844,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x3f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x18
@@ -101895,7 +101853,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x40
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x19
@@ -101904,22 +101862,22 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x41
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1a
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1f853
+	.4byte	0x1f851
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1f887
+	.4byte	0x1f885
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1f8ba
+	.4byte	0x1f8b8
 	.byte	0xe
-	.4byte	0x1fc1a
+	.4byte	0x1fc18
 	.ascii	"WirelessLink_Group\000"
 
 	.byte	0x18
@@ -101930,7 +101888,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x46
-	.4byte	0x1fa8b
+	.4byte	0x1fa89
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -101939,7 +101897,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x47
-	.4byte	0x1fa91
+	.4byte	0x1fa8f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -101948,7 +101906,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x48
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -101957,7 +101915,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x49
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -101966,7 +101924,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -101975,7 +101933,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xb
@@ -101984,7 +101942,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -101993,7 +101951,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xd
@@ -102002,7 +101960,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -102011,7 +101969,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x4f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0xf
@@ -102020,7 +101978,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x50
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -102029,7 +101987,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x51
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x11
@@ -102038,7 +101996,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x52
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -102047,7 +102005,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x53
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x13
@@ -102056,7 +102014,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x54
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -102065,13 +102023,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x55
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
 	.byte	0x0
 	.byte	0xe
-	.4byte	0x1fc7b
+	.4byte	0x1fc79
 	.ascii	"UnionRoomObject\000"
 
 	.byte	0x4
@@ -102082,7 +102040,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x5a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -102091,7 +102049,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x5b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1
@@ -102100,7 +102058,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x5c
-	.4byte	0x8d07
+	.4byte	0x8d05
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -102109,13 +102067,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x5d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x3
 	.byte	0x0
 	.byte	0x20
-	.4byte	0x1ff35
+	.4byte	0x1ff33
 	.ascii	"WirelessLink_URoom\000"
 
 	.2byte	0x26c
@@ -102126,7 +102084,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x62
-	.4byte	0x1fa8b
+	.4byte	0x1fa89
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -102135,7 +102093,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x63
-	.4byte	0x1fa91
+	.4byte	0x1fa8f
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -102144,7 +102102,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x64
-	.4byte	0x1fa8b
+	.4byte	0x1fa89
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -102153,7 +102111,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x65
-	.4byte	0x1fa91
+	.4byte	0x1fa8f
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -102162,7 +102120,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x66
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -102171,7 +102129,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x67
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -102180,7 +102138,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x68
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -102189,7 +102147,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x69
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x15
@@ -102198,7 +102156,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x6a
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x16
@@ -102216,7 +102174,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x6c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1b
@@ -102225,7 +102183,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x6d
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1c
@@ -102234,7 +102192,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x6e
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1d
@@ -102243,7 +102201,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x6f
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1e
@@ -102252,7 +102210,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x70
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x1f
@@ -102261,7 +102219,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x71
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x20
@@ -102270,7 +102228,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x72
-	.4byte	0xff08
+	.4byte	0xff06
 	.byte	0x2
 	.byte	0x23
 	.byte	0x21
@@ -102279,7 +102237,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x73
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x49
@@ -102288,7 +102246,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x74
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4a
@@ -102306,7 +102264,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x76
-	.4byte	0x1ff35
+	.4byte	0x1ff33
 	.byte	0x2
 	.byte	0x23
 	.byte	0x58
@@ -102315,7 +102273,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x77
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x3
 	.byte	0x23
 	.byte	0x98,0x1
@@ -102324,7 +102282,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x78
-	.4byte	0xa7e3
+	.4byte	0xa7e1
 	.byte	0x3
 	.byte	0x23
 	.byte	0x9a,0x1
@@ -102333,7 +102291,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x79
-	.4byte	0x1ff43
+	.4byte	0x1ff41
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa0,0x1
@@ -102342,7 +102300,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x7a
-	.4byte	0x1ff4f
+	.4byte	0x1ff4d
 	.byte	0x3
 	.byte	0x23
 	.byte	0xc0,0x1
@@ -102351,7 +102309,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x7b
-	.4byte	0x1ff5d
+	.4byte	0x1ff5b
 	.byte	0x3
 	.byte	0x23
 	.byte	0xf4,0x2
@@ -102360,47 +102318,47 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x7c
-	.4byte	0x1ff69
+	.4byte	0x1ff67
 	.byte	0x3
 	.byte	0x23
 	.byte	0xa4,0x3
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ff43
-	.4byte	0x8cdc
+	.4byte	0x1ff41
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x3
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ff4f
-	.4byte	0x1fc1a
+	.4byte	0x1ff4d
+	.4byte	0x1fc18
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ff5d
-	.4byte	0x8cdc
+	.4byte	0x1ff5b
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xb
 	.byte	0x12
 	.byte	0xe
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ff69
-	.4byte	0x8cdc
+	.4byte	0x1ff67
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0x2f
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x1ff75
-	.4byte	0x8cdc
+	.4byte	0x1ff73
+	.4byte	0x8cda
 	.byte	0x12
 	.byte	0xc7
 	.byte	0x0
 	.byte	0x15
-	.4byte	0x1ffb8
+	.4byte	0x1ffb6
 	.ascii	"WirelessLink_Main\000"
 
 	.byte	0x4
@@ -102411,31 +102369,31 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x81
-	.4byte	0x1ffb8
+	.4byte	0x1ffb6
 	.byte	0x14
 	.ascii	"group\000"
 
 	.byte	0x3d
 	.byte	0x82
-	.4byte	0x1ffbe
+	.4byte	0x1ffbc
 	.byte	0x14
 	.ascii	"uRoom\000"
 
 	.byte	0x3d
 	.byte	0x83
-	.4byte	0x1ffc4
+	.4byte	0x1ffc2
 	.byte	0x0
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1f8ed
+	.4byte	0x1f8eb
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1fa9d
+	.4byte	0x1fa9b
 	.byte	0x8
 	.byte	0x4
-	.4byte	0x1fc7b
+	.4byte	0x1fc79
 	.byte	0xe
-	.4byte	0x200bf
+	.4byte	0x200bd
 	.ascii	"UnionRoomTrade\000"
 
 	.byte	0x18
@@ -102446,7 +102404,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x88
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -102455,7 +102413,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x89
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x2
@@ -102464,7 +102422,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8a
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
@@ -102473,7 +102431,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8b
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x8
@@ -102482,7 +102440,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x9
@@ -102491,7 +102449,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8d
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xa
@@ -102500,7 +102458,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8e
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xc
@@ -102509,7 +102467,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x8f
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0xe
@@ -102518,7 +102476,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x90
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x10
@@ -102527,7 +102485,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x91
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x2
 	.byte	0x23
 	.byte	0x12
@@ -102536,7 +102494,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x92
-	.4byte	0x8cf1
+	.4byte	0x8cef
 	.byte	0x2
 	.byte	0x23
 	.byte	0x14
@@ -102546,7 +102504,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x99
-	.4byte	0x1c23d
+	.4byte	0x1c23b
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -102554,7 +102512,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x9b
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x1
 	.byte	0x1
 	.byte	0x2f
@@ -102562,11 +102520,11 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3d
 	.byte	0x9c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x1
 	.byte	0x1
 	.byte	0x27
-	.4byte	0x20180
+	.4byte	0x2017e
 	.byte	0x4
 	.byte	0x1
 	.byte	0x5d
@@ -102592,7 +102550,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x8e
-	.4byte	0x6d54
+	.4byte	0x6d52
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuInternal
@@ -102646,7 +102604,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x99
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuItemId
@@ -102655,13 +102613,13 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x1
 	.byte	0x9a
-	.4byte	0x8ce6
+	.4byte	0x8ce4
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnused_0203CEFE
 	.byte	0x11
-	.4byte	0x2028b
-	.4byte	0xe28f
+	.4byte	0x20289
+	.4byte	0xe28d
 	.byte	0x30
 	.2byte	0x4b6
 	.byte	0x0
@@ -102670,33 +102628,33 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x34
 	.byte	0x26
-	.4byte	0x202a8
+	.4byte	0x202a6
 	.byte	0x5
 	.byte	0x3
 	.4byte	sTutorLearnsets
 	.byte	0x17
-	.4byte	0x2027e
+	.4byte	0x2027c
 	.byte	0x11
-	.4byte	0x202b9
-	.4byte	0x202b9
+	.4byte	0x202b7
+	.4byte	0x202b7
 	.byte	0x12
 	.byte	0x2
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x165e0
+	.4byte	0x165de
 	.byte	0x3e
 	.ascii	"sPartyMenuBgTemplates\000"
 
 	.byte	0x3e
 	.byte	0x1
-	.4byte	0x202e1
+	.4byte	0x202df
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuBgTemplates
 	.byte	0x17
-	.4byte	0x202ad
+	.4byte	0x202ab
 	.byte	0x27
-	.4byte	0x20320
+	.4byte	0x2031e
 	.byte	0x4
 	.byte	0x3e
 	.byte	0x21
@@ -102710,7 +102668,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x1
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x2032c
+	.4byte	0x2032a
 	.4byte	0x104b
 	.byte	0x12
 	.byte	0x1
@@ -102720,14 +102678,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x26
-	.4byte	0x2034c
+	.4byte	0x2034a
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxInfoRects
 	.byte	0x17
-	.4byte	0x20320
+	.4byte	0x2031e
 	.byte	0x11
-	.4byte	0x20361
+	.4byte	0x2035f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x3
@@ -102741,15 +102699,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x4a
-	.4byte	0x20385
+	.4byte	0x20383
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuSpriteCoords
 	.byte	0x17
-	.4byte	0x20351
+	.4byte	0x2034f
 	.byte	0x11
-	.4byte	0x20396
-	.4byte	0xe28f
+	.4byte	0x20394
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
@@ -102758,15 +102716,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x73
-	.4byte	0x203ba
+	.4byte	0x203b8
 	.byte	0x5
 	.byte	0x3
 	.4byte	sConfirmButton_Tilemap
 	.byte	0x17
-	.4byte	0x2038a
+	.4byte	0x20388
 	.byte	0x11
-	.4byte	0x203cb
-	.4byte	0xe28f
+	.4byte	0x203c9
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
@@ -102775,14 +102733,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x74
-	.4byte	0x203ee
+	.4byte	0x203ec
 	.byte	0x5
 	.byte	0x3
 	.4byte	sCancelButton_Tilemap
 	.byte	0x17
-	.4byte	0x203bf
+	.4byte	0x203bd
 	.byte	0x11
-	.4byte	0x20401
+	.4byte	0x203ff
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x5
@@ -102794,15 +102752,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x77
-	.4byte	0x2041e
+	.4byte	0x2041c
 	.byte	0x5
 	.byte	0x3
 	.4byte	sFontColorTable
 	.byte	0x17
-	.4byte	0x203f3
+	.4byte	0x203f1
 	.byte	0x11
-	.4byte	0x2042f
-	.4byte	0x2042f
+	.4byte	0x2042d
+	.4byte	0x2042d
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
@@ -102813,15 +102771,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0x81
-	.4byte	0x20460
+	.4byte	0x2045e
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSinglePartyMenuWindowTemplate
 	.byte	0x17
-	.4byte	0x20423
+	.4byte	0x20421
 	.byte	0x11
-	.4byte	0x20471
-	.4byte	0x2042f
+	.4byte	0x2046f
+	.4byte	0x2042d
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
@@ -102830,15 +102788,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.byte	0xc5
-	.4byte	0x2049d
+	.4byte	0x2049b
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDoublePartyMenuWindowTemplate
 	.byte	0x17
-	.4byte	0x20465
+	.4byte	0x20463
 	.byte	0x11
-	.4byte	0x204ae
-	.4byte	0x2042f
+	.4byte	0x204ac
+	.4byte	0x2042d
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
@@ -102847,15 +102805,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x109
-	.4byte	0x204da
+	.4byte	0x204d8
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMultiPartyMenuWindowTemplate
 	.byte	0x17
-	.4byte	0x204a2
+	.4byte	0x204a0
 	.byte	0x11
-	.4byte	0x204eb
-	.4byte	0x2042f
+	.4byte	0x204e9
+	.4byte	0x2042d
 	.byte	0x12
 	.byte	0x6
 	.byte	0x0
@@ -102864,18 +102822,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x14d
-	.4byte	0x2051f
+	.4byte	0x2051d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sShowcaseMultiPartyMenuWindowTemplate
 	.byte	0x17
-	.4byte	0x204df
+	.4byte	0x204dd
 	.byte	0x4
 	.ascii	"sCancelButtonWindowTemplate\000"
 
 	.byte	0x3e
 	.2byte	0x188
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sCancelButtonWindowTemplate
@@ -102884,7 +102842,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x193
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMultiCancelButtonWindowTemplate
@@ -102893,7 +102851,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x19e
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sConfirmButtonWindowTemplate
@@ -102902,7 +102860,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1a9
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDefaultPartyMsgWindowTemplate
@@ -102911,7 +102869,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1b4
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDoWhatWithMonMsgWindowTemplate
@@ -102920,7 +102878,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1bf
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDoWhatWithItemMsgWindowTemplate
@@ -102929,7 +102887,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1ca
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDoWhatWithMailMsgWindowTemplate
@@ -102938,7 +102896,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1d5
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sWhichMoveMsgWindowTemplate
@@ -102947,7 +102905,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1e0
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sAlreadyHoldingOneMsgWindowTemplate
@@ -102956,7 +102914,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1eb
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sItemGiveTakeWindowTemplate
@@ -102965,7 +102923,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x1f6
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMailReadTakeWindowTemplate
@@ -102974,7 +102932,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x201
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMoveSelectWindowTemplate
@@ -102983,7 +102941,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x20c
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuYesNoWindowTemplate
@@ -102992,7 +102950,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x217
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sLevelUpStatsWindowTemplate
@@ -103001,7 +102959,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x222
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnusedWindowTemplate_08615978
@@ -103010,12 +102968,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x22d
-	.4byte	0x2042f
+	.4byte	0x2042d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnusedWindowTemplate_08615980
 	.byte	0x11
-	.4byte	0x207f5
+	.4byte	0x207f3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x45
@@ -103025,14 +102983,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x239
-	.4byte	0x20815
+	.4byte	0x20813
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMainSlotTileNums
 	.byte	0x17
-	.4byte	0x207e9
+	.4byte	0x207e7
 	.byte	0x11
-	.4byte	0x20826
+	.4byte	0x20824
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x45
@@ -103042,14 +103000,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x241
-	.4byte	0x2084a
+	.4byte	0x20848
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMainSlotTileNums_Egg
 	.byte	0x17
-	.4byte	0x2081a
+	.4byte	0x20818
 	.byte	0x11
-	.4byte	0x2085b
+	.4byte	0x20859
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x35
@@ -103059,14 +103017,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x249
-	.4byte	0x2087d
+	.4byte	0x2087b
 	.byte	0x5
 	.byte	0x3
 	.4byte	sOtherSlotsTileNums
 	.byte	0x17
-	.4byte	0x2084f
+	.4byte	0x2084d
 	.byte	0x11
-	.4byte	0x2088e
+	.4byte	0x2088c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x35
@@ -103076,14 +103034,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x24d
-	.4byte	0x208b4
+	.4byte	0x208b2
 	.byte	0x5
 	.byte	0x3
 	.4byte	sOtherSlotsTileNums_Egg
 	.byte	0x17
-	.4byte	0x20882
+	.4byte	0x20880
 	.byte	0x11
-	.4byte	0x208c5
+	.4byte	0x208c3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x35
@@ -103093,14 +103051,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x251
-	.4byte	0x208e6
+	.4byte	0x208e4
 	.byte	0x5
 	.byte	0x3
 	.4byte	sEmptySlotTileNums
 	.byte	0x17
-	.4byte	0x208b9
+	.4byte	0x208b7
 	.byte	0x11
-	.4byte	0x208f7
+	.4byte	0x208f5
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103110,14 +103068,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x256
-	.4byte	0x20917
+	.4byte	0x20915
 	.byte	0x5
 	.byte	0x3
 	.4byte	sGenderPalOffsets
 	.byte	0x17
-	.4byte	0x208eb
+	.4byte	0x208e9
 	.byte	0x11
-	.4byte	0x20928
+	.4byte	0x20926
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103127,14 +103085,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x257
-	.4byte	0x20947
+	.4byte	0x20945
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHPBarPalOffsets
 	.byte	0x17
-	.4byte	0x2091c
+	.4byte	0x2091a
 	.byte	0x11
-	.4byte	0x20958
+	.4byte	0x20956
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103144,14 +103102,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x258
-	.4byte	0x2097b
+	.4byte	0x20979
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxPalOffsets1
 	.byte	0x17
-	.4byte	0x2094c
+	.4byte	0x2094a
 	.byte	0x11
-	.4byte	0x2098c
+	.4byte	0x2098a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103161,14 +103119,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x259
-	.4byte	0x209af
+	.4byte	0x209ad
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxPalOffsets2
 	.byte	0x17
-	.4byte	0x20980
+	.4byte	0x2097e
 	.byte	0x11
-	.4byte	0x209c0
+	.4byte	0x209be
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103178,14 +103136,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x25a
-	.4byte	0x209e7
+	.4byte	0x209e5
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxNoMonPalOffsets
 	.byte	0x17
-	.4byte	0x209b4
+	.4byte	0x209b2
 	.byte	0x11
-	.4byte	0x209f8
+	.4byte	0x209f6
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103195,14 +103153,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x25d
-	.4byte	0x20a18
+	.4byte	0x20a16
 	.byte	0x5
 	.byte	0x3
 	.4byte	sGenderMalePalIds
 	.byte	0x17
-	.4byte	0x209ec
+	.4byte	0x209ea
 	.byte	0x11
-	.4byte	0x20a29
+	.4byte	0x20a27
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103212,14 +103170,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x25e
-	.4byte	0x20a4b
+	.4byte	0x20a49
 	.byte	0x5
 	.byte	0x3
 	.4byte	sGenderFemalePalIds
 	.byte	0x17
-	.4byte	0x20a1d
+	.4byte	0x20a1b
 	.byte	0x11
-	.4byte	0x20a5c
+	.4byte	0x20a5a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103229,14 +103187,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x25f
-	.4byte	0x20a7c
+	.4byte	0x20a7a
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHPBarGreenPalIds
 	.byte	0x17
-	.4byte	0x20a50
+	.4byte	0x20a4e
 	.byte	0x11
-	.4byte	0x20a8d
+	.4byte	0x20a8b
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103246,14 +103204,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x260
-	.4byte	0x20aae
+	.4byte	0x20aac
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHPBarYellowPalIds
 	.byte	0x17
-	.4byte	0x20a81
+	.4byte	0x20a7f
 	.byte	0x11
-	.4byte	0x20abf
+	.4byte	0x20abd
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103263,14 +103221,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x261
-	.4byte	0x20add
+	.4byte	0x20adb
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHPBarRedPalIds
 	.byte	0x17
-	.4byte	0x20ab3
+	.4byte	0x20ab1
 	.byte	0x11
-	.4byte	0x20aee
+	.4byte	0x20aec
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103280,14 +103238,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x262
-	.4byte	0x20b16
+	.4byte	0x20b14
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxEmptySlotPalIds1
 	.byte	0x17
-	.4byte	0x20ae2
+	.4byte	0x20ae0
 	.byte	0x11
-	.4byte	0x20b27
+	.4byte	0x20b25
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103297,14 +103255,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x263
-	.4byte	0x20b4b
+	.4byte	0x20b49
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxMultiPalIds1
 	.byte	0x17
-	.4byte	0x20b1b
+	.4byte	0x20b19
 	.byte	0x11
-	.4byte	0x20b5c
+	.4byte	0x20b5a
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103314,14 +103272,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x264
-	.4byte	0x20b82
+	.4byte	0x20b80
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxFaintedPalIds1
 	.byte	0x17
-	.4byte	0x20b50
+	.4byte	0x20b4e
 	.byte	0x11
-	.4byte	0x20b93
+	.4byte	0x20b91
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103331,14 +103289,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x265
-	.4byte	0x20bbf
+	.4byte	0x20bbd
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxCurrSelectionPalIds1
 	.byte	0x17
-	.4byte	0x20b87
+	.4byte	0x20b85
 	.byte	0x11
-	.4byte	0x20bd0
+	.4byte	0x20bce
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103348,14 +103306,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x266
-	.4byte	0x20c00
+	.4byte	0x20bfe
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxCurrSelectionMultiPalIds
 	.byte	0x17
-	.4byte	0x20bc4
+	.4byte	0x20bc2
 	.byte	0x11
-	.4byte	0x20c11
+	.4byte	0x20c0f
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103365,14 +103323,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x267
-	.4byte	0x20c43
+	.4byte	0x20c41
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxCurrSelectionFaintedPalIds
 	.byte	0x17
-	.4byte	0x20c05
+	.4byte	0x20c03
 	.byte	0x11
-	.4byte	0x20c54
+	.4byte	0x20c52
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103382,14 +103340,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x268
-	.4byte	0x20c84
+	.4byte	0x20c82
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxSelectedForActionPalIds1
 	.byte	0x17
-	.4byte	0x20c48
+	.4byte	0x20c46
 	.byte	0x11
-	.4byte	0x20c95
+	.4byte	0x20c93
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103399,14 +103357,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x269
-	.4byte	0x20cbd
+	.4byte	0x20cbb
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxEmptySlotPalIds2
 	.byte	0x17
-	.4byte	0x20c89
+	.4byte	0x20c87
 	.byte	0x11
-	.4byte	0x20cce
+	.4byte	0x20ccc
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103416,14 +103374,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x26a
-	.4byte	0x20cf2
+	.4byte	0x20cf0
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxMultiPalIds2
 	.byte	0x17
-	.4byte	0x20cc2
+	.4byte	0x20cc0
 	.byte	0x11
-	.4byte	0x20d03
+	.4byte	0x20d01
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103433,14 +103391,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x26b
-	.4byte	0x20d29
+	.4byte	0x20d27
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxFaintedPalIds2
 	.byte	0x17
-	.4byte	0x20cf7
+	.4byte	0x20cf5
 	.byte	0x11
-	.4byte	0x20d3a
+	.4byte	0x20d38
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103450,14 +103408,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x26c
-	.4byte	0x20d66
+	.4byte	0x20d64
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxCurrSelectionPalIds2
 	.byte	0x17
-	.4byte	0x20d2e
+	.4byte	0x20d2c
 	.byte	0x11
-	.4byte	0x20d77
+	.4byte	0x20d75
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103467,14 +103425,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x26d
-	.4byte	0x20da7
+	.4byte	0x20da5
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxSelectedForActionPalIds2
 	.byte	0x17
-	.4byte	0x20d6b
+	.4byte	0x20d69
 	.byte	0x11
-	.4byte	0x20db8
+	.4byte	0x20db6
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103484,15 +103442,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x26e
-	.4byte	0x20ddb
+	.4byte	0x20dd9
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyBoxNoMonPalIds
 	.byte	0x17
-	.4byte	0x20dac
+	.4byte	0x20daa
 	.byte	0x11
-	.4byte	0x20dec
-	.4byte	0xecfd
+	.4byte	0x20dea
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0x1a
 	.byte	0x0
@@ -103501,15 +103459,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x270
-	.4byte	0x20e0d
+	.4byte	0x20e0b
 	.byte	0x5
 	.byte	0x3
 	.4byte	sActionStringTable
 	.byte	0x17
-	.4byte	0x20de0
+	.4byte	0x20dde
 	.byte	0x11
-	.4byte	0x20e1e
-	.4byte	0xecfd
+	.4byte	0x20e1c
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0xc
 	.byte	0x0
@@ -103518,15 +103476,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x28f
-	.4byte	0x20e44
+	.4byte	0x20e42
 	.byte	0x5
 	.byte	0x3
 	.4byte	sDescriptionStringTable
 	.byte	0x17
-	.4byte	0x20e12
+	.4byte	0x20e10
 	.byte	0x11
-	.4byte	0x20e55
-	.4byte	0xe2ce
+	.4byte	0x20e53
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0x39
 	.byte	0x0
@@ -103535,14 +103493,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x2a0
-	.4byte	0x20e74
+	.4byte	0x20e72
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnused_08615B94
 	.byte	0x17
-	.4byte	0x20e49
+	.4byte	0x20e47
 	.byte	0x29
-	.4byte	0x20fa2
+	.4byte	0x20fa0
 	.byte	0x4
 	.byte	0x3e
 	.2byte	0x2a9
@@ -103628,7 +103586,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x13
 	.byte	0x0
 	.byte	0x29
-	.4byte	0x210d5
+	.4byte	0x210d3
 	.byte	0x4
 	.byte	0x3e
 	.2byte	0x2c1
@@ -103690,7 +103648,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x2b
-	.4byte	0x210ff
+	.4byte	0x210fd
 	.byte	0x8
 	.byte	0x3e
 	.2byte	0x2d9
@@ -103708,32 +103666,32 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x2d8
-	.4byte	0x149c4
+	.4byte	0x149c2
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x2110b
-	.4byte	0x2110b
+	.4byte	0x21109
+	.4byte	0x21109
 	.byte	0x12
 	.byte	0x20
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x210d5
+	.4byte	0x210d3
 	.byte	0x4
 	.ascii	"sCursorOptions\000"
 
 	.byte	0x3e
 	.2byte	0x2d9
-	.4byte	0x2112d
+	.4byte	0x2112b
 	.byte	0x5
 	.byte	0x3
 	.4byte	sCursorOptions
 	.byte	0x17
-	.4byte	0x210ff
+	.4byte	0x210fd
 	.byte	0x11
-	.4byte	0x2113e
+	.4byte	0x2113c
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103743,14 +103701,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x2fe
-	.4byte	0x21171
+	.4byte	0x2116f
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_SummarySwitchCancel
 	.byte	0x17
-	.4byte	0x21132
+	.4byte	0x21130
 	.byte	0x11
-	.4byte	0x21182
+	.4byte	0x21180
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103760,14 +103718,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x2ff
-	.4byte	0x211b4
+	.4byte	0x211b2
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_ShiftSummaryCancel
 	.byte	0x17
-	.4byte	0x21176
+	.4byte	0x21174
 	.byte	0x11
-	.4byte	0x211c5
+	.4byte	0x211c3
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103777,14 +103735,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x300
-	.4byte	0x211f9
+	.4byte	0x211f7
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_SendOutSummaryCancel
 	.byte	0x17
-	.4byte	0x211b9
+	.4byte	0x211b7
 	.byte	0x11
-	.4byte	0x2120a
+	.4byte	0x21208
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x1
@@ -103794,14 +103752,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x301
-	.4byte	0x21237
+	.4byte	0x21235
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_SummaryCancel
 	.byte	0x17
-	.4byte	0x211fe
+	.4byte	0x211fc
 	.byte	0x11
-	.4byte	0x21248
+	.4byte	0x21246
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103811,14 +103769,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x302
-	.4byte	0x2127a
+	.4byte	0x21278
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_EnterSummaryCancel
 	.byte	0x17
-	.4byte	0x2123c
+	.4byte	0x2123a
 	.byte	0x11
-	.4byte	0x2128b
+	.4byte	0x21289
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103828,14 +103786,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x303
-	.4byte	0x212bf
+	.4byte	0x212bd
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_NoEntrySummaryCancel
 	.byte	0x17
-	.4byte	0x2127f
+	.4byte	0x2127d
 	.byte	0x11
-	.4byte	0x212d0
+	.4byte	0x212ce
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103845,14 +103803,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x304
-	.4byte	0x21302
+	.4byte	0x21300
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_StoreSummaryCancel
 	.byte	0x17
-	.4byte	0x212c4
+	.4byte	0x212c2
 	.byte	0x11
-	.4byte	0x21313
+	.4byte	0x21311
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103862,14 +103820,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x305
-	.4byte	0x21345
+	.4byte	0x21343
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_GiveTakeItemCancel
 	.byte	0x17
-	.4byte	0x21307
+	.4byte	0x21305
 	.byte	0x11
-	.4byte	0x21356
+	.4byte	0x21354
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103879,14 +103837,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x306
-	.4byte	0x21388
+	.4byte	0x21386
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_ReadTakeMailCancel
 	.byte	0x17
-	.4byte	0x2134a
+	.4byte	0x21348
 	.byte	0x11
-	.4byte	0x21399
+	.4byte	0x21397
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103896,14 +103854,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x307
-	.4byte	0x213ce
+	.4byte	0x213cc
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_RegisterSummaryCancel
 	.byte	0x17
-	.4byte	0x2138d
+	.4byte	0x2138b
 	.byte	0x11
-	.4byte	0x213df
+	.4byte	0x213dd
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103913,14 +103871,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x308
-	.4byte	0x21412
+	.4byte	0x21410
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_TradeSummaryCancel1
 	.byte	0x17
-	.4byte	0x213d3
+	.4byte	0x213d1
 	.byte	0x11
-	.4byte	0x21423
+	.4byte	0x21421
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103930,14 +103888,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x309
-	.4byte	0x21456
+	.4byte	0x21454
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_TradeSummaryCancel2
 	.byte	0x17
-	.4byte	0x21417
+	.4byte	0x21415
 	.byte	0x11
-	.4byte	0x21467
+	.4byte	0x21465
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0x2
@@ -103947,14 +103905,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x30a
-	.4byte	0x21499
+	.4byte	0x21497
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuAction_TakeItemTossCancel
 	.byte	0x17
-	.4byte	0x2145b
+	.4byte	0x21459
 	.byte	0x29
-	.4byte	0x215a3
+	.4byte	0x215a1
 	.byte	0x4
 	.byte	0x3e
 	.2byte	0x30e
@@ -104016,8 +103974,8 @@ IsLastMonThatKnowsSurf:
 	.byte	0xd
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x215af
-	.4byte	0xecfd
+	.4byte	0x215ad
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
@@ -104026,14 +103984,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x31f
-	.4byte	0x215cf
+	.4byte	0x215cd
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuActions
 	.byte	0x17
-	.4byte	0x215a3
+	.4byte	0x215a1
 	.byte	0x11
-	.4byte	0x215e0
+	.4byte	0x215de
 	.4byte	0x1056
 	.byte	0x12
 	.byte	0xd
@@ -104043,15 +104001,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x331
-	.4byte	0x21605
+	.4byte	0x21603
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPartyMenuActionCounts
 	.byte	0x17
-	.4byte	0x215d4
+	.4byte	0x215d2
 	.byte	0x11
-	.4byte	0x21616
-	.4byte	0xe2ce
+	.4byte	0x21614
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0xe
 	.byte	0x0
@@ -104060,14 +104018,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x343
-	.4byte	0x21630
+	.4byte	0x2162e
 	.byte	0x5
 	.byte	0x3
 	.4byte	sFieldMoves
 	.byte	0x17
-	.4byte	0x2160a
+	.4byte	0x21608
 	.byte	0x2b
-	.4byte	0x21669
+	.4byte	0x21667
 	.byte	0x8
 	.byte	0x3e
 	.2byte	0x34d
@@ -104076,7 +104034,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x34b
-	.4byte	0x1928a
+	.4byte	0x19288
 	.byte	0x2
 	.byte	0x23
 	.byte	0x0
@@ -104085,33 +104043,33 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x34c
-	.4byte	0x8cdc
+	.4byte	0x8cda
 	.byte	0x2
 	.byte	0x23
 	.byte	0x4
 	.byte	0x0
 	.byte	0x11
-	.4byte	0x21675
-	.4byte	0x21675
+	.4byte	0x21673
+	.4byte	0x21673
 	.byte	0x12
 	.byte	0xd
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x21635
+	.4byte	0x21633
 	.byte	0x4
 	.ascii	"sFieldMoveCursorCallbacks\000"
 
 	.byte	0x3e
 	.2byte	0x34d
-	.4byte	0x216a2
+	.4byte	0x216a0
 	.byte	0x5
 	.byte	0x3
 	.4byte	sFieldMoveCursorCallbacks
 	.byte	0x17
-	.4byte	0x21669
+	.4byte	0x21667
 	.byte	0x11
-	.4byte	0x216b3
-	.4byte	0xecfd
+	.4byte	0x216b1
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0x8
 	.byte	0x0
@@ -104120,15 +104078,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x35f
-	.4byte	0x216d9
+	.4byte	0x216d7
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnionRoomTradeMessages
 	.byte	0x17
-	.4byte	0x216a7
+	.4byte	0x216a5
 	.byte	0x11
-	.4byte	0x216ea
-	.4byte	0xe28f
+	.4byte	0x216e8
+	.4byte	0xe28d
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
@@ -104137,15 +104095,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x36c
-	.4byte	0x21705
+	.4byte	0x21703
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHeldItemGfx
 	.byte	0x17
-	.4byte	0x216de
+	.4byte	0x216dc
 	.byte	0x11
-	.4byte	0x21716
-	.4byte	0xe2ce
+	.4byte	0x21714
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0xf
 	.byte	0x0
@@ -104154,12 +104112,12 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x36d
-	.4byte	0x21735
+	.4byte	0x21733
 	.byte	0x5
 	.byte	0x3
 	.4byte	sHeldItemPalette
 	.byte	0x17
-	.4byte	0x2170a
+	.4byte	0x21708
 	.byte	0x4
 	.ascii	"sOamData_HeldItem\000"
 
@@ -104170,7 +104128,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.4byte	sOamData_HeldItem
 	.byte	0x11
-	.4byte	0x21766
+	.4byte	0x21764
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104180,14 +104138,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x380
-	.4byte	0x21789
+	.4byte	0x21787
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_HeldItem
 	.byte	0x17
-	.4byte	0x2175a
+	.4byte	0x21758
 	.byte	0x11
-	.4byte	0x2179a
+	.4byte	0x21798
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104197,14 +104155,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x386
-	.4byte	0x217bd
+	.4byte	0x217bb
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_HeldMail
 	.byte	0x17
-	.4byte	0x2178e
+	.4byte	0x2178c
 	.byte	0x11
-	.4byte	0x217ce
+	.4byte	0x217cc
 	.4byte	0x50ee
 	.byte	0x12
 	.byte	0x1
@@ -104214,34 +104172,34 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x38c
-	.4byte	0x217f6
+	.4byte	0x217f4
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnimTable_HeldItem
 	.byte	0x17
-	.4byte	0x217c2
+	.4byte	0x217c0
 	.byte	0x4
 	.ascii	"sSpriteSheet_HeldItem\000"
 
 	.byte	0x3e
 	.2byte	0x392
-	.4byte	0x2181f
+	.4byte	0x2181d
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteSheet_HeldItem
 	.byte	0x17
-	.4byte	0xe1fd
+	.4byte	0xe1fb
 	.byte	0x4
 	.ascii	"sSpritePalette_HeldItem\000"
 
 	.byte	0x3e
 	.2byte	0x397
-	.4byte	0x2184a
+	.4byte	0x21848
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpritePalette_HeldItem
 	.byte	0x17
-	.4byte	0xe294
+	.4byte	0xe292
 	.byte	0x4
 	.ascii	"sSpriteTemplate_HeldItem\000"
 
@@ -104261,7 +104219,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.4byte	sOamData_MenuPokeball
 	.byte	0x11
-	.4byte	0x218a6
+	.4byte	0x218a4
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104271,14 +104229,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3b8
-	.4byte	0x218c9
+	.4byte	0x218c7
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPokeballAnim_Closed
 	.byte	0x17
-	.4byte	0x2189a
+	.4byte	0x21898
 	.byte	0x11
-	.4byte	0x218da
+	.4byte	0x218d8
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104288,14 +104246,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3be
-	.4byte	0x218fb
+	.4byte	0x218f9
 	.byte	0x5
 	.byte	0x3
 	.4byte	sPokeballAnim_Open
 	.byte	0x17
-	.4byte	0x218ce
+	.4byte	0x218cc
 	.byte	0x11
-	.4byte	0x2190c
+	.4byte	0x2190a
 	.4byte	0x50ee
 	.byte	0x12
 	.byte	0x1
@@ -104305,34 +104263,34 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3c4
-	.4byte	0x21938
+	.4byte	0x21936
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnimTable_MenuPokeball
 	.byte	0x17
-	.4byte	0x21900
+	.4byte	0x218fe
 	.byte	0x4
 	.ascii	"sSpriteSheet_MenuPokeball\000"
 
 	.byte	0x3e
 	.2byte	0x3ca
-	.4byte	0x21965
+	.4byte	0x21963
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteSheet_MenuPokeball
 	.byte	0x17
-	.4byte	0xe23e
+	.4byte	0xe23c
 	.byte	0x4
 	.ascii	"sSpritePalette_MenuPokeball\000"
 
 	.byte	0x3e
 	.2byte	0x3cf
-	.4byte	0x21994
+	.4byte	0x21992
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpritePalette_MenuPokeball
 	.byte	0x17
-	.4byte	0xe2d3
+	.4byte	0xe2d1
 	.byte	0x4
 	.ascii	"sSpriteTemplate_MenuPokeball\000"
 
@@ -104352,7 +104310,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.4byte	sOamData_MenuPokeballSmall
 	.byte	0x11
-	.4byte	0x219f9
+	.4byte	0x219f7
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104362,14 +104320,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3f1
-	.4byte	0x21a21
+	.4byte	0x21a1f
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Closed
 	.byte	0x17
-	.4byte	0x219ed
+	.4byte	0x219eb
 	.byte	0x11
-	.4byte	0x21a32
+	.4byte	0x21a30
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104379,14 +104337,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3f7
-	.4byte	0x21a58
+	.4byte	0x21a56
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Open
 	.byte	0x17
-	.4byte	0x21a26
+	.4byte	0x21a24
 	.byte	0x11
-	.4byte	0x21a69
+	.4byte	0x21a67
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104396,14 +104354,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x3fd
-	.4byte	0x21a91
+	.4byte	0x21a8f
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Blank1
 	.byte	0x17
-	.4byte	0x21a5d
+	.4byte	0x21a5b
 	.byte	0x11
-	.4byte	0x21aa2
+	.4byte	0x21aa0
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104413,14 +104371,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x403
-	.4byte	0x21aca
+	.4byte	0x21ac8
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Blank2
 	.byte	0x17
-	.4byte	0x21a96
+	.4byte	0x21a94
 	.byte	0x11
-	.4byte	0x21adb
+	.4byte	0x21ad9
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104430,14 +104388,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x409
-	.4byte	0x21b03
+	.4byte	0x21b01
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Blank3
 	.byte	0x17
-	.4byte	0x21acf
+	.4byte	0x21acd
 	.byte	0x11
-	.4byte	0x21b14
+	.4byte	0x21b12
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104447,14 +104405,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x40f
-	.4byte	0x21b3c
+	.4byte	0x21b3a
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSmallPokeballAnim_Blank4
 	.byte	0x17
-	.4byte	0x21b08
+	.4byte	0x21b06
 	.byte	0x11
-	.4byte	0x21b4d
+	.4byte	0x21b4b
 	.4byte	0x50ee
 	.byte	0x12
 	.byte	0x5
@@ -104464,18 +104422,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x416
-	.4byte	0x21b7e
+	.4byte	0x21b7c
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnimTable_MenuPokeballSmall
 	.byte	0x17
-	.4byte	0x21b41
+	.4byte	0x21b3f
 	.byte	0x4
 	.ascii	"sSpriteSheet_MenuPokeballSmall\000"
 
 	.byte	0x3e
 	.2byte	0x420
-	.4byte	0x21965
+	.4byte	0x21963
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteSheet_MenuPokeballSmall
@@ -104498,7 +104456,7 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.4byte	sOamData_StatusCondition
 	.byte	0x11
-	.4byte	0x21c13
+	.4byte	0x21c11
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104508,14 +104466,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x442
-	.4byte	0x21c3a
+	.4byte	0x21c38
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusPoison
 	.byte	0x17
-	.4byte	0x21c07
+	.4byte	0x21c05
 	.byte	0x11
-	.4byte	0x21c4b
+	.4byte	0x21c49
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104525,14 +104483,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x448
-	.4byte	0x21c75
+	.4byte	0x21c73
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusParalyzed
 	.byte	0x17
-	.4byte	0x21c3f
+	.4byte	0x21c3d
 	.byte	0x11
-	.4byte	0x21c86
+	.4byte	0x21c84
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104542,14 +104500,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x44e
-	.4byte	0x21cac
+	.4byte	0x21caa
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusSleep
 	.byte	0x17
-	.4byte	0x21c7a
+	.4byte	0x21c78
 	.byte	0x11
-	.4byte	0x21cbd
+	.4byte	0x21cbb
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104559,14 +104517,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x454
-	.4byte	0x21ce4
+	.4byte	0x21ce2
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusFrozen
 	.byte	0x17
-	.4byte	0x21cb1
+	.4byte	0x21caf
 	.byte	0x11
-	.4byte	0x21cf5
+	.4byte	0x21cf3
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104576,14 +104534,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x45a
-	.4byte	0x21d1a
+	.4byte	0x21d18
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusBurn
 	.byte	0x17
-	.4byte	0x21ce9
+	.4byte	0x21ce7
 	.byte	0x11
-	.4byte	0x21d2b
+	.4byte	0x21d29
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104593,14 +104551,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x460
-	.4byte	0x21d53
+	.4byte	0x21d51
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusPokerus
 	.byte	0x17
-	.4byte	0x21d1f
+	.4byte	0x21d1d
 	.byte	0x11
-	.4byte	0x21d64
+	.4byte	0x21d62
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104610,14 +104568,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x466
-	.4byte	0x21d8a
+	.4byte	0x21d88
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_StatusFaint
 	.byte	0x17
-	.4byte	0x21d58
+	.4byte	0x21d56
 	.byte	0x11
-	.4byte	0x21d9b
+	.4byte	0x21d99
 	.4byte	0x50f9
 	.byte	0x12
 	.byte	0x1
@@ -104627,14 +104585,14 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x46c
-	.4byte	0x21dbb
+	.4byte	0x21db9
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteAnim_Blank
 	.byte	0x17
-	.4byte	0x21d8f
+	.4byte	0x21d8d
 	.byte	0x11
-	.4byte	0x21dcc
+	.4byte	0x21dca
 	.4byte	0x50ee
 	.byte	0x12
 	.byte	0x7
@@ -104644,18 +104602,18 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x472
-	.4byte	0x21dfa
+	.4byte	0x21df8
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteTemplate_StatusCondition
 	.byte	0x17
-	.4byte	0x21dc0
+	.4byte	0x21dbe
 	.byte	0x4
 	.ascii	"sSpriteSheet_StatusIcons\000"
 
 	.byte	0x3e
 	.2byte	0x47e
-	.4byte	0x21965
+	.4byte	0x21963
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpriteSheet_StatusIcons
@@ -104664,7 +104622,7 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x483
-	.4byte	0x21994
+	.4byte	0x21992
 	.byte	0x5
 	.byte	0x3
 	.4byte	sSpritePalette_StatusIcons
@@ -104678,27 +104636,27 @@ IsLastMonThatKnowsSurf:
 	.byte	0x3
 	.4byte	sSpriteTemplate_StatusIcons
 	.byte	0x11
-	.4byte	0x21e85
-	.4byte	0x21e85
+	.4byte	0x21e83
+	.4byte	0x21e83
 	.byte	0x12
 	.byte	0x7
 	.byte	0x0
 	.byte	0x17
-	.4byte	0x8de1
+	.4byte	0x8ddf
 	.byte	0x4
 	.ascii	"sMultiBattlePartnersPartyMask\000"
 
 	.byte	0x3e
 	.2byte	0x496
-	.4byte	0x21eb6
+	.4byte	0x21eb4
 	.byte	0x5
 	.byte	0x3
 	.4byte	sMultiBattlePartnersPartyMask
 	.byte	0x17
-	.4byte	0x21e79
+	.4byte	0x21e77
 	.byte	0x11
-	.4byte	0x21ec7
-	.4byte	0xecfd
+	.4byte	0x21ec5
+	.4byte	0xecfb
 	.byte	0x12
 	.byte	0x5
 	.byte	0x0
@@ -104707,15 +104665,15 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x4a1
-	.4byte	0x21ee9
+	.4byte	0x21ee7
 	.byte	0x5
 	.byte	0x3
 	.4byte	sUnused_StatStrings
 	.byte	0x17
-	.4byte	0x21ebb
+	.4byte	0x21eb9
 	.byte	0x11
-	.4byte	0x21efa
-	.4byte	0xe2ce
+	.4byte	0x21ef8
+	.4byte	0xe2cc
 	.byte	0x12
 	.byte	0x39
 	.byte	0x0
@@ -104724,19 +104682,19 @@ IsLastMonThatKnowsSurf:
 
 	.byte	0x3e
 	.2byte	0x4ab
-	.4byte	0x21f13
+	.4byte	0x21f11
 	.byte	0x5
 	.byte	0x3
 	.4byte	sTMHMMoves
 	.byte	0x17
-	.4byte	0x21eee
+	.4byte	0x21eec
 	.byte	0x0
 
 	.section	.debug_pubnames
 	.4byte	0x72d
 	.2byte	0x2
 	.4byte	.debug_info
-	.4byte	0x21f19
+	.4byte	0x21f17
 	.4byte	0x11c0
 	.ascii	"AnimatePartySlot\000"
 
@@ -104818,127 +104776,127 @@ IsLastMonThatKnowsSurf:
 	.4byte	0x66d7
 	.ascii	"ItemUseCB_TMHM\000"
 
-	.4byte	0x6b7a
+	.4byte	0x6b78
 	.ascii	"ItemUseCB_RareCandy\000"
 
-	.4byte	0x70c7
+	.4byte	0x70c5
 	.ascii	"ItemUseCB_SacredAsh\000"
 
-	.4byte	0x71d6
+	.4byte	0x71d4
 	.ascii	"ItemUseCB_EvolutionStone\000"
 
-	.4byte	0x7222
+	.4byte	0x7220
 	.ascii	"GetItemEffectType\000"
 
-	.4byte	0x72dc
+	.4byte	0x72da
 	.ascii	"CB2_PartyMenuFromStartMenu\000"
 
-	.4byte	0x7307
+	.4byte	0x7305
 	.ascii	"CB2_ChooseMonToGiveItem\000"
 
-	.4byte	0x76ab
+	.4byte	0x76a9
 	.ascii	"ChooseMonToGiveMailFromMailbox\000"
 
-	.4byte	0x77bd
+	.4byte	0x77bb
 	.ascii	"InitChooseHalfPartyForBattle\000"
 
-	.4byte	0x77fe
+	.4byte	0x77fc
 	.ascii	"ClearSelectedPartyOrder\000"
 
-	.4byte	0x7b4a
+	.4byte	0x7b48
 	.ascii	"ChooseMonForTradingBoard\000"
 
-	.4byte	0x7b9c
+	.4byte	0x7b9a
 	.ascii	"ChooseMonForMoveTutor\000"
 
-	.4byte	0x7bc2
+	.4byte	0x7bc0
 	.ascii	"ChooseMonForWirelessMinigame\000"
 
-	.4byte	0x7c1f
+	.4byte	0x7c1d
 	.ascii	"OpenPartyMenuInBattle\000"
 
-	.4byte	0x7c5e
+	.4byte	0x7c5c
 	.ascii	"ChooseMonForInBattleItem\000"
 
-	.4byte	0x7d45
+	.4byte	0x7d43
 	.ascii	"BufferBattlePartyCurrentOrder\000"
 
-	.4byte	0x7e01
+	.4byte	0x7dff
 	.ascii	"BufferBattlePartyCurrentOrderBySide\000"
 
-	.4byte	0x7f29
+	.4byte	0x7f27
 	.ascii	"SwitchPartyOrderLinkMulti\000"
 
-	.4byte	0x80b9
+	.4byte	0x80b7
 	.ascii	"SwitchPartyMonSlots\000"
 
-	.4byte	0x810d
+	.4byte	0x810b
 	.ascii	"GetPartyIdFromBattlePartyId\000"
 
-	.4byte	0x8293
+	.4byte	0x8291
 	.ascii	"ShowPartyMenuToShowcaseMultiBattleParty\000"
 
-	.4byte	0x8475
+	.4byte	0x8473
 	.ascii	"ChooseMonForDaycare\000"
 
-	.4byte	0x84f9
+	.4byte	0x84f7
 	.ascii	"CB2_FadeFromPartyMenu\000"
 
-	.4byte	0x8560
+	.4byte	0x855e
 	.ascii	"ChooseContestMon\000"
 
-	.4byte	0x85de
+	.4byte	0x85dc
 	.ascii	"ChoosePartyMon\000"
 
-	.4byte	0x8634
+	.4byte	0x8632
 	.ascii	"ChooseMonForMoveRelearner\000"
 
-	.4byte	0x86cd
+	.4byte	0x86cb
 	.ascii	"DoBattlePyramidMonsHaveHeldItem\000"
 
-	.4byte	0x870e
+	.4byte	0x870c
 	.ascii	"BattlePyramidChooseMonHeldItems\000"
 
-	.4byte	0x8786
+	.4byte	0x8784
 	.ascii	"MoveDeleterChooseMoveToForget\000"
 
-	.4byte	0x87b4
+	.4byte	0x87b2
 	.ascii	"GetNumMovesSelectedMonHas\000"
 
-	.4byte	0x87ef
+	.4byte	0x87ed
 	.ascii	"BufferMoveDeleterNicknameAndMove\000"
 
-	.4byte	0x8840
+	.4byte	0x883e
 	.ascii	"MoveDeleterForgetMove\000"
 
-	.4byte	0x8970
+	.4byte	0x896e
 	.ascii	"IsSelectedMonEgg\000"
 
-	.4byte	0x8991
+	.4byte	0x898f
 	.ascii	"IsLastMonThatKnowsSurf\000"
 
-	.4byte	0x19246
+	.4byte	0x19244
 	.ascii	"gPostMenuFieldCallback\000"
 
-	.4byte	0x1d102
+	.4byte	0x1d100
 	.ascii	"gPartyMenu\000"
 
-	.4byte	0x1d11b
+	.4byte	0x1d119
 	.ascii	"gPartyMenuUseExitCallback\000"
 
-	.4byte	0x1d143
+	.4byte	0x1d141
 	.ascii	"gSelectedMonPartyId\000"
 
-	.4byte	0x1d165
+	.4byte	0x1d163
 	.ascii	"gSelectedOrderFromParty\000"
 
-	.4byte	0x1d18b
+	.4byte	0x1d189
 	.ascii	"gBattlePartyCurrentOrder\000"
 
-	.4byte	0x1d1c3
+	.4byte	0x1d1c1
 	.ascii	"gItemUseCB\000"
 
-	.4byte	0x1d1ee
+	.4byte	0x1d1ec
 	.ascii	"gTutorMoves\000"
 
 	.4byte	0x0
