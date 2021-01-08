@@ -1,5 +1,11 @@
 # Pokémon Emerald
 
+Contains:
+* [**battle_engine**](https://github.com/rh-hideout/pokeemerald-expansion/tree/battle_engine)
+* [**item_expansion**](https://github.com/rh-hideout/pokeemerald-expansion/tree/item_expansion)
+* [**pokemon_expansion**](https://github.com/rh-hideout/pokeemerald-expansion/tree/pokemon_expansion)
+* [**broken_rng_fix**](https://www.pokecommunity.com/showpost.php?p=10211666&postcount=155)
+
 [![Build Status][travis-badge]][travis]
 
 [travis]: https://travis-ci.org/pret/pokeemerald
