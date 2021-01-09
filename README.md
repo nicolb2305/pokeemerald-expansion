@@ -47,3 +47,5 @@ Modification:
   * Exclude eggs from the pokecenter healing animation
 * [**LGPE Style Bonus Premier Balls**](https://github.com/pret/pokeemerald/wiki/LGPE-Style-Bonus-Premier-Balls)
   * Buying more than 20 pokeballs will result in getting more than 1 premier ball at a time, premier balls are also given for other pokeball types
+* [**Repeated Field Medicine Use**](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
+  * Medicine and rare candy can be used repeatedly without returning to the bag
