@@ -67,3 +67,5 @@ Modification:
   * Speeds up pokecenter healing, faces player away when done
 * [**Removing the extra save confirmation**](https://www.pokecommunity.com/showpost.php?p=10211835&postcount=156)
   * Speeds up saving by removing unneccesary save confirmation, confirmation is still present when trying to overwrite an old save file after starting a new game
+* [**Lower case after first input in the naming screen**](https://www.pokecommunity.com/showpost.php?p=10199896&postcount=139)
+  * Automatically switches to lowercase characters after the first character on naming screens
