@@ -61,4 +61,5 @@ Modification:
   * When the mother or ditto is holding an Everstone the nature will be passed down 100% of the time instead of 50%
 * [**Forgettable HMs**](https://www.pokecommunity.com/showpost.php?p=10182839&postcount=119)
   * HMs can be forgotten without going to the move forgetter
-  
+* [**Shop Items By Badge Count**](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count)
+  * All pokemarts have the same stock based on number of badges (getting coin case no longer requires a harbor mail)

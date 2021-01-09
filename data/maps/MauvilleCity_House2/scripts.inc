@@ -6,9 +6,7 @@ MauvilleCity_House2_EventScript_Woman:: @ 8210C5D
 	faceplayer
 	goto_if_set FLAG_RECEIVED_COIN_CASE, MauvilleCity_House2_EventScript_ReceivedCoinCase
 	msgbox MauvilleCity_House2_Text_BuyHarborMailAtSlateport, MSGBOX_DEFAULT
-	checkitem ITEM_HARBOR_MAIL, 1
-	compare VAR_RESULT, TRUE
-	goto_if_eq MauvilleCity_House2_EventScript_AskToTradeForHarborMail
+	goto MauvilleCity_House2_EventScript_AcceptTrade
 	release
 	end
 
@@ -26,8 +24,6 @@ MauvilleCity_House2_EventScript_AskToTradeForHarborMail:: @ 8210C82
 	end
 
 MauvilleCity_House2_EventScript_AcceptTrade:: @ 8210CB8
-	msgbox MauvilleCity_House2_Text_IllTradeYouCoinCase, MSGBOX_DEFAULT
-	removeitem ITEM_HARBOR_MAIL
 	giveitem ITEM_COIN_CASE
 	setflag FLAG_RECEIVED_COIN_CASE
 	goto MauvilleCity_House2_EventScript_ReceivedCoinCase
@@ -47,7 +43,12 @@ MauvilleCity_House2_Text_BuyHarborMailAtSlateport: @ 8210CEE
 	.string "If I had a BIKE, it'd be easy to cycle to\n"
 	.string "SLATEPORT for some shopping.\p"
 	.string "I'd be able to buy HARBOR MAIL at the\n"
-	.string "POKéMON MART in SLATEPORT…$"
+	.string "POKéMON MART in SLATEPORT…\p"
+	.string "Oh? They're no longer selling\n"
+	.string "HARBOR MAIL at the POKéMON MART in\l"
+	.string "SLATEPORT?\p"
+	.string "I guess I will just have to give you\n"
+	.string "this for free then…$"
 
 MauvilleCity_House2_Text_TradeHarborMailForCoinCase: @ 8210D76
 	.string "Oh! You have HARBOR MAIL?\n"

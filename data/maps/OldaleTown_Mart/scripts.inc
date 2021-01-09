@@ -7,7 +7,7 @@ OldaleTown_Mart_EventScript_Clerk:: @ 81FC240
 	message gText_HowMayIServeYou
 	waitmessage
 	goto_if_set FLAG_ADVENTURE_STARTED, OldaleTown_Mart_ExpandedItems
-	pokemart OldaleTown_Mart_Pokemart_Basic
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
@@ -22,7 +22,7 @@ OldaleTown_Mart_Pokemart_Basic: @ 81FC260
 	end
 
 OldaleTown_Mart_ExpandedItems:: @ 81FC26C
-	pokemart OldaleTown_Mart_Pokemart_Expanded
+	pokemart 0
 	msgbox gText_PleaseComeAgain, MSGBOX_DEFAULT
 	release
 	end
