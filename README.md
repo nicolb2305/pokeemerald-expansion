@@ -65,3 +65,5 @@ Modification:
   * All pokemarts have the same stock based on number of badges (getting coin case no longer requires a harbor mail)
 * [**Fast! nurse joy in PokeCenter**](https://www.pokecommunity.com/showpost.php?p=10213415&postcount=164)
   * Speeds up pokecenter healing, faces player away when done
+* [**Removing the extra save confirmation**](https://www.pokecommunity.com/showpost.php?p=10211835&postcount=156)
+  * Speeds up saving by removing unneccesary save confirmation, confirmation is still present when trying to overwrite an old save file after starting a new game
