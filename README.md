@@ -69,3 +69,5 @@ Modification:
   * Speeds up saving by removing unneccesary save confirmation, confirmation is still present when trying to overwrite an old save file after starting a new game
 * [**Lower case after first input in the naming screen**](https://www.pokecommunity.com/showpost.php?p=10199896&postcount=139)
   * Automatically switches to lowercase characters after the first character on naming screens
+* [**Lower case berries**](https://www.pokecommunity.com/showpost.php?p=10013331&postcount=2)
+  * All berries have lower case names
