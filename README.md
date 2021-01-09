@@ -19,8 +19,8 @@ Modification:
   * Wraps around to first/last pokemon when pressing down/up on the last/first pokemon in your pary's summary screen
 * [**Showing IVs/EVs in Summary Screen**](https://www.pokecommunity.com/showpost.php?p=10161688&postcount=77)
   * Show IVs by pressing L, EVs by pressing R, and stats by pressing Start on the stats screen
-* [**Reusable TMs**](https://www.pokecommunity.com/showpost.php?p=9980343&postcount=7)
-  * TMs are reusable and cannot be held
+* [**Reusable TMs**](https://github.com/pret/pokeemerald/wiki/Infinite-TM-usage)
+  * TMs are reusable, cannot be held or sold and cannot be bought if already owned
 * [**repel**](https://github.com/DizzyEggg/pokeemerald/tree/repel)
   * Brings up prompt for whether to use another repel when one wears out
 * [**ow_1hp_psn_survival**](https://github.com/LOuroboros/pokeemerald/tree/ow_1hp_psn_survival)
