@@ -29,3 +29,7 @@ Modification:
 ** Speeds up picking, planting and watering berries by removing unnessecary dialogue
 * [**Keep the Camera from Making Waves**](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
 ** Prevents the camera from making ground effects when moved around
+* [**Improving the WaitForVBlank function**](https://github.com/pret/pokeemerald/wiki/Improving-the-WaitForVBlank-function)
+** Reduces wasted CPU cycles during VBlank, saves battery on GBA and allows for larger speed ups in emulator
+* [**Allow running indoors**](https://github.com/pret/pokeemerald/wiki/Allow-running-indoors)
+** Allows for running even if the current map header disallows it
