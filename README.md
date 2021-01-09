@@ -43,3 +43,5 @@ Modification:
   * Remove part of a message creation that was only used in Japanese and simply wasted function calls in English
 * [**Trainer Class Based Poké Balls**](https://github.com/pret/pokeemerald/wiki/Trainer-Class-Based-Pok%C3%A9-Balls)
   * Make specific trainer classes use different pokeballs
+* [**Pokecenters Disregard Eggs**](https://github.com/pret/pokeemerald/wiki/Pokecenters-Disregard-Eggs)
+  * Exclude eggs from the pokecenter healing animation
