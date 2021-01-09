@@ -63,3 +63,5 @@ Modification:
   * HMs can be forgotten without going to the move forgetter
 * [**Shop Items By Badge Count**](https://github.com/pret/pokeemerald/wiki/Shop-Items-By-Badge-Count)
   * All pokemarts have the same stock based on number of badges (getting coin case no longer requires a harbor mail)
+* [**Fast! nurse joy in PokeCenter**](https://www.pokecommunity.com/showpost.php?p=10213415&postcount=164)
+  * Speeds up pokecenter healing, faces player away when done
