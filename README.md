@@ -39,4 +39,5 @@ Modification:
   * Stops the game from showing the pokedex entry of a pokemon if it's caught before acquiring the pokedex, data still gets added to the pokedex when you obtain it
 * [**Better White Out Money Calculation**](https://github.com/pret/pokeemerald/wiki/Better-White-Out-Money-Calculation)
   * Add message for money handout on whiteout and scale money lost on highest party level and number of badges, rather than 50% of total money
-
+* [**Remove the functionally redundant move grammar tables**](https://github.com/pret/pokeemerald/wiki/Remove-the-functionally-redundant-move-grammar-tables)
+  * Remove part of a message creation that was only used in Japanese and simply wasted function calls in English
