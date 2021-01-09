@@ -53,7 +53,9 @@ Modification:
   * Sitrus berry now restores 25% of the pokemon's hp instead of a flat 30 hp
 * [**Evolution Moves**](https://www.pokecommunity.com/showpost.php?p=10097987&postcount=36)
   * Makes pokemon able to learn moves on evolution, otherwise a pokemon will not learn a move when evolving if it evolves at a later level
-* Updated Pickup Table
+* [**Updated Pickup Table**](https://www.pokecommunity.com/showpost.php?p=9987541&postcount=11)
   * The ability pickup has the same loot table as in ORAS
 * [**Item Descriptions On First Obtain**](https://www.pokecommunity.com/showpost.php?p=10126502&postcount=46)
   * Presents an item description box on screen when an item is obtained for the first time, and an icon of the item next to the text if it's not the first time
+* [**Always inherit nature when holding an Everstone**](https://www.pokecommunity.com/showpost.php?p=10159052&postcount=68)
+  * When the mother or ditto is holding an Everstone the nature will be passed down 100% of the time instead of 50%
