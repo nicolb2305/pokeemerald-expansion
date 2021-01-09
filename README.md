@@ -55,3 +55,5 @@ Modification:
   * Makes pokemon able to learn moves on evolution, otherwise a pokemon will not learn a move when evolving if it evolves at a later level
 * Updated Pickup Table
   * The ability pickup has the same loot table as in ORAS
+* [**Item Descriptions On First Obtain**](https://www.pokecommunity.com/showpost.php?p=10126502&postcount=46)
+  * Presents an item description box on screen when an item is obtained for the first time, and an icon of the item next to the text if it's not the first time
