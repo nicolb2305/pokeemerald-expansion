@@ -37,3 +37,6 @@ Modification:
   * Increased money limit from 999,999 to 9,999,999
 * [**Not showing dex entries until getting the Pokédex**](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)
   * Stops the game from showing the pokedex entry of a pokemon if it's caught before acquiring the pokedex, data still gets added to the pokedex when you obtain it
+* [**Better White Out Money Calculation**](https://github.com/pret/pokeemerald/wiki/Better-White-Out-Money-Calculation)
+  * Add message for money handout on whiteout and scale money lost on highest party level and number of badges, rather than 50% of total money
+
