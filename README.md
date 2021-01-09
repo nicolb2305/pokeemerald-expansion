@@ -59,3 +59,6 @@ Modification:
   * Presents an item description box on screen when an item is obtained for the first time, and an icon of the item next to the text if it's not the first time
 * [**Always inherit nature when holding an Everstone**](https://www.pokecommunity.com/showpost.php?p=10159052&postcount=68)
   * When the mother or ditto is holding an Everstone the nature will be passed down 100% of the time instead of 50%
+* [**Forgettable HMs**](https://www.pokecommunity.com/showpost.php?p=10182839&postcount=119)
+  * HMs can be forgotten without going to the move forgetter
+  
