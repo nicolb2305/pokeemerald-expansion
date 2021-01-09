@@ -49,3 +49,5 @@ Modification:
   * Buying more than 20 pokeballs will result in getting more than 1 premier ball at a time, premier balls are also given for other pokeball types
 * [**Repeated Field Medicine Use**](https://github.com/pret/pokeemerald/wiki/Repeated-Field-Medicine-Use)
   * Medicine and rare candy can be used repeatedly without returning to the bag
+* [**Update Sitrus Berry's effect to Gen 4 standard**](https://github.com/pret/pokeemerald/wiki/Update-Sitrus-Berry's-effect-to-Gen-4-standard)
+  * Sitrus berry now restores 25% of the pokemon's hp instead of a flat 30 hp
