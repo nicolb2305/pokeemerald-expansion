@@ -41,3 +41,5 @@ Modification:
   * Add message for money handout on whiteout and scale money lost on highest party level and number of badges, rather than 50% of total money
 * [**Remove the functionally redundant move grammar tables**](https://github.com/pret/pokeemerald/wiki/Remove-the-functionally-redundant-move-grammar-tables)
   * Remove part of a message creation that was only used in Japanese and simply wasted function calls in English
+* [**Trainer Class Based Poké Balls**](https://github.com/pret/pokeemerald/wiki/Trainer-Class-Based-Pok%C3%A9-Balls)
+  * Make specific trainer classes use different pokeballs
