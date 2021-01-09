@@ -27,3 +27,5 @@ Modification:
 ** Makes pokemon survive at 1 hp from poison outside of battle instead of fainting
 * [**Faster berry interactions**](https://www.pokecommunity.com/showpost.php?p=10164065&postcount=82)
 ** Speeds up picking, planting and watering berries by removing unnessecary dialogue
+* [**Keep the Camera from Making Waves**](https://github.com/pret/pokeemerald/wiki/Keep-the-Camera-from-Making-Waves)
+** Prevents the camera from making ground effects when moved around
