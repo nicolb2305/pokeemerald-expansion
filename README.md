@@ -35,5 +35,5 @@ Modification:
   * Allows for running even if the current map header disallows it
 * [**Increase money limit**](https://github.com/pret/pokeemerald/wiki/Increase-money-limit)
   * Increased money limit from 999,999 to 9,999,999
-* [**Implement Missing Text Function RESET_SIZE**](https://github.com/pret/pokeemerald/wiki/Implement-Missing-Text-Function-RESET_SIZE)
-  * Properly implements text function found in code, resets font size mid text
+* [**Not showing dex entries until getting the Pokédex**](https://github.com/pret/pokeemerald/wiki/Not-showing-dex-entries-until-getting-the-Pok%C3%A9dex)
+  * Stops the game from showing the pokedex entry of a pokemon if it's caught before acquiring the pokedex, data still gets added to the pokedex when you obtain it
