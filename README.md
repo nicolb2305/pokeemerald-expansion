@@ -45,3 +45,5 @@ Modification:
   * Make specific trainer classes use different pokeballs
 * [**Pokecenters Disregard Eggs**](https://github.com/pret/pokeemerald/wiki/Pokecenters-Disregard-Eggs)
   * Exclude eggs from the pokecenter healing animation
+* [**LGPE Style Bonus Premier Balls**](https://github.com/pret/pokeemerald/wiki/LGPE-Style-Bonus-Premier-Balls)
+  * Buying more than 20 pokeballs will result in getting more than 1 premier ball at a time, premier balls are also given for other pokeball types
