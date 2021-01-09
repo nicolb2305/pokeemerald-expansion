@@ -53,3 +53,5 @@ Modification:
   * Sitrus berry now restores 25% of the pokemon's hp instead of a flat 30 hp
 * [**Evolution Moves**](https://www.pokecommunity.com/showpost.php?p=10097987&postcount=36)
   * Makes pokemon able to learn moves on evolution, otherwise a pokemon will not learn a move when evolving if it evolves at a later level
+* Updated Pickup Table
+  * The ability pickup has the same loot table as in ORAS
