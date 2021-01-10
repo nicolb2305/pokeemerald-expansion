@@ -77,3 +77,5 @@ Modification:
   * Exp. Share is a key item that can be toggled on and off to share exp across the entire team
 * [**Show Type Effectiveness In-Battle**](https://www.pokecommunity.com/showpost.php?p=10167016&postcount=83)
   * The typing of the selected move in battle changes color based on effectivness vs opponent
+* [**Bag Sorting**](https://www.pokecommunity.com/showpost.php?p=10167488&postcount=84)
+  * Bag can be sorted by item name, category or amount by pressing Start
