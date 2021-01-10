@@ -81,4 +81,6 @@ Modification:
   * Bag can be sorted by item name, category or amount by pressing Start
 * [**Dexnav**](https://www.pokecommunity.com/showpost.php?p=10215653&postcount=1)
   * Added dexnav and obtained together with the pokedex, also removed exit button from Start menu to make space
+* **Added hidden mons to pokedex**
+  * Hidden dexnav mons now appear on the pokedex area finder
 
