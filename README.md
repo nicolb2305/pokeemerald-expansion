@@ -73,3 +73,7 @@ Modification:
   * All berries have lower case names
 * **Decapitalized everything**
   * Everything should be decapitalized
+* [**Gen. 6 styled Exp. Share**](https://www.pokecommunity.com/showpost.php?p=10060538&postcount=26)
+  * Exp. Share is a key item that can be toggled on and off to share exp across the entire team
+* [**Show Type Effectiveness In-Battle**](https://www.pokecommunity.com/showpost.php?p=10167016&postcount=83)
+  * The typing of the selected move in battle changes color based on effectivness vs opponent
