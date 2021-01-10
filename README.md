@@ -71,3 +71,5 @@ Modification:
   * Automatically switches to lowercase characters after the first character on naming screens
 * [**Lower case berries**](https://www.pokecommunity.com/showpost.php?p=10013331&postcount=2)
   * All berries have lower case names
+* **Decapitalized everything**
+  * Everything should be decapitalized

@@ -1950,7 +1950,7 @@ static const u8 sTeachyTVDesc[] = _(
 static const u8 sTriPassDesc[] = _(
     "A pass for ferries\n"
     "between One, Two,\n"
-    "and Three ISLAND.");
+    "and Three Island.");
 
 static const u8 sRainbowPassDesc[] = _(
     "For ferries serving\n"
@@ -1974,7 +1974,7 @@ static const u8 sAuroraTicketDesc[] = _(
 
 static const u8 sPowderJarDesc[] = _(
     "Stores Berry\n"
-    "POWDER made using\n"
+    "Powder made using\n"
     "a Berry Crusher.");
 
 static const u8 sRubyDesc[] = _(
