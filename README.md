@@ -85,3 +85,5 @@ Modification:
   * Hidden dexnav mons now appear on the pokedex area finder
 * [**PokedexPlus with a HGSS style**](https://www.pokecommunity.com/showpost.php?p=10230792&postcount=1)
   * HGSS Style pokedex with lots of new features, moves learned, base stats, etc.
+* [**Triple layer metatiles**](https://github.com/pret/pokeemerald/wiki/Triple-layer-metatiles)
+  * Allows for creation of metatiles consisting of three layers of tiles instead of 2
