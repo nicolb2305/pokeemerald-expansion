@@ -87,3 +87,5 @@ Modification:
   * HGSS Style pokedex with lots of new features, moves learned, base stats, etc.
 * [**Triple layer metatiles**](https://github.com/pret/pokeemerald/wiki/Triple-layer-metatiles)
   * Allows for creation of metatiles consisting of three layers of tiles instead of 2
+* [**Hidden Power type in battles**](https://www.pokecommunity.com/showpost.php?p=10269149&postcount=222) Credits: [LOuroboros](https://github.com/LOuroboros)
+  * The type of the move hidden power is displayed in battle
