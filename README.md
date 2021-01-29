@@ -89,3 +89,5 @@ Modification:
   * Allows for creation of metatiles consisting of three layers of tiles instead of 2
 * [**Hidden Power type in battles**](https://www.pokecommunity.com/showpost.php?p=10269149&postcount=222) Credits: [LOuroboros](https://github.com/LOuroboros)
   * The type of the move hidden power is displayed in battle
+* [**Hidden Power type in summary screen**](https://www.pokecommunity.com/showpost.php?p=10269132&postcount=221) Credits: [Jirachii.](https://www.pokecommunity.com/member.php?u=672932)
+  * The type of the move hidden power is displayed on the summary screen
