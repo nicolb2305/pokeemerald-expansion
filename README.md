@@ -91,3 +91,5 @@ Modification:
   * The type of the move hidden power is displayed in battle
 * [**Hidden Power type in summary screen**](https://www.pokecommunity.com/showpost.php?p=10269132&postcount=221) Credits: [Jirachii.](https://www.pokecommunity.com/member.php?u=672932)
   * The type of the move hidden power is displayed on the summary screen
+* [**Improved scrolling options menu with instant text, HP and EXP bars and a metric unit option!**](https://www.pokecommunity.com/showpost.php?p=10275248&postcount=233) Credits: [TheXaman](https://github.com/TheXaman)
+  * Adds more options to the options menu
